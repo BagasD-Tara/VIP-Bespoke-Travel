@@ -1,0 +1,179 @@
+/* CSS Reset & Basic Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Navbar Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+    background-color: rgba(10, 10, 10, 0.95);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #222;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #d4af37;
+}
+
+.nav-links a {
+    color: #cccccc;
+    text-decoration: none;
+    margin-left: 35px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #d4af37;
+}
+
+.btn-demo {
+    color: #d4af37 !important;
+    border: 1px solid #d4af37;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+.btn-demo:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 180px 20px 100px 20px;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+}
+
+.hero h1 span {
+    color: #d4af37;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #999999;
+    max-width: 800px;
+    margin: 0 auto 45px auto;
+}
+
+.btn-primary {
+    background-color: #d4af37;
+    color: #000000;
+    padding: 16px 40px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: #b5952f;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Target Market Section */
+.target-market {
+    padding: 60px 8%;
+    text-align: center;
+    background-color: #111111;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+
+.target-market h2 {
+    font-size: 22px;
+    color: #d4af37;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.market-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.market-box {
+    padding: 15px 25px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 30px;
+    font-size: 14px;
+    color: #cccccc;
+    letter-spacing: 1px;
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 80px 8%;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background-color: #111111;
+    padding: 40px 30px;
+    border-radius: 8px;
+    width: 320px;
+    border: 1px solid #222;
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    border-color: #d4af37;
+    transform: translateY(-5px);
+}
+
+.feature-card h3 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.feature-card p {
+    color: #888888;
+    font-size: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid #222;
+    color: #555555;
+    font-size: 14px;
+}
