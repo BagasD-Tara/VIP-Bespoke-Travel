@@ -1,0 +1,75 @@
+{
+  "business": {
+    "name": "Bespoke",
+    "logo": "B"
+  },
+  "perluTindakan": [
+    {
+      "id": "act-1",
+      "type": "proposal",
+      "title": "Proposal v2 siap ditinjau",
+      "subtitle": "Kyoto Autumn Luxury Escape • diperbarui 12 Okt 2026",
+      "badge": "Versi 2",
+      "actionLabel": "Lihat Proposal",
+      "actionUrl": "#"
+    },
+    {
+      "id": "act-2",
+      "type": "review",
+      "title": "Permintaan perubahan Anda sedang ditinjau",
+      "subtitle": "Concierge akan mengirim versi baru bila perubahan diterima.",
+      "badge": "In Review",
+      "actionLabel": null,
+      "actionUrl": null
+    }
+  ],
+  "requestSaya": [
+    {
+      "id": "req-1",
+      "destination": "Kyoto Autumn Private Retreat & Onsen",
+      "dateRange": "18 Nov – 25 Nov 2026",
+      "guests": 2,
+      "statusBadge": "Proposal Dikirim",
+      "statusType": "warning",
+      "currentStepIndex": 2,
+      "steps": ["Diajukan", "Ditinjau", "Proposal", "Disetujui", "Dikonfirmasi"],
+      "footerType": "estimate",
+      "costEstimate": "Rp 145.000.000",
+      "costBadge": "Estimasi"
+    },
+    {
+      "id": "req-2",
+      "destination": "Como Lake Private Villa & Vintage Yacht",
+      "dateRange": "10 Des – 16 Des 2026",
+      "guests": 4,
+      "statusBadge": "Dikonfirmasi",
+      "statusType": "info",
+      "currentStepIndex": 4,
+      "steps": ["Diajukan", "Ditinjau", "Proposal", "Disetujui", "Dikonfirmasi"],
+      "footerType": "confirmed",
+      "confirmedText": "Booking 4 dari 4 Confirmed"
+    }
+  ],
+  "perjalananMendatang": {
+    "dateDay": "18",
+    "dateMonth": "NOV",
+    "destination": "Kyoto, Jepang",
+    "confirmedSummary": "3 dari 4 booking Confirmed"
+  },
+  "pesanTerbaru": [
+    {
+      "id": "msg-1",
+      "sender": "Michael (Concierge)",
+      "initial": "C",
+      "time": "10m lalu",
+      "message": "Proposal v2 siap ditinjau dengan kurasi villa dan private dining di Kyoto."
+    },
+    {
+      "id": "msg-2",
+      "sender": "Michael (Concierge)",
+      "initial": "C",
+      "time": "2 jam lalu",
+      "message": "Permintaan perubahan jadwal privat onsen telah disesuaikan dengan concierge lokal."
+    }
+  ]
+}

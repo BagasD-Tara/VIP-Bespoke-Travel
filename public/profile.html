@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profil — Bespoke</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#141c17",
+              "ink-soft": "#1f2a23",
+              ivory: "#ede6d8",
+              "ivory-dim": "#b9b2a2",
+              charcoal: "#2b332e",
+              "charcoal-dim": "#6b7570",
+              brass: "#c2a46d",
+              "brass-deep": "#8a6d3a",
+              tint: "#f5f2ea",
+            },
+            fontFamily: {
+              serif: ['"Cormorant Garamond"', "serif"],
+              sans: ["Manrope", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-sans text-charcoal antialiased bg-tint min-h-screen">
+    <header class="bg-ink text-ivory">
+      <div class="max-w-4xl mx-auto px-8 py-5 flex items-center justify-between">
+        <a href="landing_page.html" class="flex items-baseline gap-2.5 font-serif text-2xl">
+          <span class="inline-block w-[9px] h-[9px] rounded-full bg-brass -translate-y-0.5"></span>
+          Bespoke
+        </a>
+        <button
+          id="logout-btn"
+          class="text-sm border border-brass-deep px-4 py-2 rounded-sm hover:bg-ink-soft transition-colors"
+        >
+          Keluar
+        </button>
+      </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-8 py-12">
+      <h1 class="font-serif font-medium text-4xl text-ink">Profil Pengguna</h1>
+      <p class="mt-2 text-charcoal-dim">Data berikut diambil dari endpoint <code class="text-brass-deep">GET /api/profile</code>.</p>
+
+      <p id="status" class="mt-8 text-sm text-charcoal-dim">Memuat data...</p>
+
+      <section id="profile" class="hidden mt-8 grid gap-6 md:grid-cols-2">
+        <div class="bg-white border border-ink/10 p-6">
+          <h2 class="font-serif text-2xl text-ink mb-4">Ringkasan</h2>
+          <dl class="space-y-3 text-sm">
+            <div><dt class="text-charcoal-dim">Nama</dt><dd id="f-name" class="font-semibold text-ink"></dd></div>
+            <div><dt class="text-charcoal-dim">Email</dt><dd id="f-email" class="font-semibold text-ink"></dd></div>
+            <div><dt class="text-charcoal-dim">Peran</dt><dd id="f-role" class="font-semibold text-ink"></dd></div>
+            <div><dt class="text-charcoal-dim">Perusahaan</dt><dd id="f-company" class="font-semibold text-ink"></dd></div>
+            <div><dt class="text-charcoal-dim">Dibuat</dt><dd id="f-created" class="font-semibold text-ink"></dd></div>
+          </dl>
+        </div>
+
+        <div class="bg-ink text-ivory p-6">
+          <h2 class="font-serif text-2xl mb-4">Respons API (JSON)</h2>
+          <pre id="json" class="text-xs leading-relaxed overflow-x-auto text-brass"></pre>
+        </div>
+      </section>
+    </main>
+
+    <script src="profile.js"></script>
+  </body>
+</html>
