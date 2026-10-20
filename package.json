@@ -15,7 +15,8 @@
     "start": "node server.js",
     "hash": "node hash-password.js",
     "build:ts": "tsc",
-    "dev:ts": "tsc -w"
+    "dev:ts": "tsc -w",
+    "php:serve": "/Applications/XAMPP/xamppfiles/bin/php -S localhost:8000 -t public"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
