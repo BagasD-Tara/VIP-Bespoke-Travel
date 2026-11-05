@@ -6,6 +6,16 @@
 
 ---
 
+## 📌 Ringkasan Pengerjaan: Week 7 (Arsitektur MVC)
+> **Keterangan Kontribusi (Week 7):**  
+> Pada penugasan **Week 7**, saya mengimplementasikan arsitektur **Model-View-Controller (MVC)** pada proyek PHP "VIP Bespoke Travel":
+> - **Model (`models/TravelModel.php`):** Membaca data dari `dashboard-data.json`, menyediakan method `getDashboardData()` dan `getRequestsByFilter($status)`.
+> - **Controller (`controllers/DashboardController.php`):** Menangani alur request (`$_GET['status']`), memanggil Model, memproses filter status & greeting dinamis, lalu melempar data ke View (`index()`).
+> - **View (`views/dashboard-view.php`):** Template antarmuka luxury bespoke Tailwind CSS yang menampilkan data dinamis dengan sanitasi `htmlspecialchars()`.
+> - **Entry Point (`index.php`):** Router utama yang memanggil `DashboardController->index()`.
+
+---
+
 ## 📌 Ringkasan Pengerjaan: Week 6
 > **Keterangan Kontribusi:**  
 > Pada pengerjaan proyek ini, saya berfokus dan menyelesaikan penugasan pada **Week 6**, yang mencakup integrasi asinkronus (Fetch API / REST API Client-Side Rendering), validasi form, penanganan state (loading, error message, retry mechanism), serta penyempurnaan UI/UX interaktif pada portal dashboard. Modul-modul dasar SSR dan data processor PHP sebelumnya diadaptasi dari arsitektur tim.
