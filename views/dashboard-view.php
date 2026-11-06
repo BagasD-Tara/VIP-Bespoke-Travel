@@ -1,614 +1,530 @@
 <?php
 /**
  * Pertemuan 7 - Web Programming
- * Task 01 - 03: VIEW (dashboard-view.php) - Remodeled & Refined
+ * Task 02 & Task 03: VIEW (views/dashboard-view.php)
  * 
- * Tampilan Dashboard VIP yang telah dirombak total:
- * - Terpusat rapi dengan max-width terukur (max-w-6xl), tidak melebar ke seluruh layar monitor
- * - Spacing bernapas dan nyaman dibaca (Quiet Luxury Aesthetic)
- * - Sentuhan AI Telemetry & Copilot yang elegan dan proporsional
- * - 100% Terintegrasi MVC: Model -> Controller -> View dengan sanitasi htmlspecialchars()
+ * Presentasi antarmuka VIP Bespoke Travel & Sovereign Concierge
+ * Mengimplementasikan arsitektur Model-View-Controller (MVC) PHP.
  * 
  * Mahasiswa: Zaidaan Diandra Eka Putra (202410370110420)
  * Proyek: VIP Bespoke Travel
  */
 
-function safe(mixed $value): string {
-    return htmlspecialchars((string) ($value ?? ''), ENT_QUOTES, 'UTF-8');
+if (!function_exists('safe')) {
+    function safe($value): string {
+        return htmlspecialchars((string)($value ?? ''), ENT_QUOTES, 'UTF-8');
+    }
 }
+
+// Fallback data jika file view diakses langsung tanpa controller
+$client = $client ?? [
+    'name' => 'Alexander Wright',
+    'title' => 'Lord Alexander Wright',
+    'member_id' => 'VIP-8821',
+    'tier' => 'Black Diamond Tier',
+    'city' => 'Geneva / Zurich',
+    'avatar_initials' => 'AW'
+];
+
+$stats = $stats ?? [
+    'total_requests' => 6,
+    'total_budget' => '$536,000',
+    'response_time' => '< 12 Mins Direct'
+];
+
+$requests = $requests ?? [];
+$availableStatuses = $availableStatuses ?? [
+    'all' => count($requests) > 0 ? count($requests) : 6,
+    'Approved' => 2,
+    'In Review' => 2,
+    'Planning' => 1,
+    'Confirmed' => 1
+];
+$activeFilter = $activeFilter ?? 'all';
 ?>
 <!DOCTYPE html>
-<html class="dark scroll-smooth" lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Patron Portal — Bespoke Private Travel &amp; Advisory</title>
-  
-  <!-- Google Fonts: EB Garamond (Serif) & DM Sans / Plus Jakarta Sans (Sans) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><title>Bespoke — Sovereign VIP Patron Portal</title><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#19362b", "inverse-surface": "#dee4de", "tertiary-container": "#aacaba", "secondary-fixed-dim": "#e9c176", "secondary": "#e9c176", "on-secondary-fixed-variant": "#5d4201", "primary-container": "#dfbe7e", "surface-container-high": "#252b28", "on-surface-variant": "#d0c5b5", "on-tertiary-fixed": "#022016", "on-background": "#dee4de", "secondary-container": "#604403", "tertiary": "#c5e6d5", "on-secondary-fixed": "#261900", "surface-container": "#1b211e", "surface-variant": "#303632", "on-tertiary-fixed-variant": "#304d40", "surface-dim": "#0f1512", "primary-fixed-dim": "#e3c282", "background": "#0f1512", "surface": "#0f1512", "error": "#ffb4ab", "surface-container-low": "#171d1a", "on-tertiary-container": "#395649", "on-primary-fixed-variant": "#5a430f", "secondary-fixed": "#ffdea5", "on-error-container": "#ffdad6", "on-primary": "#402d00", "primary": "#fdda97", "surface-container-lowest": "#090f0c", "inverse-primary": "#745b25", "surface-tint": "#e3c282", "error-container": "#93000a", "surface-bright": "#343b37", "tertiary-fixed-dim": "#adcebe", "on-primary-container": "#644c17", "tertiary-fixed": "#c9ead9", "on-secondary-container": "#dab36a", "inverse-on-surface": "#2b322e", "on-error": "#690005", "primary-fixed": "#ffdea1", "on-surface": "#dee4de", "on-primary-fixed": "#261900", "outline-variant": "#4d463a", "on-secondary": "#412d00", "outline": "#998f81", "surface-container-highest": "#303632" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "1.75rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "space-xl": "3rem", "gutter-mobile": "0.75rem", "margin": "3rem", "space-md": "1rem", "space-xs": "0.25rem", "gutter": "1.5rem" }, "fontFamily": { "headline-lg-mobile": [ "EB Garamond" ], "headline-sm": [ "EB Garamond" ], "title-lg": [ "DM Sans" ], "label-md": [ "DM Sans" ], "headline-md": [ "EB Garamond" ], "label-caps": [ "DM Sans" ], "body-lg": [ "DM Sans" ], "display-hero-mobile": [ "EB Garamond" ], "display-hero": [ "EB Garamond" ], "headline-lg": [ "EB Garamond" ], "body-md": [ "DM Sans" ], "telemetry-numeric": [ "DM Sans" ] }, "fontSize": { "headline-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-sm": [ "22px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "500" } ], "title-lg": [ "18px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "headline-md": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "label-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.14em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" } ], "display-hero-mobile": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "display-hero": [ "56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" } ], "headline-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "telemetry-numeric": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "500" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: {
-              DEFAULT: '#060a08',
-              surface: '#0d1310',
-              card: '#121a16',
-              border: '#1f2d25'
-            },
-            gold: {
-              DEFAULT: '#c5a059',
-              light: '#f5e4bb',
-              bright: '#dfbe7e',
-              dark: '#9a7736'
-            },
-            ivory: '#fcfbf8',
-            emeraldCustom: '#34d399'
-          },
-          fontFamily: {
-            serif: ['"EB Garamond"', 'Georgia', 'serif'],
-            sans: ['"DM Sans"', 'sans-serif']
-          }
-        }
-      }
+<!-- FIXED SOVEREIGN SIDEBAR -->
+<aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/95 backdrop-blur-xl z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-20 px-space-md flex items-center gap-space-sm bg-surface-container-lowest/60"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="font-headline-sm text-headline-sm text-primary tracking-[0.25em] uppercase font-medium">BESPOKE</span><span class="ml-auto font-label-caps text-label-caps uppercase text-primary px-space-xs py-0.5 bg-surface-container-high rounded text-opacity-90"><?= safe($client['member_id'] ?? 'VIP-8821') ?></span></div><div class="px-space-md pt-space-md pb-space-sm"><span class="font-label-caps text-label-caps uppercase text-outline tracking-widest">Sovereign Consoles</span></div><nav class="flex flex-col gap-space-xs px-space-sm" data-active-classes="bg-surface-container-high text-primary font-title-lg"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2.5 rounded transition-all bg-surface-container-high text-primary font-title-lg" data-path="overview" href="index.php"><span class="material-symbols-outlined text-[18px]">radar</span><span class="font-body-md text-body-md">Mission Telemetry</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="flight-manifest" href="#aviation-radar"><span class="material-symbols-outlined text-[18px]">flight_takeoff</span><span class="font-body-md text-body-md">Aviation Manifest</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="itinerary-planner" href="#dossiers-section"><span class="material-symbols-outlined text-[18px]">calendar_today</span><span class="font-body-md text-body-md">Curated Itinerary</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="concierge-desk" href="#concierge-section"><span class="material-symbols-outlined text-[18px]">support_agent</span><span class="font-body-md text-body-md">Geneva Desk</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="vault-ledger" href="#metrics-section"><span class="material-symbols-outlined text-[18px]">account_balance</span><span class="font-body-md text-body-md">Vault &amp; Ledger</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patron-credentials" href="public/dashboard.php"><span class="material-symbols-outlined text-[18px]">verified_user</span><span class="font-body-md text-body-md">SSR Portal</span></a></nav></div><div class="p-space-md bg-surface-container-lowest/80 flex flex-col gap-space-xs"><div class="flex items-center justify-between text-outline"><span class="font-label-caps text-label-caps uppercase">Swiss Sovereign Node</span><span class="font-telemetry-numeric text-telemetry-numeric text-tertiary">GENEVA-01</span></div><div class="flex items-center justify-between text-outline"><span class="font-label-caps text-label-caps uppercase">Transit Clearance</span><span class="font-telemetry-numeric text-telemetry-numeric text-primary">DIPLOMATIC</span></div></div></aside>
+
+<!-- MAIN CONTENT WRAPPER -->
+<div class="pl-72 flex flex-col min-h-screen">
+
+<!-- TOP HEADER -->
+<header class="fixed top-0 left-72 right-0 h-20 bg-surface-container-low/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full h-full px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-xs text-on-surface-variant hover:text-primary transition-colors py-1.5 px-space-sm rounded bg-surface-container/60 hover:bg-surface-container-high" href="latihan1.php"><span class="material-symbols-outlined text-[16px]">arrow_back</span><span class="font-body-md text-body-md font-medium tracking-wide">Back to Public Advisory</span></a><div class="h-4 w-px bg-outline-variant/40 hidden sm:block"></div><span class="font-label-caps text-label-caps text-outline uppercase tracking-wider hidden md:inline">Patron Vault: <?= safe($client['member_id'] ?? 'VIP-8821') ?></span></div><div class="flex items-center gap-space-sm"><div class="hidden xl:flex items-center gap-1.5 px-space-sm py-1 bg-surface-container-lowest/80 rounded text-on-surface-variant"><span class="material-symbols-outlined text-[14px] text-primary">lock</span><span class="font-telemetry-numeric text-telemetry-numeric">Encrypted Signal 256-bit</span></div><div class="hidden lg:flex items-center gap-1.5 px-space-sm py-1 bg-surface-container-lowest/80 rounded text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span><span class="font-telemetry-numeric text-telemetry-numeric text-tertiary">Geneva Desk Online</span></div><button class="relative p-2 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Notifications"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-low"></span></button><div class="flex items-center gap-space-sm pl-space-xs py-1 pr-space-sm rounded bg-surface-container/70"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center font-bold text-on-primary text-xs"><?= safe($client['avatar_initials'] ?? 'AW') ?></div><div class="hidden md:flex flex-col text-left"><span class="font-title-lg text-title-lg text-on-surface leading-tight"><?= safe($client['title'] ?? 'Lord Alexander Wright') ?></span><span class="font-label-caps text-label-caps text-primary tracking-widest uppercase"><?= safe($client['tier'] ?? 'Black Diamond Tier') ?></span></div></div></div></div></header>
+
+<div class="pt-20"><div class="w-full bg-surface-container-lowest/90 px-space-lg py-2 flex flex-wrap items-center justify-between text-outline text-label-caps font-label-caps tracking-widest uppercase"><div class="flex items-center gap-space-sm"><span class="text-tertiary">FINMA Compliant</span><span>·</span><span>Session: CH-GVA-990422-AUTH</span><span>·</span><span>Dual-Signoff Quorum Active</span></div><div class="flex items-center gap-space-md"><span class="text-on-surface-variant">UTC <?= date('H:i:s') ?></span><span>·</span><span class="text-primary">Zurich Vault Mirror Synced</span></div></div>
+
+<main class="w-full px-space-lg py-space-lg bg-surface-container-lowest"><div class="flex flex-col w-full">
+
+<!-- Top Sovereign Header / Hero Section -->
+<section class="relative w-full mb-space-lg" id="concierge-section">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md mb-space-md">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-space-xs text-primary font-label-caps text-label-caps uppercase tracking-widest">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(197,230,213,0.8)]"></span>
+<span>Sovereign Patron Tier · Vault Ref #BW-8821-SWISS</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-normal tracking-tight">
+  Good evening, <?= safe($client['title'] ?? 'Lord Alexander Wright') ?>
+</h1>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span>Swiss Concierge Desk Active</span>
+<span class="text-outline-variant">·</span>
+<span class="text-secondary font-medium">Managing Partner: Marc-André V. on standby (Geneva HQ)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-sm rounded shadow-sm self-start lg:self-auto">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-outline">Authentication Status</span>
+<span class="font-telemetry-numeric text-telemetry-numeric text-tertiary">Diplomatic Biometric Quorum · Validated</span>
+</div>
+</div>
+</div>
+
+<!-- Intelligent Concierge AI Query Bar -->
+<div class="w-full bg-surface-container-low/90 backdrop-blur-xl p-space-md rounded shadow-md relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col md:flex-row items-stretch md:items-center gap-space-sm mb-space-xs">
+<div class="relative flex-1 flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-primary text-[20px] pointer-events-none">auto_awesome</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md pl-11 pr-4 py-3 rounded placeholder:text-outline focus:outline-none focus:bg-surface-container-high transition-all" id="concierge-input" placeholder="✦ Ask Concierge AI: Dispatch tail number, request private chef, or view tarmac security clearance..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-space-md py-3 rounded tracking-wider uppercase font-semibold flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.99] transition-all shadow-sm" id="btn-submit-advisor">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Submit to Advisor</span>
+</button>
+</div>
+<!-- Actionable Chips -->
+<div class="flex flex-wrap items-center gap-2 pt-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-outline mr-1">Direct Prompts:</span>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high text-telemetry-numeric font-telemetry-numeric transition-colors cursor-pointer" onclick="applyPrompt('Add caviar service to G650ER catering profile')">
+  + Add caviar service to G650ER
+</button>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high text-telemetry-numeric font-telemetry-numeric transition-colors cursor-pointer" onclick="applyPrompt('Request St. Moritz heli transfer from Samedan (LSZS)')">
+  + Request St. Moritz heli transfer
+</button>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high text-telemetry-numeric font-telemetry-numeric transition-colors cursor-pointer" onclick="applyPrompt('Confirm Monaco Paddock Club biometric tarmac passes')">
+  + Verify Monaco tarmac clearance
+</button>
+</div>
+</div>
+</section>
+
+<!-- Metric & Telemetry KPI Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg" id="metrics-section">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-space-lg rounded shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Active Expeditions</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-numeric text-telemetry-numeric"><?= safe($availableStatuses['In Review'] ?? 2) + safe($availableStatuses['Planning'] ?? 1) + safe($availableStatuses['Approved'] ?? 2) ?> Active · <?= safe($availableStatuses['Confirmed'] ?? 1) ?> Confirmed</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface leading-none mb-2"><?= safe($availableStatuses['all'] ?? count($requests)) ?> Portfolios</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">Alps, Cote d'Azur, Kansai, Amalfi &amp; Serengeti</p>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden flex">
+<div class="bg-primary h-full w-2/3"></div>
+<div class="bg-tertiary h-full w-1/3"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-space-lg rounded shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Allocated Vault Portfolio</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-telemetry-numeric text-telemetry-numeric">+12% Charter</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary leading-none mb-2"><?= safe($stats['total_budget'] ?? '$536,000') ?></div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">Escrow verified via Swiss Sovereign Clearing</p>
+<div class="flex items-center gap-space-xs text-outline font-telemetry-numeric text-telemetry-numeric">
+<span class="text-tertiary">CHF 482,000 Equiv</span>
+<span>·</span>
+<span>Zero Liquidity Lock</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low p-space-lg rounded shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Aviation Contingency</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-numeric text-telemetry-numeric">99.4% Slot Direct</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface leading-none mb-2">100% Ready</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">Dual standby: LSGG (Geneva) &amp; LFMN (Nice)</p>
+<div class="flex items-center gap-1.5 text-secondary font-label-caps text-label-caps uppercase">
+<span class="material-symbols-outlined text-[14px]">flight_takeoff</span>
+<span>Gulfstream G650ER Crew Activated</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low p-space-lg rounded shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Senior Partner SLA</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-telemetry-numeric text-telemetry-numeric"><?= safe($stats['response_time'] ?? '< 12 Mins Direct') ?></span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface leading-none mb-2">Geneva Desk</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">Dedicated Senior Dispatch: Marc-André V.</p>
+<div class="flex items-center gap-1.5 text-outline font-telemetry-numeric text-telemetry-numeric">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-tertiary">Signal Channel Online</span>
+<span>· Quorum Dual-Auth</span>
+</div>
+</div>
+</section>
+
+<!-- Live Flight Telemetry & Airspace Radar Banner -->
+<section class="bg-surface-container-low p-space-lg rounded shadow-md mb-space-xl relative overflow-hidden" id="aviation-radar">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">radar</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-title-lg text-title-lg text-on-surface font-medium">Bespoke Intelligence™ · Live Flight Telemetry</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-label-caps text-label-caps uppercase tracking-wider">AI Route Optimized</span>
+</div>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Transponder Mode-S Transmit: HB-BSK · Trans-Alpine Corridor Safe</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-telemetry-numeric font-telemetry-numeric text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
+<span class="text-tertiary">0% Turbulence Risk</span>
+</div>
+<span>·</span>
+<span>Ground ETA: 15:42 CEST</span>
+<span>·</span>
+<span class="text-primary">Apron Maybach Ready</span>
+</div>
+</div>
+<!-- Route Telemetry Graphics -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center bg-surface-container-lowest p-space-md rounded">
+<div class="lg:col-span-4 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Departure Point</span>
+<span class="font-headline-sm text-headline-sm text-primary">LSGG · Geneva</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Terminal VIP Jet Aviation</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[24px]">trending_flat</span>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-outline uppercase">Destination Airstrip</span>
+<span class="font-headline-sm text-headline-sm text-tertiary">LSZS · Samedan</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Engadin Airport St. Moritz</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded mt-1 flex flex-col gap-1 text-telemetry-numeric font-telemetry-numeric">
+<div class="flex justify-between text-outline">
+<span>Airframe Model</span>
+<span class="text-on-surface">Gulfstream G650ER</span>
+</div>
+<div class="flex justify-between text-outline">
+<span>Cruising Speed &amp; Altitude</span>
+<span class="text-on-surface">510 kts · FL410</span>
+</div>
+<div class="flex justify-between text-outline">
+<span>Chauffeur Integration</span>
+<span class="text-secondary font-medium">Maybach 62S Apron Standby</span>
+</div>
+</div>
+</div>
+<!-- SVG Flight Vector Path & Radar -->
+<div class="lg:col-span-8 flex flex-col">
+<div class="w-full h-32 relative flex items-center justify-center">
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 600 120">
+<!-- Grid Lines -->
+<line class="text-surface-variant/40" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="600" y1="30" y2="30"></line>
+<line class="text-surface-variant/40" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="600" y1="60" y2="60"></line>
+<line class="text-surface-variant/40" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="600" y1="90" y2="90"></line>
+<!-- Mountainous Horizon Silhouette (Subtle) -->
+<path class="text-surface-container-high/40" d="M0 110 L80 95 L140 105 L230 75 L310 90 L400 65 L480 85 L540 70 L600 100 L600 120 L0 120 Z" fill="currentColor"></path>
+<!-- Primary Flight Vector Trajectory -->
+<path class="text-primary/30" d="M40 90 Q 220 15, 540 90" stroke="currentColor" stroke-dasharray="6 6" stroke-width="2"></path>
+<path class="text-primary" d="M40 90 Q 220 15, 340 42" stroke="currentColor" stroke-width="2.5"></path>
+<!-- Origin Beacon -->
+<circle class="text-primary" cx="40" cy="90" fill="currentColor" r="5"></circle>
+<circle class="text-primary/40" cx="40" cy="90" r="10" stroke="currentColor" stroke-width="1.5"></circle>
+<text class="text-on-surface font-label-caps" fill="currentColor" font-size="10" text-anchor="middle" x="40" y="112">LSGG 14:45</text>
+<!-- Destination Beacon -->
+<circle class="text-tertiary" cx="540" cy="90" fill="currentColor" r="5"></circle>
+<circle class="text-tertiary/40" cx="540" cy="90" r="12" stroke="currentColor" stroke-width="1.5"></circle>
+<text class="text-on-surface font-label-caps" fill="currentColor" font-size="10" text-anchor="middle" x="540" y="112">LSZS 15:23</text>
+<!-- Live Aircraft Coordinate -->
+<g transform="translate(340, 42)">
+<circle class="text-primary/20" cx="0" cy="0" fill="currentColor" r="14"></circle>
+<circle class="text-primary" cx="0" cy="0" fill="currentColor" r="4"></circle>
+<polygon class="text-primary" fill="currentColor" points="0,-7 6,5 0,3 -6,5" transform="rotate(50)"></polygon>
+<text class="text-primary font-telemetry-numeric" fill="currentColor" font-size="11" font-weight="bold" x="12" y="-4">HB-BSK (38 min en-route)</text>
+<text class="text-outline font-telemetry-numeric" fill="currentColor" font-size="9" x="12" y="10">FL410 · 510 KTS</text>
+</g>
+</svg>
+</div>
+<div class="flex items-center justify-between text-label-caps font-label-caps text-outline uppercase pt-2">
+<span>Swiss Alpine Corridor Alpha</span>
+<span>Live GPS Telemetry: 46.5050° N, 9.8789° E</span>
+<span>Transponder Mode S / ADS-B Ver. 2</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Dossier Portfolio Grid & Filter Controls -->
+<section class="w-full mb-space-xl" id="dossiers-section">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-normal">Patron Itinerary Dossiers &amp; Expeditions</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Confidential portfolios under bilateral non-disclosure protocols.</p>
+</div>
+
+<!-- Tab Filter System (Mendukung Client-side JS & URL Server Query) -->
+<div class="flex items-center bg-surface-container-low p-1 rounded gap-1 overflow-x-auto max-w-full">
+<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= ($activeFilter === 'all' || $activeFilter === '') ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('all', this)">
+  All Requests (<?= safe($availableStatuses['all'] ?? count($requests)) ?>)
+</button>
+<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= (strtolower($activeFilter) === 'approved') ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('approved', this)">
+  Approved (<?= safe($availableStatuses['Approved'] ?? 2) ?>)
+</button>
+<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= (in_array(strtolower($activeFilter), ['in review', 'in-review'])) ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('in-review', this)">
+  In Review (<?= safe($availableStatuses['In Review'] ?? 2) ?>)
+</button>
+<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= (strtolower($activeFilter) === 'planning') ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('planning', this)">
+  Planning (<?= safe($availableStatuses['Planning'] ?? 1) ?>)
+</button>
+<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= (strtolower($activeFilter) === 'confirmed') ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('confirmed', this)">
+  Confirmed (<?= safe($availableStatuses['Confirmed'] ?? 1) ?>)
+</button>
+</div>
+</div>
+
+<!-- 3-Column Luxury Cards Grid (Render Dinamis dari PHP Model) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-md" id="dossiers-grid">
+
+<?php foreach ($requests as $item): ?>
+  <?php
+    $statusRaw = $item['status'] ?? 'Planning';
+    $statusSlug = strtolower(str_replace(' ', '-', $statusRaw));
+    
+    // Status color badge
+    $badgeColor = 'text-tertiary';
+    $badgePulse = true;
+    if ($statusSlug === 'in-review') {
+      $badgeColor = 'text-secondary';
+    } elseif ($statusSlug === 'planning') {
+      $badgeColor = 'text-tertiary-fixed';
+      $badgePulse = false;
     }
-  </script>
-
-  <style>
-    body {
-      background-color: #060a08;
-      color: #cbd5e1;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .gold-glow-subtle {
-      box-shadow: 0 0 25px -5px rgba(197, 160, 89, 0.15);
-    }
-    .text-gold-gradient {
-      background: linear-gradient(135deg, #f5e4bb 0%, #dfbe7e 50%, #c5a059 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  </style>
-</head>
-<body class="min-h-screen flex flex-col bg-obsidian text-slate-300 antialiased selection:bg-gold selection:text-obsidian">
-
-  <!-- =========================================================================
-       1. TOPBAR NAVIGATION (ELEGANT & CLEAN)
-       ========================================================================= -->
-  <header class="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-xl border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-      
-      <!-- Left: Logo & Back Link -->
-      <div class="flex items-center gap-6">
-        <a href="latihan1.php" class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-slate-400 hover:text-gold transition-colors py-1.5 px-3 rounded-full border border-white/10 hover:border-gold/40 bg-white/[0.02]">
-          <span class="material-symbols-outlined text-[15px]">arrow_back</span>
-          <span class="hidden sm:inline">Landing Page</span>
-        </a>
-
-        <div class="h-4 w-px bg-white/15 hidden sm:block"></div>
-
-        <a href="index.php" class="flex items-center gap-3 group">
-          <div class="w-2.5 h-2.5 rounded-full bg-gold animate-pulse shadow-[0_0_8px_#dfbe7e]"></div>
-          <span class="font-serif text-2xl tracking-[0.25em] font-medium text-ivory group-hover:text-gold transition-colors">BESPOKE</span>
-          <span class="hidden md:inline text-[10px] uppercase tracking-widest text-gold px-2 py-0.5 rounded border border-gold/30 bg-gold/5 font-sans">
-            Patron Portal
-          </span>
-        </a>
-      </div>
-
-      <!-- Center: Status Quick Telemetry -->
-      <div class="hidden lg:flex items-center gap-4 text-xs font-mono">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px]">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Encrypted Signal 256-bit</span>
+    
+    $dossierRef = safe($item['dossier_ref'] ?? ('EXP-' . ($item['id'] ?? 'REF')));
+    $destTitle = safe($item['destination'] ?? 'Luxury Expedition');
+    $dates = safe($item['dates'] ?? '');
+    $budget = safe($item['budget'] ?? '$0');
+    $advisor = safe($item['advisor'] ?? 'Marc-André V.');
+    $assetTag = safe($item['asset_tag'] ?? 'Private Jet & Chauffeur');
+    $imgUrl = safe($item['image_url'] ?? '');
+    $notes = safe($item['notes'] ?? '');
+    $hash = 'SHA-256: ' . substr(hash('sha256', $dossierRef . $destTitle), 0, 16);
+  ?>
+  <div class="dossier-card bg-surface-container-low rounded p-space-lg flex flex-col justify-between shadow-sm hover:bg-surface-container transition-all relative overflow-hidden group" data-status="<?= $statusSlug ?>">
+    <div class="flex flex-col gap-space-sm">
+      <div class="flex items-center justify-between">
+        <span class="font-telemetry-numeric text-telemetry-numeric text-outline"><?= $dossierRef ?></span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface-container-high <?= $badgeColor ?> font-label-caps text-label-caps uppercase">
+          <?php if ($badgePulse): ?>
+            <span class="w-1.5 h-1.5 rounded-full <?= ($statusSlug === 'in-review') ? 'bg-secondary' : 'bg-tertiary' ?> animate-pulse"></span>
+          <?php endif; ?>
+          <?= safe($statusRaw) ?>
         </span>
-        <span class="text-slate-400 text-[11px]">
-          Geneva Desk: <strong class="text-ivory font-normal">Online</strong>
-        </span>
       </div>
-
-      <!-- Right: User Avatar & Tier -->
-      <div class="flex items-center gap-3">
-        <div class="text-right hidden sm:block">
-          <div class="text-sm font-medium text-ivory leading-tight"><?= safe($client['title'] ?? $client['name']) ?></div>
-          <div class="text-[11px] text-gold tracking-wider font-mono"><?= safe($client['tier'] ?? 'Black Diamond Sovereign') ?></div>
-        </div>
-        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-bright to-gold text-obsidian font-bold flex items-center justify-center text-sm shadow-md ring-2 ring-gold/30">
-          <?= safe($client['avatar_initials'] ?? 'AW') ?>
-        </div>
+      <!-- Image Container -->
+      <div class="w-full h-36 rounded overflow-hidden relative">
+        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="<?= $destTitle ?>" alt="<?= $destTitle ?>" src="<?= $imgUrl ?>"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+        <div class="absolute bottom-2 left-3 text-on-surface font-telemetry-numeric text-telemetry-numeric"><?= $dates ?></div>
       </div>
-
-    </div>
-  </header>
-
-  <!-- =========================================================================
-       2. MAIN CONTENT (TERPUSAT DI CONTAINER MAX-W-6XL)
-       ========================================================================= -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-6 py-10 sm:py-12 space-y-10">
-
-    <!-- HERO SECTION: WELCOME & GREETING -->
-    <section class="space-y-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2">
-        <div class="space-y-2">
-          <div class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold font-medium">
-            <span class="material-symbols-outlined text-sm">verified_user</span>
-            <span>Vault ID: <?= safe($client['member_id'] ?? 'VIP-8821') ?> &bull; Sovereign Desk</span>
-          </div>
-          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-ivory tracking-tight leading-tight">
-            <?= safe($greeting) ?>
-          </h1>
-          <p class="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
-            Swiss Concierge Desk aktif. Managing Partner <strong class="text-slate-200 font-medium">Marc-André V.</strong> bersiaga di Geneva HQ untuk seluruh jadwal armada dan akomodasi privat Anda.
-          </p>
-        </div>
-
-        <!-- Quick Telemetry Action Pills -->
-        <div class="flex flex-wrap items-center gap-2.5 self-start md:self-end">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-obsidian-card border border-white/10 text-xs text-slate-300">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span>Direct Secure Line</span>
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-obsidian-card border border-white/10 text-xs text-slate-300">
-            <span class="material-symbols-outlined text-[14px] text-gold">flight</span>
-            <span>Tail HB-BSK Ready</span>
-          </span>
-        </div>
+      <div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+          <?= $destTitle ?>
+        </h3>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Asset: <?= $assetTag ?></p>
       </div>
-
-      <!-- AI Concierge Copilot Bar (Elegan & Rapi) -->
-      <div class="p-4 sm:p-5 rounded-2xl bg-obsidian-surface border border-gold/30 gold-glow-subtle space-y-3">
-        <div class="flex items-center justify-between text-xs">
-          <div class="flex items-center gap-2 text-gold font-medium uppercase tracking-wider text-[11px]">
-            <span class="material-symbols-outlined text-sm animate-pulse">auto_awesome</span>
-            <span>Bespoke Concierge AI Copilot (Encrypted Private Instance)</span>
-          </div>
-          <span class="text-[10px] text-slate-500 font-mono hidden sm:inline">E2EE: 4096-BIT POST-QUANTUM</span>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-center gap-3">
-          <div class="relative w-full">
-            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-lg">travel_explore</span>
-            <input id="copilot-input" 
-                   type="text" 
-                   placeholder="Ajukan instruksi concierge (misal: tambah armada helikopter, ubah katering jet, jadwal sommelier)..." 
-                   class="w-full pl-11 pr-4 py-3 bg-obsidian rounded-xl text-sm text-ivory placeholder-slate-500 border border-white/10 focus:border-gold focus:outline-none transition-colors" />
-          </div>
-          <button id="copilot-btn" class="w-full sm:w-auto shrink-0 px-6 py-3 rounded-xl bg-gold hover:bg-gold-bright text-obsidian text-xs uppercase tracking-wider font-bold transition-all shadow flex items-center justify-center gap-2">
-            <span>Submit to Advisor</span>
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </button>
-        </div>
-
-        <!-- Quick Suggestions -->
-        <div class="flex items-center gap-2 overflow-x-auto pt-1 text-xs text-slate-400">
-          <span class="text-[10px] uppercase tracking-wider text-slate-500 shrink-0">Direct Mandates:</span>
-          <button class="copilot-chip shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs transition-colors">
-            + Tambah Caviar Service di G650ER
-          </button>
-          <button class="copilot-chip shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs transition-colors">
-            + Request Transfer Heli di St. Moritz
-          </button>
-          <button class="copilot-chip shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs transition-colors">
-            + Perpanjang Monaco Yacht Berth
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         3. METRIC KPI CARDS (4 KOLOM DENGAN SPACING RAPI)
-         ======================================================================= -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      
-      <!-- Card 1: Destinations -->
-      <div class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/30 transition-all flex flex-col justify-between space-y-4">
-        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider">
-          <span>Global Envelopes</span>
-          <span class="material-symbols-outlined text-gold text-lg">public</span>
-        </div>
-        <div>
-          <div class="text-3xl font-serif text-ivory font-normal"><?= safe($stats['total_requests'] ?? count($requests)) ?> Destinasi</div>
-          <p class="text-xs text-slate-400 mt-1">4 Active Planning &bull; 2 Confirmed</p>
-        </div>
-        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Portfolio Status</span>
-          <span class="text-emerald-400 font-semibold">100% On-Track</span>
-        </div>
-      </div>
-
-      <!-- Card 2: Budget -->
-      <div class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/30 transition-all flex flex-col justify-between space-y-4">
-        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider">
-          <span>Allocated Escrow</span>
-          <span class="material-symbols-outlined text-gold text-lg">account_balance</span>
-        </div>
-        <div>
-          <div class="text-3xl font-serif text-gold-bright font-normal font-mono"><?= safe($stats['total_budget'] ?? '$536,000') ?></div>
-          <p class="text-xs text-emerald-400 mt-1 flex items-center gap-1 font-medium">
-            <span class="material-symbols-outlined text-sm">trending_up</span>
-            +12% Charter Allocation (BCGE)
-          </p>
-        </div>
-        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Private Escrow Vault</span>
-          <span class="text-ivory">Zurich &bull; Verified</span>
-        </div>
-      </div>
-
-      <!-- Card 3: Fleet Ready -->
-      <div class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/30 transition-all flex flex-col justify-between space-y-4">
-        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider">
-          <span>Fleet Contingency</span>
-          <span class="material-symbols-outlined text-emerald-400 text-lg">flight</span>
-        </div>
-        <div>
-          <div class="text-3xl font-serif text-ivory font-normal">100% Ready</div>
-          <p class="text-xs text-slate-400 mt-1">Dual Standby: LSGG &bull; LFMN</p>
-        </div>
-        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Airborne Clearance</span>
-          <span class="text-emerald-400 font-medium">Immediate</span>
-        </div>
-      </div>
-
-      <!-- Card 4: Response SLA -->
-      <div class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/30 transition-all flex flex-col justify-between space-y-4">
-        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider">
-          <span>Concierge SLA</span>
-          <span class="material-symbols-outlined text-gold text-lg">schedule</span>
-        </div>
-        <div>
-          <div class="text-3xl font-serif text-gold-bright font-normal font-mono"><?= safe($stats['response_time'] ?? '< 12 Mins') ?></div>
-          <p class="text-xs text-slate-400 mt-1">Dedicated Senior Partner Channel</p>
-        </div>
-        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Average Today</span>
-          <span class="text-emerald-400 font-bold">4.2 Menit</span>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- =======================================================================
-         4. AI FLIGHT RADAR & TELEMETRY WIDGET (PROPORSIONAL & TIDAK SESAK)
-         ======================================================================= -->
-    <section class="p-6 sm:p-8 rounded-2xl bg-obsidian-surface border border-white/10 space-y-6">
-      
-      <!-- Header Radar -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-white/10">
-        <div>
-          <div class="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>Bespoke Intelligence™ &bull; Live Flight Telemetry</span>
-          </div>
-          <h2 class="font-serif text-xl sm:text-2xl text-ivory mt-1">
-            Flight Dossier #BSK-904: Geneva Cointrin (LSGG) &rarr; Samedan / St. Moritz (LSZS)
-          </h2>
-          <p class="text-xs text-slate-400 font-mono mt-0.5">
-            Gulfstream G650ER &bull; Cruising Altitude: <span class="text-ivory">FL410</span> &bull; Estimated En-Route: <span class="text-gold">38 Mins</span>
-          </p>
-        </div>
-        <div class="flex items-center gap-2 self-start sm:self-center font-mono text-xs">
-          <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
-            Transponder: 7421 (VIP)
-          </span>
-          <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-            In-Flight
-          </span>
-        </div>
-      </div>
-
-      <!-- Visual Altitude Profile Curve (SVG Ringan & Jelas) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        <div class="lg:col-span-8 bg-obsidian rounded-xl p-4 sm:p-5 border border-white/10 space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span>LSGG (Geneva Apron &bull; 1,411 FT)</span>
-            <span class="text-emerald-400 font-semibold">Cruising FL410 (Mach 0.88)</span>
-            <span>LSZS (Engadin Alpine &bull; 5,600 FT)</span>
-          </div>
-
-          <!-- Curve SVG -->
-          <div class="relative w-full h-28 sm:h-32">
-            <svg class="w-full h-full" viewBox="0 0 700 120" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="grad-curve" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#34d399" stop-opacity="0.3"></stop>
-                  <stop offset="100%" stop-color="#34d399" stop-opacity="0.0"></stop>
-                </linearGradient>
-              </defs>
-              <path d="M 20 100 C 120 100, 180 20, 260 20 L 440 20 C 520 20, 580 80, 680 90 L 680 120 L 20 120 Z" fill="url(#grad-curve)"></path>
-              <path d="M 20 100 C 120 100, 180 20, 260 20 L 440 20 C 520 20, 580 80, 680 90" stroke="#34d399" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
-              <!-- Waypoints -->
-              <circle cx="20" cy="100" r="4" fill="#dfbe7e"></circle>
-              <circle cx="350" cy="20" r="4" fill="#dfbe7e"></circle>
-              <circle cx="410" cy="20" r="6" fill="#34d399" class="animate-pulse"></circle>
-              <circle cx="410" cy="20" r="3" fill="#ffffff"></circle>
-              <circle cx="680" cy="90" r="4" fill="#dfbe7e"></circle>
-            </svg>
-          </div>
-
-          <div class="flex items-center justify-between text-[11px] font-mono text-slate-500 pt-1">
-            <span>Departure: 19:22 CEST (On-Time)</span>
-            <span class="text-slate-400">Turbulence: Nil</span>
-            <span>Arrival: 20:00 CEST</span>
-          </div>
-        </div>
-
-        <!-- 4 Badges AI Telemetri -->
-        <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
-          <div class="p-3 rounded-xl bg-obsidian border border-white/5 flex items-center gap-3">
-            <span class="material-symbols-outlined text-emerald-400 text-xl">verified</span>
-            <div>
-              <div class="text-xs font-medium text-ivory">AI Route Optimized</div>
-              <div class="text-[11px] text-slate-400">0% Turbulence Risk &bull; Alpine Vector</div>
-            </div>
-          </div>
-          <div class="p-3 rounded-xl bg-obsidian border border-white/5 flex items-center gap-3">
-            <span class="material-symbols-outlined text-gold text-xl">flight_land</span>
-            <div>
-              <div class="text-xs font-medium text-ivory">Instant Alpine Slot Clearance</div>
-              <div class="text-[11px] text-slate-400">Samedan VIP Apron Guaranteed (99.4%)</div>
-            </div>
-          </div>
-          <div class="p-3 rounded-xl bg-obsidian border border-white/5 flex items-center gap-3">
-            <span class="material-symbols-outlined text-emerald-400 text-xl">ac_unit</span>
-            <div>
-              <div class="text-xs font-medium text-ivory">Alpine METAR Weather</div>
-              <div class="text-[11px] text-slate-400">Wind: Nil &bull; Temp: -4°C &bull; Powder Groomed</div>
-            </div>
-          </div>
-          <div class="p-3 rounded-xl bg-obsidian border border-white/5 flex items-center gap-3">
-            <span class="material-symbols-outlined text-gold text-xl">directions_car</span>
-            <div>
-              <div class="text-xs font-medium text-ivory">Apron Armored Transfer</div>
-              <div class="text-[11px] text-slate-400">Range Rover Sentinel &amp; Security Escort</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         5. CORE MVC: ITINERARY DOSSIERS & FILTER TABS
-         ======================================================================= -->
-    <section class="space-y-6">
-      
-      <!-- Section Header & Filter Tabs -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
-        <div>
-          <span class="text-xs uppercase tracking-[0.2em] text-gold font-medium">Sovereign Vault Portfolio</span>
-          <h2 class="font-serif text-2xl sm:text-3xl text-ivory tracking-tight mt-0.5">
-            Daftar Reservasi &amp; Permintaan Perjalanan
-          </h2>
-          <p class="text-xs text-slate-400 font-mono mt-0.5">
-            Menampilkan <strong class="text-gold"><?= $totalFiltered ?></strong> rencana perjalanan
-            <?php if ($activeFilter !== 'all'): ?>
-              (Filter aktif: <span class="text-emerald-400 capitalize"><?= safe($activeFilter) ?></span>)
-            <?php endif; ?>
-          </p>
-        </div>
-
-        <!-- Filter Tabs (Koneksi ke Controller MVC) -->
-        <div class="flex items-center gap-1.5 p-1 bg-obsidian-surface rounded-xl border border-white/10 text-xs overflow-x-auto max-w-full">
-          <a href="index.php?status=all" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= ($activeFilter === 'all') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            Semua (<?= safe($availableStatuses['all'] ?? count($requests)) ?>)
-          </a>
-          <a href="index.php?status=approved" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= (strtolower($activeFilter) === 'approved') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            Approved (<?= safe($availableStatuses['approved']['count'] ?? 2) ?>)
-          </a>
-          <a href="index.php?status=in+review" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= (strtolower($activeFilter) === 'in review' || strtolower($activeFilter) === 'in-review') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            In Review (<?= safe($availableStatuses['in review']['count'] ?? 2) ?>)
-          </a>
-          <a href="index.php?status=planning" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= (strtolower($activeFilter) === 'planning') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            Planning (<?= safe($availableStatuses['planning']['count'] ?? 1) ?>)
-          </a>
-          <a href="index.php?status=confirmed" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= (strtolower($activeFilter) === 'confirmed') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            Confirmed (<?= safe($availableStatuses['confirmed']['count'] ?? 1) ?>)
-          </a>
-        </div>
-      </div>
-
-      <!-- Grid Kartu Perjalanan (3 Kolom Proporsional) -->
-      <?php if (empty($requests)): ?>
-        <div class="text-center py-16 bg-obsidian-surface rounded-2xl border border-dashed border-white/10 p-8 space-y-3">
-          <span class="material-symbols-outlined text-4xl text-gold">travel_explore</span>
-          <h3 class="font-serif text-xl text-ivory">Tidak Ada Permintaan dengan Status "<?= safe($activeFilter) ?>"</h3>
-          <p class="text-xs text-slate-400 max-w-md mx-auto">
-            Silakan pilih filter status lainnya untuk melihat rencana perjalanan Anda atau hubungi penasihat pribadi Anda.
-          </p>
-          <a href="index.php?status=all" class="inline-block mt-3 px-5 py-2 rounded-lg bg-gold text-obsidian font-bold text-xs uppercase tracking-wider hover:bg-gold-bright transition-colors">
-            Reset Filter ke Semua
-          </a>
-        </div>
-      <?php else: ?>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <?php foreach ($requests as $trip): ?>
-            <?php
-              $statusName = $trip['status'] ?? 'Draft';
-              $badgeColor = match (strtolower($statusName)) {
-                  'approved', 'confirmed' => 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-                  'in review'             => 'bg-amber-500/15 text-gold-bright border-amber-500/30',
-                  'planning'              => 'bg-sky-500/15 text-sky-400 border-sky-500/30',
-                  default                 => 'bg-slate-500/15 text-slate-300 border-slate-500/30'
-              };
-            ?>
-            <article class="rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/40 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-lg hover:-translate-y-1">
-              <div>
-                <!-- Foto Destinasi (Aspect Ratio 16/10) -->
-                <div class="relative w-full h-44 bg-cover bg-center" style="background-image: url('<?= safe($trip['image_url'] ?? '') ?>')">
-                  <div class="absolute inset-0 bg-gradient-to-t from-obsidian-surface via-obsidian-surface/40 to-transparent"></div>
-                  
-                  <!-- Status & Anggaran -->
-                  <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border backdrop-blur-md <?= $badgeColor ?>">
-                    <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                    <span><?= safe($statusName) ?></span>
-                  </div>
-                  <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-obsidian/80 backdrop-blur-md text-gold font-mono text-xs font-semibold border border-white/10">
-                    <?= safe($trip['budget'] ?? '$0') ?>
-                  </div>
-
-                  <div class="absolute bottom-2.5 left-4 right-4 flex items-end justify-between">
-                    <span class="text-[10px] uppercase font-mono tracking-wider text-slate-400"><?= safe($trip['dossier_ref'] ?? $trip['id']) ?></span>
-                    <span class="text-[11px] text-slate-400 font-mono"><?= safe($trip['nights'] ?? 'VIP') ?></span>
-                  </div>
-                </div>
-
-                <!-- Konten Kartu -->
-                <div class="p-5 space-y-3.5">
-                  <h3 class="font-serif text-xl font-medium text-ivory leading-snug">
-                    <?= safe($trip['destination']) ?>
-                  </h3>
-
-                  <!-- Jadwal & Armada -->
-                  <div class="space-y-1.5 py-2.5 border-y border-white/5 text-xs text-slate-300">
-                    <div class="flex items-center justify-between">
-                      <span class="text-slate-500">Jadwal:</span>
-                      <span class="font-medium text-ivory"><?= safe($trip['dates']) ?></span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                      <span class="text-slate-500">Armada / Aset:</span>
-                      <span class="font-medium text-gold font-mono"><?= safe($trip['asset_tag'] ?? $trip['guests']) ?></span>
-                    </div>
-                  </div>
-
-                  <!-- Tag Layanan -->
-                  <?php if (!empty($trip['services']) && is_array($trip['services'])): ?>
-                    <div class="flex flex-wrap gap-1.5">
-                      <?php foreach ($trip['services'] as $srv): ?>
-                        <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">
-                          ✓ <?= safe($srv) ?>
-                        </span>
-                      <?php endforeach; ?>
-                    </div>
-                  <?php endif; ?>
-
-                  <!-- Deskripsi -->
-                  <p class="text-xs text-slate-400 leading-relaxed line-clamp-2 italic">
-                    "<?= safe($trip['notes']) ?>"
-                  </p>
-                </div>
-              </div>
-
-              <!-- Footer Kartu: Advisor & Link -->
-              <div class="px-5 py-3.5 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 bg-black/20">
-                <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-full bg-gold/20 text-gold text-[10px] font-bold flex items-center justify-center font-mono">
-                    <?= safe($trip['advisor_initials'] ?? 'MV') ?>
-                  </div>
-                  <span class="text-[11px]">Advisor: <strong class="text-slate-200"><?= safe($trip['advisor']) ?></strong></span>
-                </div>
-                <a href="#" class="text-gold hover:text-gold-bright text-[11px] uppercase tracking-wider font-semibold inline-flex items-center gap-1">
-                  <span>Dossier</span>
-                  <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
-                </a>
-              </div>
-            </article>
+      <div class="flex flex-wrap gap-1.5 pt-1">
+        <?php if (!empty($item['services']) && is_array($item['services'])): ?>
+          <?php foreach ($item['services'] as $svc): ?>
+            <span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-caps text-label-caps">✓ <?= safe($svc) ?></span>
           <?php endforeach; ?>
-        </div>
-      <?php endif; ?>
-
-    </section>
-
-    <!-- =======================================================================
-         6. DIRECT CONCIERGE SECURE RELAY BANNER
-         ======================================================================= -->
-    <section class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
-      <div class="flex items-center gap-4 text-left w-full sm:w-auto">
-        <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold shrink-0">
-          <span class="material-symbols-outlined text-2xl">phonelink_ring</span>
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h3 class="font-serif text-lg font-medium text-ivory">Direct 24/7 Sovereign Desk</h3>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-mono">
-              Available &bull; 0s Queue
-            </span>
-          </div>
-          <p class="text-xs text-slate-400 font-mono mt-0.5">
-            +41 22 819 0088 &bull; Managing Partner Marc-André V. on Duty
-          </p>
-        </div>
-      </div>
-
-      <button id="pgp-btn" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-ivory text-xs uppercase tracking-wider font-medium border border-white/10 transition-colors flex items-center justify-center gap-2">
-        <span class="material-symbols-outlined text-sm text-gold">key</span>
-        <span>Send Encrypted PGP Note</span>
-      </button>
-    </section>
-
-  </main>
-
-  <!-- =========================================================================
-       7. MVC ARCHITECTURAL FOOTER
-       ========================================================================= -->
-  <footer class="bg-black/60 border-t border-white/10 py-8 px-6 mt-12 text-xs text-slate-400">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-      <div class="space-y-1">
-        <div class="font-serif text-base text-ivory">Bespoke Concierge Framework &bull; Arsitektur MVC Week 7</div>
-        <p class="text-[11px] text-slate-500 font-mono">
-          Model: <code class="text-emerald-400">TravelModel.php</code> &bull; 
-          Controller: <code class="text-sky-400">DashboardController.php</code> &bull; 
-          View: <code class="text-gold">dashboard-view.php</code>
-        </p>
-      </div>
-      <div class="text-[11px] sm:text-right text-slate-400">
-        <div>Pengembang: <strong class="text-ivory font-medium">Zaidaan Diandra Eka Putra</strong> (202410370110420)</div>
-        <div class="text-slate-500 mt-0.5">&copy; <?= date('Y') ?> VIP Bespoke Travel Concierge. All Rights Reserved.</div>
+        <?php endif; ?>
       </div>
     </div>
-  </footer>
+    <div class="mt-space-md pt-space-sm border-t border-transparent bg-surface-container-lowest/50 -mx-space-lg -mb-space-lg p-space-md flex items-center justify-between">
+      <div class="flex flex-col">
+        <span class="font-label-caps text-label-caps uppercase text-outline">Budget / Advisor</span>
+        <span class="font-title-lg text-title-lg text-primary"><?= $budget ?> <span class="text-label-caps text-outline font-normal">· <?= $advisor ?></span></span>
+      </div>
+      <button class="text-primary hover:text-secondary font-label-md text-label-md flex items-center gap-1 cursor-pointer" onclick="openDossierModal('<?= addslashes($destTitle) ?>', '<?= $budget ?>', '<?= addslashes($advisor) ?>', '<?= safe($statusRaw) ?>', '<?= $dossierRef ?>', '<?= $hash ?>')">
+        <span>Encrypted Dossier</span>
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+      </button>
+    </div>
+  </div>
+<?php endforeach; ?>
 
-  <!-- Interaktivitas Sederhana -->
-  <script>
-    // Copilot chip click
-    document.querySelectorAll('.copilot-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const input = document.getElementById('copilot-input');
-        input.value = chip.textContent.replace('+', '').trim();
-        input.focus();
-      });
+</div>
+</section>
+
+<!-- Architectural MVC & Vault Assurance Bar -->
+<section class="bg-surface-container-low/70 p-space-md rounded shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">account_balance</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">Bespoke Concierge Framework · MVC Architecture</span>
+<span class="font-label-caps text-label-caps text-outline uppercase">Model: TravelModel · Controller: DashboardController · View: dashboard-view · Dev: Zaidaan Diandra (202410370110420)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm text-telemetry-numeric font-telemetry-numeric text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>FINMA Protocol &amp; Article 47 Covenants Active</span>
+</div>
+</section>
+
+<!-- Encrypted Dossier Drawer / Modal -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md hidden items-center justify-center p-4" id="dossier-modal">
+<div class="bg-surface-container-low max-w-2xl w-full rounded p-space-lg shadow-xl relative flex flex-col gap-space-md">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest" id="modal-ref">REF-ID</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface" id="modal-title">Expedition Title</h3>
+</div>
+<button class="text-outline hover:text-on-surface p-1 rounded hover:bg-surface-container cursor-pointer" onclick="closeDossierModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded flex flex-col gap-2 font-telemetry-numeric text-telemetry-numeric">
+<div class="flex justify-between">
+<span class="text-outline">Cryptographic Fingerprint:</span>
+<span class="text-tertiary select-all" id="modal-hash">SHA-256: 000000</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Managing Advisor:</span>
+<span class="text-on-surface" id="modal-advisor">Marc-André V.</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Authorized Allocation:</span>
+<span class="text-primary font-medium" id="modal-budget">$0</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Swiss Diplomatic Clearance:</span>
+<span class="text-tertiary">GEN-POL-APR-VALID</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Direct Advisor Message Signal</span>
+<textarea class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md p-3 rounded h-20 placeholder:text-outline focus:outline-none focus:bg-surface-container-high resize-none" placeholder="Send high-priority directive directly to assigned managing partner..."></textarea>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-2 text-outline font-label-caps text-label-caps uppercase">
+<span class="material-symbols-outlined text-[16px] text-primary">security</span>
+<span>End-to-End Encrypted Quorum</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-space-md py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors cursor-pointer" onclick="closeDossierModal()">
+  Dismiss
+</button>
+<button class="px-space-md py-2 rounded bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider font-semibold hover:bg-primary-container transition-all cursor-pointer" onclick="confirmAdvisorDispatch()">
+  Transmit Directive
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</main>
+</div>
+
+<!-- FOOTER -->
+<footer class="mt-auto w-full bg-surface-container-low/95 text-on-surface-variant py-space-lg">
+<div class="w-full px-space-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<p class="font-body-md text-body-md text-on-surface">Bespoke Concierge Framework · MVC Architecture (Model: TravelModel · Controller: DashboardController · View: dashboard-view)</p>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">All data encrypted under Swiss bilateral non-disclosure covenants · Article 47 Swiss Federal Banking Law standard.</p>
+</div>
+<div class="flex items-center gap-space-md font-telemetry-numeric text-telemetry-numeric text-outline">
+<span class="text-primary">Geneva <?= date('H:i') ?> CEST</span>
+<span>·</span>
+<span class="text-secondary">Zurich Ops Verified</span>
+</div>
+</div>
+</footer>
+
+</div>
+
+<!-- INTERACTIVE SCRIPTS -->
+<script>
+  function applyPrompt(promptText) {
+    const input = document.getElementById('concierge-input');
+    if (input) {
+      input.value = promptText;
+      input.focus();
+    }
+  }
+
+  function filterDossiers(status, btnElement) {
+    // Update active tab styles
+    const buttons = document.querySelectorAll('.tab-filter-btn');
+    buttons.forEach(btn => {
+      btn.className = 'tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer';
     });
+    btnElement.className = 'tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all bg-primary text-on-primary font-semibold cursor-pointer';
 
-    // Copilot submit animation
-    const copilotBtn = document.getElementById('copilot-btn');
-    if (copilotBtn) {
-      copilotBtn.addEventListener('click', () => {
-        const input = document.getElementById('copilot-input');
-        if (input.value.trim() !== '') {
-          const originalText = copilotBtn.innerHTML;
-          copilotBtn.innerHTML = '<span>Transmitting...</span>';
-          setTimeout(() => {
-            copilotBtn.innerHTML = '<span>✓ Dispatched to Geneva</span>';
-            setTimeout(() => {
-              input.value = '';
-              copilotBtn.innerHTML = originalText;
-            }, 2000);
-          }, 800);
-        }
-      });
+    // Filter cards
+    const cards = document.querySelectorAll('.dossier-card');
+    cards.forEach(card => {
+      const cardStatus = card.getAttribute('data-status');
+      if (status === 'all' || cardStatus === status) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function openDossierModal(title, budget, advisor, status, refId, hash) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-budget').innerText = budget;
+    document.getElementById('modal-advisor').innerText = advisor;
+    document.getElementById('modal-ref').innerText = 'ENCRYPTED DOSSIER · ' + refId + ' (' + status + ')';
+    document.getElementById('modal-hash').innerText = hash;
+    
+    const modal = document.getElementById('dossier-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeDossierModal() {
+    const modal = document.getElementById('dossier-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function confirmAdvisorDispatch() {
+    alert("Encrypted transmission queued for Geneva Desk Managing Partner. Dual-key handshake confirmed.");
+    closeDossierModal();
+  }
+
+  document.getElementById('btn-submit-advisor')?.addEventListener('click', () => {
+    const val = document.getElementById('concierge-input').value.trim();
+    if (val) {
+      alert("AI Copilot request transmitted to Marc-André V. at Geneva Ops: \"" + val + "\"");
+      document.getElementById('concierge-input').value = '';
+    } else {
+      document.getElementById('concierge-input').focus();
     }
+  });
+</script>
 
-    // PGP Tunnel alert
-    const pgpBtn = document.getElementById('pgp-btn');
-    if (pgpBtn) {
-      pgpBtn.addEventListener('click', () => {
-        alert("Membuka Tunnel PGP Terenkripsi ke Managing Partner Marc-André V. (Geneva Desk)...");
-      });
-    }
-  </script>
-
-</body>
-</html>
+</body></html>
