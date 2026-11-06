@@ -1,0 +1,567 @@
+/* ==========================================================================
+   BESPOKE — PRIVATE CONCIERGE PLATFORM
+   Stylesheet Utama (Clean, Modern, & High-Readability)
+   Didesain agar rapi, berkelas, dan mudah dijelaskan saat presentasi.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES (:root)
+   Variabel warna dan font terpusat agar mudah diganti dan konsisten.
+   -------------------------------------------------------------------------- */
+:root {
+  /* Warna Gelap (Dark Mode / Luxury Tone) */
+  --ink: #0d1712;
+  --ink-soft: #17241d;
+  --ink-card: rgba(23, 36, 29, 0.85);
+
+  /* Warna Terang & Latar Belakang */
+  --paper: #ffffff;
+  --paper-tint: #f8fafc;       /* Abu-abu sangat lembut untuk kontras section */
+  --paper-warm: #fcfbf8;       /* Krem gading mewah untuk kartu */
+
+  /* Warna Aksen Emas (Brass / Gold) */
+  --brass: #c5a059;
+  --brass-hover: #b38e46;
+  --brass-light: rgba(197, 160, 89, 0.12);
+  --brass-border: rgba(197, 160, 89, 0.35);
+
+  /* Warna Teks (Dibuat kontras tinggi agar nyaman dibaca) */
+  --text-dark: #0f172a;        /* Judul utama (slate-900) */
+  --text-body: #334155;        /* Paragraf / isi (slate-700) */
+  --text-muted: #64748b;       /* Teks sekunder / pelengkap (slate-500) */
+  --text-light: #f8fafc;       /* Teks di atas warna gelap */
+  --text-light-dim: #cbd5e1;   /* Teks sekunder di atas warna gelap */
+
+  /* Garis & Border */
+  --border-light: #e2e8f0;
+  --border-dark: rgba(255, 255, 255, 0.12);
+
+  /* Tipografi */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", "Manrope", system-ui, -apple-system, sans-serif;
+
+  /* Layout Container */
+  --max-w: 1140px;
+  --radius: 10px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & DASAR ELEMEN
+   -------------------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Wadah Pembatas Lebar Konten Tengah */
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --------------------------------------------------------------------------
+   3. HEADER & NAVIGASI
+   -------------------------------------------------------------------------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   4. STRIP PARTNER / SEGMEN BANNER (DI BAWAH HERO)
+   -------------------------------------------------------------------------- */
+.strip {
+  background: var(--ink);
+  padding: 22px 0;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.strip .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: var(--text-light-dim);
+  font-size: 13.5px;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.strip .wrap span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s ease;
+}
+
+.strip .wrap span:hover {
+  color: var(--brass);
+}
+
+.strip .wrap span::before {
+  content: "✦";
+  color: var(--brass);
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+/* --------------------------------------------------------------------------
+   5. UMUM: SECTION & SECTION HEADER
+   -------------------------------------------------------------------------- */
+section {
+  padding: 90px 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  margin-bottom: 50px;
+  align-items: start;
+}
+
+.section-head h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 1.2;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.section-head p {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .section-head {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. MASALAH & SOLUSI (.split)
+   Dibuat kartu perbandingan yang kontras dan jelas bagi dosen.
+   -------------------------------------------------------------------------- */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.split > div {
+  padding: 36px 32px;
+  border-radius: var(--radius);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Kartu Masalah */
+.split .masalah {
+  background: #fff8f8;
+  border: 1px solid #fecaca;
+  box-shadow: var(--shadow-sm);
+}
+
+.split .masalah .badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.08);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.split .masalah h3 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: #991b1b;
+  margin-bottom: 12px;
+}
+
+.split .masalah p {
+  color: #4b5563;
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+/* Kartu Solusi */
+.split .solusi {
+  background: var(--paper-warm);
+  border: 1px solid var(--brass-border);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.split .solusi .badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--brass-hover);
+  background: var(--brass-light);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.split .solusi h3 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.split .solusi p {
+  color: var(--text-body);
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. ALUR KERJA (.steps)
+   Grid bertingkat 4 kolom (atau 2 di tablet) bernomor elegan.
+   -------------------------------------------------------------------------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.step {
+  background: var(--paper);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.25s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.step:hover {
+  border-color: var(--brass);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.step .num {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--brass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.step h4 {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.step p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. DAFTAR FITUR (.feature-list)
+   -------------------------------------------------------------------------- */
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature {
+  background: var(--paper);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.feature:hover {
+  border-color: var(--brass-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.feature h4 {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feature p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.feature-highlight {
+  background: var(--paper-warm);
+  border-color: var(--brass-border);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 1024px) {
+  .feature-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. SEGMEN TARGET BISNIS (.segments)
+   -------------------------------------------------------------------------- */
+.segments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.segment {
+  background: var(--paper);
+  border: 1px solid var(--border-light);
+  padding: 12px 22px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-body);
+  border-radius: 30px;
+  transition: all 0.2s ease;
+}
+
+.segment:hover {
+  border-color: var(--brass);
+  color: var(--ink);
+  background: var(--paper-warm);
+}
+
+.segment.main {
+  background: var(--ink);
+  color: var(--text-light);
+  border-color: var(--ink);
+  font-weight: 600;
+}
+
+.segment.main:hover {
+  background: var(--ink-soft);
+  color: var(--brass);
+}
+
+/* --------------------------------------------------------------------------
+   10. CATATAN TENTANG AI (.ai-note)
+   -------------------------------------------------------------------------- */
+.ai-note-box {
+  background: var(--paper-warm);
+  border-left: 4px solid var(--brass);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 28px 32px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ai-note-box .label {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--brass-hover);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-note-box p {
+  color: var(--text-body);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 75ch;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   11. CALL TO ACTION (.cta-block)
+   Pulau gelap elegan dengan aksen emas berkelas.
+   -------------------------------------------------------------------------- */
+.cta-block {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  color: var(--text-light);
+  border-radius: 16px;
+  padding: 68px 36px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cta-block h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(28px, 3.5vw, 42px);
+  color: var(--text-light);
+  margin-bottom: 14px;
+}
+
+.cta-block p {
+  color: var(--text-light-dim);
+  font-size: 16.5px;
+  max-width: 52ch;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+.btn-primary {
+  background: var(--brass);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.35);
+}
+
+.btn-primary:hover {
+  background: #d4b885;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.5);
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+
+.tags span {
+  font-size: 13px;
+  color: var(--text-light-dim);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   12. FOOTER
+   -------------------------------------------------------------------------- */
+footer {
+  padding: 36px 0;
+  background: #080e0b;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13.5px;
+  color: var(--text-light-dim);
+}
+
+/* --------------------------------------------------------------------------
+   13. ANIMASI DASAR
+   -------------------------------------------------------------------------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
