@@ -1,0 +1,15 @@
+[
+  {
+    "email": "admin@bespoke.id",
+    "passwordHash": "$2a$10$ZJBTo/76uztv3n1oqGhyZeJSfUNc1e050vqa9r3E1cLzNKyBTUx.G"
+  },
+  {
+    "id": 1,
+    "email": "dahlah@contoh.com",
+    "passwordHash": "$2a$10$V9il7ypooJoDEfAA92MSFet3dvimgjV57cLeb4Gi1thqEH0ZLNeNS",
+    "name": "Dragon",
+    "role": "Lead Concierge",
+    "company": "Bespoke Travel",
+    "createdAt": "2026-10-06T11:47:54.595Z"
+  }
+]
