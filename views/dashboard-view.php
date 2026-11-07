@@ -1,614 +1,418 @@
 <?php
 /**
  * Pertemuan 7 - Web Programming
- * Task 01 - 03: VIEW (dashboard-view.php) - Remodeled & Refined
+ * VIEW: views/dashboard-view.php
  * 
- * Tampilan Dashboard VIP yang telah dirombak total:
- * - Terpusat rapi dengan max-width terukur (max-w-6xl), tidak melebar ke seluruh layar monitor
- * - Spacing bernapas dan nyaman dibaca (Quiet Luxury Aesthetic)
- * - Sentuhan AI Telemetry & Copilot yang elegan dan proporsional
- * - 100% Terintegrasi MVC: Model -> Controller -> View dengan sanitasi htmlspecialchars()
+ * Desain Dashboard VIP (Model-View-Controller)
+ * Presisi mengikuti tampilan dashboard.html (Quiet Luxury / Modern Bespoke Concierge)
  * 
- * Mahasiswa: Zaidaan Diandra Eka Putra (202410370110420)
+ * Mahasiswa: Zaidaan Diandra Eka Putra & Bagas Dewantara
  * Proyek: VIP Bespoke Travel
  */
-
-function safe(mixed $value): string {
-    return htmlspecialchars((string) ($value ?? ''), ENT_QUOTES, 'UTF-8');
-}
 ?>
-<!DOCTYPE html>
-<html class="dark scroll-smooth" lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Patron Portal — Bespoke Private Travel &amp; Advisory</title>
-  
-  <!-- Google Fonts: EB Garamond (Serif) & DM Sans / Plus Jakarta Sans (Sans) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: {
-              DEFAULT: '#060a08',
-              surface: '#0d1310',
-              card: '#121a16',
-              border: '#1f2d25'
-            },
-            gold: {
-              DEFAULT: '#c5a059',
-              light: '#f5e4bb',
-              bright: '#dfbe7e',
-              dark: '#9a7736'
-            },
-            ivory: '#fcfbf8',
-            emeraldCustom: '#34d399'
-          },
-          fontFamily: {
-            serif: ['"EB Garamond"', 'Georgia', 'serif'],
-            sans: ['"DM Sans"', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    body {
-      background-color: #060a08;
-      color: #cbd5e1;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .gold-glow-subtle {
-      box-shadow: 0 0 25px -5px rgba(197, 160, 89, 0.15);
-    }
-    .text-gold-gradient {
-      background: linear-gradient(135deg, #f5e4bb 0%, #dfbe7e 50%, #c5a059 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  </style>
-</head>
-<body class="min-h-screen flex flex-col bg-obsidian text-slate-300 antialiased selection:bg-gold selection:text-obsidian">
-
-  <!-- =========================================================================
-       1. TOPBAR NAVIGATION (ELEGANT & CLEAN)
-       ========================================================================= -->
-  <header class="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-xl border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-      
-      <!-- Left: Logo & Back Link -->
-      <div class="flex items-center gap-6">
-        <a href="latihan1.php" class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-slate-400 hover:text-gold transition-colors py-1.5 px-3 rounded-full border border-white/10 hover:border-gold/40 bg-white/[0.02]">
-          <span class="material-symbols-outlined text-[15px]">arrow_back</span>
-          <span class="hidden sm:inline">Landing Page</span>
-        </a>
-
-        <div class="h-4 w-px bg-white/15 hidden sm:block"></div>
-
-        <a href="index.php" class="flex items-center gap-3 group">
-          <div class="w-2.5 h-2.5 rounded-full bg-gold animate-pulse shadow-[0_0_8px_#dfbe7e]"></div>
-          <span class="font-serif text-2xl tracking-[0.25em] font-medium text-ivory group-hover:text-gold transition-colors">BESPOKE</span>
-          <span class="hidden md:inline text-[10px] uppercase tracking-widest text-gold px-2 py-0.5 rounded border border-gold/30 bg-gold/5 font-sans">
-            Patron Portal
-          </span>
-        </a>
-      </div>
-
-      <!-- Center: Status Quick Telemetry -->
-      <div class="hidden lg:flex items-center gap-4 text-xs font-mono">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px]">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Encrypted Signal 256-bit</span>
-        </span>
-        <span class="text-slate-400 text-[11px]">
-          Geneva Desk: <strong class="text-ivory font-normal">Online</strong>
-        </span>
-      </div>
-
-      <!-- Right: User Avatar & Tier -->
-      <div class="flex items-center gap-3">
-        <div class="text-right hidden sm:block">
-          <div class="text-sm font-medium text-ivory leading-tight"><?= safe($client['title'] ?? $client['name']) ?></div>
-          <div class="text-[11px] text-gold tracking-wider font-mono"><?= safe($client['tier'] ?? 'Black Diamond Sovereign') ?></div>
-        </div>
-        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-bright to-gold text-obsidian font-bold flex items-center justify-center text-sm shadow-md ring-2 ring-gold/30">
-          <?= safe($client['avatar_initials'] ?? 'AW') ?>
-        </div>
-      </div>
-
-    </div>
-  </header>
-
-  <!-- =========================================================================
-       2. MAIN CONTENT (TERPUSAT DI CONTAINER MAX-W-6XL)
-       ========================================================================= -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-6 py-10 sm:py-12 space-y-10">
-
-    <!-- HERO SECTION: WELCOME & GREETING -->
-    <section class="space-y-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2">
-        <div class="space-y-2">
-          <div class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold font-medium">
-            <span class="material-symbols-outlined text-sm">verified_user</span>
-            <span>Vault ID: <?= safe($client['member_id'] ?? 'VIP-8821') ?> &bull; Sovereign Desk</span>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Bespoke Travel Concierge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body class="bg-[#f5f7f5] text-[#142b1f] min-h-screen antialiased flex flex-col md:flex-row">
+    <!-- SIDEBAR -->
+    <aside class="sidebar w-full md:w-[250px] shrink-0 bg-white border-b md:border-b-0 md:border-r border-[#e1e9e3] p-6 flex flex-col justify-between">
+      <div>
+        <!-- Brand / Logo -->
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-9 h-9 rounded-lg bg-[#0284c7] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+            <span><?= htmlspecialchars($business['logo'] ?? 'B') ?></span>
           </div>
-          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-ivory tracking-tight leading-tight">
-            <?= safe($greeting) ?>
-          </h1>
-          <p class="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
-            Swiss Concierge Desk aktif. Managing Partner <strong class="text-slate-200 font-medium">Marc-André V.</strong> bersiaga di Geneva HQ untuk seluruh jadwal armada dan akomodasi privat Anda.
-          </p>
+          <span id="business-name" class="font-bold text-lg tracking-tight text-[#142b1f]"><?= htmlspecialchars($business['name'] ?? 'Bespoke') ?></span>
         </div>
 
-        <!-- Quick Telemetry Action Pills -->
-        <div class="flex flex-wrap items-center gap-2.5 self-start md:self-end">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-obsidian-card border border-white/10 text-xs text-slate-300">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span>Direct Secure Line</span>
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-obsidian-card border border-white/10 text-xs text-slate-300">
-            <span class="material-symbols-outlined text-[14px] text-gold">flight</span>
-            <span>Tail HB-BSK Ready</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- AI Concierge Copilot Bar (Elegan & Rapi) -->
-      <div class="p-4 sm:p-5 rounded-2xl bg-obsidian-surface border border-gold/30 gold-glow-subtle space-y-3">
-        <div class="flex items-center justify-between text-xs">
-          <div class="flex items-center gap-2 text-gold font-medium uppercase tracking-wider text-[11px]">
-            <span class="material-symbols-outlined text-sm animate-pulse">auto_awesome</span>
-            <span>Bespoke Concierge AI Copilot (Encrypted Private Instance)</span>
-          </div>
-          <span class="text-[10px] text-slate-500 font-mono hidden sm:inline">E2EE: 4096-BIT POST-QUANTUM</span>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-center gap-3">
-          <div class="relative w-full">
-            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-lg">travel_explore</span>
-            <input id="copilot-input" 
-                   type="text" 
-                   placeholder="Ajukan instruksi concierge (misal: tambah armada helikopter, ubah katering jet, jadwal sommelier)..." 
-                   class="w-full pl-11 pr-4 py-3 bg-obsidian rounded-xl text-sm text-ivory placeholder-slate-500 border border-white/10 focus:border-gold focus:outline-none transition-colors" />
-          </div>
-          <button id="copilot-btn" class="w-full sm:w-auto shrink-0 px-6 py-3 rounded-xl bg-gold hover:bg-gold-bright text-obsidian text-xs uppercase tracking-wider font-bold transition-all shadow flex items-center justify-center gap-2">
-            <span>Submit to Advisor</span>
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </button>
-        </div>
-
-        <!-- Quick Suggestions -->
-        <div class="flex items-center gap-2 overflow-x-auto pt-1 text-xs text-slate-400">
-          <span class="text-[10px] uppercase tracking-wider text-slate-500 shrink-0">Direct Mandates:</span>
-          <button class="copilot-chip shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs transition-colors">
-            + Tambah Caviar Service di G650ER
-          </button>
-          <button class="copilot-chip shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs transition-colors">
-            + Request Transfer Heli di St. Moritz
-          </button>
-          <button class="copilot-chip shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs transition-colors">
-            + Perpanjang Monaco Yacht Berth
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         3. METRIC KPI CARDS (4 KOLOM DENGAN SPACING RAPI)
-         ======================================================================= -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      
-      <!-- Card 1: Destinations -->
-      <div class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/30 transition-all flex flex-col justify-between space-y-4">
-        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider">
-          <span>Global Envelopes</span>
-          <span class="material-symbols-outlined text-gold text-lg">public</span>
-        </div>
-        <div>
-          <div class="text-3xl font-serif text-ivory font-normal"><?= safe($stats['total_requests'] ?? count($requests)) ?> Destinasi</div>
-          <p class="text-xs text-slate-400 mt-1">4 Active Planning &bull; 2 Confirmed</p>
-        </div>
-        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Portfolio Status</span>
-          <span class="text-emerald-400 font-semibold">100% On-Track</span>
-        </div>
-      </div>
-
-      <!-- Card 2: Budget -->
-      <div class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/30 transition-all flex flex-col justify-between space-y-4">
-        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider">
-          <span>Allocated Escrow</span>
-          <span class="material-symbols-outlined text-gold text-lg">account_balance</span>
-        </div>
-        <div>
-          <div class="text-3xl font-serif text-gold-bright font-normal font-mono"><?= safe($stats['total_budget'] ?? '$536,000') ?></div>
-          <p class="text-xs text-emerald-400 mt-1 flex items-center gap-1 font-medium">
-            <span class="material-symbols-outlined text-sm">trending_up</span>
-            +12% Charter Allocation (BCGE)
-          </p>
-        </div>
-        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Private Escrow Vault</span>
-          <span class="text-ivory">Zurich &bull; Verified</span>
-        </div>
-      </div>
-
-      <!-- Card 3: Fleet Ready -->
-      <div class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/30 transition-all flex flex-col justify-between space-y-4">
-        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider">
-          <span>Fleet Contingency</span>
-          <span class="material-symbols-outlined text-emerald-400 text-lg">flight</span>
-        </div>
-        <div>
-          <div class="text-3xl font-serif text-ivory font-normal">100% Ready</div>
-          <p class="text-xs text-slate-400 mt-1">Dual Standby: LSGG &bull; LFMN</p>
-        </div>
-        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Airborne Clearance</span>
-          <span class="text-emerald-400 font-medium">Immediate</span>
-        </div>
-      </div>
-
-      <!-- Card 4: Response SLA -->
-      <div class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/30 transition-all flex flex-col justify-between space-y-4">
-        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider">
-          <span>Concierge SLA</span>
-          <span class="material-symbols-outlined text-gold text-lg">schedule</span>
-        </div>
-        <div>
-          <div class="text-3xl font-serif text-gold-bright font-normal font-mono"><?= safe($stats['response_time'] ?? '< 12 Mins') ?></div>
-          <p class="text-xs text-slate-400 mt-1">Dedicated Senior Partner Channel</p>
-        </div>
-        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Average Today</span>
-          <span class="text-emerald-400 font-bold">4.2 Menit</span>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- =======================================================================
-         4. AI FLIGHT RADAR & TELEMETRY WIDGET (PROPORSIONAL & TIDAK SESAK)
-         ======================================================================= -->
-    <section class="p-6 sm:p-8 rounded-2xl bg-obsidian-surface border border-white/10 space-y-6">
-      
-      <!-- Header Radar -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-white/10">
-        <div>
-          <div class="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>Bespoke Intelligence™ &bull; Live Flight Telemetry</span>
-          </div>
-          <h2 class="font-serif text-xl sm:text-2xl text-ivory mt-1">
-            Flight Dossier #BSK-904: Geneva Cointrin (LSGG) &rarr; Samedan / St. Moritz (LSZS)
-          </h2>
-          <p class="text-xs text-slate-400 font-mono mt-0.5">
-            Gulfstream G650ER &bull; Cruising Altitude: <span class="text-ivory">FL410</span> &bull; Estimated En-Route: <span class="text-gold">38 Mins</span>
-          </p>
-        </div>
-        <div class="flex items-center gap-2 self-start sm:self-center font-mono text-xs">
-          <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
-            Transponder: 7421 (VIP)
-          </span>
-          <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-            In-Flight
-          </span>
-        </div>
-      </div>
-
-      <!-- Visual Altitude Profile Curve (SVG Ringan & Jelas) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        <div class="lg:col-span-8 bg-obsidian rounded-xl p-4 sm:p-5 border border-white/10 space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span>LSGG (Geneva Apron &bull; 1,411 FT)</span>
-            <span class="text-emerald-400 font-semibold">Cruising FL410 (Mach 0.88)</span>
-            <span>LSZS (Engadin Alpine &bull; 5,600 FT)</span>
-          </div>
-
-          <!-- Curve SVG -->
-          <div class="relative w-full h-28 sm:h-32">
-            <svg class="w-full h-full" viewBox="0 0 700 120" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="grad-curve" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#34d399" stop-opacity="0.3"></stop>
-                  <stop offset="100%" stop-color="#34d399" stop-opacity="0.0"></stop>
-                </linearGradient>
-              </defs>
-              <path d="M 20 100 C 120 100, 180 20, 260 20 L 440 20 C 520 20, 580 80, 680 90 L 680 120 L 20 120 Z" fill="url(#grad-curve)"></path>
-              <path d="M 20 100 C 120 100, 180 20, 260 20 L 440 20 C 520 20, 580 80, 680 90" stroke="#34d399" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
-              <!-- Waypoints -->
-              <circle cx="20" cy="100" r="4" fill="#dfbe7e"></circle>
-              <circle cx="350" cy="20" r="4" fill="#dfbe7e"></circle>
-              <circle cx="410" cy="20" r="6" fill="#34d399" class="animate-pulse"></circle>
-              <circle cx="410" cy="20" r="3" fill="#ffffff"></circle>
-              <circle cx="680" cy="90" r="4" fill="#dfbe7e"></circle>
+        <!-- Navigation Links -->
+        <nav class="space-y-1.5" aria-label="Menu Utama">
+          <a href="index.php" class="nav-link active">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
             </svg>
-          </div>
+            <span>Beranda</span>
+          </a>
+          <a href="#request-section" class="nav-link">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+            <span>Request Saya</span>
+          </a>
+          <a href="#action-section" class="nav-link">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+            <span>Proposal</span>
+          </a>
+          <a href="#upcoming-section" class="nav-link">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span>Booking</span>
+          </a>
+          <a href="#messages-section" class="nav-link">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <span>Pesan</span>
+          </a>
+        </nav>
+      </div>
 
-          <div class="flex items-center justify-between text-[11px] font-mono text-slate-500 pt-1">
-            <span>Departure: 19:22 CEST (On-Time)</span>
-            <span class="text-slate-400">Turbulence: Nil</span>
-            <span>Arrival: 20:00 CEST</span>
-          </div>
-        </div>
-
-        <!-- 4 Badges AI Telemetri -->
-        <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
-          <div class="p-3 rounded-xl bg-obsidian border border-white/5 flex items-center gap-3">
-            <span class="material-symbols-outlined text-emerald-400 text-xl">verified</span>
-            <div>
-              <div class="text-xs font-medium text-ivory">AI Route Optimized</div>
-              <div class="text-[11px] text-slate-400">0% Turbulence Risk &bull; Alpine Vector</div>
-            </div>
-          </div>
-          <div class="p-3 rounded-xl bg-obsidian border border-white/5 flex items-center gap-3">
-            <span class="material-symbols-outlined text-gold text-xl">flight_land</span>
-            <div>
-              <div class="text-xs font-medium text-ivory">Instant Alpine Slot Clearance</div>
-              <div class="text-[11px] text-slate-400">Samedan VIP Apron Guaranteed (99.4%)</div>
-            </div>
-          </div>
-          <div class="p-3 rounded-xl bg-obsidian border border-white/5 flex items-center gap-3">
-            <span class="material-symbols-outlined text-emerald-400 text-xl">ac_unit</span>
-            <div>
-              <div class="text-xs font-medium text-ivory">Alpine METAR Weather</div>
-              <div class="text-[11px] text-slate-400">Wind: Nil &bull; Temp: -4°C &bull; Powder Groomed</div>
-            </div>
-          </div>
-          <div class="p-3 rounded-xl bg-obsidian border border-white/5 flex items-center gap-3">
-            <span class="material-symbols-outlined text-gold text-xl">directions_car</span>
-            <div>
-              <div class="text-xs font-medium text-ivory">Apron Armored Transfer</div>
-              <div class="text-[11px] text-slate-400">Range Rover Sentinel &amp; Security Escort</div>
-            </div>
-          </div>
+      <div class="pt-4 mt-auto border-t border-[#edf2ee] flex flex-col gap-2">
+        <a href="public/dashboard.html" class="text-xs font-semibold text-sky-600 hover:text-sky-800 transition flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+          <span>Buka Versi HTML + JS (CSR)</span>
+        </a>
+        <div class="flex items-center justify-between">
+          <a href="latihan1.php" class="text-xs text-slate-400 hover:text-slate-600 transition">Ke Beranda Publik</a>
+          <a href="login.php" class="text-xs font-semibold text-slate-500 hover:text-red-700 transition" title="Keluar dari akun">Keluar</a>
         </div>
       </div>
-    </section>
+    </aside>
 
-    <!-- =======================================================================
-         5. CORE MVC: ITINERARY DOSSIERS & FILTER TABS
-         ======================================================================= -->
-    <section class="space-y-6">
-      
-      <!-- Section Header & Filter Tabs -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full">
+      <!-- HEADER -->
+      <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <span class="text-xs uppercase tracking-[0.2em] text-gold font-medium">Sovereign Vault Portfolio</span>
-          <h2 class="font-serif text-2xl sm:text-3xl text-ivory tracking-tight mt-0.5">
-            Daftar Reservasi &amp; Permintaan Perjalanan
-          </h2>
-          <p class="text-xs text-slate-400 font-mono mt-0.5">
-            Menampilkan <strong class="text-gold"><?= $totalFiltered ?></strong> rencana perjalanan
-            <?php if ($activeFilter !== 'all'): ?>
-              (Filter aktif: <span class="text-emerald-400 capitalize"><?= safe($activeFilter) ?></span>)
+          <div class="flex items-center gap-3">
+            <h1 id="customer-greeting" class="text-2xl sm:text-3xl font-bold text-[#142b1f] tracking-tight">Halo, <?= htmlspecialchars($customer['name'] ?? 'Dragon') ?></h1>
+            <div id="api-status-container"></div>
+          </div>
+          <p class="text-sm text-[#5d6a62] mt-1">Pantau perjalanan Anda dan tinjau proposal dari concierge.</p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="index.php" class="p-2.5 rounded-lg border border-[#e1e9e3] bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-xs flex items-center gap-1.5 text-xs font-semibold" title="Sinkronkan data">
+            <svg id="refresh-icon" class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            <span class="hidden sm:inline">Refresh Data</span>
+          </a>
+          <button id="btn-new-request" type="button" class="btn-primary-dark">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            <span>Buat Request Baru</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- FLASH NOTIFICATION -->
+      <?php if (!empty($notification)): ?>
+        <div class="mb-6 p-4 rounded-xl border flex items-center justify-between gap-3 shadow-xs <?= ($notification['type'] ?? '') === 'success' ? 'bg-sky-50 border-sky-200 text-sky-900' : 'bg-rose-50 border-rose-200 text-rose-900' ?>">
+          <div class="flex items-center gap-3">
+            <?php if (($notification['type'] ?? '') === 'success'): ?>
+              <svg class="w-5 h-5 text-sky-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            <?php else: ?>
+              <svg class="w-5 h-5 text-rose-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
             <?php endif; ?>
-          </p>
-        </div>
-
-        <!-- Filter Tabs (Koneksi ke Controller MVC) -->
-        <div class="flex items-center gap-1.5 p-1 bg-obsidian-surface rounded-xl border border-white/10 text-xs overflow-x-auto max-w-full">
-          <a href="index.php?status=all" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= ($activeFilter === 'all') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            Semua (<?= safe($availableStatuses['all'] ?? count($requests)) ?>)
-          </a>
-          <a href="index.php?status=approved" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= (strtolower($activeFilter) === 'approved') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            Approved (<?= safe($availableStatuses['approved']['count'] ?? 2) ?>)
-          </a>
-          <a href="index.php?status=in+review" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= (strtolower($activeFilter) === 'in review' || strtolower($activeFilter) === 'in-review') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            In Review (<?= safe($availableStatuses['in review']['count'] ?? 2) ?>)
-          </a>
-          <a href="index.php?status=planning" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= (strtolower($activeFilter) === 'planning') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            Planning (<?= safe($availableStatuses['planning']['count'] ?? 1) ?>)
-          </a>
-          <a href="index.php?status=confirmed" 
-             class="px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap font-medium <?= (strtolower($activeFilter) === 'confirmed') ? 'bg-gold text-obsidian font-bold shadow' : 'text-slate-400 hover:text-ivory' ?>">
-            Confirmed (<?= safe($availableStatuses['confirmed']['count'] ?? 1) ?>)
-          </a>
-        </div>
-      </div>
-
-      <!-- Grid Kartu Perjalanan (3 Kolom Proporsional) -->
-      <?php if (empty($requests)): ?>
-        <div class="text-center py-16 bg-obsidian-surface rounded-2xl border border-dashed border-white/10 p-8 space-y-3">
-          <span class="material-symbols-outlined text-4xl text-gold">travel_explore</span>
-          <h3 class="font-serif text-xl text-ivory">Tidak Ada Permintaan dengan Status "<?= safe($activeFilter) ?>"</h3>
-          <p class="text-xs text-slate-400 max-w-md mx-auto">
-            Silakan pilih filter status lainnya untuk melihat rencana perjalanan Anda atau hubungi penasihat pribadi Anda.
-          </p>
-          <a href="index.php?status=all" class="inline-block mt-3 px-5 py-2 rounded-lg bg-gold text-obsidian font-bold text-xs uppercase tracking-wider hover:bg-gold-bright transition-colors">
-            Reset Filter ke Semua
-          </a>
-        </div>
-      <?php else: ?>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <?php foreach ($requests as $trip): ?>
-            <?php
-              $statusName = $trip['status'] ?? 'Draft';
-              $badgeColor = match (strtolower($statusName)) {
-                  'approved', 'confirmed' => 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-                  'in review'             => 'bg-amber-500/15 text-gold-bright border-amber-500/30',
-                  'planning'              => 'bg-sky-500/15 text-sky-400 border-sky-500/30',
-                  default                 => 'bg-slate-500/15 text-slate-300 border-slate-500/30'
-              };
-            ?>
-            <article class="rounded-2xl bg-obsidian-surface border border-white/10 hover:border-gold/40 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-lg hover:-translate-y-1">
-              <div>
-                <!-- Foto Destinasi (Aspect Ratio 16/10) -->
-                <div class="relative w-full h-44 bg-cover bg-center" style="background-image: url('<?= safe($trip['image_url'] ?? '') ?>')">
-                  <div class="absolute inset-0 bg-gradient-to-t from-obsidian-surface via-obsidian-surface/40 to-transparent"></div>
-                  
-                  <!-- Status & Anggaran -->
-                  <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border backdrop-blur-md <?= $badgeColor ?>">
-                    <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                    <span><?= safe($statusName) ?></span>
-                  </div>
-                  <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-obsidian/80 backdrop-blur-md text-gold font-mono text-xs font-semibold border border-white/10">
-                    <?= safe($trip['budget'] ?? '$0') ?>
-                  </div>
-
-                  <div class="absolute bottom-2.5 left-4 right-4 flex items-end justify-between">
-                    <span class="text-[10px] uppercase font-mono tracking-wider text-slate-400"><?= safe($trip['dossier_ref'] ?? $trip['id']) ?></span>
-                    <span class="text-[11px] text-slate-400 font-mono"><?= safe($trip['nights'] ?? 'VIP') ?></span>
-                  </div>
-                </div>
-
-                <!-- Konten Kartu -->
-                <div class="p-5 space-y-3.5">
-                  <h3 class="font-serif text-xl font-medium text-ivory leading-snug">
-                    <?= safe($trip['destination']) ?>
-                  </h3>
-
-                  <!-- Jadwal & Armada -->
-                  <div class="space-y-1.5 py-2.5 border-y border-white/5 text-xs text-slate-300">
-                    <div class="flex items-center justify-between">
-                      <span class="text-slate-500">Jadwal:</span>
-                      <span class="font-medium text-ivory"><?= safe($trip['dates']) ?></span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                      <span class="text-slate-500">Armada / Aset:</span>
-                      <span class="font-medium text-gold font-mono"><?= safe($trip['asset_tag'] ?? $trip['guests']) ?></span>
-                    </div>
-                  </div>
-
-                  <!-- Tag Layanan -->
-                  <?php if (!empty($trip['services']) && is_array($trip['services'])): ?>
-                    <div class="flex flex-wrap gap-1.5">
-                      <?php foreach ($trip['services'] as $srv): ?>
-                        <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">
-                          ✓ <?= safe($srv) ?>
-                        </span>
-                      <?php endforeach; ?>
-                    </div>
-                  <?php endif; ?>
-
-                  <!-- Deskripsi -->
-                  <p class="text-xs text-slate-400 leading-relaxed line-clamp-2 italic">
-                    "<?= safe($trip['notes']) ?>"
-                  </p>
-                </div>
-              </div>
-
-              <!-- Footer Kartu: Advisor & Link -->
-              <div class="px-5 py-3.5 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 bg-black/20">
-                <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-full bg-gold/20 text-gold text-[10px] font-bold flex items-center justify-center font-mono">
-                    <?= safe($trip['advisor_initials'] ?? 'MV') ?>
-                  </div>
-                  <span class="text-[11px]">Advisor: <strong class="text-slate-200"><?= safe($trip['advisor']) ?></strong></span>
-                </div>
-                <a href="#" class="text-gold hover:text-gold-bright text-[11px] uppercase tracking-wider font-semibold inline-flex items-center gap-1">
-                  <span>Dossier</span>
-                  <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
-                </a>
-              </div>
-            </article>
-          <?php endforeach; ?>
+            <div>
+              <h4 class="text-xs font-bold leading-tight"><?= htmlspecialchars($notification['title'] ?? '') ?></h4>
+              <p class="text-xs opacity-90 mt-0.5"><?= htmlspecialchars($notification['message'] ?? '') ?></p>
+            </div>
+          </div>
+          <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 text-base font-bold leading-none">&times;</button>
         </div>
       <?php endif; ?>
 
-    </section>
-
-    <!-- =======================================================================
-         6. DIRECT CONCIERGE SECURE RELAY BANNER
-         ======================================================================= -->
-    <section class="p-6 rounded-2xl bg-obsidian-surface border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
-      <div class="flex items-center gap-4 text-left w-full sm:w-auto">
-        <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold shrink-0">
-          <span class="material-symbols-outlined text-2xl">phonelink_ring</span>
+      <!-- SECTION: PERLU TINDAKAN ANDA -->
+      <section id="action-section" class="mb-9">
+        <h2 class="text-base sm:text-[17px] font-bold text-[#162d20] mb-3">Perlu tindakan Anda</h2>
+        <div id="action-items-list" class="bg-white rounded-2xl border border-[#e1e9e3] shadow-xs divide-y divide-[#edf3ef] overflow-hidden">
+          <?php if (empty($perluTindakan)): ?>
+            <div class="p-6 text-sm text-slate-400">Tidak ada tindakan yang diperlukan saat ini.</div>
+          <?php else: ?>
+            <?php foreach ($perluTindakan as $item): 
+              $isProposal = ($item['type'] ?? '') === 'proposal';
+            ?>
+              <div class="action-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 md:p-5">
+                <div class="flex items-start sm:items-center gap-3.5">
+                  <?php if ($isProposal): ?>
+                    <div class="action-icon action-icon-gold">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                      </svg>
+                    </div>
+                  <?php else: ?>
+                    <div class="action-icon action-icon-mint">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                    </div>
+                  <?php endif; ?>
+                  <div>
+                    <h3 class="text-[15px] font-semibold text-slate-900 leading-snug"><?= htmlspecialchars($item['title'] ?? '') ?></h3>
+                    <p class="text-xs sm:text-[13px] text-slate-500 mt-0.5"><?= htmlspecialchars($item['subtitle'] ?? '') ?></p>
+                  </div>
+                </div>
+                <div class="self-end sm:self-auto shrink-0">
+                  <?php if ($isProposal): ?>
+                    <div class="flex items-center gap-3">
+                      <span class="badge-gold"><?= htmlspecialchars($item['badge'] ?? '') ?></span>
+                      <button class="btn-primary-sm" onclick="alert('Membuka detail proposal v2...')"><?= htmlspecialchars($item['actionLabel'] ?? 'Lihat Proposal') ?></button>
+                    </div>
+                  <?php else: ?>
+                    <div>
+                      <span class="badge-mint-outline"><?= htmlspecialchars($item['badge'] ?? '') ?></span>
+                    </div>
+                  <?php endif; ?>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h3 class="font-serif text-lg font-medium text-ivory">Direct 24/7 Sovereign Desk</h3>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-mono">
-              Available &bull; 0s Queue
-            </span>
+      </section>
+
+      <!-- GRID DUA KOLOM: REQUEST SAYA & RIGHT COLUMN -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- LEFT COLUMN: REQUEST SAYA -->
+        <section id="request-section" class="lg:col-span-7">
+          <div class="flex items-center justify-between mb-3.5">
+            <h2 class="text-base sm:text-[17px] font-bold text-[#162d20]">Request Saya</h2>
+            <a href="index.php" class="text-xs font-semibold text-sky-600 hover:text-sky-800 hover:underline">Lihat semua</a>
           </div>
-          <p class="text-xs text-slate-400 font-mono mt-0.5">
-            +41 22 819 0088 &bull; Managing Partner Marc-André V. on Duty
-          </p>
+
+          <div id="requests-list" class="space-y-4">
+            <?php if (empty($requestSaya)): ?>
+              <div class="p-8 text-center text-sm text-slate-400 bg-white rounded-2xl border border-slate-200">Belum ada request perjalanan aktif.</div>
+            <?php else: ?>
+              <?php foreach ($requestSaya as $req): 
+                $isWarning = ($req['statusType'] ?? '') === 'warning';
+                $statusBadgeClass = $isWarning ? "badge-sand" : "badge-soft-blue";
+                $steps = $req['steps'] ?? ["Diajukan", "Ditinjau", "Proposal", "Disetujui", "Dikonfirmasi"];
+                $currentIndex = (int)($req['currentStepIndex'] ?? 0);
+              ?>
+                <div class="request-card p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm transition hover:shadow-md">
+                  <div class="flex items-start justify-between gap-3 mb-1">
+                    <h4 class="text-[15px] sm:text-base font-bold text-slate-900 leading-snug"><?= htmlspecialchars($req['destination'] ?? '') ?></h4>
+                    <span class="<?= $statusBadgeClass ?> shrink-0"><?= htmlspecialchars($req['statusBadge'] ?? '') ?></span>
+                  </div>
+                  <p class="text-xs sm:text-[13px] text-slate-500 mb-4"><?= htmlspecialchars($req['dateRange'] ?? '') ?> • <?= (int)($req['guests'] ?? 2) ?> peserta</p>
+
+                  <?php if (!empty($req['image'])): ?>
+                    <div class="mb-4 overflow-hidden rounded-xl border border-slate-200/70 bg-slate-100">
+                      <img 
+                        src="<?= htmlspecialchars($req['image']) ?>" 
+                        alt="<?= htmlspecialchars($req['destination'] ?? '') ?>" 
+                        class="w-full h-44 sm:h-48 object-cover rounded-xl hover:scale-[1.02] transition duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  <?php endif; ?>
+
+                  <div class="steps-container flex items-center justify-between gap-1 sm:gap-2 mb-5">
+                    <?php foreach ($steps as $idx => $stepName): 
+                      $isCompletedOrActive = $idx <= $currentIndex;
+                      $isCurrentActive = $idx === $currentIndex;
+                      $labelClass = $isCurrentActive
+                        ? "font-bold text-slate-900"
+                        : ($isCompletedOrActive ? "font-medium text-slate-700" : "text-slate-400");
+                      $barClass = $isCompletedOrActive ? "step-bar-active" : "step-bar-inactive";
+                    ?>
+                      <div class="flex-1 flex flex-col items-center">
+                        <div class="step-bar <?= $barClass ?> w-full h-[3.5px] rounded-full mb-1.5"></div>
+                        <span class="step-label text-[11px] sm:text-xs <?= $labelClass ?>"><?= htmlspecialchars($stepName) ?></span>
+                      </div>
+                    <?php endforeach; ?>
+                  </div>
+
+                  <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <?php if (($req['footerType'] ?? '') === 'estimate'): ?>
+                      <div class="flex items-center gap-2 text-xs sm:text-[13px] text-slate-600">
+                        <span>Estimasi biaya <strong class="text-slate-900"><?= htmlspecialchars($req['costEstimate'] ?? 'Rp -') ?></strong></span>
+                        <span class="badge-neutral"><?= htmlspecialchars($req['costBadge'] ?? 'Estimasi') ?></span>
+                      </div>
+                    <?php else: ?>
+                      <div class="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
+                        <svg class="w-4 h-4 text-sky-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span><?= htmlspecialchars($req['confirmedText'] ?? 'Booking Confirmed') ?></span>
+                      </div>
+                    <?php endif; ?>
+                    <a href="#" class="text-xs sm:text-[13px] font-semibold text-sky-600 hover:text-sky-800 transition">Lihat detail</a>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </section>
+
+        <!-- RIGHT COLUMN: PERJALANAN MENDATANG & PESAN TERBARU -->
+        <aside class="lg:col-span-5 space-y-8">
+          <!-- Widget 1: Perjalanan Mendatang -->
+          <section id="upcoming-section">
+            <h2 class="text-base sm:text-[17px] font-bold text-[#162d20] mb-3">Perjalanan mendatang</h2>
+            <div id="upcoming-card" class="bg-white rounded-2xl border border-[#e1e9e3] p-4 sm:p-5 shadow-xs">
+              <?php if (!empty($perjalananMendatang)): ?>
+                <div class="flex items-center gap-4">
+                  <div class="date-tile flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-[#e0f2fe] text-[#0369a1] shrink-0 font-sans shadow-xs">
+                    <span class="text-base font-extrabold leading-tight"><?= htmlspecialchars($perjalananMendatang['dateDay'] ?? '18') ?></span>
+                    <span class="text-[11px] font-bold tracking-wider leading-none uppercase"><?= htmlspecialchars($perjalananMendatang['dateMonth'] ?? 'NOV') ?></span>
+                  </div>
+                  <div>
+                    <h4 class="text-[15px] font-bold text-slate-900 leading-snug"><?= htmlspecialchars($perjalananMendatang['destination'] ?? '') ?></h4>
+                    <p class="text-xs sm:text-[13px] text-slate-500 mt-0.5"><?= htmlspecialchars($perjalananMendatang['confirmedSummary'] ?? '') ?></p>
+                  </div>
+                </div>
+              <?php else: ?>
+                <div class="p-2 text-sm text-slate-400">Belum ada perjalanan mendatang.</div>
+              <?php endif; ?>
+            </div>
+          </section>
+
+          <!-- Widget 2: Pesan Terbaru -->
+          <section id="messages-section">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-base sm:text-[17px] font-bold text-[#162d20]">Pesan terbaru</h2>
+              <a href="#" class="text-xs font-semibold text-sky-600 hover:text-sky-800 hover:underline">Buka pesan</a>
+            </div>
+            <div class="bg-white rounded-2xl border border-[#e1e9e3] p-4 sm:p-5 shadow-xs">
+              <div id="messages-list" class="divide-y divide-[#edf3ef]">
+                <?php if (empty($pesanTerbaru)): ?>
+                  <div class="p-2 text-sm text-slate-400">Belum ada pesan concierge.</div>
+                <?php else: ?>
+                  <?php foreach ($pesanTerbaru as $msg): ?>
+                    <div class="flex items-start gap-3.5 py-2.5 first:pt-0 last:pb-0">
+                      <div class="w-8 h-8 rounded-full bg-[#e0f2fe] text-[#0369a1] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                        <?= htmlspecialchars($msg['initial'] ?? 'C') ?>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <div class="flex items-baseline gap-2">
+                          <h5 class="text-xs sm:text-[13px] font-semibold text-slate-800 truncate"><?= htmlspecialchars($msg['sender'] ?? '') ?></h5>
+                          <span class="text-[11px] text-slate-400 shrink-0">• <?= htmlspecialchars($msg['time'] ?? '') ?></span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5 line-clamp-2 leading-relaxed"><?= htmlspecialchars($msg['message'] ?? '') ?></p>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <!-- MODAL: + BUAT REQUEST BARU -->
+    <div id="new-request-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-white rounded-2xl border border-[#e1e9e3] shadow-xl w-full max-w-lg overflow-hidden animate-fade-in">
+        <div class="px-6 py-5 border-b border-[#edf3ef] flex items-center justify-between">
+          <h3 class="text-lg font-bold text-[#142b1f]">Buat Request Perjalanan Baru</h3>
+          <button id="btn-close-modal" type="button" class="text-slate-400 hover:text-slate-600 text-xl font-bold leading-none">&times;</button>
         </div>
-      </div>
+        <form id="new-request-form" method="POST" action="index.php" class="p-6 space-y-4">
+          <input type="hidden" name="action" value="new_request" />
+          <div id="modal-feedback" class="hidden p-3.5 rounded-xl text-xs font-medium"></div>
 
-      <button id="pgp-btn" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-ivory text-xs uppercase tracking-wider font-medium border border-white/10 transition-colors flex items-center justify-center gap-2">
-        <span class="material-symbols-outlined text-sm text-gold">key</span>
-        <span>Send Encrypted PGP Note</span>
-      </button>
-    </section>
-
-  </main>
-
-  <!-- =========================================================================
-       7. MVC ARCHITECTURAL FOOTER
-       ========================================================================= -->
-  <footer class="bg-black/60 border-t border-white/10 py-8 px-6 mt-12 text-xs text-slate-400">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-      <div class="space-y-1">
-        <div class="font-serif text-base text-ivory">Bespoke Concierge Framework &bull; Arsitektur MVC Week 7</div>
-        <p class="text-[11px] text-slate-500 font-mono">
-          Model: <code class="text-emerald-400">TravelModel.php</code> &bull; 
-          Controller: <code class="text-sky-400">DashboardController.php</code> &bull; 
-          View: <code class="text-gold">dashboard-view.php</code>
-        </p>
-      </div>
-      <div class="text-[11px] sm:text-right text-slate-400">
-        <div>Pengembang: <strong class="text-ivory font-medium">Zaidaan Diandra Eka Putra</strong> (202410370110420)</div>
-        <div class="text-slate-500 mt-0.5">&copy; <?= date('Y') ?> VIP Bespoke Travel Concierge. All Rights Reserved.</div>
+          <div>
+            <label for="req-destination" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Destinasi / Nama Acara</label>
+            <input
+              id="req-destination"
+              name="destination"
+              type="text"
+              required
+              placeholder="Contoh: Swiss Alps Winter Chalet"
+              class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500"
+            />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="req-dates" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tanggal Perjalanan</label>
+              <input
+                id="req-dates"
+                name="dateRange"
+                type="text"
+                required
+                placeholder="Contoh: 15 Jan – 22 Jan 2027"
+                class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500"
+              />
+            </div>
+            <div>
+              <label for="req-guests" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Jumlah Peserta</label>
+              <input
+                id="req-guests"
+                name="guests"
+                type="number"
+                min="1"
+                value="2"
+                class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500"
+              />
+            </div>
+          </div>
+          <div>
+            <label for="req-notes" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Catatan Khusus Concierge (Opsional)</label>
+            <textarea
+              id="req-notes"
+              name="notes"
+              rows="3"
+              placeholder="Preferensi villa pribadi, private jet, chef bintang michelin, dll."
+              class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500"
+            ></textarea>
+          </div>
+          <div class="pt-3 border-t border-[#edf3ef] flex items-center justify-end gap-3">
+            <button
+              type="button"
+              id="btn-cancel-modal"
+              class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 transition"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="btn-submit-request"
+              class="btn-primary-dark"
+            >
+              <span id="btn-submit-text">Kirim Request</span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  </footer>
 
-  <!-- Interaktivitas Sederhana -->
-  <script>
-    // Copilot chip click
-    document.querySelectorAll('.copilot-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const input = document.getElementById('copilot-input');
-        input.value = chip.textContent.replace('+', '').trim();
-        input.focus();
-      });
-    });
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-    // Copilot submit animation
-    const copilotBtn = document.getElementById('copilot-btn');
-    if (copilotBtn) {
-      copilotBtn.addEventListener('click', () => {
-        const input = document.getElementById('copilot-input');
-        if (input.value.trim() !== '') {
-          const originalText = copilotBtn.innerHTML;
-          copilotBtn.innerHTML = '<span>Transmitting...</span>';
-          setTimeout(() => {
-            copilotBtn.innerHTML = '<span>✓ Dispatched to Geneva</span>';
-            setTimeout(() => {
-              input.value = '';
-              copilotBtn.innerHTML = originalText;
-            }, 2000);
-          }, 800);
-        }
-      });
-    }
+    <script>
+      const modal = document.getElementById("new-request-modal");
+      const openBtn = document.getElementById("btn-new-request");
+      const closeBtn = document.getElementById("btn-close-modal");
+      const cancelBtn = document.getElementById("btn-cancel-modal");
 
-    // PGP Tunnel alert
-    const pgpBtn = document.getElementById('pgp-btn');
-    if (pgpBtn) {
-      pgpBtn.addEventListener('click', () => {
-        alert("Membuka Tunnel PGP Terenkripsi ke Managing Partner Marc-André V. (Geneva Desk)...");
-      });
-    }
-  </script>
+      function openModal() {
+        if (modal) modal.classList.remove("hidden");
+      }
+      function closeModal() {
+        if (modal) modal.classList.add("hidden");
+      }
 
-</body>
+      if (openBtn) openBtn.addEventListener("click", openModal);
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
+      if (cancelBtn) cancelBtn.addEventListener("click", closeModal);
+
+      if (modal) {
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) closeModal();
+        });
+      }
+    </script>
+  </body>
 </html>

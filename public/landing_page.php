@@ -1,0 +1,819 @@
+<?php
+/**
+ * VIP Bespoke Travel - Landing Page (PHP)
+ * Crafted under Antislop Architecture:
+ * - Style Dials: ENERGY 2 / RHYTHM 2 / MOTION 2
+ * - Verified for WCAG AA, Keyboard Nav, Responsive & Semantic Landmarks
+ */
+?>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bespoke: Private Concierge Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- HEADER & NAVIGATION -->
+    <header>
+      <nav class="wrap" aria-label="Navigasi Utama">
+        <a href="landing_page.php" class="brand" aria-label="Bespoke Beranda">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Bespoke</span>
+        </a>
+
+        <div class="navlinks" id="navlinks">
+          <a href="#masalah">Masalah</a>
+          <a href="#alur">Alur Kerja</a>
+          <a href="#fitur">Fitur</a>
+          <a href="#segmen">Untuk Siapa</a>
+          <a href="login.php">Masuk</a>
+        </div>
+
+        <div class="nav-actions">
+          <button type="button" class="navcta" data-open-modal="demo">
+            <span>Jadwalkan Demo</span>
+          </button>
+          <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="navlinks">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- MAIN CONTENT LANDMARK (R-39) -->
+    <main id="main-content">
+      <!-- HERO SECTION -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          <div class="hero-content">
+            <div class="hero-category">
+              <span class="category-rule" aria-hidden="true"></span>
+              <span>Private Concierge Platform &bull; B2B &amp; White-label</span>
+            </div>
+            <h1 id="hero-title">
+              Setiap permintaan pelanggan, menjadi pengalaman yang <span class="highlight-text">dirancang khusus</span>.
+            </h1>
+            <p class="hero-sub">
+              Bespoke menyatukan seluruh proses concierge, mulai dari permintaan,
+              kurasi, itinerary, proposal, hingga booking, yang selama ini
+              tersebar di WhatsApp, spreadsheet, dan email, ke dalam satu sistem
+              dengan identitas bisnis Anda sendiri.
+            </p>
+            <div class="hero-ctas">
+              <button type="button" class="btn-primary" data-open-modal="demo">
+                <span>Jadwalkan Demo Platform</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              </button>
+              <a class="btn-ghost" href="#alur">Lihat Alur Kerja</a>
+            </div>
+            <div class="hero-badges-row">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                White-label Ready
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Sinkronisasi Real-time
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Infrastruktur Data Privat
+              </span>
+            </div>
+          </div>
+
+          <!-- Hero Right: Live Concierge Workspace Preview (R-22, R-40) -->
+          <div class="hero-visual">
+            <div class="preview-card">
+              <div class="preview-header">
+                <span class="preview-tag">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  [Sample Kurasi] Itinerary Preview
+                </span>
+                <span class="preview-client">Klien Eksklusif Terkurasi</span>
+              </div>
+              
+              <div class="preview-image-wrap">
+                <img
+                  src="Switzerland.jfif"
+                  alt="The Alpine Retreat Itinerary Preview di Swiss - Bespoke Concierge"
+                  width="600"
+                  height="360"
+                  fetchpriority="high"
+                />
+                <div class="preview-overlay-meta">
+                  <div>
+                    <h2 class="preview-title">The Alpine Retreat: Zermatt &amp; St. Moritz</h2>
+                    <span style="font-size: 11.5px; color: var(--ivory-dim);">Swiss Alps &bull; 7 Hari 6 Malam</span>
+                  </div>
+                  <span class="preview-status">Proposal Disetujui</span>
+                </div>
+              </div>
+
+              <div class="preview-quote-box">
+                <p class="q">
+                  "Bukan sekadar platform booking: ini ruang kerja untuk merancang pengalaman."
+                </p>
+                <p class="who">
+                  Dibangun untuk luxury travel agency, private travel consultant,
+                  wedding &amp; event planner, dan villa/resort management.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BRAND & SEGMENT STRIP -->
+      <div class="strip">
+        <div class="wrap">
+          <div class="strip-item">
+            <span class="diamond" aria-hidden="true"></span>
+            <span>Luxury Travel Agency</span>
+          </div>
+          <div class="strip-item">
+            <span class="diamond" aria-hidden="true"></span>
+            <span>Private Travel Consultant</span>
+          </div>
+          <div class="strip-item">
+            <span class="diamond" aria-hidden="true"></span>
+            <span>Wedding &amp; Event Planner</span>
+          </div>
+          <div class="strip-item">
+            <span class="diamond" aria-hidden="true"></span>
+            <span>Villa &bull; Resort Management</span>
+          </div>
+          <div class="strip-item">
+            <span class="diamond" aria-hidden="true"></span>
+            <span>Private Concierge Business</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: MASALAH & SOLUSI -->
+      <section id="masalah" aria-labelledby="masalah-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-label">Tantangan &bull; Solusi</span>
+              <h2 id="masalah-title">Layanan premium tidak seharusnya dikelola secara manual.</h2>
+            </div>
+            <p>
+              Ketika perencanaan perjalanan atau acara mewah dikoordinasikan
+              lintas aplikasi yang terpisah, pelanggan dan concierge sama-sama
+              kehilangan waktu, dan pengalaman kehilangan sentuhan personalnya.
+            </p>
+          </div>
+
+          <div class="split-card-grid">
+            <div class="card-masalah">
+              <div>
+                <span class="card-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  Tantangan Industri
+                </span>
+                <h3>Masalah</h3>
+                <p>
+                  Perencanaan perjalanan atau acara premium membutuhkan koordinasi
+                  berbagai layanan secara terpisah, sehingga pelanggan harus
+                  menghabiskan banyak waktu untuk mencari, memilih, dan mengatur
+                  setiap kebutuhan sendiri.
+                </p>
+              </div>
+            </div>
+
+            <div class="card-solusi">
+              <div>
+                <span class="card-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  Transformasi Bespoke
+                </span>
+                <h3>Solusi Terintegrasi</h3>
+                <p>
+                  Bespoke membantu merancang, mengoordinasikan, dan mengelola
+                  seluruh pengalaman pelanggan secara personal berdasarkan
+                  preferensi, kebutuhan, dan anggaran mereka dalam satu sistem
+                  terintegrasi.
+                </p>
+              </div>
+              <div class="solusi-perks">
+                <div class="solusi-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Satu Ruang Kerja Terpadu</span>
+                </div>
+                <div class="solusi-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Preference Profile Otomatis</span>
+                </div>
+                <div class="solusi-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Proposal &amp; Itinerary Interaktif</span>
+                </div>
+                <div class="solusi-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>White-Label Brand Sendiri</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: ALUR KERJA (8 STEPS DALAM 3 FASE PROGRESIF) -->
+      <section id="alur" aria-labelledby="alur-title">
+        <div class="wrap">
+          <div class="section-head center">
+            <span class="section-label">Alur Kerja Concierge</span>
+            <h2 id="alur-title">Dari permintaan hingga booking, dalam satu alur terpadu.</h2>
+            <p>
+              Pelanggan mengisi Experience Brief, sistem membentuk Preference
+              Profile, dan concierge Anda menyusun pengalaman yang sesuai, lengkap
+              dengan ruang untuk revisi sebelum disetujui.
+            </p>
+          </div>
+
+          <div class="workflow-phases">
+            <!-- Fase 1: Permintaan & Profiling -->
+            <div class="workflow-phase">
+              <div class="phase-meta">
+                <span class="phase-badge">Fase 01</span>
+                <span class="phase-title">Permintaan &amp; Profiling</span>
+              </div>
+              <div class="phase-cards-grid grid-2">
+                <div class="step-card">
+                  <div class="step-top">
+                    <span class="step-number">01</span>
+                    <span class="step-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                    </span>
+                  </div>
+                  <h4>Customer Request</h4>
+                  <p>
+                    Pelanggan mengajukan kebutuhan lewat Experience Brief:
+                    preferensi, anggaran, dan konteks perjalanan atau acara.
+                  </p>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-top">
+                    <span class="step-number">02</span>
+                    <span class="step-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+                    </span>
+                  </div>
+                  <h4>Concierge Review</h4>
+                  <p>
+                    Tim concierge meninjau permintaan dan preference profile yang
+                    terbentuk otomatis dari brief tersebut.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fase 2: Kurasi & Desain Pengalaman -->
+            <div class="workflow-phase">
+              <div class="phase-meta">
+                <span class="phase-badge">Fase 02</span>
+                <span class="phase-title">Kurasi &amp; Desain Pengalaman</span>
+              </div>
+              <div class="phase-cards-grid grid-3">
+                <div class="step-card">
+                  <div class="step-top">
+                    <span class="step-number">03</span>
+                    <span class="step-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </span>
+                  </div>
+                  <h4>Curated Experiences</h4>
+                  <p>
+                    Concierge memilih dan menyusun layanan serta vendor yang paling
+                    sesuai dengan kebutuhan pelanggan.
+                  </p>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-top">
+                    <span class="step-number">04</span>
+                    <span class="step-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </span>
+                  </div>
+                  <h4>Itinerary / Proposal</h4>
+                  <p>
+                    Pengalaman yang telah dikurasi disusun menjadi itinerary atau
+                    proposal yang siap ditinjau pelanggan.
+                  </p>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-top">
+                    <span class="step-number">05</span>
+                    <span class="step-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </span>
+                  </div>
+                  <h4>Customer Review</h4>
+                  <p>
+                    Pelanggan meninjau proposal langsung dalam sistem, tanpa
+                    bolak-balik dokumen terpisah.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fase 3: Persetujuan, Revisi & Booking -->
+            <div class="workflow-phase">
+              <div class="phase-meta">
+                <span class="phase-badge">Fase 03</span>
+                <span class="phase-title">Persetujuan, Revisi &amp; Booking</span>
+              </div>
+              <div class="phase-cards-grid grid-3">
+                <div class="step-card">
+                  <div class="step-top">
+                    <span class="step-number">06</span>
+                    <span class="step-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                    </span>
+                  </div>
+                  <h4>Revision</h4>
+                  <p>
+                    Perubahan dicatat sebagai change request, menjaga riwayat
+                    komunikasi tetap jelas dan terlacak.
+                  </p>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-top">
+                    <span class="step-number">07</span>
+                    <span class="step-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </span>
+                  </div>
+                  <h4>Approval</h4>
+                  <p>
+                    Setelah disetujui, proposal terkunci sebagai dasar pemesanan.
+                  </p>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-top">
+                    <span class="step-number">08</span>
+                    <span class="step-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    </span>
+                  </div>
+                  <h4>Booking</h4>
+                  <p>
+                    Concierge menindaklanjuti pemesanan dan melacak statusnya hingga
+                    hari-H, dari satu dashboard.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: FITUR (3 CORE PILLARS + 5 SUPPORTING TOOLS) -->
+      <section id="fitur" aria-labelledby="fitur-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-label">Kapabilitas Platform</span>
+              <h2 id="fitur-title">
+                Dirancang di sekitar cara kerja concierge, bukan sekadar formulir booking.
+              </h2>
+            </div>
+            <p>
+              Fitur inti Bespoke mengikuti alur kerja nyata seorang concierge,
+              dan tiga di antaranya adalah jantung dari pengalaman personal yang
+              ditawarkan.
+            </p>
+          </div>
+
+          <!-- 3 Fitur Inti Utama -->
+          <div class="feature-core-grid">
+            <!-- Core 1 -->
+            <div class="feature-card highlight">
+              <span class="card-badge">Fitur Inti</span>
+              <div class="feature-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              </div>
+              <h4>Itinerary Builder</h4>
+              <p>
+                Menyusun rangkaian pengalaman menjadi itinerary yang mudah dibaca
+                pelanggan, lengkap dengan jadwal, akomodasi, dan rincian logistik.
+              </p>
+            </div>
+
+            <!-- Core 2 -->
+            <div class="feature-card highlight">
+              <span class="card-badge">Fitur Inti</span>
+              <div class="feature-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <h4>Proposal</h4>
+              <p>
+                Proposal yang bisa langsung ditinjau, direvisi, dan disetujui oleh
+                pelanggan dalam sistem, dengan transparansi nilai dan pilihan kustom.
+              </p>
+            </div>
+
+            <!-- Core 3 -->
+            <div class="feature-card highlight">
+              <span class="card-badge">Fitur Inti</span>
+              <div class="feature-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <h4>Concierge Dashboard &amp; Collaboration</h4>
+              <p>
+                Ruang kerja bersama bagi tim concierge untuk menangani banyak
+                permintaan sekaligus, melacak penugasan, dan memastikan kualitas layanan.
+              </p>
+            </div>
+          </div>
+
+          <!-- Modul Kerja Pendukung (5 Fitur Terstruktur Rapi) -->
+          <div class="feature-sub-section">
+            <div class="feature-sub-head">
+              <span class="sub-label">Modul Kerja Pendukung</span>
+              <p>Kelengkapan operasional untuk mengelola setiap detail perjalanan dan komunikasi klien.</p>
+            </div>
+            
+            <div class="supporting-features-container">
+              <div class="supporting-row-primary">
+                <!-- Supporting 1 -->
+                <div class="feature-card">
+                  <div class="feature-icon-wrap" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                  </div>
+                  <h4>Bespoke Request</h4>
+                  <p>
+                    Experience Brief terstruktur yang menangkap preferensi dan
+                    anggaran pelanggan sejak awal.
+                  </p>
+                </div>
+
+                <!-- Supporting 2 -->
+                <div class="feature-card">
+                  <div class="feature-icon-wrap" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  </div>
+                  <h4>Customer Management</h4>
+                  <p>
+                    Riwayat, preferensi, dan preference profile setiap pelanggan
+                    tersimpan rapi dalam satu profil terpadu.
+                  </p>
+                </div>
+
+                <!-- Supporting 3 -->
+                <div class="feature-card">
+                  <div class="feature-icon-wrap" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  </div>
+                  <h4>Experience &amp; Vendor Management</h4>
+                  <p>
+                    Katalog layanan dan vendor premium yang siap dikurasi ulang
+                    untuk setiap permintaan perjalanan.
+                  </p>
+                </div>
+              </div>
+
+              <div class="supporting-row-secondary">
+                <!-- Supporting 4 -->
+                <div class="feature-card">
+                  <div class="feature-icon-wrap" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                  </div>
+                  <h4>Booking Management</h4>
+                  <p>
+                    Melacak status pemesanan dari persetujuan hingga hari pelaksanaan
+                    dengan koordinasi vendor otomatis.
+                  </p>
+                </div>
+
+                <!-- Supporting 5 -->
+                <div class="feature-card">
+                  <div class="feature-icon-wrap" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                  </div>
+                  <h4>Change Request</h4>
+                  <p>
+                    Setiap revisi tercatat rapi dalam riwayat audit, tanpa
+                    kehilangan jejak komunikasi klien.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: SEGMEN PENGGUNA DENGAN VALUE PROPOSITION NYATA -->
+      <section id="segmen" aria-labelledby="segmen-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-label">Target Ekosistem</span>
+              <h2 id="segmen-title">
+                Dibangun untuk bisnis yang menjual pengalaman, bukan hanya jasa.
+              </h2>
+            </div>
+            <p>
+              Bespoke cocok untuk bisnis yang berinteraksi langsung dengan klien
+              premium dan membutuhkan koordinasi yang rapi di baliknya.
+            </p>
+          </div>
+
+          <div class="segments-grid">
+            <div class="segment-item">
+              <div class="segment-top">
+                <div class="segment-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
+                </div>
+                <span class="segment-name">Luxury Travel Agency</span>
+              </div>
+              <p class="segment-desc">
+                Kelola portofolio perjalanan VIP, koordinasi vendor eksklusif lintas benua, dan sajikan proposal bermerek agensi Anda.
+              </p>
+            </div>
+
+            <div class="segment-item">
+              <div class="segment-top">
+                <div class="segment-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                </div>
+                <span class="segment-name">Private Travel Consultant</span>
+              </div>
+              <p class="segment-desc">
+                Ruang kerja terpadu untuk merangkum preferensi klien langganan secara personal tanpa tercecer di spreadsheet.
+              </p>
+            </div>
+
+            <div class="segment-item">
+              <div class="segment-top">
+                <div class="segment-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </div>
+                <span class="segment-name">Wedding Planner</span>
+              </div>
+              <p class="segment-desc">
+                Susun jadwal acara multi-hari, reservasi akomodasi tamu istimewa, dan pantau persetujuan klien secara real-time.
+              </p>
+            </div>
+
+            <div class="segment-item">
+              <div class="segment-top">
+                <div class="segment-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </div>
+                <span class="segment-name">Event Planner</span>
+              </div>
+              <p class="segment-desc">
+                Penyelarasan logistik acara privat, koordinasi perizinan khusus, dan pengelolaan change request yang tercatat rapi.
+              </p>
+            </div>
+
+            <div class="segment-item">
+              <div class="segment-top">
+                <div class="segment-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <span class="segment-name">Villa &bull; Resort Management</span>
+              </div>
+              <p class="segment-desc">
+                Sediakan kurasi pengalaman in-house (private chef, yacht charter, tur lokal) yang langsung terhubung ke layanan concierge.
+              </p>
+            </div>
+
+            <div class="segment-item">
+              <div class="segment-top">
+                <div class="segment-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><path d="M12 12L2.5 7.5"></path></svg>
+                </div>
+                <span class="segment-name">Private Concierge Business</span>
+              </div>
+              <p class="segment-desc">
+                Platform operasional menyeluruh untuk mengelola seluruh siklus concierge dari brief perdana hingga pelaksanaan hari-H.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: FILOSOFI LAYANAN & PRIVASI -->
+      <section class="philosophy-section" aria-label="Filosofi Layanan dan Privasi Data">
+        <div class="wrap">
+          <div class="philosophy-box">
+            <div class="philosophy-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div>
+              <p class="label">Filosofi Layanan: Kurasi Manusiawi &amp; Privasi Tanpa Kompromi</p>
+              <p>
+                Di Bespoke, sentuhan personal dan keahlian kurator manusia tetap menjadi inti dari pengalaman mewah. Sistem kami dirancang untuk mempermudah alur kerja Anda tanpa ketergantungan otomatisasi yang kaku, menjaga kerahasiaan data klien tetap privat, dengan opsi kecerdasan komputasi yang senantiasa berada di bawah kendali penuh tim Anda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: KONTAK & CTA SALON -->
+      <section id="kontak" aria-labelledby="kontak-title">
+        <div class="wrap">
+          <div class="cta-salon">
+            <h2 id="kontak-title">Beri bisnis Anda ruang kerja concierge sendiri.</h2>
+            <p>
+              Bespoke hadir dengan branding bisnis Anda: B2B, white-label, dan
+              siap disesuaikan dengan cara tim Anda bekerja.
+            </p>
+            <button type="button" class="btn-primary" data-open-modal="demo">
+              <span>Jadwalkan Demo Platform</span>
+            </button>
+            <div class="cta-salon-tags">
+              <span>B2B &bull; White-label</span>
+              <span>Workspace Concierge Privat</span>
+              <span>Personalized Experience Management</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="wrap">
+        <div class="footer-brand">
+          <span class="mark" style="width: 8px; height: 8px; border-radius: 50%; background: var(--brass); display: inline-block;"></span>
+          <span>Bespoke: Private Concierge Platform</span>
+        </div>
+        <div>
+          <span>&copy; 2026. Dibuat untuk bisnis perjalanan &amp; pengalaman premium.</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- INTERACTIVE DEMO MODAL DIALOG (R-26, R-27, R-32) -->
+    <div class="modal-overlay" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+      <div class="modal-window">
+        <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Tutup formulir demo">&times;</button>
+        
+        <!-- State 1: Form Input -->
+        <div id="modalStateForm">
+          <h3 id="modalHeading">Jadwalkan Demo Platform</h3>
+          <p class="modal-desc">
+            Sesi konsultasi privat 30 menit via Google Meet atau kunjungan untuk melihat keselarasan Bespoke dengan bisnis Anda.
+          </p>
+          <form class="modal-form" id="demoBookingForm">
+            <div class="form-group">
+              <label for="fullName">Nama Lengkap</label>
+              <input type="text" id="fullName" class="form-control" placeholder="Contoh: Alexander Wright" required />
+            </div>
+            <div class="form-group">
+              <label for="agencyName">Nama Bisnis / Agensi</label>
+              <input type="text" id="agencyName" class="form-control" placeholder="Contoh: Wright Luxury Travel" required />
+            </div>
+            <div class="form-group">
+              <label for="businessType">Kategori Bisnis</label>
+              <select id="businessType" class="form-control" required>
+                <option value="Luxury Travel Agency">Luxury Travel Agency</option>
+                <option value="Private Travel Consultant">Private Travel Consultant</option>
+                <option value="Wedding & Event Planner">Wedding &amp; Event Planner</option>
+                <option value="Villa / Resort Management">Villa / Resort Management</option>
+                <option value="Private Concierge Business">Private Concierge Business</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email Bisnis</label>
+              <input type="email" id="contactEmail" class="form-control" placeholder="alexander@wright-luxury.com" required />
+            </div>
+            <div class="form-group">
+              <label for="phoneWhatsApp">Nomor WhatsApp</label>
+              <input type="tel" id="phoneWhatsApp" class="form-control" placeholder="+62 812 xxxx xxxx" required />
+            </div>
+            <div class="form-group">
+              <label for="specialNotes">Kebutuhan Utama (Opsional)</label>
+              <textarea id="specialNotes" class="form-control" rows="3" placeholder="Ceritakan bagaimana alur kurasi atau jumlah klien Anda saat ini..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">
+              <span>Kirim Permintaan Demo</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- State 2: Submitting / Loading State (R-27) -->
+        <div id="modalStateLoading" class="modal-state-loading">
+          <div class="spinner" aria-hidden="true"></div>
+          <h4>Menghubungkan ke Tim Kurator Bespoke...</h4>
+          <p style="color: var(--charcoal-dim); font-size: 14.5px;">Memvalidasi profil bisnis Anda dan menjadwalkan kalender concierge.</p>
+        </div>
+
+        <!-- State 3: Success Confirmation State (R-27) -->
+        <div id="modalStateSuccess" class="modal-state-success">
+          <div class="success-icon-wrap" aria-hidden="true">&check;</div>
+          <h4 style="font-family: var(--serif); font-size: 26px; margin: 0 0 8px; color: var(--ink);">Permintaan Demo Terkirim</h4>
+          <p style="color: var(--charcoal-dim); font-size: 14.5px; line-height: 1.6; margin: 0 0 24px;">
+            Terima kasih. Concierge Partnership Specialist kami akan menghubungi kontak Anda dalam waktu 1x24 jam untuk konfirmasi jadwal sesi privat.
+          </p>
+          <button type="button" class="btn-primary" id="btnFinishModal" style="margin: 0 auto;">Selesai</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT: INTERACTIVE CONTROLS & MODAL ENGINE -->
+    <script>
+      (function() {
+        // Mobile Navigation Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navlinks = document.getElementById('navlinks');
+
+        if (mobileToggle && navlinks) {
+          mobileToggle.addEventListener('click', function() {
+            const isOpen = navlinks.classList.toggle('open');
+            mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          });
+
+          // Close on link click
+          navlinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              navlinks.classList.remove('open');
+              mobileToggle.setAttribute('aria-expanded', 'false');
+            });
+          });
+        }
+
+        // Demo Modal Dialog Engine
+        const modal = document.getElementById('demoModal');
+        const openButtons = document.querySelectorAll('[data-open-modal="demo"]');
+        const closeBtn = document.getElementById('modalCloseBtn');
+        const formState = document.getElementById('modalStateForm');
+        const loadingState = document.getElementById('modalStateLoading');
+        const successState = document.getElementById('modalStateSuccess');
+        const demoForm = document.getElementById('demoBookingForm');
+        const btnFinish = document.getElementById('btnFinishModal');
+
+        function openModal() {
+          if (!modal) return;
+          modal.classList.add('active');
+          formState.style.display = 'block';
+          loadingState.style.display = 'none';
+          successState.style.display = 'none';
+          setTimeout(() => {
+            const firstInput = modal.querySelector('input');
+            if (firstInput) firstInput.focus();
+          }, 100);
+        }
+
+        function closeModal() {
+          if (!modal) return;
+          modal.classList.remove('active');
+        }
+
+        openButtons.forEach(btn => {
+          btn.addEventListener('click', openModal);
+        });
+
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (btnFinish) btnFinish.addEventListener('click', closeModal);
+
+        // Backdrop click close
+        if (modal) {
+          modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+          });
+        }
+
+        // ESC Key Close (R-32)
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+            closeModal();
+          }
+        });
+
+        // Form Submit Simulation with 3 States (R-27)
+        if (demoForm) {
+          demoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formState.style.display = 'none';
+            loadingState.style.display = 'block';
+
+            setTimeout(function() {
+              loadingState.style.display = 'none';
+              successState.style.display = 'block';
+              demoForm.reset();
+            }, 900);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

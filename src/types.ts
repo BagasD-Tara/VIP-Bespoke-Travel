@@ -31,6 +31,7 @@ export interface TravelRequest {
   costEstimate?: string;
   costBadge?: string;
   confirmedText?: string;
+  image?: string;
 }
 
 export interface UpcomingTrip {

@@ -1,77 +1,94 @@
 /* ==========================================================================
-   BESPOKE — PRIVATE CONCIERGE PLATFORM
-   Stylesheet Utama (Clean, Modern, & High-Readability)
-   Didesain agar rapi, berkelas, dan mudah dijelaskan saat presentasi.
+   Bespoke Private Concierge Platform: Main Stylesheet
+   Designed under Antislop Architecture:
+   - Dials: ENERGY 2 / RHYTHM 2 / MOTION 2
+   - Aesthetic: Warm Editorial Luxury & Tactile Bespoke Workspace
+   - WCAG AA Compliant Contrast, Multi-Breakpoint Responsive, Reduced-Motion Ready
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. CSS VARIABLES (:root)
-   Variabel warna dan font terpusat agar mudah diganti dan konsisten.
-   -------------------------------------------------------------------------- */
 :root {
-  /* Warna Gelap (Dark Mode / Luxury Tone) */
-  --ink: #0d1712;
-  --ink-soft: #17241d;
-  --ink-card: rgba(23, 36, 29, 0.85);
-
-  /* Warna Terang & Latar Belakang */
-  --paper: #ffffff;
-  --paper-tint: #f8fafc;       /* Abu-abu sangat lembut untuk kontras section */
-  --paper-warm: #fcfbf8;       /* Krem gading mewah untuk kartu */
-
-  /* Warna Aksen Emas (Brass / Gold) */
-  --brass: #c5a059;
-  --brass-hover: #b38e46;
-  --brass-light: rgba(197, 160, 89, 0.12);
-  --brass-border: rgba(197, 160, 89, 0.35);
-
-  /* Warna Teks (Dibuat kontras tinggi agar nyaman dibaca) */
-  --text-dark: #0f172a;        /* Judul utama (slate-900) */
-  --text-body: #334155;        /* Paragraf / isi (slate-700) */
-  --text-muted: #64748b;       /* Teks sekunder / pelengkap (slate-500) */
-  --text-light: #f8fafc;       /* Teks di atas warna gelap */
-  --text-light-dim: #cbd5e1;   /* Teks sekunder di atas warna gelap */
-
-  /* Garis & Border */
-  --border-light: #e2e8f0;
-  --border-dark: rgba(255, 255, 255, 0.12);
-
-  /* Tipografi */
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", "Manrope", system-ui, -apple-system, sans-serif;
-
-  /* Layout Container */
-  --max-w: 1140px;
-  --radius: 10px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.1);
+  /* Core Palette (3 Cores + 1 Accent) */
+  --ink: #141c17;              /* Deep Forest Ink */
+  --ink-soft: #1f2a23;         /* Muted Dark Forest */
+  --ink-surface: #18221c;      /* Dark Surface for panels */
+  --canvas: #faf8f5;           /* Warm Ivory Canvas */
+  --canvas-warm: #f4efe6;      /* Sand Linen Canvas */
+  --surface-card: #ffffff;     /* Pure Card Surface */
+  --surface-tint: #f5f0e6;     /* Sand Tinted Card */
+  
+  /* Accent & Brass Metals */
+  --brass: #c2a46d;            /* Champagne Brass */
+  --brass-deep: #8a6d3a;       /* Deep Antique Brass */
+  --brass-glow: rgba(194, 164, 109, 0.18);
+  --brass-dim: #8e7a52;        /* Subtle Brass Border */
+  
+  /* Neutrals & Text */
+  --ivory: #ede6d8;            /* Light Warm Ivory */
+  --ivory-dim: #b9b2a2;        /* Muted Ivory */
+  --charcoal: #252d28;         /* Deep Body Text */
+  --charcoal-dim: #5c6661;     /* Secondary Body Text */
+  --charcoal-muted: #7d8882;   /* Subtle Micro Text */
+  
+  /* Borders & Dividers */
+  --line-light: rgba(20, 28, 23, 0.08);
+  --line-subtle: #e5ded2;
+  --line-dark: rgba(237, 230, 216, 0.12);
+  
+  /* Typography */
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Spacing & Container */
+  --maxw: 1200px;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  
+  /* Elevation & Shadows */
+  --shadow-sm: 0 2px 8px rgba(20, 28, 23, 0.04);
+  --shadow-md: 0 8px 24px rgba(20, 28, 23, 0.06);
+  --shadow-lg: 0 16px 40px rgba(20, 28, 23, 0.08);
+  --shadow-lift: 0 20px 48px rgba(194, 164, 109, 0.14);
+  --shadow-dark: 0 20px 50px rgba(10, 15, 12, 0.35);
+  
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --------------------------------------------------------------------------
-   2. RESET & DASAR ELEMEN
-   -------------------------------------------------------------------------- */
-* {
-  margin: 0;
-  padding: 0;
+/* ==========================================================================
+   Base & Reset
+   ========================================================================== */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: var(--paper);
-  color: var(--text-body);
-  font-family: var(--font-sans);
-  line-height: 1.65;
+  margin: 0;
+  background-color: var(--canvas);
+  color: var(--charcoal);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Semantics & Interactive Cursor Affordance (R-39) */
+a, button, input[type="submit"], input[type="button"], label, select, summary {
+  cursor: pointer;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 img {
@@ -80,31 +97,458 @@ img {
   display: block;
 }
 
-/* Wadah Pembatas Lebar Konten Tengah */
-.wrap {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 24px;
+/* Keyboard Focus Indicators (R-32) */
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
 
-/* --------------------------------------------------------------------------
-   3. HEADER & NAVIGASI
-   -------------------------------------------------------------------------- */
+/* Container Wrapper */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 20px;
+  }
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
 header {
   position: sticky;
   top: 0;
-  z-index: 50;
-  transition: all 0.3s ease;
+  z-index: 100;
+  background: rgba(20, 28, 23, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line-dark);
+  transition: background 0.3s ease;
 }
 
-/* --------------------------------------------------------------------------
-   4. STRIP PARTNER / SEGMEN BANNER (DI BAWAH HERO)
-   -------------------------------------------------------------------------- */
+nav.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  nav.wrap {
+    padding: 16px 20px;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ivory);
+  letter-spacing: 0.03em;
+}
+
+.brand .mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brass);
+  display: inline-block;
+}
+
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ivory-dim);
+}
+
+.navlinks a {
+  position: relative;
+  padding: 4px 0;
+}
+
+.navlinks a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--brass);
+  transition: width 0.25s ease;
+}
+
+.navlinks a:hover {
+  color: var(--ivory);
+}
+
+.navlinks a:hover::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navcta {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 11px 24px;
+  border: 1px solid var(--brass);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  color: var(--ivory);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s var(--ease-out);
+}
+
+.navcta:hover {
+  background: var(--brass);
+  color: var(--ink);
+  box-shadow: 0 4px 16px rgba(194, 164, 109, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Mobile Menu Toggle Button (R-03) */
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-sm);
+  color: var(--ivory);
+  padding: 8px 12px;
+  min-height: 44px;
+  min-width: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 900px) {
+  .navlinks {
+    display: none;
+  }
+  
+  .mobile-toggle {
+    display: flex;
+  }
+  
+  /* Mobile Drawer Active State */
+  .navlinks.open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+    padding: 24px 32px 32px;
+    gap: 20px;
+    box-shadow: var(--shadow-dark);
+  }
+  
+  .navlinks.open a {
+    font-size: 17px;
+    width: 100%;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(237, 230, 216, 0.05);
+  }
+}
+
+/* ==========================================================================
+   Hero Section: Atmospheric Luxury & Workspace Preview
+   ========================================================================== */
+.hero {
+  position: relative;
+  background: 
+    linear-gradient(180deg, #141c17 0%, #17211b 60%, #1f2a23 100%);
+  color: var(--ivory);
+  padding: 72px 0 96px;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 620px;
+}
+
+.hero-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 24px;
+}
+
+.hero-category .category-rule {
+  width: 24px;
+  height: 1px;
+  background: var(--brass);
+  display: inline-block;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 4.4vw, 56px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ivory);
+  margin: 0 0 24px;
+}
+
+.hero h1 .highlight-text {
+  font-style: italic;
+  color: #f7eedc;
+}
+
+.hero-sub {
+  font-size: 16.5px;
+  line-height: 1.68;
+  color: var(--ivory-dim);
+  margin: 0 0 36px;
+}
+
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--brass);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 13px 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--brass);
+  transition: all 0.25s var(--ease-out);
+  box-shadow: 0 4px 14px rgba(194, 164, 109, 0.2);
+}
+
+.btn-primary:hover {
+  background: #d4b882;
+  border-color: #d4b882;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(194, 164, 109, 0.3);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--ivory);
+  font-weight: 500;
+  font-size: 14.5px;
+  padding: 13px 24px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-dark);
+  transition: all 0.25s var(--ease-out);
+}
+
+.btn-ghost:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+  background: rgba(194, 164, 109, 0.05);
+}
+
+.hero-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--ivory-dim);
+  padding-top: 16px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.hero-badges-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-badges-row svg {
+  color: var(--brass);
+  width: 16px;
+  height: 16px;
+}
+
+/* Hero Right: Live Concierge Workspace Preview (R-22, R-40) */
+.hero-visual {
+  position: relative;
+}
+
+.preview-card {
+  background: var(--ink-surface);
+  border: 1px solid rgba(194, 164, 109, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 12px;
+}
+
+.preview-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(194, 164, 109, 0.15);
+  color: var(--brass);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.preview-client {
+  color: var(--ivory-dim);
+}
+
+.preview-image-wrap {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.preview-image-wrap img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.preview-card:hover .preview-image-wrap img {
+  transform: scale(1.03);
+}
+
+.preview-overlay-meta {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: rgba(20, 28, 23, 0.88);
+  backdrop-filter: blur(8px);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.preview-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ivory);
+  margin: 0;
+}
+
+.preview-status {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #79cf9c;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.preview-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #79cf9c;
+}
+
+.preview-quote-box {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid var(--brass);
+  padding: 14px 16px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-top: 14px;
+}
+
+.preview-quote-box .q {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ivory);
+  line-height: 1.45;
+  margin: 0 0 6px;
+}
+
+.preview-quote-box .who {
+  font-size: 12.5px;
+  color: var(--ivory-dim);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Strip / Ribbon Section
+   ========================================================================== */
 .strip {
-  background: var(--ink);
+  background: #111813;
   padding: 22px 0;
-  border-top: 1px solid var(--border-dark);
-  border-bottom: 1px solid var(--border-dark);
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
 }
 
 .strip .wrap {
@@ -112,434 +556,688 @@ header {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 18px;
-  color: var(--text-light-dim);
-  font-size: 13.5px;
-  letter-spacing: 0.5px;
-  font-weight: 500;
+  gap: 20px;
 }
 
-.strip .wrap span {
-  display: flex;
+.strip-item {
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  transition: color 0.2s ease;
+  gap: 12px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ivory-dim);
+  letter-spacing: 0.02em;
 }
 
-.strip .wrap span:hover {
-  color: var(--brass);
+.strip-item .diamond {
+  width: 5px;
+  height: 5px;
+  background: var(--brass);
+  transform: rotate(45deg);
 }
 
-.strip .wrap span::before {
-  content: "✦";
-  color: var(--brass);
-  font-size: 10px;
-  opacity: 0.8;
+@media (max-width: 768px) {
+  .strip .wrap {
+    justify-content: center;
+    gap: 16px 24px;
+  }
 }
 
-/* --------------------------------------------------------------------------
-   5. UMUM: SECTION & SECTION HEADER
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Common Section Architecture & Rhythm (R-05)
+   ========================================================================== */
 section {
-  padding: 90px 0;
-  background: var(--paper);
-  border-bottom: 1px solid var(--border-light);
+  padding: 108px 0;
+  position: relative;
 }
 
 .section-head {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 48px;
-  margin-bottom: 50px;
-  align-items: start;
+  margin-bottom: 64px;
+  align-items: end;
+}
+
+.section-head.center {
+  text-align: center;
+  display: block;
+  max-width: 740px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass-deep);
+  margin-bottom: 12px;
 }
 
 .section-head h2 {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: clamp(30px, 3.2vw, 42px);
-  line-height: 1.2;
-  color: var(--text-dark);
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.8vw, 46px);
+  font-weight: 500;
+  line-height: 1.16;
+  color: var(--ink);
   margin: 0;
 }
 
 .section-head p {
-  color: var(--text-muted);
-  font-size: 16px;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--charcoal-dim);
+  margin: 0;
+  max-width: 54ch;
+}
+
+@media (max-width: 860px) {
+  section {
+    padding: 72px 0;
+  }
+  
+  .section-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+}
+
+/* ==========================================================================
+   Section 1: Masalah vs Solusi (Asymmetric Comparison)
+   ========================================================================== */
+#masalah {
+  background-color: var(--canvas);
+}
+
+.split-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.card-masalah {
+  background: #ffffff;
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-masalah .card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8c4238;
+  margin-bottom: 20px;
+}
+
+.card-masalah h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin: 0 0 16px;
+  line-height: 1.25;
+}
+
+.card-masalah p {
+  color: var(--charcoal-dim);
+  font-size: 15.5px;
   line-height: 1.7;
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .section-head {
+.card-solusi {
+  background: var(--ink);
+  color: var(--ivory);
+  border: 1px solid rgba(194, 164, 109, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-solusi .card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 20px;
+}
+
+.card-solusi h3 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--ivory);
+  margin: 0 0 16px;
+  line-height: 1.25;
+}
+
+.card-solusi p {
+  color: var(--ivory-dim);
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0 0 28px;
+}
+
+.solusi-perks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.solusi-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ivory);
+}
+
+.solusi-perk-item svg {
+  color: var(--brass);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .split-card-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 36px;
+  }
+  
+  .card-masalah, .card-solusi {
+    padding: 32px;
   }
 }
 
-/* --------------------------------------------------------------------------
-   6. MASALAH & SOLUSI (.split)
-   Dibuat kartu perbandingan yang kontras dan jelas bagi dosen.
-   -------------------------------------------------------------------------- */
-.split {
+/* ==========================================================================
+   Section 2: Alur Kerja (Timeline & Milestone Steps Dalam 3 Fase)
+   ========================================================================== */
+#alur {
+  background-color: var(--canvas-warm);
+}
+
+.workflow-phases {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.workflow-phase {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.phase-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-subtle);
+}
+
+.phase-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass-deep);
+  background: rgba(194, 164, 109, 0.16);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.phase-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.phase-cards-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
 
-.split > div {
-  padding: 36px 32px;
-  border-radius: var(--radius);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.phase-cards-grid.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-/* Kartu Masalah */
-.split .masalah {
-  background: #fff8f8;
-  border: 1px solid #fecaca;
+.phase-cards-grid.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.step-card {
+  background: var(--surface-card);
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-md);
+  padding: 30px 24px;
+  position: relative;
+  transition: all 0.3s var(--ease-out);
   box-shadow: var(--shadow-sm);
-}
-
-.split .masalah .badge-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: #dc2626;
-  background: rgba(220, 38, 38, 0.08);
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-bottom: 16px;
-}
-
-.split .masalah h3 {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 600;
-  color: #991b1b;
-  margin-bottom: 12px;
-}
-
-.split .masalah p {
-  color: #4b5563;
-  font-size: 15.5px;
-  line-height: 1.7;
-}
-
-/* Kartu Solusi */
-.split .solusi {
-  background: var(--paper-warm);
-  border: 1px solid var(--brass-border);
-  box-shadow: var(--shadow-md);
-  position: relative;
-}
-
-.split .solusi .badge-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--brass-hover);
-  background: var(--brass-light);
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-bottom: 16px;
-}
-
-.split .solusi h3 {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 12px;
-}
-
-.split .solusi p {
-  color: var(--text-body);
-  font-size: 15.5px;
-  line-height: 1.7;
-}
-
-@media (max-width: 768px) {
-  .split {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   7. ALUR KERJA (.steps)
-   Grid bertingkat 4 kolom (atau 2 di tablet) bernomor elegan.
-   -------------------------------------------------------------------------- */
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-.step {
-  background: var(--paper);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius);
-  padding: 24px;
-  transition: all 0.25s ease;
-  position: relative;
   display: flex;
   flex-direction: column;
 }
 
-.step:hover {
+.step-card:hover {
+  transform: translateY(-3px);
   border-color: var(--brass);
   box-shadow: var(--shadow-md);
-  transform: translateY(-3px);
 }
 
-.step .num {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--brass);
+.step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.step-number {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--brass-deep);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--canvas-warm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-serif);
+}
+
+.step-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--charcoal-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-card h4 {
   font-size: 17px;
   font-weight: 700;
-  margin-bottom: 16px;
+  color: var(--ink);
+  margin: 0 0 10px;
 }
 
-.step h4 {
-  font-size: 16.5px;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 8px;
-}
-
-.step p {
-  font-size: 14px;
-  color: var(--text-muted);
+.step-card p {
+  font-size: 14.5px;
+  color: var(--charcoal-dim);
   line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
 }
 
-@media (max-width: 1024px) {
-  .steps {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 560px) {
-  .steps {
+@media (max-width: 900px) {
+  .phase-cards-grid.grid-2,
+  .phase-cards-grid.grid-3 {
     grid-template-columns: 1fr;
   }
 }
 
-/* --------------------------------------------------------------------------
-   8. DAFTAR FITUR (.feature-list)
-   -------------------------------------------------------------------------- */
-.feature-list {
+/* ==========================================================================
+   Section 3: Fitur Inti & Pendukung (Visual Hierarchy Bento Grid)
+   ========================================================================== */
+#fitur {
+  background-color: var(--canvas);
+}
+
+.feature-core-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
 }
 
-.feature {
-  background: var(--paper);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius);
-  padding: 26px 22px;
-  transition: all 0.25s ease;
+.feature-card {
+  background: var(--surface-card);
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
   position: relative;
+  transition: all 0.3s var(--ease-out);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
 }
 
-.feature:hover {
-  border-color: var(--brass-border);
+.feature-card:hover {
+  border-color: var(--brass);
   box-shadow: var(--shadow-md);
   transform: translateY(-3px);
 }
 
-.feature h4 {
-  font-size: 16.5px;
+.feature-card.highlight {
+  background: linear-gradient(145deg, #ffffff 0%, #f9f5ed 100%);
+  border: 1.5px solid var(--brass);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-card .card-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 11px;
   font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass-deep);
+  background: rgba(194, 164, 109, 0.14);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 18px;
+}
+
+.feature-card .feature-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--canvas-warm);
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  color: var(--brass-deep);
+  margin-bottom: 20px;
 }
 
-.feature p {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.feature-highlight {
-  background: var(--paper-warm);
-  border-color: var(--brass-border);
-  box-shadow: var(--shadow-sm);
-}
-
-@media (max-width: 1024px) {
-  .feature-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .feature-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   9. SEGMEN TARGET BISNIS (.segments)
-   -------------------------------------------------------------------------- */
-.segments {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.segment {
-  background: var(--paper);
-  border: 1px solid var(--border-light);
-  padding: 12px 22px;
-  font-size: 14.5px;
-  font-weight: 500;
-  color: var(--text-body);
-  border-radius: 30px;
-  transition: all 0.2s ease;
-}
-
-.segment:hover {
-  border-color: var(--brass);
+.feature-card h4 {
+  font-size: 18px;
+  font-weight: 700;
   color: var(--ink);
-  background: var(--paper-warm);
+  margin: 0 0 12px;
 }
 
-.segment.main {
-  background: var(--ink);
-  color: var(--text-light);
-  border-color: var(--ink);
-  font-weight: 600;
-}
-
-.segment.main:hover {
-  background: var(--ink-soft);
-  color: var(--brass);
-}
-
-/* --------------------------------------------------------------------------
-   10. CATATAN TENTANG AI (.ai-note)
-   -------------------------------------------------------------------------- */
-.ai-note-box {
-  background: var(--paper-warm);
-  border-left: 4px solid var(--brass);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  padding: 28px 32px;
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.ai-note-box .label {
-  font-family: var(--font-serif);
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--brass-hover);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ai-note-box p {
-  color: var(--text-body);
-  font-size: 15px;
-  line-height: 1.7;
-  max-width: 75ch;
+.feature-card p {
+  font-size: 14.5px;
+  color: var(--charcoal-dim);
+  line-height: 1.65;
   margin: 0;
 }
 
-/* --------------------------------------------------------------------------
-   11. CALL TO ACTION (.cta-block)
-   Pulau gelap elegan dengan aksen emas berkelas.
-   -------------------------------------------------------------------------- */
-.cta-block {
-  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
-  color: var(--text-light);
-  border-radius: 16px;
-  padding: 68px 36px;
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.feature-sub-section {
+  padding-top: 36px;
+  border-top: 1px solid var(--line-subtle);
 }
 
-.cta-block h2 {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: clamp(28px, 3.5vw, 42px);
-  color: var(--text-light);
-  margin-bottom: 14px;
+.feature-sub-head {
+  margin-bottom: 28px;
 }
 
-.cta-block p {
-  color: var(--text-light-dim);
-  font-size: 16.5px;
-  max-width: 52ch;
-  margin: 0 auto 32px;
-  line-height: 1.7;
-}
-
-.btn-primary {
-  background: var(--brass);
-  color: var(--ink);
-  font-weight: 700;
-  font-size: 15px;
-  padding: 14px 32px;
-  border-radius: 6px;
+.feature-sub-head .sub-label {
   display: inline-block;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.35);
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
 }
 
-.btn-primary:hover {
-  background: #d4b885;
+.feature-sub-head p {
+  font-size: 15px;
+  color: var(--charcoal-dim);
+  margin: 0;
+}
+
+.supporting-features-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.supporting-row-primary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.supporting-row-secondary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .feature-core-grid,
+  .supporting-row-primary,
+  .supporting-row-secondary {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Section 4: Untuk Siapa (Segments & Target Audience)
+   ========================================================================== */
+#segmen {
+  background-color: var(--canvas-warm);
+}
+
+.segments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.segment-item {
+  background: var(--surface-card);
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s var(--ease-out);
+}
+
+.segment-item:hover {
+  border-color: var(--brass);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.5);
+  box-shadow: var(--shadow-md);
 }
 
-.tags {
+.segment-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.segment-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--canvas-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brass-deep);
+  flex-shrink: 0;
+}
+
+.segment-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.segment-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--charcoal-dim);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .segments-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Section 5: Filosofi Layanan & Privasi Data
+   ========================================================================== */
+.philosophy-section {
+  background-color: var(--canvas-warm);
+  padding: 30px 0 60px;
+}
+
+.philosophy-box {
+  background: var(--surface-card);
+  border: 1px solid var(--line-subtle);
+  border-left: 4px solid var(--brass);
+  border-radius: var(--radius-md);
+  padding: 32px 36px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.philosophy-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(194, 164, 109, 0.12);
+  color: var(--brass-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.philosophy-box .label {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.philosophy-box p {
+  color: var(--charcoal-dim);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .philosophy-box {
+    flex-direction: column;
+    padding: 24px;
+    gap: 16px;
+  }
+}
+
+/* ==========================================================================
+   Section 6: Penutup & CTA Block (#kontak)
+   ========================================================================== */
+#kontak {
+  background: var(--canvas);
+  padding-bottom: 96px;
+}
+
+.cta-salon {
+  background: 
+    linear-gradient(135deg, #141c17 0%, #1a241e 100%);
+  color: var(--ivory);
+  border-radius: var(--radius-xl);
+  padding: 80px 48px;
+  text-align: center;
+  border: 1px solid rgba(194, 164, 109, 0.25);
+  box-shadow: var(--shadow-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-salon h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 500;
+  color: var(--ivory);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.cta-salon p {
+  color: var(--ivory-dim);
+  font-size: 16.5px;
+  line-height: 1.7;
+  max-width: 58ch;
+  margin: 0 auto 36px;
+}
+
+.cta-salon .btn-primary {
+  font-size: 15.5px;
+  padding: 15px 36px;
+}
+
+.cta-salon-tags {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 28px;
   flex-wrap: wrap;
-  margin-top: 36px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(237, 230, 216, 0.08);
+  font-size: 13.5px;
+  color: var(--ivory-dim);
+}
 }
 
-.tags span {
-  font-size: 13px;
-  color: var(--text-light-dim);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 6px 14px;
-  border-radius: 20px;
+.cta-salon-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* --------------------------------------------------------------------------
-   12. FOOTER
-   -------------------------------------------------------------------------- */
+.cta-salon-tags span::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brass);
+}
+
+@media (max-width: 640px) {
+  .cta-salon {
+    padding: 48px 24px;
+  }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 footer {
-  padding: 36px 0;
-  background: #080e0b;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: #0f1511;
+  border-top: 1px solid var(--line-dark);
+  padding: 40px 0;
+  color: var(--ivory-dim);
+  font-size: 13.5px;
 }
 
 footer .wrap {
@@ -548,20 +1246,169 @@ footer .wrap {
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  font-size: 13.5px;
-  color: var(--text-light-dim);
 }
 
-/* --------------------------------------------------------------------------
-   13. ANIMASI DASAR
-   -------------------------------------------------------------------------- */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ivory);
+}
+
+/* ==========================================================================
+   Interactive Demo Modal & State Architecture (R-26, R-27, R-32)
+   ========================================================================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 15, 12, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-window {
+  background: var(--surface-card);
+  border: 1px solid var(--brass);
+  border-radius: var(--radius-lg);
+  max-width: 560px;
+  width: 100%;
+  box-shadow: var(--shadow-dark);
+  position: relative;
+  padding: 40px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--canvas-warm);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--charcoal);
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: var(--ink);
+  color: var(--ivory);
+}
+
+.modal-window h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.modal-window .modal-desc {
+  font-size: 14.5px;
+  color: var(--charcoal-dim);
+  margin: 0 0 28px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.form-control {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  padding: 11px 14px;
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--charcoal);
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  outline: 2px solid var(--brass-deep);
+  outline-offset: 1px;
+  border-color: var(--brass-deep);
+  box-shadow: 0 0 0 3px rgba(194, 164, 109, 0.2);
+}
+
+/* Modal States: Form, Loading, Success */
+.modal-state-loading,
+.modal-state-success {
+  display: none;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(194, 164, 109, 0.2);
+  border-top-color: var(--brass);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.success-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(121, 207, 156, 0.15);
+  color: #2e8b57;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 28px;
+}
+
+/* ==========================================================================
+   Reduced Motion Accessibility (R-39)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

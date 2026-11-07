@@ -1,23 +1,25 @@
 /* Modern Clean Dashboard CSS for Bespoke Travel Concierge */
 :root {
-  --ink-primary: #142b1f;
-  --ink-secondary: #233b2c;
-  --bg-main: #f5f7f5;
+  --ink-primary: #0f172a;
+  --ink-secondary: #334155;
+  --bg-main: #f8fafc;
   --bg-sidebar: #ffffff;
   --card-bg: #ffffff;
-  --card-border: #e1e9e3;
-  --brand-green: #183e2e;
-  --brand-green-hover: #123023;
-  --brand-mint-light: #e3ede6;
-  --brand-mint-text: #1a4d36;
-  --text-muted: #66736c;
-  --text-dim: #94a199;
+  --card-border: #e2e8f0;
+  --brand-blue: #0284c7;
+  --brand-blue-hover: #0369a1;
+  --brand-green: #0284c7;
+  --brand-green-hover: #0369a1;
+  --brand-mint-light: #e0f2fe;
+  --brand-mint-text: #0369a1;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
   --badge-gold-bg: #fdf3e2;
   --badge-gold-text: #96671d;
-  --badge-blue-bg: #e2edf6;
-  --badge-blue-text: #235d80;
-  --step-active: #204b36;
-  --step-inactive: #e4ece7;
+  --badge-blue-bg: #e0f2fe;
+  --badge-blue-text: #0369a1;
+  --step-active: #0284c7;
+  --step-inactive: #e2e8f0;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -91,7 +93,7 @@ body {
 
 /* Top Buttons */
 .btn-primary-dark {
-  background-color: var(--brand-green);
+  background-color: var(--brand-blue);
   color: #ffffff;
   padding: 10px 18px;
   border-radius: 8px;
@@ -103,11 +105,11 @@ body {
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 1px 2px rgba(20, 43, 31, 0.08);
+  box-shadow: 0 1px 2px rgba(2, 132, 199, 0.15);
 }
 
 .btn-primary-dark:hover {
-  background-color: var(--brand-green-hover);
+  background-color: var(--brand-blue-hover);
 }
 
 .btn-primary-dark:active {
@@ -115,7 +117,7 @@ body {
 }
 
 .btn-primary-sm {
-  background-color: var(--brand-green);
+  background-color: var(--brand-blue);
   color: #ffffff;
   padding: 7px 14px;
   border-radius: 7px;
@@ -127,7 +129,7 @@ body {
 }
 
 .btn-primary-sm:hover {
-  background-color: var(--brand-green-hover);
+  background-color: var(--brand-blue-hover);
 }
 
 /* Action items */
@@ -156,8 +158,8 @@ body {
 }
 
 .action-icon-mint {
-  background-color: #e4f1eb;
-  color: #23694c;
+  background-color: #e0f2fe;
+  color: #0284c7;
 }
 
 /* Badges */
@@ -175,9 +177,9 @@ body {
   display: inline-block;
   padding: 3px 12px;
   border-radius: 9999px;
-  background-color: #ebf4f0;
-  color: #236c4f;
-  border: 1px solid #d0e5db;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
   font-size: 12px;
   font-weight: 600;
 }
@@ -239,8 +241,8 @@ body {
 }
 
 .spinner-dark {
-  border: 2px solid rgba(20, 43, 31, 0.2);
-  border-top-color: var(--brand-green);
+  border: 2px solid rgba(2, 132, 199, 0.2);
+  border-top-color: var(--brand-blue);
 }
 
 @keyframes spin {
@@ -398,7 +400,7 @@ body {
 }
 
 .btn-retry {
-  background-color: #183e2e;
+  background-color: var(--brand-blue);
   color: #ffffff;
   font-size: 13px;
   font-weight: 600;
@@ -413,7 +415,7 @@ body {
 }
 
 .btn-retry:hover {
-  background-color: #123023;
+  background-color: var(--brand-blue-hover);
   transform: translateY(-1px);
 }
 

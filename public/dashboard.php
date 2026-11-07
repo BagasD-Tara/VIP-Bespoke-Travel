@@ -66,12 +66,13 @@ if (!is_array($rawData)) {
         "requestSaya" => [
             [
                 "id" => "req-1",
-                "destination" => "Kyoto Autumn Private Retreat & Onsen",
+                "destination" => "The Alpine Retreat: Zermatt & St. Moritz",
                 "dateRange" => "18 Nov – 25 Nov 2026",
                 "guests" => 2,
                 "statusBadge" => "Proposal Dikirim",
                 "statusType" => "warning",
                 "currentStepIndex" => 2,
+                "image" => "Switzerland.jfif",
                 "steps" => ["Diajukan", "Ditinjau", "Proposal", "Disetujui", "Dikonfirmasi"],
                 "footerType" => "estimate",
                 "costEstimate" => "Rp 145.000.000",
@@ -236,8 +237,8 @@ $kpiCards = [
         'title' => 'Total Permintaan',
         'value' => (int)$metrics['totalRequests'],
         'unit' => 'Perjalanan',
-        'subtext' => '<span class="text-emerald-700 font-semibold">' . (int)$metrics['activeRequests'] . ' aktif</span> • <span>' . (int)$metrics['confirmedRequests'] . ' selesai</span>',
-        'theme' => 'emerald',
+        'subtext' => '<span class="text-sky-600 font-semibold">' . (int)$metrics['activeRequests'] . ' aktif</span> • <span>' . (int)$metrics['confirmedRequests'] . ' selesai</span>',
+        'theme' => 'sky',
         'svgPath' => 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'
     ],
     [
@@ -313,7 +314,7 @@ $filterTabs = [
       <div>
         <!-- Brand / Logo Dinamis dari PHP -->
         <div class="flex items-center gap-3 mb-8">
-          <div class="w-9 h-9 rounded-lg bg-[#183e2e] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+          <div class="w-9 h-9 rounded-lg bg-[#0284c7] text-white flex items-center justify-center font-bold text-xs shadow-xs">
             <span><?= htmlspecialchars($business['logo']) ?></span>
           </div>
           <span id="business-name" class="font-bold text-lg tracking-tight text-[#142b1f]"><?= htmlspecialchars($business['name']) ?></span>
@@ -339,7 +340,7 @@ $filterTabs = [
       <div class="pt-4 mt-auto border-t border-[#edf2ee] flex flex-col gap-3">
         <!-- Client Profile Badge Dinamis (Nama & Inisial Avatar) -->
         <div class="flex items-center gap-3 p-2 rounded-xl bg-slate-50 border border-slate-100">
-          <div class="w-8 h-8 rounded-full bg-[#183e2e] text-white flex items-center justify-center font-bold text-xs shrink-0">
+          <div class="w-8 h-8 rounded-full bg-[#0284c7] text-white flex items-center justify-center font-bold text-xs shrink-0">
             <?= htmlspecialchars($customer['initials']) ?>
           </div>
           <div class="min-w-0 flex-1">
@@ -348,8 +349,8 @@ $filterTabs = [
           </div>
         </div>
 
-        <a href="dashboard.html" class="text-xs font-semibold text-emerald-800 hover:text-emerald-950 transition flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+        <a href="dashboard.html" class="text-xs font-semibold text-sky-600 hover:text-sky-800 transition flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
           <span>Buka Versi HTML + JS (CSR)</span>
         </a>
         <div class="flex items-center justify-between">
@@ -364,21 +365,15 @@ $filterTabs = [
       <!-- HEADER -->
       <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <div class="flex flex-wrap items-center gap-3">
-            <!-- Sapaan Dinamis Berbasis Waktu Server (Hasil Proses PHP) -->
-            <h1 id="customer-greeting" class="text-2xl sm:text-3xl font-bold text-[#142b1f] tracking-tight">
-              <?= htmlspecialchars($greeting['greeting']) ?>, <?= htmlspecialchars($customer['name']) ?>
-            </h1>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#e8f3ed] text-[#1a4e37] border border-[#cbe3d4] shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-              <span>PHP Dynamic SSR Aktif</span>
-            </span>
+          <div class="flex items-center gap-3">
+            <h1 id="customer-greeting" class="text-2xl sm:text-3xl font-bold text-[#142b1f] tracking-tight">Halo, <?= htmlspecialchars($customer['name']) ?></h1>
+            <div id="api-status-container"></div>
           </div>
-          <p class="text-sm text-[#5d6a62] mt-1">Pantau perjalanan VIP Anda, analisis portofolio anggaran, dan tinjau proposal secara real-time.</p>
+          <p class="text-sm text-[#5d6a62] mt-1">Pantau perjalanan Anda dan tinjau proposal dari concierge.</p>
         </div>
         <div class="flex items-center gap-3 shrink-0">
-          <a href="dashboard.php" class="p-2.5 rounded-lg border border-[#e1e9e3] bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-xs flex items-center gap-1.5 text-xs font-semibold" title="Muat ulang dan hitung data server">
-            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a href="dashboard.php" class="p-2.5 rounded-lg border border-[#e1e9e3] bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-xs flex items-center gap-1.5 text-xs font-semibold" title="Sinkronkan data dari server">
+            <svg id="refresh-icon" class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
             </svg>
             <span class="hidden sm:inline">Refresh Data</span>
@@ -394,10 +389,10 @@ $filterTabs = [
 
       <!-- SERVER NOTIFICATION / FLASH MESSAGE (Logika Kondisional PHP) -->
       <?php if ($notification): ?>
-        <div class="mb-6 p-4 rounded-xl border flex items-center justify-between gap-3 shadow-xs <?= $notification['type'] === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900' ?>">
+        <div class="mb-6 p-4 rounded-xl border flex items-center justify-between gap-3 shadow-xs <?= $notification['type'] === 'success' ? 'bg-sky-50 border-sky-200 text-sky-900' : 'bg-rose-50 border-rose-200 text-rose-900' ?>">
           <div class="flex items-center gap-3">
             <?php if ($notification['type'] === 'success'): ?>
-              <svg class="w-5 h-5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-sky-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             <?php else: ?>
@@ -415,55 +410,11 @@ $filterTabs = [
       <?php endif; ?>
 
       <!-- ===================================================================== -->
-      <!-- TAHAP 3: GENERATED HTML METRIK / KPI SUMMARY CARDS                    -->
-      <!-- Dihasilkan secara dinamis lewat Loop Foreach & Kondisional PHP        -->
-      <!-- ===================================================================== -->
-      <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <?php foreach ($kpiCards as $card): 
-          // Logika Kondisional: Pemilihan Warna Tema Kartu
-          $theme = $card['theme'] ?? 'emerald';
-          $colorClasses = match($theme) {
-            'amber' => ['bg' => 'bg-amber-50', 'text' => 'text-amber-800'],
-            'sky'   => ['bg' => 'bg-sky-50',   'text' => 'text-sky-800'],
-            'rose'  => ['bg' => 'bg-rose-50',  'text' => 'text-rose-800'],
-            default => ['bg' => 'bg-emerald-50', 'text' => 'text-emerald-800'],
-          };
-        ?>
-          <div class="p-4 sm:p-5 rounded-2xl bg-white border border-[#e1e9e3] shadow-xs hover:border-[#c9dacd] transition">
-            <div class="flex items-center justify-between text-slate-500 mb-2">
-              <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-500">
-                <?= htmlspecialchars($card['title']) ?>
-              </span>
-              <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg <?= $colorClasses['bg'] ?> <?= $colorClasses['text'] ?> flex items-center justify-center">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<?= $card['svgPath'] ?>"></path>
-                </svg>
-              </div>
-            </div>
-            <div class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight truncate">
-              <?= $card['value'] ?>
-              <?php if (!empty($card['unit'])): ?>
-                <span class="text-xs sm:text-sm font-medium text-slate-500"><?= htmlspecialchars($card['unit']) ?></span>
-              <?php endif; ?>
-            </div>
-            <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1.5 truncate">
-              <?= $card['subtext'] ?>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      </section>
-
-      <!-- ===================================================================== -->
       <!-- TAHAP 3: GENERATED HTML DAFTAR PERLU TINDAKAN ANDA                     -->
       <!-- Dihasilkan secara dinamis lewat Loop Foreach & Kondisional Jenis Aksi -->
       <!-- ===================================================================== -->
       <section id="action-section" class="mb-9">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="text-base sm:text-[17px] font-bold text-[#162d20] flex items-center gap-2">
-            <span>Perlu tindakan Anda</span>
-            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800"><?= count($perluTindakan) ?></span>
-          </h2>
-        </div>
+        <h2 class="text-base sm:text-[17px] font-bold text-[#162d20] mb-3">Perlu tindakan Anda</h2>
         <div class="bg-white rounded-2xl border border-[#e1e9e3] shadow-xs divide-y divide-[#edf3ef] overflow-hidden">
           <?php if (empty($perluTindakan)): ?>
             <div class="p-6 text-sm text-slate-400">Tidak ada tindakan yang diperlukan saat ini.</div>
@@ -516,72 +467,18 @@ $filterTabs = [
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <!-- LEFT COLUMN: REQUEST SAYA -->
         <section id="request-section" class="lg:col-span-7">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3.5">
-            <h2 class="text-base sm:text-[17px] font-bold text-[#162d20] flex items-center gap-2">
-              <span>Request Saya</span>
-              <span class="text-xs text-slate-400 font-normal">(<?= count($requestSaya) ?> dari <?= $allRequestsCount ?>)</span>
-            </h2>
-            <div class="flex items-center gap-2">
-              <a href="dashboard.php" class="text-xs font-semibold text-emerald-800 hover:underline">Lihat semua</a>
-            </div>
+          <div class="flex items-center justify-between mb-3.5">
+            <h2 class="text-base sm:text-[17px] font-bold text-[#162d20]">Request Saya</h2>
+            <a href="dashboard.php" class="text-xs font-semibold text-sky-600 hover:text-sky-800 hover:underline">Lihat semua</a>
           </div>
 
-          <!-- KONTROL FILTER & PENCARIAN (PHP Server-Side Filtering) -->
-          <div class="bg-white p-3 rounded-xl border border-[#e1e9e3] mb-4 space-y-2.5">
-            <form method="GET" action="dashboard.php" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-              <div class="relative flex-1">
-                <input
-                  type="text"
-                  name="q"
-                  value="<?= htmlspecialchars($filterState['q']) ?>"
-                  placeholder="Cari destinasi atau rentang tanggal..."
-                  class="w-full pl-8 pr-3 py-1.5 text-xs bg-[#f8faf9] border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-700"
-                />
-                <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-              </div>
-
-              <!-- TAHAP 3: GENERATED HTML FILTER TABS VIA FOREACH LOOP & KONDISIONAL -->
-              <div class="flex items-center gap-1.5 overflow-x-auto">
-                <?php foreach ($filterTabs as $tab): 
-                  $isActive = ($filterState['filter'] === $tab['key']);
-                  $tabClass = $isActive 
-                    ? 'bg-[#183e2e] text-white' 
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200';
-                ?>
-                  <a href="<?= htmlspecialchars($tab['url']) ?>" 
-                     class="px-2.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition <?= $tabClass ?>">
-                    <?= htmlspecialchars($tab['label']) ?>
-                  </a>
-                <?php endforeach; ?>
-              </div>
-            </form>
-
-            <?php if (!empty($filterState['q']) || $filterState['filter'] !== 'all'): ?>
-              <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <span>Filter aktif: <strong><?= htmlspecialchars($filterState['filter']) ?></strong> <?= !empty($filterState['q']) ? '• kata kunci: "' . htmlspecialchars($filterState['q']) . '"' : '' ?></span>
-                <a href="dashboard.php" class="text-emerald-800 font-bold hover:underline">Reset Filter</a>
-              </div>
-            <?php endif; ?>
-          </div>
-
-          <!-- ===================================================================== -->
-          <!-- TAHAP 3: GENERATED HTML DAFTAR REQUEST PERJALANAN                     -->
-          <!-- Dihasilkan secara dinamis lewat Loop Foreach & Nested 5-Step Bar      -->
-          <!-- ===================================================================== -->
-          <div class="space-y-4">
+          <div id="requests-list" class="space-y-4">
             <?php if (empty($requestSaya)): ?>
-              <div class="p-8 text-center bg-white rounded-2xl border border-slate-200">
-                <p class="text-sm text-slate-500 font-medium">Tidak ada permintaan perjalanan yang sesuai filter.</p>
-                <a href="dashboard.php" class="text-xs text-emerald-800 font-bold hover:underline mt-2 inline-block">Tampilkan semua request</a>
-              </div>
+              <div class="p-8 text-center text-sm text-slate-400 bg-white rounded-2xl border border-slate-200">Belum ada request perjalanan aktif.</div>
             <?php else: ?>
               <?php foreach ($requestSaya as $req): 
-                // Logika Kondisional: Badge Status & Durasi Perjalanan
                 $isWarning = ($req['statusType'] ?? '') === 'warning';
                 $statusBadgeClass = $isWarning ? "badge-sand" : "badge-soft-blue";
-                $duration = $req['duration']['formatted'] ?? 'Durasi Fleksibel';
               ?>
                 <div class="request-card p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm transition hover:shadow-md">
                   <div class="flex items-start justify-between gap-3 mb-1">
@@ -589,22 +486,24 @@ $filterTabs = [
                     <span class="<?= $statusBadgeClass ?> shrink-0"><?= htmlspecialchars($req['statusBadge']) ?></span>
                   </div>
                   
-                  <!-- Metadata Tanggal, Durasi Dihitung PHP, dan Jumlah Tamu -->
-                  <p class="text-xs sm:text-[13px] text-slate-500 mb-5 flex flex-wrap items-center gap-1.5">
-                    <span><?= htmlspecialchars($req['dateRange']) ?></span>
-                    <span>•</span>
-                    <span class="font-semibold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded"><?= htmlspecialchars($duration) ?></span>
-                    <span>•</span>
-                    <span><?= htmlspecialchars($req['guestsFormatted'] ?? ((int)$req['guests'] . ' peserta')) ?></span>
-                  </p>
+                  <p class="text-xs sm:text-[13px] text-slate-500 mb-4"><?= htmlspecialchars($req['dateRange']) ?> • <?= (int)($req['guests'] ?? 2) ?> peserta</p>
 
-                  <!-- 5-Step Progress Bar Dinamis: Nested Loop & Logika Kondisional Tahap -->
+                  <?php if (!empty($req['image'])): ?>
+                    <div class="mb-4 overflow-hidden rounded-xl border border-slate-200/70 bg-slate-100">
+                      <img 
+                        src="<?= htmlspecialchars($req['image']) ?>" 
+                        alt="<?= htmlspecialchars($req['destination']) ?>" 
+                        class="w-full h-44 sm:h-48 object-cover rounded-xl hover:scale-[1.02] transition duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  <?php endif; ?>
+
                   <div class="steps-container flex items-center justify-between gap-1 sm:gap-2 mb-5">
                     <?php 
                     $steps = $req['steps'] ?? ["Diajukan", "Ditinjau", "Proposal", "Disetujui", "Dikonfirmasi"];
                     $currentIndex = $req['currentStepIndex'] ?? 0;
                     foreach ($steps as $idx => $stepName): 
-                      // Logika Kondisional: Menentukan progress bar yang aktif / terisi
                       $isCompletedOrActive = $idx <= $currentIndex;
                       $isCurrentActive = $idx === $currentIndex;
                       $labelClass = $isCurrentActive ? "font-bold text-slate-900" : ($isCompletedOrActive ? "font-medium text-slate-700" : "text-slate-400");
@@ -617,7 +516,6 @@ $filterTabs = [
                     <?php endforeach; ?>
                   </div>
 
-                  <!-- Footer Request (Estimasi Biaya vs Booking Confirmed via Kondisional) -->
                   <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
                     <?php if (($req['footerType'] ?? '') === 'estimate'): ?>
                       <div class="flex items-center gap-2 text-xs sm:text-[13px] text-slate-600">
@@ -626,13 +524,13 @@ $filterTabs = [
                       </div>
                     <?php else: ?>
                       <div class="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
-                        <svg class="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 text-sky-600" fill="currentColor" viewBox="0 0 20 20">
                           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                         </svg>
                         <span><?= htmlspecialchars($req['confirmedText'] ?? 'Booking Confirmed') ?></span>
                       </div>
                     <?php endif; ?>
-                    <a href="#" class="text-xs sm:text-[13px] font-semibold text-emerald-800 hover:text-emerald-950 transition">Lihat detail</a>
+                    <a href="#" class="text-xs sm:text-[13px] font-semibold text-sky-600 hover:text-sky-800 transition">Lihat detail</a>
                   </div>
                 </div>
               <?php endforeach; ?>
@@ -642,46 +540,32 @@ $filterTabs = [
 
         <!-- RIGHT COLUMN: PERJALANAN MENDATANG & PESAN TERBARU -->
         <aside class="lg:col-span-5 space-y-8">
-          <!-- ===================================================================== -->
-          <!-- TAHAP 3: GENERATED HTML PERJALANAN MENDATANG                          -->
-          <!-- Dihasilkan secara dinamis lewat Logika Kondisional PHP                -->
-          <!-- ===================================================================== -->
+          <!-- Widget 1: Perjalanan Mendatang -->
           <section id="upcoming-section">
             <h2 class="text-base sm:text-[17px] font-bold text-[#162d20] mb-3">Perjalanan mendatang</h2>
-            <div class="bg-white rounded-2xl border border-[#e1e9e3] p-4 sm:p-5 shadow-xs">
+            <div id="upcoming-card" class="bg-white rounded-2xl border border-[#e1e9e3] p-4 sm:p-5 shadow-xs">
               <?php if ($perjalananMendatang): ?>
                 <div class="flex items-center gap-4">
-                  <div class="date-tile flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-[#e3efe9] text-[#164330] shrink-0 font-sans shadow-xs">
+                  <div class="date-tile flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-[#e0f2fe] text-[#0369a1] shrink-0 font-sans shadow-xs">
                     <span class="text-base font-extrabold leading-tight"><?= htmlspecialchars($perjalananMendatang['dateDay']) ?></span>
                     <span class="text-[11px] font-bold tracking-wider leading-none uppercase"><?= htmlspecialchars($perjalananMendatang['dateMonth']) ?></span>
                   </div>
-                  <div class="flex-1 min-w-0">
-                    <div class="flex items-center justify-between gap-2">
-                      <h4 class="text-[15px] font-bold text-slate-900 leading-snug truncate"><?= htmlspecialchars($perjalananMendatang['destination']) ?></h4>
-                      <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-900 shrink-0">
-                        <?= htmlspecialchars($perjalananMendatang['countdown']['formatted'] ?? '29 Hari Lagi') ?>
-                      </span>
-                    </div>
+                  <div>
+                    <h4 class="text-[15px] font-bold text-slate-900 leading-snug"><?= htmlspecialchars($perjalananMendatang['destination']) ?></h4>
                     <p class="text-xs sm:text-[13px] text-slate-500 mt-0.5"><?= htmlspecialchars($perjalananMendatang['confirmedSummary']) ?></p>
                   </div>
                 </div>
               <?php else: ?>
-                <p class="text-xs text-slate-400 py-2">Belum ada jadwal perjalanan mendatang.</p>
+                <p class="text-xs text-slate-400 py-2">Belum ada perjalanan mendatang.</p>
               <?php endif; ?>
             </div>
           </section>
 
-          <!-- ===================================================================== -->
-          <!-- TAHAP 3: GENERATED HTML PESAN TERBARU                                 -->
-          <!-- Dihasilkan secara dinamis lewat Loop Foreach & Waktu Relatif PHP      -->
-          <!-- ===================================================================== -->
+          <!-- Widget 2: Pesan Terbaru -->
           <section id="messages-section">
             <div class="flex items-center justify-between mb-3">
-              <h2 class="text-base sm:text-[17px] font-bold text-[#162d20] flex items-center gap-2">
-                <span>Pesan terbaru</span>
-                <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700"><?= count($pesanTerbaru) ?></span>
-              </h2>
-              <a href="#" class="text-xs font-semibold text-emerald-800 hover:underline">Buka pesan</a>
+              <h2 class="text-base sm:text-[17px] font-bold text-[#162d20]">Pesan terbaru</h2>
+              <a href="#" class="text-xs font-semibold text-sky-600 hover:text-sky-800 hover:underline">Buka pesan</a>
             </div>
             <div class="bg-white rounded-2xl border border-[#e1e9e3] p-4 sm:p-5 shadow-xs">
               <div class="divide-y divide-[#edf3ef]">
@@ -691,7 +575,7 @@ $filterTabs = [
                   <?php foreach ($pesanTerbaru as $msg): ?>
                     <div class="flex items-start gap-3.5 py-2.5 first:pt-0 last:pb-0">
                       <!-- Inisial Dinamis Diproses PHP -->
-                      <div class="w-8 h-8 rounded-full bg-[#e7eee9] text-[#244b36] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                      <div class="w-8 h-8 rounded-full bg-[#e0f2fe] text-[#0369a1] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                         <?= htmlspecialchars($msg['initial']) ?>
                       </div>
                       <div class="flex-1 min-w-0">
@@ -730,7 +614,7 @@ $filterTabs = [
               type="text"
               required
               placeholder="Contoh: Swiss Alps Winter Chalet"
-              class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
+              class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500"
             />
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -742,7 +626,7 @@ $filterTabs = [
                 type="text"
                 required
                 placeholder="Contoh: 15 Jan – 22 Jan 2027"
-                class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
+                class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500"
               />
             </div>
             <div>
@@ -753,7 +637,7 @@ $filterTabs = [
                 type="number"
                 min="1"
                 value="2"
-                class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
+                class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500"
               />
             </div>
           </div>
@@ -764,7 +648,7 @@ $filterTabs = [
               name="notes"
               rows="3"
               placeholder="Preferensi villa pribadi, private jet, chef bintang michelin, dll."
-              class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
+              class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500"
             ></textarea>
           </div>
           <div class="pt-3 border-t border-[#edf3ef] flex items-center justify-end gap-3">
