@@ -8,8 +8,8 @@ Repositori resmi kolaborasi pengembangan platform **VIP Bespoke Travel & Luxury 
 
 - **Zaidaan Diandra Eka Putra (NIM: 202410370110420)**
   - **Fokus Kontribusi:**
-    - **Week 7:** Perancangan & Implementasi Penuh Arsitektur **Model-View-Controller (MVC)** PHP (`models/`, `controllers/`, `views/`, `index.php`), perancangan dashboard *Quiet Luxury* (Obsidian & Champagne Gold) dengan widget telemetri penerbangan AI privat dan dossier perjalanan VIP.
-    - **Week 6:** Perancangan modul **Pemrograman Berorientasi Objek / OOP** (`BespokeConcierge.php`), landing page dinamis dan interaktif (`latihan1.html`, `latihan1.php`) dengan modal autentikasi VIP terintegrasi.
+    - **Week 7:** Perancangan & Implementasi Penuh Arsitektur **Model-View-Controller (MVC)** PHP (`models/`, `controllers/`, `views/`, `index.php`), perancangan dashboard **Sovereign Reserve** (*Obsidian & Glowing Champagne Gold*) dengan telemetri portofolio aset, grafik SVG area line, alokasi domain 3D donut chart, kesiapan armada jet, dan settlement ledger terenkripsi.
+    - **Week 6:** Perancangan modul **Pemrograman Berorientasi Objek / OOP** (`BespokeConcierge.php`), landing page dinamis dan interaktif (**Black Gold Luxury**) (`latihan1.html`, `latihan1.php`) dengan hero banner full-width, kapsul pencarian melayang, 3 kartu showcase, dan modal VIP Portal terintegrasi.
 - **Bagas Dewantara (NIM: 202410370110441)**
   - **Fokus Kontribusi:**
     - **Week 5 / Base Framework:** Perancangan arsitektur backend Express.js (`server.js`), sistem autentikasi JWT & hash password Bcrypt (`users.json`, `hash-password.js`), frontend CSR berbasis TypeScript (`src/dashboard.ts`, `src/types.ts`), formulir pengajuan perjalanan baru, serta implementasi dasar SSR PHP (`public/dashboard.php`, `public/data-processor.php`).
@@ -38,24 +38,28 @@ Implementasi pola arsitektur MVC murni di sisi server PHP untuk memisahkan data 
   - Memproses logika penentuan salam dinamis sesuai waktu server (*Time-of-day greeting*).
   - Merender view melalui method `render()` dengan mem-passing data yang telah disanitasi.
 - **View (`views/dashboard-view.php`)**:
-  - Antarmuka dashboard VIP berestetika *Quiet Luxury* (palet warna Obsidian `#060a08`, Champagne Gold `#c5a059`, dan Ivory `#fcfbf8`) dengan container terpusat (`max-w-6xl mx-auto`).
+  - Antarmuka dashboard VIP berestetika **Sovereign Reserve — Zurich Private Vaults** (palet warna Obsidian `#0c0e12`, Champagne Gold `#f2ca50`, dan Muted Platinum `#d0c5af`) dengan sidebar navigasi tetap di sisi kiri (`w-72 fixed`).
   - Dilengkapi fitur:
-    - **Widget Telemetri Penerbangan AI Privat:** Pelacakan rute udara *Geneva Cointrin (LSGG) &rarr; Samedan / St. Moritz Engadin (LSZS)* dengan profil elevasi, kecepatan jelajah, dan integrasi transfer apron Maybach.
-    - **Copilot Query Dispatch Bar:** Input asisten AI concierge dengan saran cepat dan animasi transmisi terenkripsi ke Geneva Desk.
-    - **Filter Tabs Real-time:** Tombol filter interaktif (`All`, `Approved`, `In Review`, `Planning`, `Confirmed`) dengan counter dinamis dari Model.
-    - **6 Kartu Portofolio Dossier VIP:** Informasi mendalam mencakup aset transportasi (jet/helikopter/yacht), private advisor, catatan kurasi, estimasi anggaran, dan tautan dossier.
-    - **Direct Sovereign Desk & PGP Note:** Kontak langsung concierge dan simulasi pengiriman pesan terenkripsi.
+    - **Header & Client Dossier:** Sambutan personal `Welcome, Alexander Dubois`, status tier keanggotaan `VIP-8821 • Sovereign Tier`, live search ledger real-time, dan indikator keamanan *Tier-1 Encrypted Zurich Gateway*.
+    - **Portfolio Performance Chart:** Grafik area SVG interaktif berpendar emas dengan filter rentang waktu (1M, 3M, 6 MONTHS, 1Y, ALL) serta penanda puncak *Sep 2026 Peak ($2,485,000)*.
+    - **Total Wealth & Treasury Card:** Pelacakan kekayaan total $32.78M (+7.8% YTD) dengan grafik gelombang ganda dan breakdown *Global Custody Escrow*, *Gold Bullion*, dan *Liquid Yield Stash*.
+    - **Asset Allocation 3D Donut Chart:** Visualisasi alokasi aset & domain (Equities & Jets 52%, Sanctuaries 28%, Charters 15%, Vaults 5%) dengan inti *100% Tier Alpha*.
+    - **Market Sentiment & Fleet Readiness:** Grafik pilar indeks global (S&P, NASDAQ, DOW, XAU Gold) dan status kesiapan armada jet privat (*Gulfstream G700 & Global 7500: 4/5 Ready*).
+    - **Goals & Capital Allocations:** Progress bar dinamis target aset keluarga (*Estate Reserve*, *Island Acquisition*, *Orbital Aerospace*).
+    - **Settlement Ledger Table:** Tabel transaksi mutasi concierge dan escrow privat (Amalfi Coast G700, Zurich Escrow Deposit, Monaco Superyacht, St. Moritz Alpine) lengkap dengan modul *Personal Banker: Lucian Von Bern*.
 
 ---
 
 ### 💎 2. Pemrograman Berorientasi Objek & Landing Page (Week 6 — Zaidaan Diandra)
 - **Implementasi OOP (`BespokeConcierge.php`)**:
-  - Penerapan prinsip Pemrograman Berorientasi Objek (OOP) dalam PHP: Enkapsulasi properti, metode setter/getter, abstraksi layanan concierge, serta metode pengolahan data paket perjalanan.
-- **Landing Page Interaktif (`latihan1.html` & `latihan1.php`)**:
-  - Antarmuka beranda dengan tipografi elegan (*EB Garamond* & *DM Sans*) dan navigasi sticky glassmorphic.
-  - Seksi kurasi destinasi dunia (Swiss Alps, Monaco, Kyoto, Amalfi Coast, Serengeti, Lapland).
-  - Seksi *Fleet & Aviation Showcase* serta penjelasan alur kerja *Bespoke Process*.
-  - Modal autentikasi login VIP interaktif yang terhubung langsung ke dashboard.
+  - Penerapan prinsip Pemrograman Berorientasi Objek (OOP) dalam PHP: Enkapsulasi properti, metode setter/getter, abstraksi layanan concierge, serta binding data dinamis `$suiteProfile` dan `$quickStats`.
+- **Landing Page Interaktif Black Gold (`latihan1.html` & `latihan1.php`)**:
+  - Antarmuka beranda berestetika **Black Gold Obsidian Luxury** dengan tipografi editorial (*EB Garamond* & *DM Sans*).
+  - **Full-Width Hero Banner:** Foto editorial koper mewah di podium pantai (`assets/images/luxury-luggage-coastal-hero.jpg`) dengan dark obsidian scrim overlay.
+  - **Floating Top Navbar:** Navigasi kaca tembus pandang (*dark frosted glass*) dengan logo monogram emas dan tautan VIP Portal.
+  - **Floating Quick Search Capsule:** Bar pencarian 4 segmen melayang (Destinasi, Tanggal, Jumlah Tamu, Anggaran) dengan tombol aksi emas.
+  - **3 Showcase Cards Grid:** Kartu sorotan *Santorini Estate Caldera* (`assets/images/santorini-caldera-sunset.jpg`), metrik benchmark komunitas, dan teaser video arsip.
+  - **Seksi Lengkap:** 6 Dossier ekspedisi global terkurasi (dengan sistem filter kategori), armada penerbangan privat, protokol concierge 4 tahap, tier keanggotaan berdaulat, sertifikasi FINMA/Trust, dan formulir konsultasi interaktif.
 
 ---
 
@@ -84,16 +88,19 @@ Implementasi pola arsitektur MVC murni di sisi server PHP untuk memisahkan data 
 
 ```plaintext
 VIP-BESPOKE-TRAVEL/
+├── assets/                   # [Assets] Foto & Media Resolusi Tinggi Lokal
+│   └── images/               # Koleksi foto koper pesisir, Santorini, Alpen, dan referensi
 ├── controllers/              # [Week 7 - Zaidaan] Controller Pola Arsitektur MVC
 │   └── DashboardController.php # Logika bisnis, filter status, dispatch view
 ├── models/                   # [Week 7 - Zaidaan] Model Data Layer Pola Arsitektur MVC
 │   └── TravelModel.php       # Abstraksi data JSON, query filtering, agregasi statistik
 ├── views/                    # [Week 7 - Zaidaan] View Presentation Layer Pola Arsitektur MVC
-│   └── dashboard-view.php    # UI Patron Dashboard (Quiet Luxury, AI Telemetry, SSR)
+│   └── dashboard-view.php    # UI Patron Dashboard (Sovereign Reserve, Black Gold, Charts)
 ├── src/                      # [Bagas] Source Code Frontend TypeScript
 │   ├── dashboard.ts          # Logika frontend CSR, API fetcher, & DOM rendering
 │   └── types.ts              # Definisi interface TypeScript & generic state API
 ├── public/                   # [Bagas] Asset Web Statis & Client Application
+│   ├── images/               # Cermin aset gambar untuk akses direktori publik
 │   ├── landing_page.html     # Halaman beranda utama
 │   ├── login.html            # Halaman login klien
 │   ├── login.js              # Script client-side login & JWT store
@@ -108,7 +115,7 @@ VIP-BESPOKE-TRAVEL/
 │   └── style.css             # Desain global & stylesheet landing page
 ├── index.php                 # [Week 7 - Zaidaan] Front Controller / Entry Point Aplikasi MVC
 ├── latihan1.php              # [Week 6 - Zaidaan] Landing Page Dinamis & Integrasi VIP Portal
-├── latihan1.html             # [Week 6 - Zaidaan] File Desain Landing Page Quiet Luxury
+├── latihan1.html             # [Week 6 - Zaidaan] File Desain Landing Page Black Gold Luxury
 ├── BespokeConcierge.php      # [Week 6 - Zaidaan] Implementasi Class Berorientasi Objek (OOP)
 ├── server.js                 # [Bagas] Server Express.js (REST API & Static Server)
 ├── users.json                # [Bagas] Database mock pengguna & hash password Bcrypt

@@ -12,8 +12,8 @@ require_once __DIR__ . '/BespokeConcierge.php';
 
 // Inisialisasi Object BespokeConcierge (OOP Pertemuan 6)
 $bespoke = new BespokeConcierge(
-    suiteName: 'The Alpine Retreat: Zermatt & St. Moritz',
-    destination: 'Zermatt & St. Moritz, Swiss',
+    suiteName: 'Santorini Estate Caldera',
+    destination: 'Santorini, Greece',
     client: 'Lord Alexander Wright (VIP-8821)',
     status: 'Proposal Approved',
     totalCurated: '4 Vendor Premium Terverifikasi'
@@ -23,906 +23,1490 @@ $suiteProfile = $bespoke->getSuiteProfile();
 $quickStats   = $bespoke->getStats();
 ?>
 <!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>Bespoke — Ultra-Luxury Private Travel &amp; Diplomatic Concierge</title>
+  <meta content="Private Travel Office & Diplomatic Hospitality Atelier. Access granted exclusively via peer recommendation and private board clearance." name="description"/>
 
-<html class="dark scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Bespoke — VIP Private Travel &amp; Luxury Concierge Platform</title>
-<meta content="Ultra-luxurious private travel and concierge advisory for UHNWIs, family offices, and executives worldwide." name="description"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
+  <!-- Google Fonts: EB Garamond, DM Sans & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <style>
     @layer base {
       html, body {
         margin: 0;
         padding: 0;
-        background-color: #080e0b;
-        color: #e2e8f0;
+        background-color: #0c0e12;
+        color: #e2e2e8;
       }
       body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
     }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #080e0b; }
-    ::-webkit-scrollbar-thumb { background: #262b29; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #c5a059; }
-    .gold-glow {
-      box-shadow: 0 0 35px -5px rgba(197, 160, 89, 0.25);
-    }
-    .gold-glow-subtle {
-      box-shadow: 0 0 20px -3px rgba(197, 160, 89, 0.12);
-    }
-    .text-gradient-gold {
-      background: linear-gradient(135deg, #fcedc7 0%, #dfbe7e 45%, #bfa16b 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    ::-webkit-scrollbar { display: none; }
   </style>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+
+    <!-- Tailwind CSS CDN with Black Gold Theme Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "obsidian": "#040806",
-            "surface-dim": "#080e0b",
-            "surface": "#0d1712",
-            "surface-container": "#131e18",
-            "surface-container-high": "#1b2821",
-            "surface-container-highest": "#24332b",
-            "gold-light": "#f6e4bb",
-            "gold-bright": "#dfbe7e",
-            "gold": "#c5a059",
-            "gold-dark": "#9c7937",
-            "ivory": "#fcfbf8",
-            "slate-subtle": "#94a3b8",
-            "outline-dim": "rgba(255, 255, 255, 0.08)",
-            "outline-gold": "rgba(197, 160, 89, 0.3)"
+            "on-secondary": "#3d2f00",
+            "inverse-surface": "#e2e2e8",
+            "secondary": "#e7c35a",
+            "primary-fixed": "#ffe088",
+            "outline": "#99907c",
+            "surface-container": "#1e2024",
+            "on-surface": "#e2e2e8",
+            "on-secondary-fixed-variant": "#584400",
+            "on-primary-fixed": "#241a00",
+            "secondary-fixed-dim": "#e7c35a",
+            "background": "#111317",
+            "on-tertiary": "#3a3000",
+            "on-surface-variant": "#d0c5af",
+            "on-tertiary-container": "#524500",
+            "tertiary": "#e3cf7c",
+            "outline-variant": "#4d4635",
+            "on-error": "#690005",
+            "tertiary-container": "#c6b364",
+            "surface-dim": "#111317",
+            "surface-container-lowest": "#0c0e12",
+            "tertiary-fixed": "#f7e28e",
+            "primary-fixed-dim": "#e9c349",
+            "on-primary-fixed-variant": "#574500",
+            "inverse-on-surface": "#2f3035",
+            "inverse-primary": "#735c00",
+            "on-secondary-fixed": "#241a00",
+            "on-primary-container": "#554300",
+            "primary": "#f2ca50",
+            "surface-variant": "#333539",
+            "surface": "#111317",
+            "primary-container": "#d4af37",
+            "surface-container-highest": "#333539",
+            "surface-container-high": "#282a2e",
+            "error-container": "#93000a",
+            "on-primary": "#3c2f00",
+            "tertiary-fixed-dim": "#dac675",
+            "on-tertiary-fixed-variant": "#534600",
+            "on-error-container": "#ffdad6",
+            "surface-tint": "#e9c349",
+            "surface-container-low": "#1a1c20",
+            "secondary-fixed": "#ffe08b",
+            "on-background": "#e2e2e8",
+            "on-secondary-container": "#fff3dc",
+            "surface-bright": "#37393e",
+            "secondary-container": "#896c00",
+            "on-tertiary-fixed": "#221b00",
+            "error": "#ffb4ab"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "margin-tablet": "2.5rem",
+            "gutter-tablet": "2rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-xl": "3rem",
+            "space-lg": "1.75rem",
+            "margin-desktop": "5rem",
+            "gutter": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "1.25rem",
+            "gutter-desktop": "3rem"
           },
           fontFamily: {
-            "serif": ["EB Garamond", "Cormorant Garamond", "serif"],
-            "display": ["Cormorant Garamond", "EB Garamond", "serif"],
-            "sans": ["DM Sans", "sans-serif"]
+            "display-mobile": ["EB Garamond"],
+            "label-lg": ["DM Sans"],
+            "label-sm": ["DM Sans"],
+            "body-md": ["DM Sans"],
+            "body-lg": ["DM Sans"],
+            "label-md": ["DM Sans"],
+            "headline-md": ["EB Garamond"],
+            "headline-lg-mobile": ["EB Garamond"],
+            "display": ["EB Garamond"],
+            "body-sm": ["DM Sans"],
+            "headline-sm": ["EB Garamond"],
+            "headline-lg": ["EB Garamond"]
+          },
+          fontSize: {
+            "display-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.14em", "fontWeight": "600" }],
+            "label-sm": ["9px", { "lineHeight": "12px", "letterSpacing": "0.22em", "fontWeight": "600" }],
+            "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.18em", "fontWeight": "500" }],
+            "headline-md": ["32px", { "lineHeight": "40px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "display": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-sm": ["24px", { "lineHeight": "32px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "headline-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.015em", "fontWeight": "400" }]
           }
         }
       }
-    }
+    };
   </script>
 </head>
-<body class="bg-surface-dim font-sans text-slate-300 antialiased selection:bg-gold selection:text-obsidian">
-<!-- ================= STICKY GLASSMORPHIC NAVBAR ================= -->
-<header class="fixed top-0 left-0 right-0 z-50 bg-obsidian/80 backdrop-blur-xl border-b border-white/[0.08] transition-all duration-300">
-<div class="max-w-7xl mx-auto h-20 px-6 lg:px-10 flex items-center justify-between">
-<!-- Wordmark -->
-<a class="flex items-center gap-3.5 group" href="#">
-<div class="w-2.5 h-2.5 rounded-full bg-gold animate-pulse shadow-[0_0_10px_#dfbe7e]"></div>
-<span class="font-serif text-2xl tracking-[0.28em] font-medium text-ivory group-hover:text-gold transition-colors duration-300">BESPOKE</span>
-<span class="h-3.5 w-px bg-white/20"></span>
-<span class="text-[10px] tracking-[0.25em] font-medium uppercase text-gold/90 px-2.5 py-0.5 rounded-full border border-gold/30 bg-gold/5">
-          Private Concierge
-        </span>
-</a>
-<!-- Center Links -->
-<nav class="hidden xl:flex items-center gap-8">
-<a class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold transition-colors duration-200" href="#experiences">Curated Destinations</a>
-<a class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold transition-colors duration-200" href="#aviation">Fleet &amp; Aviation</a>
-<a class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold transition-colors duration-200" href="#workflow">Bespoke Process</a>
-<a class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold transition-colors duration-200" href="#membership">Membership</a>
-<a class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold transition-colors duration-200" href="#advantage">The Standard</a>
-</nav>
-<!-- Right CTAs -->
-<div class="flex items-center gap-4 sm:gap-6">
-<button class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-ivory transition-colors flex items-center gap-1.5 py-2" onclick="toggleModal(true)">
-<span class="material-symbols-outlined text-sm text-gold">lock</span>
-<span class="hidden sm:inline">VIP Portal</span>
-</button>
-<a class="relative group overflow-hidden px-5 py-2.5 rounded-sm bg-gradient-to-r from-gold via-gold-bright to-gold text-obsidian text-xs uppercase tracking-[0.22em] font-semibold hover:shadow-[0_0_25px_rgba(223,190,126,0.5)] transition-all duration-300" href="#consultation">
-<span class="relative z-10">Private Consult</span>
-</a>
-</div>
-</div>
-</header>
-<main class="w-full pt-20">
-<!-- ================= HERO SECTION ================= -->
-<section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden px-6 lg:px-12 py-16 lg:py-24 border-b border-white/[0.06]">
-<!-- Background Ambient Glow & Architectural Grid -->
-<div class="absolute inset-0 pointer-events-none">
-<div class="absolute -top-40 left-1/4 w-[600px] h-[600px] bg-gold/10 rounded-full blur-[140px]"></div>
-<div class="absolute bottom-10 right-10 w-[500px] h-[500px] bg-emerald-950/20 rounded-full blur-[120px]"></div>
-<div class="w-full h-full opacity-[0.03]" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 36px 36px;"></div>
-</div>
-<div class="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-<!-- Left Hero Copy -->
-<div class="lg:col-span-7 space-y-7">
-<div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/[0.04] border border-gold/30 backdrop-blur-md">
-<span class="text-gold text-xs">✦</span>
-<span class="text-[11px] font-medium uppercase tracking-[0.24em] text-gold-light">
-              Private Aviation &amp; Exclusive Island Estates — B2B / White-Label
-            </span>
-</div>
-<h1 class="font-serif text-4xl sm:text-6xl lg:text-[70px] lg:leading-[1.1] text-ivory font-normal tracking-tight">
-            Every Extraordinary Journey, <br class="hidden sm:inline"/>
-<span class="italic font-light text-gradient-gold">Curated Without Compromise.</span>
-</h1>
-<p class="text-slate-300 text-base sm:text-lg max-w-xl font-light leading-relaxed">
-            Bespoke unites every facet of high-end travel — private jet charters, superyachts, discreet villas, and dedicated 24/7 personal concierges — into one seamless private ecosystem.
-          </p>
-<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-<a class="px-8 py-4 rounded-sm bg-gradient-to-r from-gold via-gold-bright to-gold text-obsidian text-xs uppercase tracking-[0.25em] font-semibold text-center hover:translate-y-[-2px] hover:shadow-[0_10px_30px_rgba(197,160,89,0.35)] transition-all duration-300" href="#consultation">
-              Curate Your Itinerary
-            </a>
-<a class="px-8 py-4 rounded-sm bg-white/[0.03] border border-white/15 hover:border-gold/60 text-ivory text-xs uppercase tracking-[0.25em] font-medium text-center backdrop-blur-sm transition-all duration-300 group flex items-center justify-center gap-2" href="#experiences">
-<span>Explore 2027 Portfolio</span>
-<span class="material-symbols-outlined text-sm text-gold transition-transform group-hover:translate-y-0.5">south</span>
-</a>
-</div>
-<div class="pt-6 border-t border-white/[0.08] flex items-center gap-8 text-xs text-slate-400">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-gold text-base">verified</span>
-<span>Swiss Fiduciary Discretion</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-gold text-base">security</span>
-<span>Strict Mutual NDA</span>
-</div>
-<div class="hidden sm:flex items-center gap-2">
-<span class="material-symbols-outlined text-gold text-base">schedule</span>
-<span>24/7 Global Dispatch</span>
-</div>
-</div>
-</div>
-<!-- Right Live Concierge Itinerary Preview Card -->
-<div class="lg:col-span-5">
-<div class="relative rounded-2xl bg-gradient-to-b from-surface-container/90 to-obsidian/90 p-7 sm:p-8 border border-gold/30 backdrop-blur-2xl gold-glow shadow-2xl space-y-6">
-<!-- Card Header -->
-<div class="flex items-center justify-between pb-5 border-b border-white/[0.08]">
-<div class="space-y-1">
-<div class="text-[10px] uppercase tracking-[0.25em] text-gold font-semibold">Live Concierge Itinerary Preview</div>
-<div class="text-xs text-slate-400">Dossier REF: #VIP-CH-8820 (OOP Active)</div>
-</div>
-<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
-<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-<span class="text-[10px] uppercase tracking-widest text-emerald-300 font-medium"><?= htmlspecialchars($suiteProfile['status']) ?></span>
-</div>
-</div>
-<!-- Route & Asset Details -->
-<div class="space-y-3">
-<div class="flex justify-between items-baseline">
-<span class="font-serif text-xl sm:text-2xl text-ivory font-medium"><?= htmlspecialchars($suiteProfile['suiteName']) ?></span>
-<span class="text-xs text-gold font-sans font-medium">7 Nights</span>
-</div>
-<p class="text-xs text-slate-300 leading-relaxed">
-                Direct apron boarding via Geneva FBO to St. Moritz heli-corridor. Exclusive private estate sanctuary with private sommelier and FIS mountain guide.
-              </p>
-</div>
-<!-- Asset Badges Grid -->
-<div class="grid grid-cols-2 gap-3 pt-1">
-<div class="p-3 rounded-lg bg-white/[0.02] border border-white/[0.06] space-y-1">
-<span class="text-[9px] uppercase tracking-widest text-slate-400 block">Air Asset</span>
-<span class="text-xs text-ivory font-medium flex items-center gap-1.5">
-<span class="material-symbols-outlined text-gold text-sm">flight</span> Gulfstream G650ER
-                </span>
-</div>
-<div class="p-3 rounded-lg bg-white/[0.02] border border-white/[0.06] space-y-1">
-<span class="text-[9px] uppercase tracking-widest text-slate-400 block">Private Residence</span>
-<span class="text-xs text-ivory font-medium flex items-center gap-1.5">
-<span class="material-symbols-outlined text-gold text-sm">villa</span> Chalet Zermatt Peak
-                </span>
-</div>
-</div>
-<!-- Interactive Timeline Steps -->
-<div class="space-y-2 pt-2">
-<div class="text-[10px] uppercase tracking-[0.2em] text-slate-400">Itinerary Orchestration</div>
-<div class="flex items-center gap-2 overflow-x-auto pb-1 text-[11px]">
-<span class="px-2.5 py-1 rounded bg-gold/15 text-gold-light border border-gold/40 whitespace-nowrap">Day 1: LSGG Apron VIP</span>
-<span class="text-white/20">→</span>
-<span class="px-2.5 py-1 rounded bg-white/[0.04] text-slate-300 border border-white/10 whitespace-nowrap">Day 2: Heliskiing</span>
-<span class="text-white/20">→</span>
-<span class="px-2.5 py-1 rounded bg-white/[0.04] text-slate-300 border border-white/10 whitespace-nowrap">Day 5: Caviar Gala</span>
-</div>
-</div>
-<!-- Footer Details: Advisor + SLA -->
-<div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-gold-dark to-gold flex items-center justify-center text-obsidian font-serif font-bold text-sm">
-                  MV
-                </div>
-<div>
-<div class="text-xs font-medium text-ivory">Marc-André V.</div>
-<div class="text-[10px] text-gold tracking-wider">Senior Partner · Geneva Desk</div>
-</div>
-</div>
-<div class="text-right">
-<div class="text-[10px] text-slate-400 uppercase tracking-widest">Guaranteed SLA</div>
-<div class="text-xs font-semibold text-emerald-400">&lt; 12 Mins Response</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- ================= TRUST & KEY METRICS BAR ================= -->
-<section class="w-full bg-obsidian py-12 border-b border-white/[0.08]">
-<div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
-<div class="space-y-1.5 text-center md:text-left">
-<div class="font-serif text-3xl sm:text-4xl lg:text-5xl text-gradient-gold">150+</div>
-<div class="text-[11px] font-medium uppercase tracking-[0.2em] text-slate-400">Private Jet Hubs &amp; FBOs</div>
-</div>
-<div class="space-y-1.5 text-center md:text-left border-l border-white/[0.06] pl-6 md:pl-8">
-<div class="font-serif text-3xl sm:text-4xl lg:text-5xl text-gradient-gold">&lt; 15 Mins</div>
-<div class="text-[11px] font-medium uppercase tracking-[0.2em] text-slate-400">Guaranteed SLA Response</div>
-</div>
-<div class="space-y-1.5 text-center md:text-left border-l border-white/[0.06] pl-6 md:pl-8">
-<div class="font-serif text-3xl sm:text-4xl lg:text-5xl text-gradient-gold">100%</div>
-<div class="text-[11px] font-medium uppercase tracking-[0.2em] text-slate-400">End-to-End NDA Privacy</div>
-</div>
-<div class="space-y-1.5 text-center md:text-left border-l border-white/[0.06] pl-6 md:pl-8">
-<div class="font-serif text-3xl sm:text-4xl lg:text-5xl text-gradient-gold">$500M+</div>
-<div class="text-[11px] font-medium uppercase tracking-[0.2em] text-slate-400">Curated Asset Portfolio</div>
-</div>
-</div>
-</section>
-<!-- ================= CURATED SIGNATURE EXPERIENCES ================= -->
-<section class="w-full px-6 lg:px-12 py-24 lg:py-32 bg-surface-dim" id="experiences">
-<div class="max-w-7xl mx-auto space-y-14">
-<!-- Header & Category Filter Tabs -->
-<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-4">
-<div class="space-y-3">
-<span class="text-xs uppercase tracking-[0.28em] text-gold font-medium">Selected 2026–2027 Portfolio</span>
-<h2 class="font-serif text-3xl sm:text-5xl text-ivory">Curated Signature Experiences</h2>
-<p class="text-sm text-slate-400 max-w-xl">Every destination vetted for absolute solitude, bespoke sovereign access, and high-altitude or oceanic luxury.</p>
-</div>
-<!-- Filter Tabs -->
-<div class="flex flex-wrap items-center gap-2 p-1.5 rounded-lg bg-surface border border-white/[0.08]" id="filterTabs">
-<button class="filter-btn active px-4 py-2 text-xs uppercase tracking-wider rounded font-medium transition-all bg-gold text-obsidian shadow-sm">All</button>
-<button class="filter-btn px-4 py-2 text-xs uppercase tracking-wider rounded font-medium text-slate-300 hover:text-white hover:bg-white/[0.05] transition-all">Private Aviation</button>
-<button class="filter-btn px-4 py-2 text-xs uppercase tracking-wider rounded font-medium text-slate-300 hover:text-white hover:bg-white/[0.05] transition-all">Superyachts</button>
-<button class="filter-btn px-4 py-2 text-xs uppercase tracking-wider rounded font-medium text-slate-300 hover:text-white hover:bg-white/[0.05] transition-all">Alpine Chalets</button>
-<button class="filter-btn px-4 py-2 text-xs uppercase tracking-wider rounded font-medium text-slate-300 hover:text-white hover:bg-white/[0.05] transition-all">Cultural Sanctuaries</button>
-</div>
-</div>
-<!-- Cards Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-<!-- Card 1 -->
-<article class="group rounded-xl overflow-hidden bg-surface border border-white/[0.08] hover:border-gold/40 transition-all duration-500 hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex flex-col">
-<div class="relative aspect-[16/10] overflow-hidden bg-obsidian">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Chalet in Engadin valley St Moritz winter twilight interior glow modern glass architecture surrounded by snowy pines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi94rZfSAWbhdj8vbItyYADutLhWJhXHZFRjI6V5xg5mPRSbOsXJnqOZm-XMdahRkndjaCeTKKxV3vL1jTB3VvtPoo7Yhyyj_cBTfBYeI8maW9qzlo2h9tu9PtBtt9gYtZ0K-Pq5lsg12B3VcaP-s9Bos2CkUMSgA-f5yZ4raMTgDRrjtvuHI_R5OGfYrcdOaW85kNlWx2wYw_J7Hpkyh4hF4Iqgmsh8INSf2pijib"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80"></div>
-<div class="absolute top-4 left-4 bg-obsidian/80 backdrop-blur-md px-3.5 py-1 text-gold text-[10px] uppercase tracking-widest rounded border border-gold/30">
-                Alpine Chalets &amp; Heliski
-              </div>
-<div class="absolute bottom-4 right-4 bg-obsidian/90 px-3 py-1 text-[10px] tracking-widest text-slate-300 rounded font-mono">
-                SAMEDAN / LSZS
-              </div>
-</div>
-<div class="p-8 flex flex-col justify-between flex-1 space-y-6">
-<div class="space-y-3">
-<h3 class="font-serif text-2xl text-ivory group-hover:text-gold-bright transition-colors">
-                  St. Moritz Glacier &amp; Chalet Zermatt Peak
-                </h3>
-<p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-                  Direct helicopter glacier drop, dedicated Michelin-trained private chef, and ski-in seclusion across private alpine corridors inaccessible to commercial traffic.
-                </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-<span class="text-[11px] uppercase tracking-widest text-slate-400">Swiss Alps · 7 Suites · Private Wellness Spa</span>
-<a class="text-xs uppercase tracking-[0.2em] text-gold hover:text-ivory transition-colors flex items-center gap-1" href="#consultation">
-<span>Explore Itinerary</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-</div>
-</article>
-<!-- Card 2 -->
-<article class="group rounded-xl overflow-hidden bg-surface border border-white/[0.08] hover:border-gold/40 transition-all duration-500 hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex flex-col">
-<div class="relative aspect-[16/10] overflow-hidden bg-obsidian">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Elegant superyacht anchored in crystal turquoise Mediterranean bay near rocky coastline" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDidQKQ9BEiqxEEZZ9zwR2v7XYKQA9IKAuzj1BiwNiNcIfarAOgyR-3csskRaeX-drCppHDcd0svVGITO82j48dhqlx_9h_laF33ujBNXlPP_9gyLYJhdQB519mb1QOmugnZ4CxVICEsgOfg_6me5TqTKIpDMNfPZ3EkHVrLxgFMfq5gsVxmRtB0_E7hl7tZdLm8_HEGBhX9DleFHC47qa__VLZU0JT1w-ePP_C2ybb"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80"></div>
-<div class="absolute top-4 left-4 bg-obsidian/80 backdrop-blur-md px-3.5 py-1 text-gold text-[10px] uppercase tracking-widest rounded border border-gold/30">
-                Superyacht Charter
-              </div>
-<div class="absolute bottom-4 right-4 bg-obsidian/90 px-3 py-1 text-[10px] tracking-widest text-slate-300 rounded font-mono">
-                PORT HERCULE // BERTH A
-              </div>
-</div>
-<div class="p-8 flex flex-col justify-between flex-1 space-y-6">
-<div class="space-y-3">
-<h3 class="font-serif text-2xl text-ivory group-hover:text-gold-bright transition-colors">
-                  Monaco Grand Prix Superyacht Charter
-                </h3>
-<p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-                  Trackside Zone 1 Berth in Port Hercule with direct tender transfers, custom helicopter shuttles from Nice Côte d'Azur FBO, and sommelier-curated onboard galas.
-                </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-<span class="text-[11px] uppercase tracking-widest text-slate-400">French Riviera · 65M Vessel · 14 Guests</span>
-<a class="text-xs uppercase tracking-[0.2em] text-gold hover:text-ivory transition-colors flex items-center gap-1" href="#consultation">
-<span>Explore Itinerary</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-</div>
-</article>
-<!-- Card 3 -->
-<article class="group rounded-xl overflow-hidden bg-surface border border-white/[0.08] hover:border-gold/40 transition-all duration-500 hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex flex-col">
-<div class="relative aspect-[16/10] overflow-hidden bg-obsidian">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Traditional Japanese wooden machiya courtyard with moss garden and quiet bamboo serenity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAihTqojf3t7wunv_kRXj7XE0QXydxcnjdswlEg6C3jw0sRRcgHGlKMhTfs5k_Ac6JvVRcsc-6Av2OAdR1sDxp0rp7yusNy2FdKkVp5gSygR5AWxsAb9Tidb3dbzpamVf0zaRfRa7JL0UwoeDU0qFSX2kYcovNQKIXWWvUyD7pGEAZLeTccVTjixsC0qujmGbdhJtfyH_p6CCLFAE09TfndNk4sflmuOJJjskyjDUE"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80"></div>
-<div class="absolute top-4 left-4 bg-obsidian/80 backdrop-blur-md px-3.5 py-1 text-gold text-[10px] uppercase tracking-widest rounded border border-gold/30">
-                Cultural Sanctuaries
-              </div>
-<div class="absolute bottom-4 right-4 bg-obsidian/90 px-3 py-1 text-[10px] tracking-widest text-slate-300 rounded font-mono">
-                KYOTO // CLOSED TEMPLE
-              </div>
-</div>
-<div class="p-8 flex flex-col justify-between flex-1 space-y-6">
-<div class="space-y-3">
-<h3 class="font-serif text-2xl text-ivory group-hover:text-gold-bright transition-colors">
-                  Private Machiya &amp; Amanemu Sanctuary
-                </h3>
-<p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-                  Privately unescorted temple tea ceremonies at midnight, restored 200-year-old Machiya residence, and private thermal onsen pavilions over Ago Bay.
-                </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-<span class="text-[11px] uppercase tracking-widest text-slate-400">Kyoto &amp; Ise-Shima · Private Kaiseki Master</span>
-<a class="text-xs uppercase tracking-[0.2em] text-gold hover:text-ivory transition-colors flex items-center gap-1" href="#consultation">
-<span>Explore Itinerary</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-</div>
-</article>
-<!-- Card 4 -->
-<article class="group rounded-xl overflow-hidden bg-surface border border-white/[0.08] hover:border-gold/40 transition-all duration-500 hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex flex-col">
-<div class="relative aspect-[16/10] overflow-hidden bg-obsidian">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Serengeti vast plains with private aviation twin engine aircraft on gravel runway at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA4SI5-M-CF74ipJBM49mkhc52uNy2LrnFPs2HFmYk4qLYbtwGUDLm7rllc-zk433DE6fcDvlGbz-AP4HPWa8D1qH4h6ypDjx2wrByr6DotpHjSiZp3OZX9g2x-6sYpNDQViHA7lH12tj97soDf0V-0NKNZZAKhnvx9qa18YJQXACdfqb2JbXIVVq2Yxm_bPnfElYR4KAfktmJK4QlwhEJ-N2i0CUvRxRO73qqqwj4"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80"></div>
-<div class="absolute top-4 left-4 bg-obsidian/80 backdrop-blur-md px-3.5 py-1 text-gold text-[10px] uppercase tracking-widest rounded border border-gold/30">
-                Private Aviation Safari
-              </div>
-<div class="absolute bottom-4 right-4 bg-obsidian/90 px-3 py-1 text-[10px] tracking-widest text-slate-300 rounded font-mono">
-                SERONERA // PRIVATE AIRSTRIP
-              </div>
-</div>
-<div class="p-8 flex flex-col justify-between flex-1 space-y-6">
-<div class="space-y-3">
-<h3 class="font-serif text-2xl text-ivory group-hover:text-gold-bright transition-colors">
-                  Singita Serengeti Luxury Flying Safari
-                </h3>
-<p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-                  Dedicated Pilatus PC-12 bush asset on standby, private 350,000-acre Grumeti reserve buyout, sunrise hot-air champagne ballooning, and armed field conservationists.
-                </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-<span class="text-[11px] uppercase tracking-widest text-slate-400">Tanzania · Exclusive Reserve · Dedicated Bush Pilot</span>
-<a class="text-xs uppercase tracking-[0.2em] text-gold hover:text-ivory transition-colors flex items-center gap-1" href="#consultation">
-<span>Explore Itinerary</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-</div>
-</article>
-</div>
-</div>
-</section>
-<!-- ================= THE BESPOKE ADVANTAGE (PROBLEM VS SOLUTION) ================= -->
-<section class="w-full px-6 lg:px-12 py-24 bg-obsidian border-y border-white/[0.06]" id="advantage">
-<div class="max-w-7xl mx-auto space-y-16">
-<div class="text-center max-w-3xl mx-auto space-y-3">
-<span class="text-xs uppercase tracking-[0.28em] text-gold font-semibold">Architectural Rigor</span>
-<h2 class="font-serif text-3xl sm:text-5xl text-ivory">The Bespoke Advantage</h2>
-<p class="text-sm sm:text-base text-slate-400">Why UHNW individuals and single-family offices abandon conventional fragmented luxury brokers.</p>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-<!-- Fragmented Booking Card -->
-<div class="p-8 sm:p-10 rounded-2xl bg-surface-container/40 border border-red-500/20 space-y-6">
-<div class="flex items-center justify-between pb-4 border-b border-red-500/20">
-<span class="text-xs uppercase tracking-widest text-red-400 font-medium">Conventional Friction</span>
-<span class="material-symbols-outlined text-red-400">warning</span>
-</div>
-<h3 class="font-serif text-2xl text-slate-200">The Fragmented Booking Dilemma</h3>
-<ul class="space-y-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-red-400/80 text-base mt-0.5">close</span>
-<span><strong>5+ Independent Brokers:</strong> Juggling separate aviation brokers, yacht agents, concierge reps, and villa managers with zero mutual synchronization.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-red-400/80 text-base mt-0.5">close</span>
-<span><strong>Exposed Privacy Leaks:</strong> Passenger manifests shared over unsecured commercial email threads and multi-tier third-party databases.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-red-400/80 text-base mt-0.5">close</span>
-<span><strong>Impersonal Call Desks:</strong> Shuffled to generic call-center attendants when flight weather diversions or slot delays occur.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-red-400/80 text-base mt-0.5">close</span>
-<span><strong>Opaque Markups:</strong> Arbitrary intermediary fees tacked onto aviation empty legs and charter leases.</span>
-</li>
-</ul>
-</div>
-<!-- Unified Bespoke Standard Card -->
-<div class="p-8 sm:p-10 rounded-2xl bg-gradient-to-b from-surface-container to-surface border border-gold/40 gold-glow space-y-6">
-<div class="flex items-center justify-between pb-4 border-b border-gold/30">
-<span class="text-xs uppercase tracking-widest text-gold font-medium">Unified Private Advisory</span>
-<span class="material-symbols-outlined text-gold">verified</span>
-</div>
-<h3 class="font-serif text-2xl text-ivory">The Unified Bespoke Standard</h3>
-<ul class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-gold text-base mt-0.5">check</span>
-<span><strong>Single Dedicated Senior Partner:</strong> One accountable Swiss partner managing your profile from wheels-up to final return.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-gold text-base mt-0.5">check</span>
-<span><strong>Encrypted Sovereign Dossier:</strong> Zero third-party indexing. Passports, manifests, and schedules encrypted behind Swiss statutory privacy walls.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-gold text-base mt-0.5">check</span>
-<span><strong>Instant Verified Tail &amp; Berth Allocations:</strong> Direct operator access ensures authentic tail verification, short-field permits, and prime harbor slots.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-gold text-base mt-0.5">check</span>
-<span><strong>Proactive 24/7 Butler &amp; Flight Dispatch:</strong> Automatic secondary aircraft contingency standby and tarmac apron VIP clearance.</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<!-- ================= THE 3-STEP JOURNEY WORKFLOW ================= -->
-<section class="w-full px-6 lg:px-12 py-24 lg:py-32 bg-surface-dim" id="workflow">
-<div class="max-w-7xl mx-auto space-y-16">
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/[0.08]">
-<div class="space-y-2">
-<span class="text-xs uppercase tracking-[0.28em] text-gold font-semibold">Trajectory</span>
-<h2 class="font-serif text-3xl sm:text-5xl text-ivory">The 3-Step Journey Workflow</h2>
-</div>
-<p class="text-xs sm:text-sm text-slate-400 max-w-sm">Crafted to ensure zero operational oversight and uncompromising personal discretion.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<!-- Step 1 -->
-<div class="p-8 rounded-xl bg-surface border border-white/[0.08] hover:border-gold/40 transition-all space-y-5 flex flex-col justify-between">
-<div class="space-y-4">
-<div class="flex items-center justify-between">
-<span class="font-serif text-2xl text-gradient-gold font-bold">01</span>
-<span class="text-[10px] uppercase tracking-widest text-slate-400 font-mono">INITIATION</span>
-</div>
-<h3 class="font-serif text-xl text-ivory">Private Briefing &amp; Lifestyle Preference Profiling</h3>
-<p class="text-xs text-slate-300 leading-relaxed font-light">
-                Confidential consultation exploring family cadence, dietary parameters, cabin atmosphere preferences, ground protection details, and aircraft tail preferences under executed NDA.
-              </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] text-[11px] text-gold tracking-wider">
-              Turnaround: 24 Hours
-            </div>
-</div>
-<!-- Step 2 -->
-<div class="p-8 rounded-xl bg-surface border border-white/[0.08] hover:border-gold/40 transition-all space-y-5 flex flex-col justify-between">
-<div class="space-y-4">
-<div class="flex items-center justify-between">
-<span class="font-serif text-2xl text-gradient-gold font-bold">02</span>
-<span class="text-[10px] uppercase tracking-widest text-slate-400 font-mono">ARCHITECTURE</span>
-</div>
-<h3 class="font-serif text-xl text-ivory">Tailored Proposal &amp; Discreet Asset Curation</h3>
-<p class="text-xs text-slate-300 leading-relaxed font-light">
-                Tail numbers locked, private berths allocated in Monaco or St. Barth, estate buyouts verified, and dual contingency alternate air routes chartered to prevent slot volatility.
-              </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] text-[11px] text-gold tracking-wider">
-              Delivery: 48 - 72 Hours
-            </div>
-</div>
-<!-- Step 3 -->
-<div class="p-8 rounded-xl bg-surface border border-white/[0.08] hover:border-gold/40 transition-all space-y-5 flex flex-col justify-between">
-<div class="space-y-4">
-<div class="flex items-center justify-between">
-<span class="font-serif text-2xl text-gradient-gold font-bold">03</span>
-<span class="text-[10px] uppercase tracking-widest text-slate-400 font-mono">FULFILLMENT</span>
-</div>
-<h3 class="font-serif text-xl text-ivory">Seamless VIP Execution &amp; 24/7 Live Butler Oversight</h3>
-<p class="text-xs text-slate-300 leading-relaxed font-light">
-                Real-time satellite flight watch, tarmac-side VIP diplomatic customs clearance, and direct uninhibited liaison with personal estate head stewards and yacht captains.
-              </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] text-[11px] text-gold tracking-wider">
-              Active: Continuous 24/7 Dispatch
-            </div>
-</div>
-</div>
-</div>
-</section>
-<!-- ================= AVIATION FLEET SPECIFICATION STRIP ================= -->
-<section class="w-full px-6 lg:px-12 py-16 bg-obsidian" id="aviation">
-<div class="max-w-7xl mx-auto rounded-2xl bg-surface p-8 lg:p-12 border border-white/[0.08] space-y-8">
-<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/[0.08]">
-<div class="space-y-1">
-<span class="text-xs uppercase tracking-[0.25em] text-gold font-medium">Aviation Network</span>
-<h3 class="font-serif text-2xl sm:text-3xl text-ivory">Intercontinental Long-Range Readiness</h3>
-</div>
-<div class="flex items-center gap-3">
-<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-<span class="text-xs text-slate-300 tracking-wider">Fleet Status: Immediate Global Slot Clearance</span>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="p-5 rounded-lg bg-surface-dim border border-white/[0.04] space-y-2">
-<div class="text-ivory font-serif text-xl">Bombardier Global 7500</div>
-<div class="text-xs text-slate-300">Range: 7,700 nm · Geneva to Tokyo Non-Stop</div>
-<div class="text-[11px] text-gold font-mono">Crew: 2 Pilots, 1 In-Flight Butler · Master Suite with Bed</div>
-</div>
-<div class="p-5 rounded-lg bg-surface-dim border border-white/[0.04] space-y-2">
-<div class="text-ivory font-serif text-xl">Gulfstream G650ER</div>
-<div class="text-xs text-slate-300">Range: 7,500 nm · London to Singapore Direct</div>
-<div class="text-[11px] text-gold font-mono">Ultra-low Cabin Altitude: 3,000 ft at FL450 · Ka-band Wi-Fi</div>
-</div>
-<div class="p-5 rounded-lg bg-surface-dim border border-white/[0.04] space-y-2">
-<div class="text-ivory font-serif text-xl">Dassault Falcon 8X</div>
-<div class="text-xs text-slate-300">Range: 6,450 nm · Steep Approach: London City &amp; St. Moritz</div>
-<div class="text-[11px] text-gold font-mono">Tri-Jet Short Field Performance · Quietest Cabin in Class</div>
-</div>
-</div>
-</div>
-</section>
-<!-- ================= MEMBERSHIP TIERS & ACCESS SUITE ================= -->
-<section class="w-full px-6 lg:px-12 py-24 lg:py-32 bg-surface-dim" id="membership">
-<div class="max-w-7xl mx-auto space-y-16">
-<div class="text-center max-w-2xl mx-auto space-y-3">
-<span class="text-xs uppercase tracking-[0.28em] text-gold font-semibold">Tiers of Stewardship</span>
-<h2 class="font-serif text-3xl sm:text-5xl text-ivory">Membership &amp; Access Suite</h2>
-<p class="text-sm text-slate-400">Strictly capped client roster ensuring our Managing Partners never compromise operational agility.</p>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<!-- Tier 1 -->
-<div class="p-8 rounded-2xl bg-surface border border-white/[0.08] flex flex-col justify-between space-y-8 hover:border-white/20 transition-all">
-<div class="space-y-6">
-<div class="space-y-2">
-<span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Corporate &amp; Executive</span>
-<h3 class="font-serif text-2xl text-ivory">Executive Private Access</h3>
-<p class="text-xs text-slate-300 leading-relaxed font-light">
-                  Engineered for active executives and frequent transcontinental flyers requiring rapid on-demand aviation booking and priority villa allocations.
-                </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] space-y-3 text-xs text-slate-300">
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>On-demand private jet charter dispatch</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Priority access to vetted luxury estates</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Guaranteed 2-hour concierge response SLA</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Encrypted client portal access</span>
-</div>
-</div>
-</div>
-<a class="w-full py-3.5 rounded bg-white/[0.05] hover:bg-white/[0.1] text-ivory text-xs uppercase tracking-[0.2em] font-medium text-center transition-all" href="#consultation">
-              Apply For Access
-            </a>
-</div>
-<!-- Tier 2 (Most Popular) -->
-<div class="relative p-8 rounded-2xl bg-gradient-to-b from-surface-container to-surface border-2 border-gold gold-glow flex flex-col justify-between space-y-8">
-<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold via-gold-bright to-gold text-obsidian text-[10px] uppercase font-bold tracking-widest px-4 py-1 rounded-full shadow">
-              Most Selected
-            </div>
-<div class="space-y-6">
-<div class="space-y-2 pt-2">
-<span class="text-[10px] uppercase tracking-widest text-gold font-semibold">Family Office &amp; Principals</span>
-<h3 class="font-serif text-2xl text-ivory">Presidential Suite Charter</h3>
-<p class="text-xs text-slate-200 leading-relaxed font-light">
-                  Complete white-glove advisory for high-net-worth families with complex multi-destination itineraries, superyacht charters, and discrete security.
-                </p>
-</div>
-<div class="pt-4 border-t border-gold/30 space-y-3 text-xs text-slate-200">
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span><strong>Dedicated Managing Partner</strong> assigned</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span><strong>&lt; 15-Minute Response SLA</strong> 24/7/365</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Guaranteed Monaco &amp; St. Barth yacht berths</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Dual contingency aircraft on standby</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Apron-side VIP customs clearance</span>
-</div>
-</div>
-</div>
-<a class="w-full py-3.5 rounded bg-gradient-to-r from-gold via-gold-bright to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-semibold text-center hover:shadow-[0_0_20px_rgba(223,190,126,0.4)] transition-all" href="#consultation">
-              Initiate Retainer Consult
-            </a>
-</div>
-<!-- Tier 3 (Black Diamond) -->
-<div class="p-8 rounded-2xl bg-surface border border-white/[0.08] flex flex-col justify-between space-y-8 hover:border-gold/30 transition-all">
-<div class="space-y-6">
-<div class="space-y-2">
-<span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Invitation Only</span>
-<h3 class="font-serif text-2xl text-ivory">Black Diamond Sovereign</h3>
-<p class="text-xs text-slate-300 leading-relaxed font-light">
-                  Unrestricted worldwide bespoke authority. Reserved for sovereign families, heads of state, and individuals requiring maximum anonymity and diplomatic protocol.
-                </p>
-</div>
-<div class="pt-4 border-t border-white/[0.08] space-y-3 text-xs text-slate-300">
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Unrestricted worldwide asset holdings</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Sovereign encrypted communications</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Diplomatic liaison &amp; close protection fleet</span>
-</div>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-gold text-sm">check_circle</span>
-<span>Closed-door private island acquisitions</span>
-</div>
-</div>
-</div>
-<button class="w-full py-3.5 rounded bg-white/[0.05] hover:bg-white/[0.1] text-ivory text-xs uppercase tracking-[0.2em] font-medium text-center transition-all" onclick="toggleModal(true)">
-              Request Sovereign Vetting
-            </button>
-</div>
-</div>
-</div>
-</section>
-<!-- ================= DISCREET CLIENT TESTIMONIALS ================= -->
-<section class="w-full px-6 lg:px-12 py-24 bg-obsidian border-b border-white/[0.06]">
-<div class="max-w-7xl mx-auto space-y-14">
-<div class="text-center max-w-xl mx-auto space-y-2">
-<span class="text-xs uppercase tracking-[0.28em] text-gold font-semibold">Testimonials</span>
-<h2 class="font-serif text-3xl sm:text-4xl text-ivory">Discreet Client Endorsements</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="p-8 rounded-xl bg-surface border border-white/[0.08] space-y-5">
-<div class="text-gold text-lg">“</div>
-<p class="text-xs sm:text-sm text-slate-300 italic leading-relaxed">
-              When weather closed the Engadin corridor in January, Bespoke rerouted our Global 7500 to Milan and had private helicopters waiting before we even received the control tower advisory. Flawless execution.
-            </p>
-<div class="pt-4 border-t border-white/[0.08]">
-<div class="text-xs font-semibold text-ivory">Family Office Principal</div>
-<div class="text-[10px] text-gold uppercase tracking-wider">Zurich, Switzerland</div>
-</div>
-</div>
-<div class="p-8 rounded-xl bg-surface border border-white/[0.08] space-y-5">
-<div class="text-gold text-lg">“</div>
-<p class="text-xs sm:text-sm text-slate-300 italic leading-relaxed">
-              Securing our Monaco Grand Prix yacht berth alongside immediate diplomatic customs clearance in Nice saved our executive team dozens of hours. The standard of confidentiality is unmatched.
-            </p>
-<div class="pt-4 border-t border-white/[0.08]">
-<div class="text-xs font-semibold text-ivory">Global Tech Founder</div>
-<div class="text-[10px] text-gold uppercase tracking-wider">London, United Kingdom</div>
-</div>
-</div>
-<div class="p-8 rounded-xl bg-surface border border-white/[0.08] space-y-5">
-<div class="text-gold text-lg">“</div>
-<p class="text-xs sm:text-sm text-slate-300 italic leading-relaxed">
-              Having a single Senior Partner who knows our security parameters, children's preferences, and tail requirements means we make one phone call and the entire journey simply materializes.
-            </p>
-<div class="pt-4 border-t border-white/[0.08]">
-<div class="text-xs font-semibold text-ivory">Private Equity Chairman</div>
-<div class="text-[10px] text-gold uppercase tracking-wider">Geneva, Switzerland</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- ================= PRIVATE INQUIRY & HIGH CONVERSION BANNER ================= -->
-<section class="w-full px-6 lg:px-12 py-24 lg:py-32 bg-surface-dim" id="consultation">
-<div class="max-w-6xl mx-auto space-y-16">
-<!-- High-End Champagne Callout Banner -->
-<div class="relative overflow-hidden rounded-2xl p-8 sm:p-14 bg-gradient-to-r from-[#17251d] via-[#203328] to-[#17251d] border border-gold/40 gold-glow shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
-<div class="space-y-3 text-center lg:text-left">
-<span class="text-xs uppercase tracking-[0.25em] text-gold font-bold">Priority Family Registry</span>
-<h3 class="font-serif text-3xl sm:text-4xl text-ivory">Accepting 12 New Family Portfolios for 2026</h3>
-<p class="text-xs sm:text-sm text-slate-300 max-w-xl">
-              Connect directly with our Swiss Senior Partners to initiate your confidential travel profile or audit existing charter efficiencies.
-            </p>
-</div>
-<a class="px-8 py-4 rounded-sm bg-gradient-to-r from-gold via-gold-bright to-gold text-obsidian text-xs uppercase tracking-[0.25em] font-semibold whitespace-nowrap hover:shadow-[0_0_25px_rgba(223,190,126,0.6)] transition-all" href="#consultForm">
-            Schedule Private Consult
-          </a>
-</div>
-<!-- Consultation Form Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 pt-6">
-<div class="lg:col-span-5 space-y-6">
-<span class="text-xs uppercase tracking-[0.28em] text-gold font-semibold">Direct Intake Desk</span>
-<h2 class="font-serif text-3xl sm:text-5xl text-ivory">Initiate Advisory Consultation</h2>
-<p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-              All inquiries received under Swiss fiduciary discretion. A Managing Partner responds via Signal, encrypted phone, or private email within 12 hours.
-            </p>
-<div class="pt-6 border-t border-white/[0.08] space-y-4 text-xs text-slate-300">
-<div>
-<span class="text-ivory font-medium block">Executive Advisory Desk</span>
-<span class="text-slate-400">concierge@bespoke-advisory.ch</span>
-</div>
-<div>
-<span class="text-ivory font-medium block">Encrypted Signal &amp; Direct Wire</span>
-<span class="text-slate-400">+41 22 819 09 00</span>
-</div>
-<div>
-<span class="text-ivory font-medium block">Swiss Headquarters</span>
-<span class="text-slate-400">Rue du Rhône 42, 1204 Geneva</span>
-</div>
-</div>
-</div>
-<div class="lg:col-span-7 p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.08] shadow-xl">
-<form class="space-y-6" id="consultForm" onsubmit="event.preventDefault(); showSuccessState();">
-<div class="space-y-2">
-<label class="block text-[11px] uppercase tracking-wider text-slate-300" for="fullName">
-                  Full Name / Family Office Representative
-                </label>
-<input class="w-full bg-surface-dim border border-white/10 rounded px-4 py-3 text-ivory text-xs sm:text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold transition-colors" id="fullName" placeholder="e.g. Lord Sterling / Family Office Trustee" required="" type="text"/>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-<div class="space-y-2">
-<label class="block text-[11px] uppercase tracking-wider text-slate-300" for="contactEmail">
-                    Encrypted Email Address
-                  </label>
-<input class="w-full bg-surface-dim border border-white/10 rounded px-4 py-3 text-ivory text-xs sm:text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold transition-colors" id="contactEmail" placeholder="principal@domain.com" required="" type="email"/>
-</div>
-<div class="space-y-2">
-<label class="block text-[11px] uppercase tracking-wider text-slate-300" for="phoneSignal">
-                    Signal Number / Direct Line
-                  </label>
-<input class="w-full bg-surface-dim border border-white/10 rounded px-4 py-3 text-ivory text-xs sm:text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold transition-colors" id="phoneSignal" placeholder="+41 ..." type="tel"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="block text-[11px] uppercase tracking-wider text-slate-300" for="scope">
-                  Primary Scope of Engagement
-                </label>
-<select class="w-full bg-surface-dim border border-white/10 rounded px-4 py-3 text-ivory text-xs sm:text-sm focus:outline-none focus:border-gold transition-colors" id="scope">
-<option value="multi-destination">Complex Multi-Destination Itinerary</option>
-<option value="private-aviation">Private Jet Aviation Retainer</option>
-<option value="superyacht">Superyacht Mediterranean/Caribbean Charter</option>
-<option value="estate-buyout">Private Island or Alpine Estate Buyout</option>
-<option value="annual-membership">Annual Family Office Retainer</option>
-</select>
-</div>
-<div class="space-y-2">
-<label class="block text-[11px] uppercase tracking-wider text-slate-300" for="details">
-                  Preliminary Timing &amp; Route Parameters
-                </label>
-<textarea class="w-full bg-surface-dim border border-white/10 rounded px-4 py-3 text-ivory text-xs sm:text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold transition-colors resize-none" id="details" placeholder="Anticipated travel window, passenger count, preferred aircraft or harbor destinations..." rows="3"></textarea>
-</div>
-<button class="w-full py-4 rounded-sm bg-gradient-to-r from-gold via-gold-bright to-gold text-obsidian text-xs uppercase tracking-[0.25em] font-semibold hover:shadow-[0_0_20px_rgba(223,190,126,0.5)] transition-all" type="submit">
-                Transmit Confidential Dossier
-              </button>
-<p class="text-center text-[10px] text-slate-400">
-                Submissions are encrypted end-to-end. Full mutual non-disclosure covenants apply immediately.
-              </p>
-</form>
-<div class="hidden text-center py-12 space-y-4" id="formSuccess">
-<span class="material-symbols-outlined text-gold text-5xl">verified_user</span>
-<h4 class="font-serif text-2xl text-ivory">Dossier Transmitted</h4>
-<p class="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto">
-                Your dossier has entered our encrypted dispatch registry. A Senior Managing Partner will initiate contact via your preferred line within 12 hours.
-              </p>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- ================= GLOBAL CONCIERGE DESKS FOOTER ================= -->
-<footer class="w-full bg-obsidian border-t border-white/[0.08] py-16 px-6 lg:px-12 text-slate-400 text-xs">
-<div class="max-w-7xl mx-auto space-y-12">
-<!-- Top Row -->
-<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/[0.06]">
-<div class="space-y-1">
-<div class="font-serif text-2xl tracking-[0.25em] text-ivory">BESPOKE</div>
-<div class="text-[10px] uppercase tracking-[0.2em] text-gold">VIP Private Travel &amp; Luxury Concierge Platform</div>
-</div>
-<!-- Global Hubs -->
-<div class="flex flex-wrap items-center gap-x-6 gap-y-2 uppercase tracking-[0.2em] text-[11px] text-slate-300">
-<span>Geneva</span>
-<span class="text-gold">·</span>
-<span>London</span>
-<span class="text-gold">·</span>
-<span>Monaco</span>
-<span class="text-gold">·</span>
-<span>Tokyo</span>
-<span class="text-gold">·</span>
-<span>New York</span>
-<span class="text-gold">·</span>
-<span>Zurich</span>
-</div>
-</div>
-<!-- Bottom Disclaimer Row -->
-<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-<p class="text-[11px] text-slate-400 max-w-2xl leading-relaxed">
-          Discretion is our foundational tenet. Advisory engagements, itinerary architectural records, and private passenger manifests remain held under strict Swiss non-disclosure statutory covenants.
-        </p>
-<div class="text-[11px] text-slate-400 whitespace-nowrap">
-          © 2026 Bespoke Advisory SA. All rights reserved. &bull; Zaidaan Diandra Eka Putra
+<body class="bg-surface-container-lowest font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- =========================================================================
+       1. TOP FLOATING NAVIGATION (Black Gold Obsidian Luxury)
+       ========================================================================= -->
+  <header class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-surface-container/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 flex items-center justify-between">
+      
+      <!-- Logo: Monogram & Brand -->
+      <a href="latihan1.php" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-secondary to-secondary-container text-on-primary flex items-center justify-center font-bold tracking-tighter text-sm shadow-md group-hover:scale-105 transition-transform">
+          ✦
         </div>
-</div>
-</div>
-</footer>
-<!-- ================= INTERACTIVE VIP PORTAL MODAL ================= -->
-<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300" id="vipModal">
-<div class="relative w-full max-w-md p-8 rounded-2xl bg-surface-container border border-gold/40 gold-glow shadow-2xl space-y-6">
-<button class="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors" onclick="toggleModal(false)">
-<span class="material-symbols-outlined text-xl">close</span>
-</button>
-<div class="text-center space-y-2">
-<div class="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mx-auto text-gold mb-3">
-<span class="material-symbols-outlined text-2xl">shield</span>
-</div>
-<h3 class="font-serif text-2xl text-ivory">VIP Client Portal</h3>
-<p class="text-xs text-slate-400">Authenticate using your Swiss security key or registered client token.</p>
-</div>
-<form class="space-y-4" onsubmit="event.preventDefault(); window.location.href='index.php';">
-<div class="space-y-1.5">
-<label class="text-[10px] uppercase tracking-wider text-slate-300 block">Dossier Key / Client ID</label>
-<input class="w-full bg-surface-dim border border-white/10 rounded px-4 py-2.5 text-ivory text-xs tracking-wider placeholder:text-slate-600 focus:outline-none focus:border-gold" placeholder="BSPK-CH-XXXX" value="BSPK-CH-8821" required="" type="text"/>
-</div>
-<div class="space-y-1.5">
-<label class="text-[10px] uppercase tracking-wider text-slate-300 block">Encrypted Passphrase</label>
-<input class="w-full bg-surface-dim border border-white/10 rounded px-4 py-2.5 text-ivory text-xs placeholder:text-slate-600 focus:outline-none focus:border-gold" placeholder="••••••••••••" value="concierge-pass" required="" type="password"/>
-</div>
-<button class="w-full py-3 rounded bg-gradient-to-r from-gold via-gold-bright to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-bold hover:shadow-lg transition-all" type="submit">
-          Authorize Session
+        <div class="flex flex-col">
+          <span class="font-bold tracking-widest text-xs uppercase text-primary leading-none">BESPOKE</span>
+          <span class="text-[9px] tracking-wider uppercase text-outline mt-0.5">Zurich &bull; Geneva Private Office</span>
+        </div>
+      </a>
+
+      <!-- Center Floating Pill Menu in Dark Frosted Glass -->
+      <nav class="hidden md:flex items-center gap-1 bg-surface-container-low/90 backdrop-blur-md px-2 py-1 rounded-full shadow-sm border border-surface-container-high/50">
+        <a href="#" class="bg-primary text-on-primary px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide shadow-sm shadow-primary/20">Home</a>
+        <a href="#expeditions" class="text-on-surface-variant hover:text-primary px-3.5 py-1.5 text-xs font-medium transition-colors">Destinations</a>
+        <a href="#fleet" class="text-on-surface-variant hover:text-primary px-3.5 py-1.5 text-xs font-medium transition-colors">Tours</a>
+        <a href="#protocol" class="text-on-surface-variant hover:text-primary px-3.5 py-1.5 text-xs font-medium transition-colors">Experiences</a>
+        <a href="#membership" class="text-on-surface-variant hover:text-primary px-3.5 py-1.5 text-xs font-medium transition-colors">About</a>
+        <a href="#consultation" class="text-on-surface-variant hover:text-primary px-3.5 py-1.5 text-xs font-medium transition-colors">Contact</a>
+      </nav>
+
+      <!-- Right Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <button class="w-10 h-10 rounded-full bg-surface-container-low/90 backdrop-blur-md border border-surface-container-high/60 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container shadow-sm cursor-pointer transition-all">
+          <span class="material-symbols-outlined text-[18px]">search</span>
         </button>
-</form>
-<div class="text-center text-[10px] text-slate-400 pt-2 border-t border-white/[0.06]">
-        Emergency dispatch key assistance: +41 22 819 09 00
+        <button onclick="openVipModal()" class="bg-primary hover:bg-primary-fixed text-on-primary pl-5 pr-2 py-2 rounded-full text-xs font-bold tracking-wide flex items-center gap-3 shadow-md shadow-primary/20 cursor-pointer transition-all">
+          <span>VIP Portal</span>
+          <span class="w-6 h-6 rounded-full bg-on-primary text-primary flex items-center justify-center shadow-xs">
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </span>
+        </button>
       </div>
-</div>
-</div>
-<!-- Interactive Scripts -->
-<script>
-    // Form Success Handler
-    function showSuccessState() {
-      const form = document.getElementById('consultForm');
-      const success = document.getElementById('formSuccess');
-      if (form && success) {
-        form.classList.add('hidden');
-        success.classList.remove('hidden');
-      }
-    }
 
-    // Modal Toggle
-    function toggleModal(open) {
-      const modal = document.getElementById('vipModal');
-      if (modal) {
-        if (open) {
-          modal.classList.remove('hidden');
-        } else {
-          modal.classList.add('hidden');
-        }
-      }
-    }
+    </div>
+  </header>
 
-    // Interactive filter tabs
-    document.querySelectorAll('#filterTabs .filter-btn').forEach(button => {
-      button.addEventListener('click', function() {
-        document.querySelectorAll('#filterTabs .filter-btn').forEach(btn => {
-          btn.classList.remove('bg-gold', 'text-obsidian', 'shadow-sm');
-          btn.classList.add('text-slate-300');
+  <!-- =========================================================================
+       MAIN BODY SECTIONS
+       ========================================================================= -->
+  <main class="w-full bg-surface-container-lowest text-on-surface">
+
+    <!-- =====================================================================
+         SECTION 1: FULL-WIDTH HERO BANNER (Black Gold Obsidian Luxury)
+         ===================================================================== -->
+    <section class="relative w-full min-h-[580px] lg:min-h-[700px] bg-cover bg-center flex flex-col justify-between" style="background-image: url('assets/images/luxury-luggage-coastal-hero.jpg')">
+      
+      <!-- Dark Obsidian Scrim Overlay: Highlights mountain vista while making gold & white typography pop -->
+      <div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/95 via-surface-container-lowest/65 to-surface-container-lowest/20 pointer-events-none"></div>
+      <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/70 to-transparent pointer-events-none"></div>
+
+      <!-- Hero Main Content -->
+      <div class="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 lg:pt-40 pb-20 sm:pb-24 flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+        
+        <!-- Left Editorial Narrative -->
+        <div class="max-w-2xl">
+          
+          <!-- Micro Eyebrow in Champagne Gold -->
+          <div class="font-sans text-xs uppercase tracking-[0.25em] font-semibold text-primary mb-3 flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span>TRAVEL</span>
+            <span>&mdash;</span>
+            <span>EXPLORE</span>
+            <span>&mdash;</span>
+            <span>EXPERIENCE</span>
+            <span>&mdash;</span>
+            <span>BELONG</span>
+          </div>
+
+          <!-- Headline in White & Radiant Gold -->
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-[72px] leading-[1.08] text-on-surface font-normal tracking-tight">
+            Discover Journeys<br/>
+            <span class="text-primary italic font-normal drop-shadow-[0_0_25px_rgba(242,202,80,0.3)]">Beyond Ordinary</span>
+          </h1>
+
+          <!-- Lead Subtitle in Muted Platinum -->
+          <p class="mt-4 font-sans text-on-surface-variant text-sm sm:text-base max-w-lg leading-relaxed font-normal">
+            Curated travel experiences to the world's most extraordinary destinations. More than trips, we create stories you'll never forget.
+          </p>
+
+          <!-- Dual CTAs -->
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="#expeditions" class="bg-primary hover:bg-primary-fixed text-on-primary px-7 py-3 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all group">
+              <span>Explore Destinations</span>
+              <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+            <button onclick="openVideoModal()" class="flex items-center gap-2.5 group cursor-pointer bg-surface-container-high/70 hover:bg-surface-container-high backdrop-blur-md px-5 py-2.5 rounded-full border border-surface-container-highest/60 text-on-surface shadow-sm transition-all">
+              <span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[16px]">play_arrow</span>
+              </span>
+              <span class="text-xs font-semibold tracking-wider uppercase text-on-surface">Watch Guide</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right Side Badge in Black Gold -->
+        <div class="hidden xl:flex flex-col border-l-2 border-primary/50 pl-3.5 py-1 text-left self-start mt-2 bg-surface-container-lowest/50 backdrop-blur-sm pr-4 rounded-r-lg">
+          <span class="text-[10px] tracking-[0.2em] uppercase font-bold text-primary leading-tight">Extraordinary</span>
+          <span class="text-[10px] tracking-[0.2em] uppercase font-bold text-on-surface leading-tight">Destinations</span>
+          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-secondary leading-tight mt-1.5">Meaningful</span>
+          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-on-surface-variant leading-tight">Experiences</span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================================
+         FLOATING QUICK SEARCH CAPSULE (Black Gold Glassmorphism)
+         ===================================================================== -->
+    <div class="relative z-20 max-w-5xl mx-auto px-4 -mt-10 sm:-mt-12">
+      <div class="bg-surface-container-low/90 backdrop-blur-2xl rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-primary/30 p-2 sm:p-2.5">
+        <form id="hero-search-form" onsubmit="event.preventDefault(); handleSearchSubmit();" class="flex flex-col lg:flex-row items-center justify-between gap-2">
+          
+          <!-- Segment 1: Destination -->
+          <div class="flex items-center gap-3 px-4 py-2 flex-1 hover:bg-surface-container rounded-full cursor-pointer transition-colors w-full lg:w-auto">
+            <span class="material-symbols-outlined text-primary text-[22px]">flight_takeoff</span>
+            <div class="flex flex-col min-w-0">
+              <span class="text-xs font-bold text-on-surface leading-none">Destinations</span>
+              <span class="text-[11px] text-outline mt-1 truncate">Where to go?</span>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="hidden lg:block w-px h-8 bg-surface-container-highest"></div>
+
+          <!-- Segment 2: Dates -->
+          <div class="flex items-center gap-3 px-4 py-2 flex-1 hover:bg-surface-container rounded-full cursor-pointer transition-colors w-full lg:w-auto">
+            <span class="material-symbols-outlined text-primary text-[22px]">calendar_today</span>
+            <div class="flex flex-col min-w-0">
+              <span class="text-xs font-bold text-on-surface leading-none">Dates</span>
+              <span class="text-[11px] text-outline mt-1 truncate">Add dates</span>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="hidden lg:block w-px h-8 bg-surface-container-highest"></div>
+
+          <!-- Segment 3: Travelers -->
+          <div class="flex items-center justify-between gap-2 px-4 py-2 flex-1 hover:bg-surface-container rounded-full cursor-pointer transition-colors w-full lg:w-auto">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-[22px]">group</span>
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs font-bold text-on-surface leading-none">Travelers</span>
+                <span class="text-[11px] text-outline mt-1 truncate">2 Travelers</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-outline text-[18px]">expand_more</span>
+          </div>
+
+          <!-- Divider -->
+          <div class="hidden lg:block w-px h-8 bg-surface-container-highest"></div>
+
+          <!-- Segment 4: Budget -->
+          <div class="flex items-center justify-between gap-2 px-4 py-2 flex-1 hover:bg-surface-container rounded-full cursor-pointer transition-colors w-full lg:w-auto">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-[22px]">sell</span>
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs font-bold text-on-surface leading-none">Budget</span>
+                <span class="text-[11px] text-outline mt-1 truncate">Any budget</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-outline text-[18px]">expand_more</span>
+          </div>
+
+          <!-- Segment 5: Submit Button -->
+          <button type="submit" class="bg-primary hover:bg-primary-fixed text-on-primary px-6 py-3 rounded-full text-xs font-bold tracking-wider flex items-center justify-center gap-2 shadow-md shadow-primary/20 transition-all shrink-0 w-full lg:w-auto cursor-pointer">
+            <span class="material-symbols-outlined text-[18px]">search</span>
+            <span>Search Journeys</span>
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SHOWCASE 3-CARD GRID (Obsidian Frosted Glass & Gold Highlights)
+         ===================================================================== -->
+    <section class="bg-surface-container-lowest pt-8 pb-16 px-4 sm:px-6 lg:px-8 border-b border-surface-container/60">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
+          
+          <!-- CARD 1: FEATURED DESTINATION (Santorini) -->
+          <div class="md:col-span-4 bg-surface-container-low/80 backdrop-blur-xl rounded-3xl p-4 shadow-xl border border-surface-container-high/60 hover:border-primary/40 flex flex-col justify-between group transition-all">
+            <div>
+              <div class="relative h-48 rounded-2xl overflow-hidden mb-3">
+                <img src="assets/images/santorini-caldera-sunset.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Santorini, Greece" />
+                <span class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md text-primary text-[10px] tracking-wider uppercase font-bold px-3 py-1 rounded-full shadow-xs border border-primary/20">
+                  Featured Destination
+                </span>
+                <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-rose-400 shadow-xs transition-colors cursor-pointer border border-white/10">
+                  <span class="material-symbols-outlined text-[16px]">favorite</span>
+                </button>
+              </div>
+              <div>
+                <h3 class="font-serif text-lg font-bold text-on-surface">Santorini, Greece</h3>
+                <div class="flex items-center gap-1.5 mt-0.5">
+                  <span class="text-primary text-xs">★</span>
+                  <span class="text-xs font-semibold text-primary">4.9</span>
+                  <span class="text-[11px] text-outline">(1.2K Reviews)</span>
+                </div>
+                <p class="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">
+                  Iconic views, timeless charm and unforgettable sunsets.
+                </p>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 flex items-center justify-between border-t border-surface-container-high/40">
+              <span class="text-xs font-semibold text-primary">From $3,450 <span class="text-outline font-normal">/ night</span></span>
+              <a href="#expeditions" class="w-8 h-8 rounded-full border border-surface-container-high/80 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all">
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- CARD 2: PATRONAGE BENCHMARK (Stats & Community Quote) -->
+          <div class="md:col-span-5 bg-surface-container-low/80 backdrop-blur-xl rounded-3xl p-6 shadow-xl border border-surface-container-high/60 flex flex-col justify-between">
+            <!-- 4 Column Stats -->
+            <div class="grid grid-cols-4 gap-2 text-center pb-4 border-b border-surface-container-high/40">
+              <div>
+                <span class="material-symbols-outlined text-primary text-[20px] mb-1">flight</span>
+                <div class="font-bold text-base text-primary">250+</div>
+                <div class="text-[10px] text-outline leading-tight">Unique Destinations</div>
+              </div>
+              <div>
+                <span class="material-symbols-outlined text-primary text-[20px] mb-1">group</span>
+                <div class="font-bold text-base text-primary">50K+</div>
+                <div class="text-[10px] text-outline leading-tight">Happy Travelers</div>
+              </div>
+              <div>
+                <span class="material-symbols-outlined text-primary text-[20px] mb-1">map</span>
+                <div class="font-bold text-base text-primary">1,200+</div>
+                <div class="text-[10px] text-outline leading-tight">Curated Experiences</div>
+              </div>
+              <div>
+                <span class="material-symbols-outlined text-primary text-[20px] mb-1">public</span>
+                <div class="font-bold text-base text-primary">95+</div>
+                <div class="text-[10px] text-outline leading-tight">Countries Worldwide</div>
+              </div>
+            </div>
+
+            <!-- Testimonial & Overlapping Avatars -->
+            <div class="pt-4 flex flex-col gap-2">
+              <div class="flex items-center gap-3">
+                <div class="flex -space-x-2 shrink-0">
+                  <img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Avatar 1"/>
+                  <img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Avatar 2"/>
+                  <img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" alt="Avatar 3"/>
+                  <div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-container flex items-center justify-center text-xs font-bold text-primary">+</div>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs italic text-on-surface-variant leading-snug">
+                    "Incredible planning, unforgettable experiences. Truly a trip of a lifetime!"
+                  </p>
+                  <div class="flex items-center gap-1.5 mt-0.5">
+                    <span class="text-primary text-[11px]">★★★★★</span>
+                    <span class="text-[11px] font-semibold text-on-surface">Sarah M.</span>
+                    <span class="text-[10px] text-outline">&mdash; Traveled to Italy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3: REAL PLACES REAL STORIES (Video Card) -->
+          <div onclick="openVideoModal()" class="md:col-span-3 relative rounded-3xl overflow-hidden shadow-xl min-h-[220px] bg-surface-container-lowest group cursor-pointer flex flex-col justify-end p-5 border border-surface-container-high/60">
+            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60" alt="Tropical Lagoon"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/60 to-transparent"></div>
+            
+            <!-- Centered Play Button in Radiant Gold -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div class="w-11 h-11 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+              </div>
+            </div>
+
+            <!-- Text at Bottom -->
+            <div class="relative z-10">
+              <h4 class="font-serif text-on-surface font-bold text-base leading-tight">Real Places. Real Stories.</h4>
+              <p class="text-[11px] text-on-surface-variant mt-1 leading-snug">Watch traveler stories from around the world.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+<!-- =====================================================================
+           SECTION 2: CURATED EXPEDITIONS & SANCTUARIES (6 DOSSIERS)
+           ===================================================================== -->
+      <section class="py-space-xl px-margin sm:px-margin-tablet lg:px-margin-desktop" id="expeditions">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div>
+            <div class="inline-flex items-center gap-2 mb-3">
+              <span class="w-2 h-2 rounded-full bg-secondary"></span>
+              <span class="font-label-md text-label-md uppercase tracking-widest text-secondary">Seasonal Itineraries</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">Curated Global Expeditions</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mt-2">
+              Hand-orchestrated missions where commercial aviation does not venture. Private access protocols secured 12 months in advance.
+            </p>
+          </div>
+
+          <!-- Filter Capsule Tabs -->
+          <div class="flex items-center flex-wrap gap-2 bg-surface-container p-1.5 rounded-full" id="filter-container">
+            <button class="filter-btn active px-4 py-2 rounded-full font-label-md text-label-md uppercase tracking-wider bg-primary text-on-primary transition-all cursor-pointer" data-category="all">All</button>
+            <button class="filter-btn px-4 py-2 rounded-full font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" data-category="alpine">Alpine Winter</button>
+            <button class="filter-btn px-4 py-2 rounded-full font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" data-category="maritime">Maritime</button>
+            <button class="filter-btn px-4 py-2 rounded-full font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" data-category="cultural">Cultural</button>
+            <button class="filter-btn px-4 py-2 rounded-full font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" data-category="safari">Safari</button>
+            <button class="filter-btn px-4 py-2 rounded-full font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" data-category="arctic">Arctic</button>
+          </div>
+        </div>
+
+        <!-- 6 Detailed Dossier Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="expeditions-grid">
+          
+          <!-- Card 1: Zermatt -->
+          <div class="expedition-card bg-surface-container-low rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col justify-between border border-surface-container" data-category="alpine">
+            <div>
+              <div class="relative h-64 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmWTz_6mJSD1BWR4sn_eMbD1MXYaBAGDUMK73-BiW0xZERWifQ1lB3dDajkBtTHt6VJcQiJfVGnLaMXMz1pkTycfgouXkaz41WuDwUJWm41-3vwplQ7Ahn0R38TWwrXiqwHIcUUw3QPEkTZPQQfn9vVxaqqzWKkjJQaVtW9TUAVvYZ9iFy95eIM4EaO6QEGillKVdV_Ku9z3l7I6MugjecxGUbt_9iNaKNE8aGUqw')"></div>
+                <div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Alpine Reserve</div>
+                <div class="absolute bottom-4 right-4 bg-primary/85 backdrop-blur-sm px-3 py-1 rounded font-label-md text-label-md text-on-primary">$85,000 / week</div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-widest text-secondary mb-1">
+                  <span>Switzerland</span>
+                  <span>&bull;</span>
+                  <span>Sion Tarmac Clearance</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Zermatt &amp; St. Moritz Penthouse</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                  Private Bombardier Global 7500 landing directly into Sion, accompanied by daily heli-skiing with former Swiss national guides.
+                </p>
+                <div class="grid grid-cols-2 gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface p-3 rounded-xl mb-4">
+                  <div><strong class="text-on-surface block">Vessel:</strong> Bombardier 7500</div>
+                  <div><strong class="text-on-surface block">Access:</strong> Heli-Ski Private</div>
+                  <div><strong class="text-on-surface block">Capacity:</strong> 10 Guests</div>
+                  <div><strong class="text-on-surface block">Cuisine:</strong> 3-Star Michelin Chef</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button class="w-full py-3 rounded-full font-label-md text-label-md uppercase tracking-wider bg-surface-container-high text-on-surface hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 cursor-pointer" onclick="openConsultation('Zermatt & St. Moritz')">
+                <span>Request Mission Dossier</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: Monaco & French Riviera -->
+          <div class="expedition-card bg-surface-container-low rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col justify-between border border-surface-container" data-category="maritime">
+            <div>
+              <div class="relative h-64 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDEbmZ9bKNwgDbxo5zYPQoS_OfO8N47YX_hecUt5OXI4ZuQbuOs7FNF9LBIjG_Ck5w-EqXQrGV214T4CRsAcxCjYkYimqJ_6bD-Q4-GGjPgwMyfreNpbmgiEqOClPmZcetriKHCRewlmdNGscvU3YCpGpOCZLPnoxYb-x3Y_OKrcGfmeOn3XAalE3p33S00b8suhj8pASseYCDI-YOMkmTxqnlhHW7ull7RuSvw9nc')"></div>
+                <div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Maritime Charter</div>
+                <div class="absolute bottom-4 right-4 bg-primary/85 backdrop-blur-sm px-3 py-1 rounded font-label-md text-label-md text-on-primary">$145,000 / week</div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-widest text-secondary mb-1">
+                  <span>C&ocirc;te d&rsquo;Azur</span>
+                  <span>&bull;</span>
+                  <span>Quai des &Eacute;tats-Unis Berth</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Monaco Grand Prix &amp; Riviera</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                  Mooring at the prestigious Port Hercule with uninterrupted paddock-terrace line of sight. Seamless tenders to Hotel du Cap-Eden-Roc.
+                </p>
+                <div class="grid grid-cols-2 gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface p-3 rounded-xl mb-4">
+                  <div><strong class="text-on-surface block">Vessel:</strong> 65m Custom Benetti</div>
+                  <div><strong class="text-on-surface block">Berth:</strong> Zone 1 Trackside</div>
+                  <div><strong class="text-on-surface block">Crew:</strong> 16 Fully Cleared</div>
+                  <div><strong class="text-on-surface block">Aviation:</strong> Nice Heli Shuttles</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button class="w-full py-3 rounded-full font-label-md text-label-md uppercase tracking-wider bg-surface-container-high text-on-surface hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 cursor-pointer" onclick="openConsultation('Monaco Grand Prix & Riviera')">
+                <span>Request Mission Dossier</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: Kyoto & Amanemu -->
+          <div class="expedition-card bg-surface-container-low rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col justify-between border border-surface-container" data-category="cultural">
+            <div>
+              <div class="relative h-64 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNJu_VQLCRADN-ju1Dsh3RdydL_XpoGsctYhpfot-zWzT3iCbRhdlxUNJXzaoW9sKoL9-pm9rXcKyjiE1QFmN3lhy_Y4rws_VoEnbZEIPWGcNzrwWODLeyv7I9FUx9txIs-lIsGibIEHsJ-1Dy_fNwDnRB_qIbnHZqHsKS8Tjv9Ff87uqxaalC4FTHBBIgUzFvOrHpsTsyRHYe92EqPuxDzdBaBC9uqLzQOD05vAw')"></div>
+                <div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Cultural Cloister</div>
+                <div class="absolute bottom-4 right-4 bg-primary/85 backdrop-blur-sm px-3 py-1 rounded font-label-md text-label-md text-on-primary">$58,000 / week</div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-widest text-secondary mb-1">
+                  <span>Japan</span>
+                  <span>&bull;</span>
+                  <span>Off-Market Shinto Access</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Kyoto Machiya &amp; Onsen Sanctuary</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                  Restricted temple access closed to the public since 1868. Private tea masters, imperial swordsmith consultations, and shinkansen salon car.
+                </p>
+                <div class="grid grid-cols-2 gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface p-3 rounded-xl mb-4">
+                  <div><strong class="text-on-surface block">Locale:</strong> Gion Private Preserve</div>
+                  <div><strong class="text-on-surface block">Transport:</strong> Shinkansen Gran Class</div>
+                  <div><strong class="text-on-surface block">Liaison:</strong> Bilingual Attach&eacute;</div>
+                  <div><strong class="text-on-surface block">Wellness:</strong> Private Onsen Springs</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button class="w-full py-3 rounded-full font-label-md text-label-md uppercase tracking-wider bg-surface-container-high text-on-surface hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 cursor-pointer" onclick="openConsultation('Kyoto Machiya Sanctuary')">
+                <span>Request Mission Dossier</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4: Amalfi Coast & Capri -->
+          <div class="expedition-card bg-surface-container-low rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col justify-between border border-surface-container" data-category="maritime">
+            <div>
+              <div class="relative h-64 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJmGxUbOWmLblSo7_tU6alyH0DLGourtksxJjJKj9pBzM9DIl_SjkecjW4bOQSN_i-G6ccmLbTkq3rP3tBYv99orvEkbwHA-KDkdT8nxD9VAV2ZcrcqhUDCcEa2QCODiNGB90lkksFO8TMGOoF-CV000uEwKH_3ZYHa_yRcsI8Oa93KmAJ301Zfq5RUumwy5LQkZB0YT_PuYrZ9JFgGBjvYMIJV8jiMIHbVAjBqqU')"></div>
+                <div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Maritime Coastline</div>
+                <div class="absolute bottom-4 right-4 bg-primary/85 backdrop-blur-sm px-3 py-1 rounded font-label-md text-label-md text-on-primary">$110,000 / week</div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-widest text-secondary mb-1">
+                  <span>Italy</span>
+                  <span>&bull;</span>
+                  <span>Private Marina Grande Pier</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Amalfi Coast &amp; Capri Estate</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                  Historic 17th-century private cliff estate reachable solely via chartered Riva tender or rooftop helipad with panoramic Faraglioni vistas.
+                </p>
+                <div class="grid grid-cols-2 gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface p-3 rounded-xl mb-4">
+                  <div><strong class="text-on-surface block">Vessel:</strong> Riva Dolceriva 48</div>
+                  <div><strong class="text-on-surface block">Villa:</strong> 8-Bedroom Historic</div>
+                  <div><strong class="text-on-surface block">Clearance:</strong> Naples FBO Priority</div>
+                  <div><strong class="text-on-surface block">Staff:</strong> Sommelier &amp; Security</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button class="w-full py-3 rounded-full font-label-md text-label-md uppercase tracking-wider bg-surface-container-high text-on-surface hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 cursor-pointer" onclick="openConsultation('Amalfi Coast & Capri')">
+                <span>Request Mission Dossier</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 5: Serengeti Flying Safari -->
+          <div class="expedition-card bg-surface-container-low rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col justify-between border border-surface-container" data-category="safari">
+            <div>
+              <div class="relative h-64 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKNT-WB0NK7ZhyZRPJ8Y54dUL61ATiHlpldIXh6CB1uTy3w7Jwff5g_DwIouse1Gp46Z8ti2Q9RGcXFk15o2F5lSVk29twL94KqHG_u5_DKDx4tODWekokMCq_dwPWhrXpbzlUs3Au15cRNOfOAyt-Ae9BbZLM7uTBkBrigqjOeLTzxVXTpaiLcI-EVKMk01EP3vWfyDrO9Z7FpVzjPrE4jMLVcgVcaxa7bsMlvqo')"></div>
+                <div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Savanna Wilderness</div>
+                <div class="absolute bottom-4 right-4 bg-primary/85 backdrop-blur-sm px-3 py-1 rounded font-label-md text-label-md text-on-primary">$92,000 / week</div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-widest text-secondary mb-1">
+                  <span>Tanzania</span>
+                  <span>&bull;</span>
+                  <span>Private Bush Strip Access</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Serengeti Flying Private Safari</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                  Dedicated Pilatus PC-12 NGX stationed with your party. Total privatization of Singita reserve concession with armed anti-poaching security escort.
+                </p>
+                <div class="grid grid-cols-2 gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface p-3 rounded-xl mb-4">
+                  <div><strong class="text-on-surface block">Aircraft:</strong> Pilatus PC-12 NGX</div>
+                  <div><strong class="text-on-surface block">Lodge:</strong> Exclusive Concession</div>
+                  <div><strong class="text-on-surface block">Rangers:</strong> Lead Conservationist</div>
+                  <div><strong class="text-on-surface block">Comm:</strong> Starlink Field Uplink</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button class="w-full py-3 rounded-full font-label-md text-label-md uppercase tracking-wider bg-surface-container-high text-on-surface hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 cursor-pointer" onclick="openConsultation('Serengeti Flying Safari')">
+                <span>Request Mission Dossier</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 6: Lapland Aurora Glass Igloo -->
+          <div class="expedition-card bg-surface-container-low rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col justify-between border border-surface-container" data-category="arctic">
+            <div>
+              <div class="relative h-64 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQx6v9zMNVbWoGybOrikU0xPB12JHJzlqJej-td_f4-_kxCbxZybgZuYBbBybcpIAywk9llDfbB9sd7ETUky7xmBOs5JFaludLGCbyr51bGEXgMJ4Tvv5CcgqjK0_4k73i8CSkAx1aY0kVGPWjIR1nrlFUWpHHyUxfj6ZEG2y9sOX-hcXPeXYJUBtpQf8_xwf9XgugTqhqyFCwGaV9nMslqXZgOY8Shrh7OGXi1ro')"></div>
+                <div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Polar Solitude</div>
+                <div class="absolute bottom-4 right-4 bg-primary/85 backdrop-blur-sm px-3 py-1 rounded font-label-md text-label-md text-on-primary">$46,000 / week</div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-widest text-secondary mb-1">
+                  <span>Finland / Arctic</span>
+                  <span>&bull;</span>
+                  <span>Ivalo Private Terminal</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Lapland Glass Igloo Aurora</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                  Falcon 8X direct to Ivalo tarmac. Heated geodesic architectural pods, private reindeer sledding reserves, and customized thermal sauna retreats.
+                </p>
+                <div class="grid grid-cols-2 gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface p-3 rounded-xl mb-4">
+                  <div><strong class="text-on-surface block">Aviation:</strong> Falcon 8X Charter</div>
+                  <div><strong class="text-on-surface block">Sanctuary:</strong> Heated Glass Dome</div>
+                  <div><strong class="text-on-surface block">Expedition:</strong> Arctic Ice Driving</div>
+                  <div><strong class="text-on-surface block">Privacy:</strong> 400 Hectares Private</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button class="w-full py-3 rounded-full font-label-md text-label-md uppercase tracking-wider bg-surface-container-high text-on-surface hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 cursor-pointer" onclick="openConsultation('Lapland Glass Igloo Aurora')">
+                <span>Request Mission Dossier</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 3: PRIVATE AVIATION & FLEET PORTFOLIO
+           ===================================================================== -->
+      <section class="py-space-xl bg-surface-container-low px-margin sm:px-margin-tablet lg:px-margin-desktop border-y border-surface-container" id="fleet">
+        <div class="max-w-4xl mb-12">
+          <div class="inline-flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+            <span class="font-label-md text-label-md uppercase tracking-widest text-secondary">Aeronautical &amp; Maritime Sovereignty</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">The Bespoke Private Fleet</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant mt-3">
+            Guaranteed zero-notice tarmac boarding across 450 general aviation terminals worldwide. Maintained under Swiss and EASA commercial air operator certificates.
+          </p>
+        </div>
+
+        <!-- Fleet Cards Mosaic -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Fleet 1: Gulfstream G650ER -->
+          <div class="bg-surface rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">Ultra Long-Range Jet</span>
+                  <h3 class="font-headline-md text-headline-md text-on-surface">Gulfstream G650ER</h3>
+                </div>
+                <div class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider">
+                  Ready &bull; Geneva GVA
+                </div>
+              </div>
+              <div class="relative h-60 rounded-xl overflow-hidden mb-6">
+                <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAmFEg-gz-TqswUX4SLHNqK_yXf3OYh03BtwOEjE-3cJ40x0x7Ie4af21jV45CzaS53AfEs48T4PGrODWMEf1987ymZOYErRdiCQazVLdGtDbdPradIditpyXzkt6H6hY3v-pabT5VwjTEvzB3vwz6KC_7d112OMDFMWxph1bi9BCqPc9eoouOl0x2tJ0CFqlO4oJLt3Bno2OquAA28lIP1d22EzSrlKjUCnXSlUCI')"></div>
+              </div>
+              <div class="grid grid-cols-3 gap-3 bg-surface-container-low p-4 rounded-xl text-center mb-6">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Max Velocity</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">Mach 0.925</span>
+                </div>
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Global Range</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">7,500 NM</span>
+                </div>
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Capacity</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">14 Staterooms</span>
+                </div>
+              </div>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                Equipped with discrete private master stateroom, private en-suite shower, Ku-band ultra-high-speed satellite datalink, and sound levels quieter than a whisper (42 dB).
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-surface-container">
+              <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Charter Hourly Rate: CHF 14,200</span>
+              <button class="px-6 py-2.5 rounded-full font-label-md text-label-md uppercase tracking-wider bg-primary text-on-primary hover:bg-surface-container-highest hover:text-on-surface transition-all cursor-pointer" onclick="openConsultation('Gulfstream G650ER Tail Allocation')">
+                Allocate Tail
+              </button>
+            </div>
+          </div>
+
+          <!-- Fleet 2: Dassault Falcon 8X -->
+          <div class="bg-surface rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">Tri-Jet Alpine Access</span>
+                  <h3 class="font-headline-md text-headline-md text-on-surface">Dassault Falcon 8X</h3>
+                </div>
+                <div class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+                  Ready &bull; London FAB
+                </div>
+              </div>
+              <div class="relative h-60 rounded-xl overflow-hidden mb-6">
+                <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8ZkovbocU6WPoelQcPOC5rH3HvgeM43epqUTPvCWM2-6Jr8NEeqVqf00bfWEGyohoPoooxOWxdxDvf3Upi8TQhK8xMq6lriGCDV4BXx_czP0s6B4PcpOXXwlxccCbrlJiKLzGmBJDQ96a_9RglZC4M6hWF1b4PB5H3Zz5Ni0JY9SdqfwnV0cXGk-bUsNuBMvXAXXVzkSw9KYjXTLZE1UtzoSD4bAxOozlKBxgpGs')"></div>
+              </div>
+              <div class="grid grid-cols-3 gap-3 bg-surface-container-low p-4 rounded-xl text-center mb-6">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Cruise Speed</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">Mach 0.90</span>
+                </div>
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Max Range</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">6,450 NM</span>
+                </div>
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Short Field</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">Sion &amp; LCY</span>
+                </div>
+              </div>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                Renowned tri-engine security margin allowing steep alpine approaches into London City, Lugano, and Aspen with uninterrupted 3-zone acoustic silence.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-surface-container">
+              <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Charter Hourly Rate: CHF 12,800</span>
+              <button class="px-6 py-2.5 rounded-full font-label-md text-label-md uppercase tracking-wider bg-primary text-on-primary hover:bg-surface-container-highest hover:text-on-surface transition-all cursor-pointer" onclick="openConsultation('Dassault Falcon 8X Tail Allocation')">
+                Allocate Tail
+              </button>
+            </div>
+          </div>
+
+          <!-- Fleet 3: Riva Dolceriva 48 Tender -->
+          <div class="bg-surface rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">Italian Day Vessel</span>
+                  <h3 class="font-headline-md text-headline-md text-on-surface">Riva Dolceriva 48</h3>
+                </div>
+                <div class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider">
+                  Moored &bull; Monaco
+                </div>
+              </div>
+              <div class="relative h-60 rounded-xl overflow-hidden mb-6">
+                <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYAvUeECwjWZ6-X7khhvbAMsVGUrWhNfmd0gzPf-fXhmzmot8YTRFhlqf4ECv0yAD8NOIZw_E9wDTk5iJeSQtQfYSDiFn79F2155lk4XYSPLncdJ-Q3lXGr7omXfMWkB08j6qIrZgJUL30ay3o1Vj8olUyaJEv1dNGd91PyxstExtmv-8dMq2XzDPPWKCgSjST4yKAJPZD4Yx-ybkyBOPp5oc6RvNis7EY3X5fw8Y')"></div>
+              </div>
+              <div class="grid grid-cols-3 gap-3 bg-surface-container-low p-4 rounded-xl text-center mb-6">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Top Speed</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">40 Knots</span>
+                </div>
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Day Capacity</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">10 Guests</span>
+                </div>
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Master Cabin</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">1 Luxury Suite</span>
+                </div>
+              </div>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                The epitome of Mediterranean nautical elegance. Handcrafted high-gloss mahogany transom, electro-hydraulic swim platform, and dedicated Riva Captain.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-surface-container">
+              <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Daily Charter: &euro;8,500 / day</span>
+              <button class="px-6 py-2.5 rounded-full font-label-md text-label-md uppercase tracking-wider bg-primary text-on-primary hover:bg-surface-container-highest hover:text-on-surface transition-all cursor-pointer" onclick="openConsultation('Riva Dolceriva 48 Tender')">
+                Reserve Tender
+              </button>
+            </div>
+          </div>
+
+          <!-- Fleet 4: Airbus H145 Penthouse Heli -->
+          <div class="bg-surface rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">Alpine &amp; Rotor Transport</span>
+                  <h3 class="font-headline-md text-headline-md text-on-surface">Airbus H145 Penthouse</h3>
+                </div>
+                <div class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+                  Ready &bull; Zurich / ZRH
+                </div>
+              </div>
+              <div class="relative h-60 rounded-xl overflow-hidden mb-6">
+                <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6GifUehevpUuewFQ2hqMUbsQvo8zdojczLfW9c_5yEGKf3gCdtbExYjXTx7YpBt6jVN-YC0jg8qksxNnrMWVbQq_DcE0iCaV8AdofCJwJ2luF1U-UYyDvikFyW__itkXiI0p3sHIZ3KQUhsBt4OL-MGfM_SRIZf-kNNlf7f0gFS0thkVzKTIntVIrGUhY7FJnKgJCs3BSR60HeNbE7M-Lsd2-eHhrlaF4ZlWMcfA')"></div>
+              </div>
+              <div class="grid grid-cols-3 gap-3 bg-surface-container-low p-4 rounded-xl text-center mb-6">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Cruise Speed</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">135 Knots</span>
+                </div>
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Rotor Range</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">350 NM</span>
+                </div>
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Seating</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface">6 Executive</span>
+                </div>
+              </div>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                Configured for direct rooftop touch-downs, yacht helipads, and remote high-altitude Swiss chalet landings. Active vibration suppression system installed.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-surface-container">
+              <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Flight Hour: CHF 4,900 / hr</span>
+              <button class="px-6 py-2.5 rounded-full font-label-md text-label-md uppercase tracking-wider bg-primary text-on-primary hover:bg-surface-container-highest hover:text-on-surface transition-all cursor-pointer" onclick="openConsultation('Airbus H145 Helicopter')">
+                Dispatch Heli
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 4: THE CONCIERGE PROTOCOL (WORKFLOW)
+           ===================================================================== -->
+      <section class="py-space-xl px-margin sm:px-margin-tablet lg:px-margin-desktop bg-surface" id="protocol">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-secondary block mb-2">Operational Precision</span>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">The Concierge Protocol</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant mt-3">
+            From initial encrypted brief to tarmac touchdown, every movement follows a four-stage sovereign workflow.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          
+          <!-- Step 01 -->
+          <div class="bg-surface-container-low p-6 sm:p-8 rounded-2xl flex flex-col justify-between relative group hover:bg-surface-container transition-colors border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-headline-md text-headline-md text-secondary font-light">01</span>
+                <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[20px]">lock</span>
+                </div>
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block mb-1">Phase I</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Confidential Briefing</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Direct single point-of-contact via encrypted liaison. Security vetting, private dietary requirements, and biological rhythm preferences established.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-surface-container">
+              <span class="font-label-sm text-label-sm text-on-surface-variant">SLA Window: &lt; 15 Minutes</span>
+            </div>
+          </div>
+
+          <!-- Step 02 -->
+          <div class="bg-surface-container-low p-6 sm:p-8 rounded-2xl flex flex-col justify-between relative group hover:bg-surface-container transition-colors border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-headline-md text-headline-md text-secondary font-light">02</span>
+                <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[20px]">hub</span>
+                </div>
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block mb-1">Phase II</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Asset Allocation</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Direct requisition of off-market private estates, priority air traffic slots, diplomatic ramp access, and vetted support staff worldwide.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-surface-container">
+              <span class="font-label-sm text-label-sm text-on-surface-variant">Zero Third-Party Brokers</span>
+            </div>
+          </div>
+
+          <!-- Step 03 -->
+          <div class="bg-surface-container-low p-6 sm:p-8 rounded-2xl flex flex-col justify-between relative group hover:bg-surface-container transition-colors border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-headline-md text-headline-md text-secondary font-light">03</span>
+                <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[20px]">draft</span>
+                </div>
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block mb-1">Phase III</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Dossier Delivery</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Dispatched via physical wax-sealed archival parcel to your residence, or synchronized directly to our biometric patron portal.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-surface-container">
+              <span class="font-label-sm text-label-sm text-on-surface-variant">PGP 4096-bit Encrypted</span>
+            </div>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="bg-surface-container-low p-6 sm:p-8 rounded-2xl flex flex-col justify-between relative group hover:bg-surface-container transition-colors border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-headline-md text-headline-md text-secondary font-light">04</span>
+                <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[20px]">shield</span>
+                </div>
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block mb-1">Phase IV</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Ground Execution</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                24/7 on-ground liaison shadowing your itinerary. Discrete security detachment, customs bypass, and seamless real-time adaptability.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-surface-container">
+              <span class="font-label-sm text-label-sm text-on-surface-variant">Swiss Standard Discretion</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 5: SOVEREIGN MEMBERSHIP TIERS
+           ===================================================================== -->
+      <section class="py-space-xl bg-surface-container-low px-margin sm:px-margin-tablet lg:px-margin-desktop border-y border-surface-container" id="membership">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-secondary block mb-2">Bespoke Guild</span>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">Private Office Membership</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant mt-3">
+            Membership is strictly capped at three hundred global patrons annually to guarantee uninterrupted concierge responsiveness.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+          
+          <!-- Tier 1: Silver Horizon -->
+          <div class="bg-surface rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col justify-between border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Tier I</span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full text-on-surface">Regional Distinction</span>
+              </div>
+              <h3 class="font-headline-md text-headline-md text-on-surface mb-2">Silver Horizon</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Designed for patrons with active intra-continental European and Mediterranean movements.</p>
+              <div class="mb-8">
+                <span class="font-display text-[44px] leading-none text-on-surface">$25,000</span>
+                <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block mt-1">Annual Retainer</span>
+              </div>
+              <ul class="space-y-4 mb-8">
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>24-Hour SLA response guarantee</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Regional light &amp; mid-size jet fleet access</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Access to 120 curated partner villas</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Dedicated seasonal travel coordinator</span>
+                </li>
+              </ul>
+            </div>
+            <button class="w-full py-3.5 rounded-full font-label-md text-label-md uppercase tracking-wider bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" onclick="openConsultation('Membership Retainer: Silver Horizon')">
+              Apply For Retainer
+            </button>
+          </div>
+
+          <!-- Tier 2: Gold Sovereign (Featured) -->
+          <div class="bg-surface rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col justify-between relative transform lg:-translate-y-4 bg-gradient-to-b from-surface via-surface to-surface-container-low border-2 border-secondary-fixed">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-widest px-4 py-1 rounded-full shadow-sm font-semibold">
+              Most Requested Tier
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-4 mt-2">
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-semibold">Tier II</span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest bg-secondary-fixed/40 text-on-surface px-3 py-1 rounded-full">Global Sovereign</span>
+              </div>
+              <h3 class="font-headline-md text-headline-md text-on-surface mb-2">Gold Sovereign</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Unrestricted global access for high-profile principals and their immediate family trusts.</p>
+              <div class="mb-8">
+                <span class="font-display text-[44px] leading-none text-on-surface">$65,000</span>
+                <span class="font-label-md text-label-md text-secondary uppercase tracking-wider block mt-1">Annual Retainer</span>
+              </div>
+              <ul class="space-y-4 mb-8">
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>4-Hour SLA priority dispatch guarantee</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Ultra long-range jets (G650ER, 7500) &amp; 60m+ yachts</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>250+ private off-market sanctuaries worldwide</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Diplomatic tarmac immigration and priority FBO</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>24/7 designated Private Office Director</span>
+                </li>
+              </ul>
+            </div>
+            <button class="w-full py-4 rounded-full font-label-md text-label-md uppercase tracking-wider bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-all shadow-md cursor-pointer" onclick="openConsultation('Membership Retainer: Gold Sovereign')">
+              Petition For Sovereign Seal
+            </button>
+          </div>
+
+          <!-- Tier 3: Black Diamond Elite -->
+          <div class="bg-surface rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col justify-between border border-surface-container">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Tier III</span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest bg-primary text-on-primary px-3 py-1 rounded-full">Imperial Status</span>
+              </div>
+              <h3 class="font-headline-md text-headline-md text-on-surface mb-2">Black Diamond Elite</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Confidential mission coordination for sovereign heads, state delegations, and royal dynasties.</p>
+              <div class="mb-8">
+                <span class="font-display text-[44px] leading-none text-on-surface">$150,000</span>
+                <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block mt-1">Annual Retainer</span>
+              </div>
+              <ul class="space-y-4 mb-8">
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Immediate (&lt;15 min) SLA response at all hours</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Unlimited mission orchestrations worldwide</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Direct personal line to Founder &amp; Senior Quorum</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Dedicated encrypted satellite communications terminal</span>
+                </li>
+                <li class="flex items-center gap-3 font-body-sm text-body-sm text-on-surface">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Pre-cleared global asset commandeering rights</span>
+                </li>
+              </ul>
+            </div>
+            <button class="w-full py-3.5 rounded-full font-label-md text-label-md uppercase tracking-wider bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" onclick="openConsultation('Membership Retainer: Black Diamond Elite')">
+              Confidential Vetting Request
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 6: DIPLOMATIC STANDARD & TRUST
+           ===================================================================== -->
+      <section class="py-space-xl px-margin sm:px-margin-tablet lg:px-margin-desktop bg-surface" id="protocol-trust">
+        <div class="rounded-3xl bg-surface-container-low p-8 sm:p-12 lg:p-16 border border-surface-container">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+            <div>
+              <span class="font-label-md text-label-md uppercase tracking-widest text-secondary block mb-2">Institutional Assurance</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">The Diplomatic Standard</h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant mt-4 leading-relaxed">
+                Operating under strict Swiss regulatory oversight in the Canton of Geneva. Our operations bridge private international banking confidentiality with diplomatic aviation privileges.
+              </p>
+            </div>
+            
+            <!-- Trust Credentials List -->
+            <div class="bg-surface rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-around gap-4 border border-surface-container">
+              <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-secondary text-[32px]">balance</span>
+                <div>
+                  <span class="font-headline-sm text-headline-sm text-on-surface text-[18px]">Article 47 Swiss Banking Secrecy</span>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">Patron identities and itineraries safeguarded under penal confidentiality legislation.</p>
+                </div>
+              </div>
+              <div class="h-px bg-surface-container"></div>
+              <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-secondary text-[32px]">vpn_key</span>
+                <div>
+                  <span class="font-headline-sm text-headline-sm text-on-surface text-[18px]">Biometric Zero-Terminal Customs</span>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">Pre-inspected sovereign transfers without passing public commercial gates.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Trust Pillars -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-surface p-6 rounded-2xl border border-surface-container">
+              <div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary mb-4">
+                <span class="material-symbols-outlined text-[24px]">verified</span>
+              </div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface text-[20px] mb-2">FINMA Protocols</h4>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">All financial transactions and escrow retainers cleared through verified Swiss clearing accounts.</p>
+            </div>
+
+            <div class="bg-surface p-6 rounded-2xl border border-surface-container">
+              <div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary mb-4">
+                <span class="material-symbols-outlined text-[24px]">fingerprint</span>
+              </div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface text-[20px] mb-2">Encrypted Vaults</h4>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Client itineraries stored in air-gapped bunkers carved beneath the Swiss Alps.</p>
+            </div>
+
+            <div class="bg-surface p-6 rounded-2xl border border-surface-container">
+              <div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary mb-4">
+                <span class="material-symbols-outlined text-[24px]">flight</span>
+              </div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface text-[20px] mb-2">Diplomatic Corridors</h4>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Unrestricted bilateral flight clearances secured through direct embassy liaison desks.</p>
+            </div>
+
+            <div class="bg-surface p-6 rounded-2xl border border-surface-container">
+              <div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary mb-4">
+                <span class="material-symbols-outlined text-[24px]">group_work</span>
+              </div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface text-[20px] mb-2">Dual-Advisor Quorum</h4>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Every mission itinerary is reviewed and signed off by two senior partner directors.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 7: INTERACTIVE CONSULTATION DESK
+           ===================================================================== -->
+      <section class="py-space-xl bg-surface-container-low px-margin sm:px-margin-tablet lg:px-margin-desktop border-t border-surface-container" id="consultation">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <!-- Narrative Column -->
+          <div class="lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <span class="font-label-md text-label-md uppercase tracking-widest text-secondary block mb-2">Private Office Inquiry</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">Initiate a Confidential Mission</h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant mt-4 leading-relaxed">
+                Please submit your confidential operational brief. Your assigned Private Office Attach&eacute; will establish communication via your preferred encrypted channel within 14 minutes.
+              </p>
+              <div class="mt-8 space-y-4">
+                <div class="flex items-center gap-4 bg-surface p-4 rounded-xl border border-surface-container">
+                  <span class="material-symbols-outlined text-secondary text-[24px]">phone_in_talk</span>
+                  <div>
+                    <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Swiss Direct Desk</span>
+                    <span class="font-headline-sm text-headline-sm text-on-surface text-[18px]">+41 22 819 9000</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 bg-surface p-4 rounded-xl border border-surface-container">
+                  <span class="material-symbols-outlined text-secondary text-[24px]">mark_chat_read</span>
+                  <div>
+                    <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block">Encrypted Signal &amp; Wire</span>
+                    <span class="font-headline-sm text-headline-sm text-on-surface text-[18px]">office@bespoke-geneva.ch</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 p-4 bg-surface rounded-xl border border-surface-container">
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block mb-1">Covenant of Discretion</span>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">
+                No submissions are stored on commercial web servers. All form telemetry is directly piped to our private on-premises Zurich cluster.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Consultation Form Card -->
+          <div class="lg:col-span-7 bg-surface rounded-3xl p-8 sm:p-10 shadow-sm border border-surface-container">
+            <form class="space-y-6" id="consultation-form" onsubmit="event.preventDefault(); handleConsultationSubmit();">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2">Principal or Liaison Name</label>
+                  <input class="w-full bg-surface-container-low px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:bg-surface-container transition-all" placeholder="e.g. Lord Sterling / Family Office" required type="text"/>
+                </div>
+                <div>
+                  <label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2">Encrypted Contact (Signal / Phone)</label>
+                  <input class="w-full bg-surface-container-low px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:bg-surface-container transition-all" placeholder="+41 22 000 0000" required type="tel"/>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2">Primary Destination / Region</label>
+                  <input class="w-full bg-surface-container-low px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:bg-surface-container transition-all" id="consultation-dest-input" placeholder="e.g. Swiss Alps, St. Tropez, Kyoto" type="text"/>
+                </div>
+                <div>
+                  <label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2">Target Departure Window</label>
+                  <select class="w-full bg-surface-container-low px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container transition-all cursor-pointer">
+                    <option>Within 48 Hours (Urgent SLA)</option>
+                    <option selected>Winter High Season (Dec - Feb)</option>
+                    <option>Spring Solstice (Mar - May)</option>
+                    <option>Summer Mediterranean (Jun - Aug)</option>
+                    <option>Autumn Harvest / Custom</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2">Party Size &amp; Entourage</label>
+                  <select class="w-full bg-surface-container-low px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container transition-all cursor-pointer">
+                    <option>Solo Principal (1)</option>
+                    <option selected>Private Family (2 - 4)</option>
+                    <option>Extended Delegation (5 - 8)</option>
+                    <option>Royal Retinue &amp; Security (9+)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2">Asset Class Preference</label>
+                  <select class="w-full bg-surface-container-low px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container transition-all cursor-pointer">
+                    <option>Ultra Long-Range Jet (G650 / 7500)</option>
+                    <option>Superyacht Charter (50m+)</option>
+                    <option>Private Alpine Estate &amp; Heli</option>
+                    <option selected>Integrated Sovereign Portfolio</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md uppercase tracking-wider text-on-surface mb-2">Confidential Operational Directives</label>
+                <textarea class="w-full bg-surface-container-low p-4 rounded-xl font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:bg-surface-container transition-all resize-none" placeholder="Detail any non-disclosure specifications, customs protocol requirements, armed security coordination, or specialized culinary demands..." rows="4"></textarea>
+              </div>
+              <div class="flex items-center gap-3">
+                <input checked class="w-4 h-4 rounded text-primary focus:ring-0 accent-primary cursor-pointer" id="nda-agree" type="checkbox"/>
+                <label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" for="nda-agree">
+                  Enforce Swiss Private Banking Article 47 reciprocal Non-Disclosure Agreement.
+                </label>
+              </div>
+              <button class="w-full py-4 rounded-full font-label-md text-label-md uppercase tracking-wider bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer" type="submit">
+                <span>Dispatch Request to Senior Partner</span>
+                <span class="material-symbols-outlined text-[18px]">send</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIP PORTAL AUTHENTICATION MODAL (CONNECTING TO MVC DASHBOARD)
+           ===================================================================== -->
+      <div class="fixed inset-0 z-50 bg-primary/70 backdrop-blur-md hidden items-center justify-center p-4" id="vip-modal">
+        <div class="bg-surface rounded-3xl max-w-md w-full p-8 sm:p-10 shadow-2xl relative border border-surface-container">
+          <button class="absolute top-6 right-6 w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" onclick="closeVipModal()">
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+          <div class="text-center mb-8">
+            <div class="w-14 h-14 rounded-2xl bg-secondary-fixed mx-auto mb-4 flex items-center justify-center text-on-secondary-fixed shadow-sm">
+              <span class="material-symbols-outlined text-[28px]">lock</span>
+            </div>
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block mb-1">Encrypted Patron Gateway</span>
+            <h3 class="font-headline-md text-headline-md text-on-surface">VIP Sovereign Vault</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Enter your designated Patron Dossier identifier and secondary biometric key.</p>
+          </div>
+          
+          <form class="space-y-4" onsubmit="event.preventDefault(); handleVipLogin();">
+            <div>
+              <label class="block font-label-sm text-label-sm uppercase tracking-wider text-on-surface mb-2">Member ID / Dossier N&deg;</label>
+              <input class="w-full bg-surface-container-low px-4 py-3 rounded-xl font-label-md text-label-md uppercase tracking-wider text-on-surface focus:outline-none focus:bg-surface-container transition-all" value="BSPK-8849-CH" required type="text"/>
+            </div>
+            <div>
+              <label class="block font-label-sm text-label-sm uppercase tracking-wider text-on-surface mb-2">6-Digit Cryptographic PIN</label>
+              <input class="w-full bg-surface-container-low px-4 py-3 rounded-xl text-center tracking-[0.5em] text-xl font-mono text-on-surface focus:outline-none focus:bg-surface-container transition-all" maxlength="6" value="123456" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" required type="password"/>
+            </div>
+            <button id="btn-auth-submit" class="w-full mt-2 py-3.5 rounded-full font-label-md text-label-md uppercase tracking-wider bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md" type="submit">
+              <span>Authenticate &amp; Enter Portal</span>
+              <span class="material-symbols-outlined text-[18px]">key</span>
+            </button>
+          </form>
+
+          <div class="mt-6 pt-4 border-t border-surface-container text-center">
+            <span class="font-label-sm text-label-sm text-on-surface-variant block">Protected under 256-bit AES Elliptic Curve Encryption</span>
+            <span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mt-1 block">Z&uuml;rich Data Bunker Online</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           FILM / MONOGRAPH MODAL (POPUP)
+           ===================================================================== -->
+      <div class="fixed inset-0 z-50 bg-primary/80 backdrop-blur-lg hidden items-center justify-center p-4" id="video-modal">
+        <div class="bg-surface rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative border border-surface-container">
+          <button class="absolute top-6 right-6 w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" onclick="closeVideoModal()">
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+          <div class="mb-4">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block">Archival Motion Picture</span>
+            <h3 class="font-headline-md text-headline-md text-on-surface">Winter in the Engadin Valley &mdash; 4K Reel</h3>
+          </div>
+          <div class="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-primary flex items-center justify-center">
+            <div class="w-full h-full bg-cover bg-center opacity-85" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvQ1kbpBf37NdpnskkiN1aer5-1e8UiXYYIJt1u9UZKiEYAnlG-h-QmczU9Fr9rIVGiMYF51GOAe7rhJmB7pOsHHuETtsisMP6M04fiO7Uu1HfwCaBuh_zZ59pHwNcX9a0oNFMryazk6wVao7_9lbQF6rNXd17a6fQochVzKoRLj3nHLLM-QRXGQRadozgUScaySw3L2OFSs5R-dl9JXSK7AO8JhEk7vpb5CyCcD4')"></div>
+            <div class="absolute inset-0 bg-primary/40 flex flex-col items-center justify-center text-center p-6">
+              <div class="w-16 h-16 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed mb-4 shadow-xl">
+                <span class="material-symbols-outlined text-[32px]">play_arrow</span>
+              </div>
+              <span class="font-headline-sm text-headline-sm text-surface-container-lowest">Stream Initialized (Private Feed)</span>
+              <span class="font-label-sm text-label-sm text-surface-container-high uppercase tracking-widest mt-1">Direct Encrypted Satellite Stream</span>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+            <span>Runtime: 03:45 &bull; Shot on Arri Alexa LF</span>
+            <span>Geneva Archive No. 2026-WTR-04</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="w-full bg-surface-container-low py-space-xl border-t border-surface-container">
+    <div class="w-full px-margin-tablet lg:px-margin-desktop">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter-desktop mb-space-xl">
+        <div class="lg:col-span-2 flex flex-col gap-space-sm">
+          <div class="flex items-center gap-space-xs">
+            <span class="font-headline-sm text-headline-sm uppercase tracking-widest text-on-surface">BESPOKE</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">Private Travel Office &amp; Diplomatic Hospitality Atelier. Access granted exclusively via peer recommendation and private board clearance.</p>
+          <div class="flex items-center gap-space-sm pt-space-xs">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">FINMA &bull; Swiss Regulatory Discretion Assured</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-xs">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-on-surface mb-space-xs">Global Desks</span>
+          <div class="flex flex-col font-body-sm text-body-sm text-on-surface-variant gap-space-xs">
+            <div><span class="text-on-surface block font-medium">Geneva (HQ)</span>Rue du Rh&ocirc;ne 42 &bull; +41 22 819 9000</div>
+            <div><span class="text-on-surface block font-medium">London Mayfair</span>Berkeley Square 14 &bull; +44 20 7946 0910</div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-xs">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-on-surface mb-space-xs">Pacific &amp; Americas</span>
+          <div class="flex flex-col font-body-sm text-body-sm text-on-surface-variant gap-space-xs">
+            <div><span class="text-on-surface block font-medium">Kyoto Atelier</span>Gion-machi Minamigawa &bull; +81 75 531 8200</div>
+            <div><span class="text-on-surface block font-medium">New York Salon</span>Madison Ave 740 &bull; +1 212 555 0198</div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-xs">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-on-surface mb-space-xs">Covenants</span>
+          <nav class="flex flex-col font-body-sm text-body-sm text-on-surface-variant gap-space-xs">
+            <a class="hover:text-on-surface transition-colors" href="#protocol">Security Protocol</a>
+            <a class="hover:text-on-surface transition-colors" href="#fleet">Aviation Manifest</a>
+            <a class="hover:text-on-surface transition-colors" href="index.php">Encrypted Dossier Vault</a>
+            <a class="hover:text-on-surface transition-colors" href="#consultation">Private Treaty Consultation</a>
+          </nav>
+        </div>
+      </div>
+      <div class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-t border-surface-container">
+        <div class="flex items-center gap-space-sm">
+          <span>&copy; MMXXVI BESPOKE PRIVATE OFFICE SA. ALL RIGHTS RESERVED.</span>
+          <span>&bull;</span>
+          <span class="text-on-surface font-medium">Zaidaan Diandra (202410370110420)</span>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <span class="text-secondary">Strictly Confidential</span>
+          <span>SWIFT / BIC &bull; BESPCHGG</span>
+          <span>Encrypted PGP 4096-bit</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       LIGHTWEIGHT INTERACTIVE JAVASCRIPT LOGIC
+       ========================================================================= -->
+  <script>
+    // Expeditions Filter Tab Interaction
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary', 'active');
+          b.classList.add('text-on-surface-variant');
         });
-        this.classList.remove('text-slate-300');
-        this.classList.add('bg-gold', 'text-obsidian', 'shadow-sm');
+        btn.classList.add('bg-primary', 'text-on-primary', 'active');
+        btn.classList.remove('text-on-surface-variant');
+
+        const cat = btn.getAttribute('data-category');
+        document.querySelectorAll('.expedition-card').forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-category') === cat) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
+
+    // VIP Modal Triggers
+    function openVipModal() {
+      const modal = document.getElementById('vip-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeVipModal() {
+      const modal = document.getElementById('vip-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    // Video Modal Triggers
+    function openVideoModal() {
+      const modal = document.getElementById('video-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('video-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    // Helpers
+    function openConsultation(destinationName) {
+      const destInput = document.getElementById('consultation-dest-input');
+      if (destInput) {
+        destInput.value = destinationName;
+      }
+      const section = document.getElementById('consultation');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function handleConsultationSubmit() {
+      alert('Mission directive registered with the Private Office Quorum. Your designated duty attaché will establish encrypted contact within 14 minutes.');
+      document.getElementById('consultation-form').reset();
+    }
+
+    function handleSearchSubmit() {
+      const dest = document.getElementById('quick-dest')?.value || 'Bespoke Expedition';
+      alert('Inquiring private route availability for: ' + dest + '\nRedirecting to VIP Patron Portal...');
+      window.location.href = 'index.php';
+    }
+
+    function handleVipLogin() {
+      const btn = document.getElementById('btn-auth-submit');
+      if (btn) btn.innerHTML = '<span>Authorizing Biometrics...</span>';
+      setTimeout(() => {
+        window.location.href = 'index.php';
+      }, 500);
+    }
   </script>
-</body></html>
+
+</body>
+</html>

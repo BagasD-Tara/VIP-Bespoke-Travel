@@ -18,513 +18,876 @@ if (!function_exists('safe')) {
 
 // Fallback data jika file view diakses langsung tanpa controller
 $client = $client ?? [
-    'name' => 'Alexander Wright',
-    'title' => 'Lord Alexander Wright',
-    'member_id' => 'VIP-8821',
-    'tier' => 'Black Diamond Tier',
-    'city' => 'Geneva / Zurich',
-    'avatar_initials' => 'AW'
+    'name'            => 'Alexander Dubois',
+    'title'           => 'Alexander Dubois',
+    'member_id'       => 'VIP-8821',
+    'tier'            => 'Sovereign Tier',
+    'city'            => 'Geneva / Zurich',
+    'avatar_initials' => 'AD'
 ];
 
 $stats = $stats ?? [
     'total_requests' => 6,
-    'total_budget' => '$536,000',
-    'response_time' => '< 12 Mins Direct'
+    'total_budget'   => '$2,485,000',
+    'response_time'  => '< 12 Mins Direct'
 ];
 
 $requests = $requests ?? [];
-$availableStatuses = $availableStatuses ?? [
-    'all' => count($requests) > 0 ? count($requests) : 6,
-    'Approved' => 2,
-    'In Review' => 2,
-    'Planning' => 1,
-    'Confirmed' => 1
-];
 $activeFilter = $activeFilter ?? 'all';
 ?>
 <!DOCTYPE html>
-<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><title>Bespoke — Sovereign VIP Patron Portal</title><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#19362b", "inverse-surface": "#dee4de", "tertiary-container": "#aacaba", "secondary-fixed-dim": "#e9c176", "secondary": "#e9c176", "on-secondary-fixed-variant": "#5d4201", "primary-container": "#dfbe7e", "surface-container-high": "#252b28", "on-surface-variant": "#d0c5b5", "on-tertiary-fixed": "#022016", "on-background": "#dee4de", "secondary-container": "#604403", "tertiary": "#c5e6d5", "on-secondary-fixed": "#261900", "surface-container": "#1b211e", "surface-variant": "#303632", "on-tertiary-fixed-variant": "#304d40", "surface-dim": "#0f1512", "primary-fixed-dim": "#e3c282", "background": "#0f1512", "surface": "#0f1512", "error": "#ffb4ab", "surface-container-low": "#171d1a", "on-tertiary-container": "#395649", "on-primary-fixed-variant": "#5a430f", "secondary-fixed": "#ffdea5", "on-error-container": "#ffdad6", "on-primary": "#402d00", "primary": "#fdda97", "surface-container-lowest": "#090f0c", "inverse-primary": "#745b25", "surface-tint": "#e3c282", "error-container": "#93000a", "surface-bright": "#343b37", "tertiary-fixed-dim": "#adcebe", "on-primary-container": "#644c17", "tertiary-fixed": "#c9ead9", "on-secondary-container": "#dab36a", "inverse-on-surface": "#2b322e", "on-error": "#690005", "primary-fixed": "#ffdea1", "on-surface": "#dee4de", "on-primary-fixed": "#261900", "outline-variant": "#4d463a", "on-secondary": "#412d00", "outline": "#998f81", "surface-container-highest": "#303632" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "1.75rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "space-xl": "3rem", "gutter-mobile": "0.75rem", "margin": "3rem", "space-md": "1rem", "space-xs": "0.25rem", "gutter": "1.5rem" }, "fontFamily": { "headline-lg-mobile": [ "EB Garamond" ], "headline-sm": [ "EB Garamond" ], "title-lg": [ "DM Sans" ], "label-md": [ "DM Sans" ], "headline-md": [ "EB Garamond" ], "label-caps": [ "DM Sans" ], "body-lg": [ "DM Sans" ], "display-hero-mobile": [ "EB Garamond" ], "display-hero": [ "EB Garamond" ], "headline-lg": [ "EB Garamond" ], "body-md": [ "DM Sans" ], "telemetry-numeric": [ "DM Sans" ] }, "fontSize": { "headline-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-sm": [ "22px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "500" } ], "title-lg": [ "18px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "headline-md": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "label-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.14em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" } ], "display-hero-mobile": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "display-hero": [ "56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" } ], "headline-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "telemetry-numeric": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "500" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased">
-
-<!-- FIXED SOVEREIGN SIDEBAR -->
-<aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/95 backdrop-blur-xl z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-20 px-space-md flex items-center gap-space-sm bg-surface-container-lowest/60"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="font-headline-sm text-headline-sm text-primary tracking-[0.25em] uppercase font-medium">BESPOKE</span><span class="ml-auto font-label-caps text-label-caps uppercase text-primary px-space-xs py-0.5 bg-surface-container-high rounded text-opacity-90"><?= safe($client['member_id'] ?? 'VIP-8821') ?></span></div><div class="px-space-md pt-space-md pb-space-sm"><span class="font-label-caps text-label-caps uppercase text-outline tracking-widest">Sovereign Consoles</span></div><nav class="flex flex-col gap-space-xs px-space-sm" data-active-classes="bg-surface-container-high text-primary font-title-lg"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2.5 rounded transition-all bg-surface-container-high text-primary font-title-lg" data-path="overview" href="index.php"><span class="material-symbols-outlined text-[18px]">radar</span><span class="font-body-md text-body-md">Mission Telemetry</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="flight-manifest" href="#aviation-radar"><span class="material-symbols-outlined text-[18px]">flight_takeoff</span><span class="font-body-md text-body-md">Aviation Manifest</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="itinerary-planner" href="#dossiers-section"><span class="material-symbols-outlined text-[18px]">calendar_today</span><span class="font-body-md text-body-md">Curated Itinerary</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="concierge-desk" href="#concierge-section"><span class="material-symbols-outlined text-[18px]">support_agent</span><span class="font-body-md text-body-md">Geneva Desk</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="vault-ledger" href="#metrics-section"><span class="material-symbols-outlined text-[18px]">account_balance</span><span class="font-body-md text-body-md">Vault &amp; Ledger</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patron-credentials" href="public/dashboard.php"><span class="material-symbols-outlined text-[18px]">verified_user</span><span class="font-body-md text-body-md">SSR Portal</span></a></nav></div><div class="p-space-md bg-surface-container-lowest/80 flex flex-col gap-space-xs"><div class="flex items-center justify-between text-outline"><span class="font-label-caps text-label-caps uppercase">Swiss Sovereign Node</span><span class="font-telemetry-numeric text-telemetry-numeric text-tertiary">GENEVA-01</span></div><div class="flex items-center justify-between text-outline"><span class="font-label-caps text-label-caps uppercase">Transit Clearance</span><span class="font-telemetry-numeric text-telemetry-numeric text-primary">DIPLOMATIC</span></div></div></aside>
-
-<!-- MAIN CONTENT WRAPPER -->
-<div class="pl-72 flex flex-col min-h-screen">
-
-<!-- TOP HEADER -->
-<header class="fixed top-0 left-72 right-0 h-20 bg-surface-container-low/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full h-full px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-xs text-on-surface-variant hover:text-primary transition-colors py-1.5 px-space-sm rounded bg-surface-container/60 hover:bg-surface-container-high" href="latihan1.php"><span class="material-symbols-outlined text-[16px]">arrow_back</span><span class="font-body-md text-body-md font-medium tracking-wide">Back to Public Advisory</span></a><div class="h-4 w-px bg-outline-variant/40 hidden sm:block"></div><span class="font-label-caps text-label-caps text-outline uppercase tracking-wider hidden md:inline">Patron Vault: <?= safe($client['member_id'] ?? 'VIP-8821') ?></span></div><div class="flex items-center gap-space-sm"><div class="hidden xl:flex items-center gap-1.5 px-space-sm py-1 bg-surface-container-lowest/80 rounded text-on-surface-variant"><span class="material-symbols-outlined text-[14px] text-primary">lock</span><span class="font-telemetry-numeric text-telemetry-numeric">Encrypted Signal 256-bit</span></div><div class="hidden lg:flex items-center gap-1.5 px-space-sm py-1 bg-surface-container-lowest/80 rounded text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span><span class="font-telemetry-numeric text-telemetry-numeric text-tertiary">Geneva Desk Online</span></div><button class="relative p-2 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Notifications"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-low"></span></button><div class="flex items-center gap-space-sm pl-space-xs py-1 pr-space-sm rounded bg-surface-container/70"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center font-bold text-on-primary text-xs"><?= safe($client['avatar_initials'] ?? 'AW') ?></div><div class="hidden md:flex flex-col text-left"><span class="font-title-lg text-title-lg text-on-surface leading-tight"><?= safe($client['title'] ?? 'Lord Alexander Wright') ?></span><span class="font-label-caps text-label-caps text-primary tracking-widest uppercase"><?= safe($client['tier'] ?? 'Black Diamond Tier') ?></span></div></div></div></div></header>
-
-<div class="pt-20"><div class="w-full bg-surface-container-lowest/90 px-space-lg py-2 flex flex-wrap items-center justify-between text-outline text-label-caps font-label-caps tracking-widest uppercase"><div class="flex items-center gap-space-sm"><span class="text-tertiary">FINMA Compliant</span><span>·</span><span>Session: CH-GVA-990422-AUTH</span><span>·</span><span>Dual-Signoff Quorum Active</span></div><div class="flex items-center gap-space-md"><span class="text-on-surface-variant">UTC <?= date('H:i:s') ?></span><span>·</span><span class="text-primary">Zurich Vault Mirror Synced</span></div></div>
-
-<main class="w-full px-space-lg py-space-lg bg-surface-container-lowest"><div class="flex flex-col w-full">
-
-<!-- Top Sovereign Header / Hero Section -->
-<section class="relative w-full mb-space-lg" id="concierge-section">
-<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md mb-space-md">
-<div class="flex flex-col gap-1.5">
-<div class="flex items-center gap-space-xs text-primary font-label-caps text-label-caps uppercase tracking-widest">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(197,230,213,0.8)]"></span>
-<span>Sovereign Patron Tier · Vault Ref #BW-8821-SWISS</span>
-</div>
-<h1 class="font-headline-lg text-headline-lg text-on-surface font-normal tracking-tight">
-  Good evening, <?= safe($client['title'] ?? 'Lord Alexander Wright') ?>
-</h1>
-<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
-<span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
-<span>Swiss Concierge Desk Active</span>
-<span class="text-outline-variant">·</span>
-<span class="text-secondary font-medium">Managing Partner: Marc-André V. on standby (Geneva HQ)</span>
-</div>
-</div>
-<div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-sm rounded shadow-sm self-start lg:self-auto">
-<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
-<div class="flex flex-col">
-<span class="font-label-caps text-label-caps uppercase text-outline">Authentication Status</span>
-<span class="font-telemetry-numeric text-telemetry-numeric text-tertiary">Diplomatic Biometric Quorum · Validated</span>
-</div>
-</div>
-</div>
-
-<!-- Intelligent Concierge AI Query Bar -->
-<div class="w-full bg-surface-container-low/90 backdrop-blur-xl p-space-md rounded shadow-md relative overflow-hidden">
-<div class="absolute -right-16 -top-16 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-<div class="flex flex-col md:flex-row items-stretch md:items-center gap-space-sm mb-space-xs">
-<div class="relative flex-1 flex items-center">
-<span class="material-symbols-outlined absolute left-3.5 text-primary text-[20px] pointer-events-none">auto_awesome</span>
-<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md pl-11 pr-4 py-3 rounded placeholder:text-outline focus:outline-none focus:bg-surface-container-high transition-all" id="concierge-input" placeholder="✦ Ask Concierge AI: Dispatch tail number, request private chef, or view tarmac security clearance..." type="text"/>
-</div>
-<button class="bg-primary text-on-primary font-label-md text-label-md px-space-md py-3 rounded tracking-wider uppercase font-semibold flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.99] transition-all shadow-sm" id="btn-submit-advisor">
-<span class="material-symbols-outlined text-[16px]">lock</span>
-<span>Submit to Advisor</span>
-</button>
-</div>
-<!-- Actionable Chips -->
-<div class="flex flex-wrap items-center gap-2 pt-space-xs">
-<span class="font-label-caps text-label-caps uppercase text-outline mr-1">Direct Prompts:</span>
-<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high text-telemetry-numeric font-telemetry-numeric transition-colors cursor-pointer" onclick="applyPrompt('Add caviar service to G650ER catering profile')">
-  + Add caviar service to G650ER
-</button>
-<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high text-telemetry-numeric font-telemetry-numeric transition-colors cursor-pointer" onclick="applyPrompt('Request St. Moritz heli transfer from Samedan (LSZS)')">
-  + Request St. Moritz heli transfer
-</button>
-<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high text-telemetry-numeric font-telemetry-numeric transition-colors cursor-pointer" onclick="applyPrompt('Confirm Monaco Paddock Club biometric tarmac passes')">
-  + Verify Monaco tarmac clearance
-</button>
-</div>
-</div>
-</section>
-
-<!-- Metric & Telemetry KPI Grid -->
-<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg" id="metrics-section">
-<!-- Card 1 -->
-<div class="bg-surface-container-low p-space-lg rounded shadow-sm relative group hover:bg-surface-container transition-all">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Active Expeditions</span>
-<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-numeric text-telemetry-numeric"><?= safe($availableStatuses['In Review'] ?? 2) + safe($availableStatuses['Planning'] ?? 1) + safe($availableStatuses['Approved'] ?? 2) ?> Active · <?= safe($availableStatuses['Confirmed'] ?? 1) ?> Confirmed</span>
-</div>
-<div class="font-headline-lg text-headline-lg text-on-surface leading-none mb-2"><?= safe($availableStatuses['all'] ?? count($requests)) ?> Portfolios</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">Alps, Cote d'Azur, Kansai, Amalfi &amp; Serengeti</p>
-<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden flex">
-<div class="bg-primary h-full w-2/3"></div>
-<div class="bg-tertiary h-full w-1/3"></div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="bg-surface-container-low p-space-lg rounded shadow-sm relative group hover:bg-surface-container transition-all">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Allocated Vault Portfolio</span>
-<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-telemetry-numeric text-telemetry-numeric">+12% Charter</span>
-</div>
-<div class="font-headline-lg text-headline-lg text-primary leading-none mb-2"><?= safe($stats['total_budget'] ?? '$536,000') ?></div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">Escrow verified via Swiss Sovereign Clearing</p>
-<div class="flex items-center gap-space-xs text-outline font-telemetry-numeric text-telemetry-numeric">
-<span class="text-tertiary">CHF 482,000 Equiv</span>
-<span>·</span>
-<span>Zero Liquidity Lock</span>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="bg-surface-container-low p-space-lg rounded shadow-sm relative group hover:bg-surface-container transition-all">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Aviation Contingency</span>
-<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-numeric text-telemetry-numeric">99.4% Slot Direct</span>
-</div>
-<div class="font-headline-lg text-headline-lg text-on-surface leading-none mb-2">100% Ready</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">Dual standby: LSGG (Geneva) &amp; LFMN (Nice)</p>
-<div class="flex items-center gap-1.5 text-secondary font-label-caps text-label-caps uppercase">
-<span class="material-symbols-outlined text-[14px]">flight_takeoff</span>
-<span>Gulfstream G650ER Crew Activated</span>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="bg-surface-container-low p-space-lg rounded shadow-sm relative group hover:bg-surface-container transition-all">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Senior Partner SLA</span>
-<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-telemetry-numeric text-telemetry-numeric"><?= safe($stats['response_time'] ?? '< 12 Mins Direct') ?></span>
-</div>
-<div class="font-headline-lg text-headline-lg text-on-surface leading-none mb-2">Geneva Desk</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">Dedicated Senior Dispatch: Marc-André V.</p>
-<div class="flex items-center gap-1.5 text-outline font-telemetry-numeric text-telemetry-numeric">
-<span class="w-2 h-2 rounded-full bg-tertiary"></span>
-<span class="text-tertiary">Signal Channel Online</span>
-<span>· Quorum Dual-Auth</span>
-</div>
-</div>
-</section>
-
-<!-- Live Flight Telemetry & Airspace Radar Banner -->
-<section class="bg-surface-container-low p-space-lg rounded shadow-md mb-space-xl relative overflow-hidden" id="aviation-radar">
-<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm mb-space-md">
-<div class="flex items-center gap-space-sm">
-<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-[20px]">radar</span>
-</div>
-<div>
-<div class="flex items-center gap-2">
-<h2 class="font-title-lg text-title-lg text-on-surface font-medium">Bespoke Intelligence™ · Live Flight Telemetry</h2>
-<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-label-caps text-label-caps uppercase tracking-wider">AI Route Optimized</span>
-</div>
-<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Transponder Mode-S Transmit: HB-BSK · Trans-Alpine Corridor Safe</span>
-</div>
-</div>
-<div class="flex items-center gap-space-md text-telemetry-numeric font-telemetry-numeric text-on-surface-variant">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
-<span class="text-tertiary">0% Turbulence Risk</span>
-</div>
-<span>·</span>
-<span>Ground ETA: 15:42 CEST</span>
-<span>·</span>
-<span class="text-primary">Apron Maybach Ready</span>
-</div>
-</div>
-<!-- Route Telemetry Graphics -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center bg-surface-container-lowest p-space-md rounded">
-<div class="lg:col-span-4 flex flex-col gap-2">
-<div class="flex items-baseline justify-between">
-<div class="flex flex-col">
-<span class="font-label-caps text-label-caps text-outline uppercase">Departure Point</span>
-<span class="font-headline-sm text-headline-sm text-primary">LSGG · Geneva</span>
-<span class="font-body-md text-body-md text-on-surface-variant">Terminal VIP Jet Aviation</span>
-</div>
-<span class="material-symbols-outlined text-outline text-[24px]">trending_flat</span>
-<div class="flex flex-col text-right">
-<span class="font-label-caps text-label-caps text-outline uppercase">Destination Airstrip</span>
-<span class="font-headline-sm text-headline-sm text-tertiary">LSZS · Samedan</span>
-<span class="font-body-md text-body-md text-on-surface-variant">Engadin Airport St. Moritz</span>
-</div>
-</div>
-<div class="bg-surface-container-low p-space-sm rounded mt-1 flex flex-col gap-1 text-telemetry-numeric font-telemetry-numeric">
-<div class="flex justify-between text-outline">
-<span>Airframe Model</span>
-<span class="text-on-surface">Gulfstream G650ER</span>
-</div>
-<div class="flex justify-between text-outline">
-<span>Cruising Speed &amp; Altitude</span>
-<span class="text-on-surface">510 kts · FL410</span>
-</div>
-<div class="flex justify-between text-outline">
-<span>Chauffeur Integration</span>
-<span class="text-secondary font-medium">Maybach 62S Apron Standby</span>
-</div>
-</div>
-</div>
-<!-- SVG Flight Vector Path & Radar -->
-<div class="lg:col-span-8 flex flex-col">
-<div class="w-full h-32 relative flex items-center justify-center">
-<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 600 120">
-<!-- Grid Lines -->
-<line class="text-surface-variant/40" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="600" y1="30" y2="30"></line>
-<line class="text-surface-variant/40" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="600" y1="60" y2="60"></line>
-<line class="text-surface-variant/40" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="600" y1="90" y2="90"></line>
-<!-- Mountainous Horizon Silhouette (Subtle) -->
-<path class="text-surface-container-high/40" d="M0 110 L80 95 L140 105 L230 75 L310 90 L400 65 L480 85 L540 70 L600 100 L600 120 L0 120 Z" fill="currentColor"></path>
-<!-- Primary Flight Vector Trajectory -->
-<path class="text-primary/30" d="M40 90 Q 220 15, 540 90" stroke="currentColor" stroke-dasharray="6 6" stroke-width="2"></path>
-<path class="text-primary" d="M40 90 Q 220 15, 340 42" stroke="currentColor" stroke-width="2.5"></path>
-<!-- Origin Beacon -->
-<circle class="text-primary" cx="40" cy="90" fill="currentColor" r="5"></circle>
-<circle class="text-primary/40" cx="40" cy="90" r="10" stroke="currentColor" stroke-width="1.5"></circle>
-<text class="text-on-surface font-label-caps" fill="currentColor" font-size="10" text-anchor="middle" x="40" y="112">LSGG 14:45</text>
-<!-- Destination Beacon -->
-<circle class="text-tertiary" cx="540" cy="90" fill="currentColor" r="5"></circle>
-<circle class="text-tertiary/40" cx="540" cy="90" r="12" stroke="currentColor" stroke-width="1.5"></circle>
-<text class="text-on-surface font-label-caps" fill="currentColor" font-size="10" text-anchor="middle" x="540" y="112">LSZS 15:23</text>
-<!-- Live Aircraft Coordinate -->
-<g transform="translate(340, 42)">
-<circle class="text-primary/20" cx="0" cy="0" fill="currentColor" r="14"></circle>
-<circle class="text-primary" cx="0" cy="0" fill="currentColor" r="4"></circle>
-<polygon class="text-primary" fill="currentColor" points="0,-7 6,5 0,3 -6,5" transform="rotate(50)"></polygon>
-<text class="text-primary font-telemetry-numeric" fill="currentColor" font-size="11" font-weight="bold" x="12" y="-4">HB-BSK (38 min en-route)</text>
-<text class="text-outline font-telemetry-numeric" fill="currentColor" font-size="9" x="12" y="10">FL410 · 510 KTS</text>
-</g>
-</svg>
-</div>
-<div class="flex items-center justify-between text-label-caps font-label-caps text-outline uppercase pt-2">
-<span>Swiss Alpine Corridor Alpha</span>
-<span>Live GPS Telemetry: 46.5050° N, 9.8789° E</span>
-<span>Transponder Mode S / ADS-B Ver. 2</span>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Dossier Portfolio Grid & Filter Controls -->
-<section class="w-full mb-space-xl" id="dossiers-section">
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-md">
-<div>
-<div class="flex items-center gap-2 mb-1">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<h2 class="font-headline-md text-headline-md text-on-surface font-normal">Patron Itinerary Dossiers &amp; Expeditions</h2>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant">Confidential portfolios under bilateral non-disclosure protocols.</p>
-</div>
-
-<!-- Tab Filter System (Mendukung Client-side JS & URL Server Query) -->
-<div class="flex items-center bg-surface-container-low p-1 rounded gap-1 overflow-x-auto max-w-full">
-<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= ($activeFilter === 'all' || $activeFilter === '') ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('all', this)">
-  All Requests (<?= safe($availableStatuses['all'] ?? count($requests)) ?>)
-</button>
-<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= (strtolower($activeFilter) === 'approved') ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('approved', this)">
-  Approved (<?= safe($availableStatuses['Approved'] ?? 2) ?>)
-</button>
-<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= (in_array(strtolower($activeFilter), ['in review', 'in-review'])) ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('in-review', this)">
-  In Review (<?= safe($availableStatuses['In Review'] ?? 2) ?>)
-</button>
-<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= (strtolower($activeFilter) === 'planning') ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('planning', this)">
-  Planning (<?= safe($availableStatuses['Planning'] ?? 1) ?>)
-</button>
-<button class="tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all <?= (strtolower($activeFilter) === 'confirmed') ? 'bg-primary text-on-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' ?>" onclick="filterDossiers('confirmed', this)">
-  Confirmed (<?= safe($availableStatuses['Confirmed'] ?? 1) ?>)
-</button>
-</div>
-</div>
-
-<!-- 3-Column Luxury Cards Grid (Render Dinamis dari PHP Model) -->
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-md" id="dossiers-grid">
-
-<?php foreach ($requests as $item): ?>
-  <?php
-    $statusRaw = $item['status'] ?? 'Planning';
-    $statusSlug = strtolower(str_replace(' ', '-', $statusRaw));
-    
-    // Status color badge
-    $badgeColor = 'text-tertiary';
-    $badgePulse = true;
-    if ($statusSlug === 'in-review') {
-      $badgeColor = 'text-secondary';
-    } elseif ($statusSlug === 'planning') {
-      $badgeColor = 'text-tertiary-fixed';
-      $badgePulse = false;
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_dashboard" name="shell-type"/>
+  <title>Sovereign Reserve — Wealth &amp; Concierge Ledger (Zurich Private Vaults)</title>
+  
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
     }
-    
-    $dossierRef = safe($item['dossier_ref'] ?? ('EXP-' . ($item['id'] ?? 'REF')));
-    $destTitle = safe($item['destination'] ?? 'Luxury Expedition');
-    $dates = safe($item['dates'] ?? '');
-    $budget = safe($item['budget'] ?? '$0');
-    $advisor = safe($item['advisor'] ?? 'Marc-André V.');
-    $assetTag = safe($item['asset_tag'] ?? 'Private Jet & Chauffeur');
-    $imgUrl = safe($item['image_url'] ?? '');
-    $notes = safe($item['notes'] ?? '');
-    $hash = 'SHA-256: ' . substr(hash('sha256', $dossierRef . $destTitle), 0, 16);
-  ?>
-  <div class="dossier-card bg-surface-container-low rounded p-space-lg flex flex-col justify-between shadow-sm hover:bg-surface-container transition-all relative overflow-hidden group" data-status="<?= $statusSlug ?>">
-    <div class="flex flex-col gap-space-sm">
-      <div class="flex items-center justify-between">
-        <span class="font-telemetry-numeric text-telemetry-numeric text-outline"><?= $dossierRef ?></span>
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface-container-high <?= $badgeColor ?> font-label-caps text-label-caps uppercase">
-          <?php if ($badgePulse): ?>
-            <span class="w-1.5 h-1.5 rounded-full <?= ($statusSlug === 'in-review') ? 'bg-secondary' : 'bg-tertiary' ?> animate-pulse"></span>
-          <?php endif; ?>
-          <?= safe($statusRaw) ?>
-        </span>
-      </div>
-      <!-- Image Container -->
-      <div class="w-full h-36 rounded overflow-hidden relative">
-        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="<?= $destTitle ?>" alt="<?= $destTitle ?>" src="<?= $imgUrl ?>"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
-        <div class="absolute bottom-2 left-3 text-on-surface font-telemetry-numeric text-telemetry-numeric"><?= $dates ?></div>
-      </div>
-      <div>
-        <h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
-          <?= $destTitle ?>
-        </h3>
-        <p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Asset: <?= $assetTag ?></p>
-      </div>
-      <div class="flex flex-wrap gap-1.5 pt-1">
-        <?php if (!empty($item['services']) && is_array($item['services'])): ?>
-          <?php foreach ($item['services'] as $svc): ?>
-            <span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-caps text-label-caps">✓ <?= safe($svc) ?></span>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </div>
-    </div>
-    <div class="mt-space-md pt-space-sm border-t border-transparent bg-surface-container-lowest/50 -mx-space-lg -mb-space-lg p-space-md flex items-center justify-between">
-      <div class="flex flex-col">
-        <span class="font-label-caps text-label-caps uppercase text-outline">Budget / Advisor</span>
-        <span class="font-title-lg text-title-lg text-primary"><?= $budget ?> <span class="text-label-caps text-outline font-normal">· <?= $advisor ?></span></span>
-      </div>
-      <button class="text-primary hover:text-secondary font-label-md text-label-md flex items-center gap-1 cursor-pointer" onclick="openDossierModal('<?= addslashes($destTitle) ?>', '<?= $budget ?>', '<?= addslashes($advisor) ?>', '<?= safe($statusRaw) ?>', '<?= $dossierRef ?>', '<?= $hash ?>')">
-        <span>Encrypted Dossier</span>
-        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-      </button>
-    </div>
-  </div>
-<?php endforeach; ?>
+    ::-webkit-scrollbar { display: none; }
+  </style>
 
-</div>
-</section>
-
-<!-- Architectural MVC & Vault Assurance Bar -->
-<section class="bg-surface-container-low/70 p-space-md rounded shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-sm">
-<div class="flex items-center gap-space-sm">
-<span class="material-symbols-outlined text-primary text-[20px]">account_balance</span>
-<div class="flex flex-col">
-<span class="font-body-md text-body-md text-on-surface font-medium">Bespoke Concierge Framework · MVC Architecture</span>
-<span class="font-label-caps text-label-caps text-outline uppercase">Model: TravelModel · Controller: DashboardController · View: dashboard-view · Dev: Zaidaan Diandra (202410370110420)</span>
-</div>
-</div>
-<div class="flex items-center gap-space-sm text-telemetry-numeric font-telemetry-numeric text-tertiary">
-<span class="w-2 h-2 rounded-full bg-tertiary"></span>
-<span>FINMA Protocol &amp; Article 47 Covenants Active</span>
-</div>
-</section>
-
-<!-- Encrypted Dossier Drawer / Modal -->
-<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md hidden items-center justify-center p-4" id="dossier-modal">
-<div class="bg-surface-container-low max-w-2xl w-full rounded p-space-lg shadow-xl relative flex flex-col gap-space-md">
-<div class="flex items-start justify-between">
-<div class="flex flex-col">
-<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest" id="modal-ref">REF-ID</span>
-<h3 class="font-headline-sm text-headline-sm text-on-surface" id="modal-title">Expedition Title</h3>
-</div>
-<button class="text-outline hover:text-on-surface p-1 rounded hover:bg-surface-container cursor-pointer" onclick="closeDossierModal()">
-<span class="material-symbols-outlined text-[20px]">close</span>
-</button>
-</div>
-<div class="bg-surface-container-lowest p-space-md rounded flex flex-col gap-2 font-telemetry-numeric text-telemetry-numeric">
-<div class="flex justify-between">
-<span class="text-outline">Cryptographic Fingerprint:</span>
-<span class="text-tertiary select-all" id="modal-hash">SHA-256: 000000</span>
-</div>
-<div class="flex justify-between">
-<span class="text-outline">Managing Advisor:</span>
-<span class="text-on-surface" id="modal-advisor">Marc-André V.</span>
-</div>
-<div class="flex justify-between">
-<span class="text-outline">Authorized Allocation:</span>
-<span class="text-primary font-medium" id="modal-budget">$0</span>
-</div>
-<div class="flex justify-between">
-<span class="text-outline">Swiss Diplomatic Clearance:</span>
-<span class="text-tertiary">GEN-POL-APR-VALID</span>
-</div>
-</div>
-<div class="flex flex-col gap-1.5">
-<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Direct Advisor Message Signal</span>
-<textarea class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md p-3 rounded h-20 placeholder:text-outline focus:outline-none focus:bg-surface-container-high resize-none" placeholder="Send high-priority directive directly to assigned managing partner..."></textarea>
-</div>
-<div class="flex items-center justify-between pt-space-xs">
-<div class="flex items-center gap-2 text-outline font-label-caps text-label-caps uppercase">
-<span class="material-symbols-outlined text-[16px] text-primary">security</span>
-<span>End-to-End Encrypted Quorum</span>
-</div>
-<div class="flex items-center gap-2">
-<button class="px-space-md py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors cursor-pointer" onclick="closeDossierModal()">
-  Dismiss
-</button>
-<button class="px-space-md py-2 rounded bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider font-semibold hover:bg-primary-container transition-all cursor-pointer" onclick="confirmAdvisorDispatch()">
-  Transmit Directive
-</button>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</main>
-</div>
-
-<!-- FOOTER -->
-<footer class="mt-auto w-full bg-surface-container-low/95 text-on-surface-variant py-space-lg">
-<div class="w-full px-space-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
-<div class="flex flex-col gap-1">
-<p class="font-body-md text-body-md text-on-surface">Bespoke Concierge Framework · MVC Architecture (Model: TravelModel · Controller: DashboardController · View: dashboard-view)</p>
-<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">All data encrypted under Swiss bilateral non-disclosure covenants · Article 47 Swiss Federal Banking Law standard.</p>
-</div>
-<div class="flex items-center gap-space-md font-telemetry-numeric text-telemetry-numeric text-outline">
-<span class="text-primary">Geneva <?= date('H:i') ?> CEST</span>
-<span>·</span>
-<span class="text-secondary">Zurich Ops Verified</span>
-</div>
-</div>
-</footer>
-
-</div>
-
-<!-- INTERACTIVE SCRIPTS -->
-<script>
-  function applyPrompt(promptText) {
-    const input = document.getElementById('concierge-input');
-    if (input) {
-      input.value = promptText;
-      input.focus();
-    }
-  }
-
-  function filterDossiers(status, btnElement) {
-    // Update active tab styles
-    const buttons = document.querySelectorAll('.tab-filter-btn');
-    buttons.forEach(btn => {
-      btn.className = 'tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer';
-    });
-    btnElement.className = 'tab-filter-btn px-space-sm py-1.5 rounded font-label-md text-label-md transition-all bg-primary text-on-primary font-semibold cursor-pointer';
-
-    // Filter cards
-    const cards = document.querySelectorAll('.dossier-card');
-    cards.forEach(card => {
-      const cardStatus = card.getAttribute('data-status');
-      if (status === 'all' || cardStatus === status) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-secondary": "#3d2f00",
+            "inverse-surface": "#e2e2e8",
+            "secondary": "#e7c35a",
+            "primary-fixed": "#ffe088",
+            "outline": "#99907c",
+            "surface-container": "#1e2024",
+            "on-surface": "#e2e2e8",
+            "on-secondary-fixed-variant": "#584400",
+            "on-primary-fixed": "#241a00",
+            "secondary-fixed-dim": "#e7c35a",
+            "background": "#111317",
+            "on-tertiary": "#3a3000",
+            "on-surface-variant": "#d0c5af",
+            "on-tertiary-container": "#524500",
+            "tertiary": "#e3cf7c",
+            "outline-variant": "#4d4635",
+            "on-error": "#690005",
+            "tertiary-container": "#c6b364",
+            "surface-dim": "#111317",
+            "surface-container-lowest": "#0c0e12",
+            "tertiary-fixed": "#f7e28e",
+            "primary-fixed-dim": "#e9c349",
+            "on-primary-fixed-variant": "#574500",
+            "inverse-on-surface": "#2f3035",
+            "inverse-primary": "#735c00",
+            "on-secondary-fixed": "#241a00",
+            "on-primary-container": "#554300",
+            "primary": "#f2ca50",
+            "surface-variant": "#333539",
+            "surface": "#111317",
+            "primary-container": "#d4af37",
+            "surface-container-highest": "#333539",
+            "surface-container-high": "#282a2e",
+            "error-container": "#93000a",
+            "on-primary": "#3c2f00",
+            "tertiary-fixed-dim": "#dac675",
+            "on-tertiary-fixed-variant": "#534600",
+            "on-error-container": "#ffdad6",
+            "surface-tint": "#e9c349",
+            "surface-container-low": "#1a1c20",
+            "secondary-fixed": "#ffe08b",
+            "on-background": "#e2e2e8",
+            "on-secondary-container": "#fff3dc",
+            "surface-bright": "#37393e",
+            "secondary-container": "#896c00",
+            "on-tertiary-fixed": "#221b00",
+            "error": "#ffb4ab"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin": "3rem",
+            "margin-mobile": "1.25rem",
+            "space-lg": "1.75rem",
+            "space-xl": "3rem",
+            "gutter": "1.5rem"
+          },
+          fontFamily: {
+            "label-caps": ["DM Sans"],
+            "body-md": ["DM Sans"],
+            "title-md": ["DM Sans"],
+            "headline-sm": ["DM Sans"],
+            "headline-lg-mobile": ["EB Garamond"],
+            "body-lg": ["DM Sans"],
+            "headline-md": ["EB Garamond"],
+            "label-meta": ["DM Sans"],
+            "body-sm": ["DM Sans"],
+            "numeric-data-md": ["DM Sans"],
+            "display-hero": ["EB Garamond"],
+            "numeric-data-lg": ["DM Sans"],
+            "display-hero-mobile": ["EB Garamond"],
+            "headline-lg": ["EB Garamond"]
+          },
+          fontSize: {
+            "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.14em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "title-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-md": ["26px", { "lineHeight": "34px", "fontWeight": "400" }],
+            "label-meta": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "numeric-data-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+            "numeric-data-lg": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+            "display-hero-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" }]
+          }
+        }
       }
-    });
-  }
+    };
+  </script>
+</head>
+<body class="bg-surface-container-lowest font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
 
-  function openDossierModal(title, budget, advisor, status, refId, hash) {
-    document.getElementById('modal-title').innerText = title;
-    document.getElementById('modal-budget').innerText = budget;
-    document.getElementById('modal-advisor').innerText = advisor;
-    document.getElementById('modal-ref').innerText = 'ENCRYPTED DOSSIER · ' + refId + ' (' + status + ')';
-    document.getElementById('modal-hash').innerText = hash;
+  <!-- =========================================================================
+       SIDEBAR NAVIGATION (Fixed Left, 72 cols)
+       ========================================================================= -->
+  <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/90 backdrop-blur-2xl z-50 flex flex-col justify-between py-space-lg px-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-r border-surface-container/40">
+    <div class="flex flex-col gap-space-lg">
+      
+      <!-- Logo: Sovereign Reserve & Zurich Vaults -->
+      <a href="index.php" class="flex items-center gap-space-sm px-space-sm group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-secondary to-secondary-container text-on-primary flex items-center justify-center font-bold text-base shadow-md group-hover:scale-105 transition-transform">
+          ✦
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-title-md tracking-wider uppercase text-primary font-bold">SOVEREIGN RESERVE</span>
+          <span class="font-label-meta text-label-meta tracking-widest text-outline uppercase">Zurich Private Vaults</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-space-xs">
+        <a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full transition-all duration-300 bg-surface-container-high text-primary shadow-[0_0_20px_-2px_rgba(212,175,55,0.15)]" href="index.php">
+          <span class="material-symbols-outlined text-[20px]">grid_view</span>
+          <span class="font-body-md text-body-md tracking-wide font-medium">Dashboard</span>
+        </a>
+        <a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-300" href="#performance-section">
+          <span class="material-symbols-outlined text-[20px]">account_balance</span>
+          <span class="font-body-md text-body-md tracking-wide">Portfolio / Sanctuaries</span>
+        </a>
+        <a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-300" href="#ledger-section">
+          <span class="material-symbols-outlined text-[20px]">flight_takeoff</span>
+          <span class="font-body-md text-body-md tracking-wide">Expeditions / Flights</span>
+        </a>
+        <a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-300" href="#fleet-section">
+          <span class="material-symbols-outlined text-[20px]">directions_boat</span>
+          <span class="font-body-md text-body-md tracking-wide">Markets / Charters</span>
+        </a>
+        <a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-300" href="#ledger-section">
+          <span class="material-symbols-outlined text-[20px]">lock_clock</span>
+          <span class="font-body-md text-body-md tracking-wide">Transfers / Escrow</span>
+        </a>
+        <a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-300" href="#ledger-section">
+          <span class="material-symbols-outlined text-[20px]">description</span>
+          <span class="font-body-md text-body-md tracking-wide">Dossiers / Reports</span>
+        </a>
+        <a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-300" href="latihan1.php">
+          <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+          <span class="font-body-md text-body-md tracking-wide text-primary">Public Advisory &rarr;</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom Encryption Badge -->
+    <div class="px-space-sm">
+      <div class="p-space-sm rounded-xl bg-surface-container/60 backdrop-blur-xl flex items-center gap-space-xs border border-surface-container-high/40">
+        <span class="material-symbols-outlined text-primary text-[18px]">shield</span>
+        <div class="flex flex-col">
+          <span class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface-variant">Tier-1 Encrypted</span>
+          <span class="font-label-meta text-label-meta uppercase tracking-wider text-outline">Zurich Gateway &bull; 4096-bit</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <div class="pl-72">
     
-    const modal = document.getElementById('dossier-modal');
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-  }
+    <!-- TOP FIXED HEADER -->
+    <header class="fixed top-0 left-72 right-0 h-20 bg-surface-container-lowest/80 backdrop-blur-2xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-surface-container/30">
+      <div class="h-20 w-full px-space-lg flex items-center justify-between gap-space-md">
+        
+        <!-- Welcome Greeting & Client Dossier -->
+        <div class="flex items-center gap-space-md">
+          <div class="flex flex-col">
+            <span class="font-body-md text-body-md text-on-surface font-medium">Welcome, <?= safe($client['title'] ?? 'Alexander Dubois') ?></span>
+            <span class="font-label-meta text-label-meta uppercase tracking-wider text-secondary"><?= safe($client['member_id'] ?? 'VIP-8821') ?> &bull; <?= safe($client['tier'] ?? 'Sovereign Tier') ?></span>
+          </div>
+          <div class="hidden lg:flex items-center px-space-sm py-space-xs rounded-full bg-surface-container border border-surface-container-high/40">
+            <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest"><?= date('M d, Y') ?></span>
+          </div>
+        </div>
 
-  function closeDossierModal() {
-    const modal = document.getElementById('dossier-modal');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-  }
+        <!-- Search Bar -->
+        <div class="flex-1 max-w-md hidden md:flex items-center gap-space-xs px-space-md py-space-xs bg-surface-container/80 rounded-full border border-surface-container-high/50">
+          <span class="material-symbols-outlined text-outline text-[18px]">search</span>
+          <input id="global-search-input" class="bg-transparent w-full text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none" placeholder="Search dossiers, charters, vaults..." type="text"/>
+        </div>
 
-  function confirmAdvisorDispatch() {
-    alert("Encrypted transmission queued for Geneva Desk Managing Partner. Dual-key handshake confirmed.");
-    closeDossierModal();
-  }
+        <!-- Notification & Profile Tray -->
+        <div class="flex items-center gap-space-md">
+          <button onclick="alert('Zurich Core Signal: Zero security alerts. All escrow vaults synchronized.')" class="relative p-space-xs rounded-full hover:bg-surface-container-high transition-colors cursor-pointer">
+            <span class="material-symbols-outlined text-on-surface-variant text-[22px]">notifications</span>
+            <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          </button>
+          <button onclick="alert('Connecting to Dedicated Attaché Desk (Geneva Quorum)...')" class="relative p-space-xs rounded-full hover:bg-surface-container-high transition-colors cursor-pointer">
+            <span class="material-symbols-outlined text-on-surface-variant text-[22px]">support_agent</span>
+            <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-secondary"></span>
+          </button>
+          
+          <div class="flex items-center gap-space-sm pl-space-xs">
+            <div class="relative rounded-full p-[2px] bg-secondary-container">
+              <img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAttuZoSQhLh0t3Q6VKC-Y1OhfDBagwl5g5Uo_k36JUrEyqs2C-QTue4ntkMCGnar6sowcrwtZNolb1YrDBUPf3WVeJGEHGRmJt4H-K6A5sl3GkHro1yrLmQsutNqaZQyTp9cg8VZTw7VlrwASZ72BH6YOZ4H_x43tPLkUo7F3qaNnVWL46dynQtfqyjY25OWRp-JIEhJbRVkJjreGATRNtQr-ivyvHAUn_ollc9_7p"/>
+            </div>
+            <a href="latihan1.php" class="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-primary border border-surface-container-high transition-colors">
+              Exit to Web
+            </a>
+          </div>
+        </div>
 
-  document.getElementById('btn-submit-advisor')?.addEventListener('click', () => {
-    const val = document.getElementById('concierge-input').value.trim();
-    if (val) {
-      alert("AI Copilot request transmitted to Marc-André V. at Geneva Ops: \"" + val + "\"");
-      document.getElementById('concierge-input').value = '';
-    } else {
-      document.getElementById('concierge-input').focus();
+      </div>
+    </header>
+
+    <!-- =========================================================================
+         DASHBOARD BODY
+         ========================================================================= -->
+    <main class="relative pt-20 w-full px-space-lg min-h-screen bg-surface-container-lowest">
+      <div class="flex flex-col w-full pb-space-xl gap-space-lg">
+
+        <!-- Ambient Specular Glow Elements -->
+        <div class="relative w-full">
+          <div class="absolute -top-10 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[140px] pointer-events-none"></div>
+          <div class="absolute top-48 right-10 w-80 h-80 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+          
+          <!-- Sovereign Sub-header / Status Node Bar -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-space-sm pt-4">
+            <div class="flex flex-col gap-space-xs">
+              <div class="flex items-center gap-space-xs">
+                <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span class="font-label-caps text-label-caps uppercase text-primary tracking-[0.2em]">Zurich Core Enclave &bull; Biometric Node #09</span>
+              </div>
+              <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Sovereign Wealth &amp; Concierge Ledger</h1>
+            </div>
+            
+            <div class="flex items-center gap-space-sm flex-wrap">
+              <div class="px-space-md py-space-xs rounded-full bg-surface-container-high/60 backdrop-blur-md flex items-center gap-space-xs shadow-sm border border-surface-container-high">
+                <span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+                <span class="font-label-caps text-label-caps text-on-surface tracking-wider uppercase">Vault Integrity: 99.998%</span>
+              </div>
+              <div class="px-space-md py-space-xs rounded-full bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-space-xs shadow-md shadow-primary/10">
+                <span class="material-symbols-outlined text-[16px]">key</span>
+                <span>Dual-Custody Key Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =====================================================================
+             PRIMARY PERFORMANCE & TOTAL WEALTH BENTO GRID
+             ===================================================================== -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md" id="performance-section">
+          
+          <!-- CARD 1: LARGE PERFORMANCE CHART (8 cols) -->
+          <div class="lg:col-span-8 group relative rounded-xl bg-surface-container-low/70 backdrop-blur-2xl p-space-lg shadow-xl overflow-hidden transition-all duration-500 hover:bg-surface-container-low/85 border border-surface-container-high/30">
+            <!-- Top Specular Highlight Line -->
+            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+            
+            <!-- Card Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mb-space-lg">
+              <div class="flex flex-col gap-space-xs">
+                <div class="flex items-center gap-space-sm">
+                  <span class="font-label-caps text-label-caps text-outline uppercase tracking-[0.18em]">PORTFOLIO PERFORMANCE</span>
+                  <span class="px-space-xs py-[2px] rounded-full bg-primary/10 text-primary font-label-meta text-label-meta tracking-wide">+5.42% Growth</span>
+                </div>
+                <div class="flex items-baseline gap-space-sm">
+                  <span class="font-numeric-data-lg text-numeric-data-lg text-on-surface font-light tracking-tight">$2,485,000</span>
+                  <span class="font-body-sm text-body-sm text-outline">USD Consolidated</span>
+                </div>
+              </div>
+              
+              <!-- Filter Pills -->
+              <div class="flex items-center gap-1 p-1 bg-surface-container-lowest/80 rounded-full shadow-inner self-start sm:self-auto border border-surface-container-high/40">
+                <button onclick="setChartFilter(this, '1M')" class="chart-filter-btn px-3 py-1 rounded-full font-label-caps text-label-caps text-outline hover:text-on-surface transition-colors cursor-pointer">1M</button>
+                <button onclick="setChartFilter(this, '3M')" class="chart-filter-btn px-3 py-1 rounded-full font-label-caps text-label-caps text-outline hover:text-on-surface transition-colors cursor-pointer">3M</button>
+                <button onclick="setChartFilter(this, '6M')" class="chart-filter-btn px-3 py-1 rounded-full font-label-caps text-label-caps bg-primary text-on-primary font-semibold shadow-sm cursor-pointer active">6 MONTHS</button>
+                <button onclick="setChartFilter(this, '1Y')" class="chart-filter-btn px-3 py-1 rounded-full font-label-caps text-label-caps text-outline hover:text-on-surface transition-colors cursor-pointer">1Y</button>
+                <button onclick="setChartFilter(this, 'ALL')" class="chart-filter-btn px-3 py-1 rounded-full font-label-caps text-label-caps text-outline hover:text-on-surface transition-colors cursor-pointer">ALL</button>
+              </div>
+            </div>
+
+            <!-- Glowing Smooth Area Line Chart (Inline SVG) -->
+            <div class="relative w-full h-72">
+              <svg class="w-full h-full overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 760 260">
+                <defs>
+                  <!-- Primary Line Gradient Fill -->
+                  <linearGradient id="goldAreaGrad" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#faecc5" stop-opacity="0.32"></stop>
+                    <stop offset="50%" stop-color="#d4af37" stop-opacity="0.12"></stop>
+                    <stop offset="100%" stop-color="#d4af37" stop-opacity="0.0"></stop>
+                  </linearGradient>
+                  <!-- Line Stroke Gradient -->
+                  <linearGradient id="goldStrokeGrad" x1="0" x2="1" y1="0" y2="0">
+                    <stop offset="0%" stop-color="#faecc5"></stop>
+                    <stop offset="60%" stop-color="#f2ca50"></stop>
+                    <stop offset="100%" stop-color="#d4af37"></stop>
+                  </linearGradient>
+                  <!-- Specular Glow Filter -->
+                  <filter height="140%" id="glowGold" width="140%" x="-20%" y="-20%">
+                    <feGaussianBlur result="blur" stdDeviation="3"></feGaussianBlur>
+                    <feMerge>
+                      <feMergeNode in="blur"></feMergeNode>
+                      <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                  </filter>
+                </defs>
+                
+                <!-- Horizontal Soft Guidelines -->
+                <line stroke="#99907c" stroke-dasharray="3 3" stroke-opacity="0.12" x1="0" x2="760" y1="40" y2="40"></line>
+                <line stroke="#99907c" stroke-dasharray="3 3" stroke-opacity="0.12" x1="0" x2="760" y1="95" y2="95"></line>
+                <line stroke="#99907c" stroke-dasharray="3 3" stroke-opacity="0.12" x1="0" x2="760" y1="150" y2="150"></line>
+                <line stroke="#99907c" stroke-dasharray="3 3" stroke-opacity="0.12" x1="0" x2="760" y1="205" y2="205"></line>
+                
+                <!-- Area Gradient Fill Path -->
+                <path d="M 0 210 C 80 190, 140 180, 200 150 C 260 120, 310 145, 380 110 C 450 75, 520 95, 600 50 C 670 15, 710 32, 760 22 L 760 250 L 0 250 Z" fill="url(#goldAreaGrad)"></path>
+                
+                <!-- Smooth Glowing Line Stroke -->
+                <path d="M 0 210 C 80 190, 140 180, 200 150 C 260 120, 310 145, 380 110 C 450 75, 520 95, 600 50 C 670 15, 710 32, 760 22" fill="none" filter="url(#glowGold)" stroke="url(#goldStrokeGrad)" stroke-width="2.5"></path>
+                
+                <!-- Peak Marker Vertical Line -->
+                <line stroke="#d4af37" stroke-dasharray="2 2" stroke-opacity="0.35" x1="600" x2="600" y1="50" y2="240"></line>
+                
+                <!-- Peak Data Node (Sep 2026: $2,485,000) -->
+                <circle class="animate-ping" cx="600" cy="50" fill="#f2ca50" fill-opacity="0.3" r="7"></circle>
+                <circle cx="600" cy="50" fill="#f2ca50" r="5"></circle>
+                <circle cx="600" cy="50" fill="#0c0e12" r="2.5"></circle>
+              </svg>
+              
+              <!-- Peak Float Tooltip Floating Tag -->
+              <div class="absolute top-2 right-32 sm:right-40 bg-surface-container-high/90 backdrop-blur-xl px-space-sm py-1 rounded shadow-lg pointer-events-none flex flex-col items-center border border-primary/20">
+                <span class="font-label-meta text-label-meta text-outline uppercase tracking-wider">Sep 2026 Peak</span>
+                <span class="font-numeric-data-md text-numeric-data-md text-primary font-semibold">$2,485,000</span>
+              </div>
+            </div>
+
+            <!-- Date Axis Labels -->
+            <div class="flex justify-between items-center pt-space-xs text-outline font-label-meta text-label-meta uppercase tracking-wider">
+              <span>May 2026</span>
+              <span>Jun 2026</span>
+              <span>Jul 2026</span>
+              <span>Aug 2026</span>
+              <span class="text-primary font-bold">Sep 2026</span>
+              <span>Oct 2026</span>
+            </div>
+          </div>
+
+          <!-- CARD 2: TOTAL WEALTH & TREASURY (4 cols) -->
+          <div class="lg:col-span-4 relative rounded-xl bg-surface-container-low/70 backdrop-blur-2xl p-space-lg shadow-xl flex flex-col justify-between overflow-hidden transition-all duration-500 hover:bg-surface-container-low/85 border border-surface-container-high/30">
+            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+            <div>
+              <div class="flex items-center justify-between mb-space-xs">
+                <span class="font-label-caps text-label-caps text-outline uppercase tracking-[0.18em]">TOTAL WEALTH &amp; TREASURY</span>
+                <span class="px-space-xs py-[2px] rounded-full bg-emerald-500/10 text-emerald-400 font-label-meta text-label-meta tracking-wide flex items-center gap-1 border border-emerald-500/20">
+                  <span class="material-symbols-outlined text-[13px]">trending_up</span>+7.8% YTD
+                </span>
+              </div>
+              <div class="font-headline-lg text-headline-lg text-on-surface font-light tracking-tight mb-space-sm">
+                $32,780,900
+              </div>
+              
+              <!-- Dual Layer Smooth Wave Area Chart -->
+              <div class="relative w-full h-28 my-space-xs">
+                <svg class="w-full h-full overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 320 110">
+                  <defs>
+                    <linearGradient id="waveGrad1" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#f2ca50" stop-opacity="0.25"></stop>
+                      <stop offset="100%" stop-color="#f2ca50" stop-opacity="0.0"></stop>
+                    </linearGradient>
+                    <linearGradient id="waveGrad2" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#faecc5" stop-opacity="0.18"></stop>
+                      <stop offset="100%" stop-color="#d4af37" stop-opacity="0.0"></stop>
+                    </linearGradient>
+                  </defs>
+                  <!-- Background Secondary Wave -->
+                  <path d="M 0 80 Q 80 50, 160 65 T 320 40 L 320 110 L 0 110 Z" fill="url(#waveGrad2)"></path>
+                  <path d="M 0 80 Q 80 50, 160 65 T 320 40" fill="none" stroke="#faecc5" stroke-opacity="0.5" stroke-width="1.5"></path>
+                  <!-- Foreground Primary Wave -->
+                  <path d="M 0 95 Q 70 70, 150 45 T 320 20 L 320 110 L 0 110 Z" fill="url(#waveGrad1)"></path>
+                  <path d="M 0 95 Q 70 70, 150 45 T 320 20" fill="none" stroke="#f2ca50" stroke-width="2"></path>
+                  <circle cx="320" cy="20" fill="#f2ca50" r="3.5"></circle>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Quick Treasury Balances List -->
+            <div class="flex flex-col gap-space-xs mt-space-sm pt-space-sm bg-surface-container-lowest/50 p-space-sm rounded-lg border border-surface-container-high/30">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-primary text-[16px]">account_balance</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Global Custody Escrow</span>
+                </div>
+                <span class="font-body-sm text-body-sm text-on-surface font-semibold tracking-tight">$32,780,900</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-secondary text-[16px]">shield_with_house</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Gold Bullion (Zurich)</span>
+                </div>
+                <span class="font-body-sm text-body-sm text-on-surface font-semibold tracking-tight">$14,250,000</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-emerald-400 text-[16px]">bolt</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Liquid Yield Stash</span>
+                </div>
+                <span class="font-body-sm text-body-sm text-emerald-400 font-semibold tracking-tight">+$34,780 today</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- =====================================================================
+             MIDDLE ROW: 3D DONUT ALLOCATION + MARKET/FLEET + GOALS TRACKER
+             ===================================================================== -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-space-md" id="fleet-section">
+          
+          <!-- CARD 3: ASSET & DOMAIN ALLOCATION (DONUT CHART) - 4 cols -->
+          <div class="lg:col-span-4 rounded-xl bg-surface-container-low/70 backdrop-blur-2xl p-space-lg shadow-xl flex flex-col justify-between relative overflow-hidden transition-all duration-500 hover:bg-surface-container-low/85 border border-surface-container-high/30">
+            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+            <div>
+              <div class="flex items-center justify-between mb-space-md">
+                <span class="font-label-caps text-label-caps text-outline uppercase tracking-[0.18em]">ASSET ALLOCATION — 3D RING</span>
+                <span class="material-symbols-outlined text-outline text-[18px]">donut_small</span>
+              </div>
+              
+              <!-- 3D Segmented Donut SVG Visual -->
+              <div class="relative flex items-center justify-center my-space-sm">
+                <svg class="w-48 h-48 -rotate-90 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]" viewBox="0 0 160 160">
+                  <defs>
+                    <linearGradient id="goldDonut" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#faecc5"></stop>
+                      <stop offset="100%" stop-color="#d4af37"></stop>
+                    </linearGradient>
+                    <linearGradient id="brassDonut" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#e7c35a"></stop>
+                      <stop offset="100%" stop-color="#896c00"></stop>
+                    </linearGradient>
+                    <linearGradient id="obsidianDonut" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#37393e"></stop>
+                      <stop offset="100%" stop-color="#1e2024"></stop>
+                    </linearGradient>
+                    <linearGradient id="silverDonut" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#e2e2e8"></stop>
+                      <stop offset="100%" stop-color="#99907c"></stop>
+                    </linearGradient>
+                  </defs>
+                  <!-- Background Track -->
+                  <circle cx="80" cy="80" fill="transparent" r="58" stroke="#1e2024" stroke-width="18"></circle>
+                  <!-- Segments: Circumference = 2 * pi * 58 ≈ 364.4 -->
+                  <!-- Segment 1: Equities & Aviation (52% -> 189.5) -->
+                  <circle cx="80" cy="80" fill="transparent" r="58" stroke="url(#goldDonut)" stroke-dasharray="189.5 364.4" stroke-dashoffset="0" stroke-width="18"></circle>
+                  <!-- Segment 2: Fixed Income & Sanctuaries (28% -> 102.0) -->
+                  <circle cx="80" cy="80" fill="transparent" r="58" stroke="url(#brassDonut)" stroke-dasharray="102.0 364.4" stroke-dashoffset="-193.5" stroke-width="18"></circle>
+                  <!-- Segment 3: Real Estate & Charters (15% -> 54.6) -->
+                  <circle cx="80" cy="80" fill="transparent" r="58" stroke="url(#obsidianDonut)" stroke-dasharray="54.6 364.4" stroke-dashoffset="-298.5" stroke-width="18"></circle>
+                  <!-- Segment 4: Alternatives & Vaults (5% -> 18.2) -->
+                  <circle cx="80" cy="80" fill="transparent" r="58" stroke="url(#silverDonut)" stroke-dasharray="18.2 364.4" stroke-dashoffset="-355.1" stroke-width="18"></circle>
+                </svg>
+                <!-- Donut Cutout Center Core -->
+                <div class="absolute flex flex-col items-center justify-center text-center">
+                  <span class="font-numeric-data-lg text-numeric-data-lg text-primary font-bold tracking-tight">100%</span>
+                  <span class="font-label-meta text-label-meta text-outline uppercase tracking-widest">Tier Alpha</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="grid grid-cols-2 gap-x-space-sm gap-y-space-xs pt-space-sm">
+              <div class="flex items-center gap-space-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-primary shadow-sm shadow-primary/30"></span>
+                <div class="flex flex-col">
+                  <span class="font-label-meta text-label-meta text-on-surface">Equities &amp; Jets</span>
+                  <span class="font-numeric-data-md text-body-sm text-primary font-bold">52%</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-space-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+                <div class="flex flex-col">
+                  <span class="font-label-meta text-label-meta text-on-surface">Sanctuaries</span>
+                  <span class="font-numeric-data-md text-body-sm text-secondary font-bold">28%</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-space-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-surface-bright"></span>
+                <div class="flex flex-col">
+                  <span class="font-label-meta text-label-meta text-on-surface">Charters</span>
+                  <span class="font-numeric-data-md text-body-sm text-on-surface font-bold">15%</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-space-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-inverse-surface"></span>
+                <div class="flex flex-col">
+                  <span class="font-label-meta text-label-meta text-on-surface">Vault Vaults</span>
+                  <span class="font-numeric-data-md text-body-sm text-outline font-bold">5%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4: MARKET SENTIMENT & FLEET READINESS - 4 cols -->
+          <div class="lg:col-span-4 rounded-xl bg-surface-container-low/70 backdrop-blur-2xl p-space-lg shadow-xl flex flex-col justify-between relative overflow-hidden transition-all duration-500 hover:bg-surface-container-low/85 border border-surface-container-high/30">
+            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+            <div>
+              <div class="flex items-center justify-between mb-space-md">
+                <span class="font-label-caps text-label-caps text-outline uppercase tracking-[0.18em]">MARKET SENTIMENT &amp; FLEET</span>
+                <span class="material-symbols-outlined text-outline text-[18px]">flight_takeoff</span>
+              </div>
+              
+              <!-- Vertical Pillar Charts for Global Asset Indices -->
+              <div class="flex items-end justify-between gap-space-sm h-36 px-space-sm pb-space-sm bg-surface-container-lowest/60 rounded-lg border border-surface-container-high/30">
+                <!-- S&P 500 -->
+                <div class="flex-1 flex flex-col items-center gap-space-xs h-full justify-end">
+                  <span class="font-label-meta text-label-meta text-emerald-400 font-semibold">+1.2%</span>
+                  <div class="w-full max-w-[28px] h-24 rounded-t-sm bg-gradient-to-t from-secondary-container via-primary to-emerald-400 shadow-sm shadow-primary/20"></div>
+                  <span class="font-label-caps text-label-caps text-outline">S&amp;P</span>
+                </div>
+                <!-- NASDAQ -->
+                <div class="flex-1 flex flex-col items-center gap-space-xs h-full justify-end">
+                  <span class="font-label-meta text-label-meta text-primary font-semibold">+0.9%</span>
+                  <div class="w-full max-w-[28px] h-20 rounded-t-sm bg-gradient-to-t from-surface-variant via-secondary to-primary shadow-sm shadow-secondary/15"></div>
+                  <span class="font-label-caps text-label-caps text-outline">NASD</span>
+                </div>
+                <!-- DOW -->
+                <div class="flex-1 flex flex-col items-center gap-space-xs h-full justify-end">
+                  <span class="font-label-meta text-label-meta text-secondary font-semibold">+0.5%</span>
+                  <div class="w-full max-w-[28px] h-14 rounded-t-sm bg-gradient-to-t from-surface-container via-surface-bright to-secondary"></div>
+                  <span class="font-label-caps text-label-caps text-outline">DOW</span>
+                </div>
+                <!-- GOLD FIX -->
+                <div class="flex-1 flex flex-col items-center gap-space-xs h-full justify-end">
+                  <span class="font-label-meta text-label-meta text-primary font-semibold">+2.1%</span>
+                  <div class="w-full max-w-[28px] h-28 rounded-t-sm bg-gradient-to-t from-secondary-container to-primary shadow-md shadow-primary/30"></div>
+                  <span class="font-label-caps text-label-caps text-outline">XAU</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fleet Readiness Status Module -->
+            <div class="mt-space-md p-space-sm rounded-lg bg-surface-container-high/60 backdrop-blur-sm flex items-center justify-between border border-surface-container-high/40">
+              <div class="flex items-center gap-space-sm">
+                <div class="relative">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 block"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute inset-0 animate-ping opacity-75"></span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-body-sm text-body-sm text-on-surface font-medium">Gulfstream G700 &amp; Global 7500</span>
+                  <span class="font-label-meta text-label-meta text-outline">Zurich (LSZH) &bull; Le Bourget (LFPB)</span>
+                </div>
+              </div>
+              <span class="font-label-caps text-label-caps text-emerald-400 font-semibold uppercase bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-500/20">4/5 Ready</span>
+            </div>
+          </div>
+
+          <!-- CARD 5: GOALS & MILESTONE TRACKER - 4 cols -->
+          <div class="lg:col-span-4 rounded-xl bg-surface-container-low/70 backdrop-blur-2xl p-space-lg shadow-xl flex flex-col justify-between relative overflow-hidden transition-all duration-500 hover:bg-surface-container-low/85 border border-surface-container-high/30">
+            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+            <div>
+              <div class="flex items-center justify-between mb-space-md">
+                <span class="font-label-caps text-label-caps text-outline uppercase tracking-[0.18em]">GOALS &amp; CAPITAL ALLOCATIONS</span>
+                <span class="material-symbols-outlined text-outline text-[18px]">track_changes</span>
+              </div>
+              
+              <div class="flex flex-col gap-space-md">
+                <!-- Milestone 1 -->
+                <div class="flex flex-col gap-space-xs">
+                  <div class="flex justify-between items-baseline">
+                    <span class="font-body-sm text-body-sm text-on-surface font-medium">Family Estate Reserve</span>
+                    <span class="font-label-caps text-label-caps text-primary font-bold">100% ($47.2B)</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden p-[1px]">
+                    <div class="h-full rounded-full bg-gradient-to-r from-secondary to-primary shadow-[0_0_12px_rgba(242,202,80,0.6)] w-full"></div>
+                  </div>
+                </div>
+                <!-- Milestone 2 -->
+                <div class="flex flex-col gap-space-xs">
+                  <div class="flex justify-between items-baseline">
+                    <span class="font-body-sm text-body-sm text-on-surface font-medium">Island Sanctuary Acquisition</span>
+                    <span class="font-label-caps text-label-caps text-secondary font-bold">60% ($33.2B)</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden p-[1px]">
+                    <div class="h-full rounded-full bg-gradient-to-r from-surface-bright via-secondary to-primary w-[60%]"></div>
+                  </div>
+                </div>
+                <!-- Milestone 3 -->
+                <div class="flex flex-col gap-space-xs">
+                  <div class="flex justify-between items-baseline">
+                    <span class="font-body-sm text-body-sm text-on-surface font-medium">Orbital Aerospace Venture</span>
+                    <span class="font-label-caps text-label-caps text-outline font-bold">35% ($10.0B)</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden p-[1px]">
+                    <div class="h-full rounded-full bg-gradient-to-r from-secondary-container to-secondary w-[35%]"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Biometric Seal Note -->
+            <div class="mt-space-md flex items-center justify-between pt-space-xs border-t border-surface-container-high/30">
+              <span class="font-label-meta text-label-meta text-outline uppercase tracking-wider">Multi-Generational Trust Lock</span>
+              <span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- =====================================================================
+             BOTTOM WIDE CARD 6: RECENT TRANSACTIONS & PRIVATE ESCROW LEDGER
+             ===================================================================== -->
+        <div class="w-full rounded-xl bg-surface-container-low/70 backdrop-blur-2xl p-space-lg shadow-xl relative overflow-hidden transition-all duration-500 hover:bg-surface-container-low/85 border border-surface-container-high/30" id="ledger-section">
+          <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+          
+          <!-- Header & Action Tray -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mb-space-md">
+            <div class="flex items-center gap-space-sm">
+              <div class="p-2 rounded-lg bg-primary/10 text-primary">
+                <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-caps text-label-caps text-outline uppercase tracking-[0.18em]">SETTLEMENT LEDGER</span>
+                <h2 class="font-title-md text-title-md text-on-surface font-semibold">Recent Transactions &amp; Private Escrow</h2>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-space-xs self-start sm:self-auto">
+              <button onclick="toggleFilterPrompt()" class="px-space-md py-1.5 rounded-full bg-surface-container-high/80 text-on-surface hover:text-primary font-label-caps text-label-caps tracking-wider transition-colors flex items-center gap-1 shadow-sm cursor-pointer border border-surface-container-high">
+                <span class="material-symbols-outlined text-[16px]">tune</span> Filter
+              </button>
+              <button onclick="exportStatementCSV()" class="px-space-md py-1.5 rounded-full bg-surface-container-high/80 text-on-surface hover:text-primary font-label-caps text-label-caps tracking-wider transition-colors flex items-center gap-1 shadow-sm cursor-pointer border border-surface-container-high">
+                <span class="material-symbols-outlined text-[16px]">file_download</span> Export Statement
+              </button>
+              <button class="p-1.5 rounded-full bg-surface-container-high/80 text-outline hover:text-primary transition-colors cursor-pointer border border-surface-container-high">
+                <span class="material-symbols-outlined text-[18px]">more_vert</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Micro Champagne Gold Header Accent Bar -->
+          <div class="w-full h-[1px] bg-gradient-to-r from-primary/40 via-secondary/20 to-transparent mb-space-xs"></div>
+
+          <!-- Transactions Responsive Table -->
+          <div class="w-full overflow-x-auto">
+            <table class="w-full text-left border-collapse" id="transactions-table">
+              <thead>
+                <tr class="text-outline font-label-caps text-label-caps uppercase tracking-wider">
+                  <th class="py-space-sm px-space-sm font-medium">Date</th>
+                  <th class="py-space-sm px-space-sm font-medium">Description / Route</th>
+                  <th class="py-space-sm px-space-sm font-medium">Domain</th>
+                  <th class="py-space-sm px-space-sm font-medium">Escrow Status</th>
+                  <th class="py-space-sm px-space-sm font-medium text-right">Settled Amount</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y-0">
+                <!-- Row 1 -->
+                <tr class="group hover:bg-surface-container-high/40 transition-colors">
+                  <td class="py-space-sm px-space-sm font-label-meta text-label-meta text-outline">10/23/2026</td>
+                  <td class="py-space-sm px-space-sm">
+                    <div class="flex items-center gap-space-sm">
+                      <span class="material-symbols-outlined text-primary text-[18px]">flight</span>
+                      <div class="flex flex-col">
+                        <span class="font-body-md text-body-md text-on-surface font-medium">Charter to Amalfi Coast</span>
+                        <span class="font-label-meta text-label-meta text-outline">Gulfstream G700 &bull; Tail SR-901</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-space-sm px-space-sm font-body-sm text-body-sm text-on-surface-variant">Aviation</td>
+                  <td class="py-space-sm px-space-sm">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-caps text-label-caps bg-emerald-950/40 text-emerald-400 border border-emerald-500/20">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Cleared
+                    </span>
+                  </td>
+                  <td class="py-space-sm px-space-sm font-numeric-data-md text-numeric-data-md text-on-surface text-right font-medium">$45,000</td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr class="group hover:bg-surface-container-high/40 transition-colors bg-surface-container-lowest/30">
+                  <td class="py-space-sm px-space-sm font-label-meta text-label-meta text-outline">10/21/2026</td>
+                  <td class="py-space-sm px-space-sm">
+                    <div class="flex items-center gap-space-sm">
+                      <span class="material-symbols-outlined text-secondary text-[18px]">lock</span>
+                      <div class="flex flex-col">
+                        <span class="font-body-md text-body-md text-on-surface font-medium">Zurich Escrow Vault Deposit</span>
+                        <span class="font-label-meta text-label-meta text-outline">Physical 999.9 Fine Gold Allocation</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-space-sm px-space-sm font-body-sm text-body-sm text-on-surface-variant">Escrow &amp; Bullion</td>
+                  <td class="py-space-sm px-space-sm">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-caps text-label-caps bg-primary/10 text-primary border border-primary/20">
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Settled
+                    </span>
+                  </td>
+                  <td class="py-space-sm px-space-sm font-numeric-data-md text-numeric-data-md text-primary text-right font-medium">$120,000</td>
+                </tr>
+
+                <!-- Row 3 -->
+                <tr class="group hover:bg-surface-container-high/40 transition-colors">
+                  <td class="py-space-sm px-space-sm font-label-meta text-label-meta text-outline">10/18/2026</td>
+                  <td class="py-space-sm px-space-sm">
+                    <div class="flex items-center gap-space-sm">
+                      <span class="material-symbols-outlined text-on-surface-variant text-[18px]">directions_boat</span>
+                      <div class="flex flex-col">
+                        <span class="font-body-md text-body-md text-on-surface font-medium">Monaco Superyacht Mooring &amp; Berth</span>
+                        <span class="font-label-meta text-label-meta text-outline">Port Hercule Marina Quay 4</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-space-sm px-space-sm font-body-sm text-body-sm text-on-surface-variant">Maritime</td>
+                  <td class="py-space-sm px-space-sm">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-caps text-label-caps bg-emerald-950/40 text-emerald-400 border border-emerald-500/20">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Cleared
+                    </span>
+                  </td>
+                  <td class="py-space-sm px-space-sm font-numeric-data-md text-numeric-data-md text-on-surface text-right font-medium">$82,500</td>
+                </tr>
+
+                <!-- Row 4 -->
+                <tr class="group hover:bg-surface-container-high/40 transition-colors bg-surface-container-lowest/30">
+                  <td class="py-space-sm px-space-sm font-label-meta text-label-meta text-outline">10/14/2026</td>
+                  <td class="py-space-sm px-space-sm">
+                    <div class="flex items-center gap-space-sm">
+                      <span class="material-symbols-outlined text-secondary text-[18px]">chalet</span>
+                      <div class="flex flex-col">
+                        <span class="font-body-md text-body-md text-on-surface font-medium">St. Moritz Alpine Sanctuary Maintenance</span>
+                        <span class="font-label-meta text-label-meta text-outline">Helipad De-icing &amp; Security Garrison</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-space-sm px-space-sm font-body-sm text-body-sm text-on-surface-variant">Sanctuaries</td>
+                  <td class="py-space-sm px-space-sm">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-caps text-label-caps bg-primary/10 text-primary border border-primary/20">
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Settled
+                    </span>
+                  </td>
+                  <td class="py-space-sm px-space-sm font-numeric-data-md text-numeric-data-md text-primary text-right font-medium">$28,400</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Concierge Dispatch Sticky Footer Anchor -->
+          <div class="mt-space-md p-space-md rounded-lg bg-surface-container-high/40 flex flex-col md:flex-row md:items-center justify-between gap-space-sm border border-surface-container-high/30">
+            <div class="flex items-center gap-space-md">
+              <div class="relative">
+                <span class="w-3 h-3 rounded-full bg-primary block"></span>
+                <span class="w-3 h-3 rounded-full bg-primary absolute inset-0 animate-ping"></span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-title-md text-title-md text-on-surface font-medium">Personal Banker: Lucian Von Bern</span>
+                <span class="font-body-sm text-body-sm text-outline">Direct Encrypted Terminal &bull; Response latency ~20s</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-space-sm">
+              <button onclick="handleCallBanker()" class="px-space-md py-space-xs rounded-full bg-surface-container text-primary hover:bg-surface-container-highest transition-colors font-body-sm text-body-sm flex items-center gap-space-xs border border-surface-container-high cursor-pointer">
+                <span class="material-symbols-outlined text-[16px]">call</span>
+                <span>Encrypted Line</span>
+              </button>
+              <button onclick="handleDispatchWire()" class="px-space-md py-space-xs rounded-full bg-primary text-on-primary hover:bg-primary-fixed transition-colors font-body-sm text-body-sm font-semibold flex items-center gap-space-xs shadow-md shadow-primary/20 cursor-pointer">
+                <span class="material-symbols-outlined text-[16px]">send</span>
+                <span>Dispatch Wire Order</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Lightweight Interactive Script -->
+  <script>
+    function setChartFilter(btn, filter) {
+      document.querySelectorAll('.chart-filter-btn').forEach(b => {
+        b.classList.remove('bg-primary', 'text-on-primary', 'font-semibold', 'shadow-sm');
+        b.classList.add('text-outline');
+      });
+      btn.classList.add('bg-primary', 'text-on-primary', 'font-semibold', 'shadow-sm');
+      btn.classList.remove('text-outline');
     }
-  });
-</script>
 
-</body></html>
+    function handleCallBanker() {
+      alert('Establishing 4096-bit encrypted audio connection with Attache Lucian Von Bern (Zurich Desks)...');
+    }
+
+    function handleDispatchWire() {
+      const amount = prompt('Enter Escrow Wire Authorization Amount (USD):', '$50,000');
+      if (amount) {
+        alert('Wire directive for ' + amount + ' securely queued for dual-custody authorization quorum.');
+      }
+    }
+
+    function toggleFilterPrompt() {
+      const q = prompt('Filter ledger transactions by keyword or domain (e.g. Aviation, Maritime, Escrow):', '');
+      if (q !== null) {
+        const rows = document.querySelectorAll('#transactions-table tbody tr');
+        rows.forEach(r => {
+          if (r.textContent.toLowerCase().includes(q.toLowerCase())) {
+            r.style.display = '';
+          } else {
+            r.style.display = 'none';
+          }
+        });
+      }
+    }
+
+    function exportStatementCSV() {
+      alert('Generating certified FINMA-compliant Swiss Vault statement (PDF/CSV)... Download initiated.');
+    }
+
+    // Live search input filtering
+    document.getElementById('global-search-input')?.addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('#transactions-table tbody tr').forEach(r => {
+        r.style.display = r.textContent.toLowerCase().includes(term) ? '' : 'none';
+      });
+    });
+  </script>
+
+</body>
+</html>
