@@ -79,7 +79,7 @@
         </a>
         <div class="flex items-center justify-between">
           <a href="latihan1.php" class="text-xs text-slate-400 hover:text-slate-600 transition">Ke Beranda Publik</a>
-          <a href="login.php" class="text-xs font-semibold text-slate-500 hover:text-red-700 transition" title="Keluar dari akun">Keluar</a>
+          <a href="public/login.html" class="text-xs font-semibold text-slate-500 hover:text-red-700 transition" title="Keluar dari akun">Keluar</a>
         </div>
       </div>
     </aside>
