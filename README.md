@@ -8,6 +8,7 @@ Repositori resmi kolaborasi pengembangan platform **VIP Bespoke Travel & Luxury 
 
 - **Zaidaan Diandra Eka Putra (NIM: 202410370110420)**
   - **Fokus Kontribusi:**
+    - **Week 9 (Pertemuan 9):** Implementasi Framework **Laravel 10**, Database **Migration** (`create_programs_table`), **Eloquent ORM Model** (`app/Models/Program.php`), serta pengembangan fitur antarmuka **CRUD Lengkap** (**Program Management**) terintegrasi database MySQL Laragon dan validasi PHPUnit automated test.
     - **Week 7 (Pertemuan 7):** Perancangan & Implementasi Penuh Arsitektur **Model-View-Controller (MVC)** PHP (`models/`, `controllers/`, `views/`, `index.php`), perancangan dashboard **Sovereign Reserve** (*Obsidian & Glowing Champagne Gold*) dengan telemetri portofolio aset, grafik SVG area line, alokasi domain 3D donut chart, kesiapan armada jet, dan settlement ledger terenkripsi.
     - **Week 6 (Pertemuan 6):** Perancangan modul **Pemrograman Berorientasi Objek / OOP** (`BespokeConcierge.php`), landing page dinamis dan interaktif (**Black Gold Luxury**) (`latihan1.html`, `latihan1.php`) dengan hero banner full-width, kapsul pencarian melayang, 3 kartu showcase, dan modal VIP Portal terintegrasi.
 - **Bagas Dewantara (NIM: 202410370110441)**
@@ -313,46 +314,156 @@ Implementasi pola arsitektur MVC murni di sisi server PHP untuk memisahkan data 
 
 ---
 
+### 🚀 7. Pertemuan 9: Framework Laravel — Migration, Eloquent ORM, & CRUD Program Management (Week 9 — Zaidaan Diandra)
+
+Implementasi framework **Laravel 10** untuk membangun arsitektur modern berorientasi database relasional MySQL, menggunakan fitur **Laravel Migration** untuk version control skema tabel, **Eloquent ORM** untuk pemodelan data objek, serta penyusunan antarmuka **CRUD (Create, Read, Update, Delete)** yang dinamis dan terintegrasi penuh.
+
+#### 🔹 Task 01 — Create Database Structure (Laravel Migration)
+*Tujuan: Mendefinisikan dan mengelola struktur tabel database melalui kode PHP terstruktur menggunakan sistem Migration Laravel.*
+
+```mermaid
+flowchart LR
+    M["MIGRATION FILE<br/>(create_programs_table)"] --> A["PHP ARTISAN MIGRATE<br/>(Jalankan Eksekusi CLI)"]
+    A --> DB["DATABASE MYSQL<br/>(Database: presidentku)"]
+    DB --> T["TABEL PROGRAMS<br/>(id, nama, deskripsi, timestamps)"]
+```
+
+- **File Migration:** `database/migrations/2026_11_17_094920_create_programs_table.php`
+- **Skema Kolom Tabel `programs`:**
+  - `id`: Primary key auto-increment (`$table->id()`)
+  - `nama`: Nama program kerja / layanan (`$table->string('nama')`)
+  - `deskripsi`: Penjelasan detail program (`$table->text('deskripsi')`)
+  - `created_at` & `updated_at`: Stempel waktu otomatis (`$table->timestamps()`)
+- **Perintah Eksekusi:**
+  ```bash
+  php artisan migrate
+  ```
+
+---
+
+#### 🔹 Task 02 — Build Program Model (Eloquent ORM)
+*Tujuan: Membangun kelas Model Eloquent sebagai Object-Relational Mapping (ORM) yang menghubungkan tabel database `programs` dengan objek PHP berorientasi entitas.*
+
+```mermaid
+flowchart TD
+    DB[("Database: programs")] <--> EL["Eloquent ORM Engine"]
+    EL <--> MOD["Model: App\\Models\\Program"]
+    MOD <--> Q1["Program::all() -> Collection Data"]
+    MOD <--> Q2["Program::find($id) -> Single Record"]
+    MOD <--> Q3["Program::create($data) -> Insert DB"]
+```
+
+- **File Model:** `app/Models/Program.php`
+- **Konfigurasi Keamanan Mass-Assignment:**
+  ```php
+  namespace App\Models;
+
+  use Illuminate\Database\Eloquent\Factories\HasFactory;
+  use Illuminate\Database\Eloquent\Model;
+
+  class Program extends Model
+  {
+      use HasFactory;
+
+      protected $fillable = [
+          'nama',
+          'deskripsi',
+      ];
+  }
+  ```
+- **Pengujian Query Eloquent via Endpoint JSON:**
+  - URL Endpoint: `GET /uji-eloquent`
+  - Menguji `Program::all()`, `Program::find(1)`, dan `Program::create([...])`.
+
+---
+
+#### 🔹 Task 03 — Build Program CRUD (Program Management)
+*Tujuan: Mengintegrasikan Laravel Migration, Eloquent ORM, Controller, dan Blade Views menjadi satu kesatuan fitur antarmuka Program Management yang interaktif dan responsif.*
+
+```mermaid
+flowchart LR
+    U["USER"] -->|HTTP Request| C["ProgramController"]
+    C -->|Eloquent Query| M["Model: Program"]
+    M -->|SQL Query| DB[("MySQL Database")]
+    DB -->|Result Set| M
+    M -->|Objects / Collection| C
+    C -->|Render View| V["Blade Template (programs.index)"]
+    V -->|Tampilan Web| U
+```
+
+- **Operasi CRUD Lengkap:**
+  1. **CREATE (Tambah Data):**
+     - Tersedia via Modal Quick Add pada tabel utama serta halaman form mandiri `/programs/create`.
+     - Validasi input `nama` (required, string, max:255) dan `deskripsi` (required).
+     - Menyimpan data baru ke MySQL via `Program::create($validated)`.
+  2. **READ (Tampilkan Data):**
+     - Halaman utama `/programs` (dan `/`) menampilkan seluruh data program dalam bentuk tabel responsif.
+     - Setiap baris menampilkan No urut, Nama Program, Deskripsi, serta tombol aksi.
+     - Mengikuti prinsip penting: *"Data yang ditampilkan bersumber murni dari database MySQL, bukan hardcoded di HTML."*
+  3. **UPDATE (Edit Data):**
+     - Tombol **Edit** (biru) mengarahkan ke form `/programs/{id}/edit` dengan field terisi data eksisting.
+     - Menyimpan perubahan ke MySQL via `$program->update($validated)`.
+  4. **DELETE (Hapus Data):**
+     - Tombol **Hapus** (merah) dengan dialog konfirmasi keamanan browser.
+     - Menghapus record secara permanen via `$program->delete()`.
+- **Pengujian Otomatis (Automated Feature Testing):**
+  - File pengujian: `tests/Feature/ProgramCrudTest.php`
+  - Menjalankan 6 test assertion: List View, Create Page, Store Data, Update Data, Delete Data, dan Uji Eloquent Endpoint. Seluruh pengujian lulus 100% (*Tests: 6 passed, 17 assertions*).
+- **Prinsip Integrasi:** Tidak merusak halaman sebelumnya (*Preserves Existing Pages*). Route `/landing` dan `/vip-portal` tetap dapat diakses dengan mulus.
+
+---
+
 ## 📂 Struktur Direktori Proyek
 
 ```plaintext
 VIP-BESPOKE-TRAVEL/
+├── app/                      # [Week 9 - Laravel] Inti Logika Aplikasi Laravel
+│   ├── Http/Controllers/     # Controller Laravel (ProgramController.php)
+│   └── Models/               # Model Eloquent (Program.php, User.php)
+├── bootstrap/                # [Laravel] Inisialisasi framework & cache
+├── config/                   # [Laravel] Konfigurasi database, app, session, dll.
+├── database/                 # [Week 9 - Laravel] Database Migrations & Seeders
+│   ├── migrations/           # File migrasi (create_programs_table.php)
+│   └── seeders/              # Seeder data program (ProgramSeeder.php)
+├── resources/                # [Week 9 - Laravel] Blade Template Views
+│   └── views/
+│       ├── layouts/app.blade.php      # Layout dasar, navbar, & flash message
+│       └── programs/
+│           ├── index.blade.php        # Tampilan tabel Program PresidentKu + Modal
+│           ├── create.blade.php       # Form tambah program mandiri
+│           └── edit.blade.php         # Form edit program terisi data eksisting
+├── routes/                   # [Week 9 - Laravel] Definisi Routing Web & API
+│   └── web.php               # Resource routes CRUD programs & endpoint uji-eloquent
+├── tests/                    # [Week 9 - Laravel] Pengujian Otomatis Feature Test
+│   └── Feature/ProgramCrudTest.php    # Automated testing 6 skenario CRUD
+├── artisan                   # [Laravel] CLI Tool Runner
 ├── assets/                   # [Assets] Foto & Media Resolusi Tinggi Lokal
 │   └── images/               # Koleksi foto koper pesisir, Santorini, Alpen, dan referensi
-├── controllers/              # [Week 7 - Zaidaan] Controller Pola Arsitektur MVC
+├── controllers/              # [Week 7 - Zaidaan] Controller Pola Arsitektur MVC PHP
 │   └── DashboardController.php # Logika bisnis, filter status, dispatch view
-├── models/                   # [Week 7 - Zaidaan] Model Data Layer Pola Arsitektur MVC
+├── models/                   # [Week 7 - Zaidaan] Model Data Layer Pola Arsitektur MVC PHP
 │   └── TravelModel.php       # Abstraksi data JSON, query filtering, agregasi statistik
-├── views/                    # [Week 7 - Zaidaan] View Presentation Layer Pola Arsitektur MVC
+├── views/                    # [Week 7 - Zaidaan] View Presentation Layer Pola Arsitektur MVC PHP
 │   └── dashboard-view.php    # UI Patron Dashboard (Sovereign Reserve, Black Gold, Charts)
 ├── src/                      # [Bagas] Source Code Frontend TypeScript
 │   ├── dashboard.ts          # Logika frontend CSR, API fetcher, & DOM rendering
 │   └── types.ts              # Definisi interface TypeScript & generic state API
-├── public/                   # [Bagas] Asset Web Statis & Client Application
-│   ├── images/               # Cermin aset gambar untuk akses direktori publik
+├── public/                   # [Laravel & Bagas] Asset Web Statis & Public Entrypoint
+│   ├── index.php             # Laravel Public Entrypoint
 │   ├── landing_page.html     # Halaman beranda utama
 │   ├── login.html            # Halaman login klien
-│   ├── login.js              # Script client-side login & JWT store
-│   ├── dashboard.html        # Halaman dashboard VIP (Client-Side Rendering via REST API)
-│   ├── dashboard.php         # Halaman dashboard VIP (Server-Side Rendering via PHP)
-│   ├── data-processor.php    # Modul pemrosesan data & kalkulasi agregasi PHP
-│   ├── dashboard.css         # Styling khusus dashboard VIP
-│   ├── dashboard.js          # Bundle JavaScript hasil kompilasi TypeScript
-│   ├── profile.html          # Halaman profil akun klien
-│   ├── profile.js            # Script client-side profil klien
-│   ├── types.js              # Script helper tipe data
-│   └── style.css             # Desain global & stylesheet landing page
+│   ├── dashboard.html        # Halaman dashboard VIP (CSR via REST API)
+│   ├── dashboard.php         # Halaman dashboard VIP (SSR via PHP)
+│   └── assets/               # Aset gambar publik
 ├── index.php                 # [Week 7 - Zaidaan] Front Controller / Entry Point Aplikasi MVC
 ├── latihan1.php              # [Week 6 - Zaidaan] Landing Page Dinamis & Integrasi VIP Portal
 ├── latihan1.html             # [Week 6 - Zaidaan] File Desain Landing Page Black Gold Luxury
 ├── BespokeConcierge.php      # [Week 6 - Zaidaan] Implementasi Class Berorientasi Objek (OOP)
-├── script.js                 # [Pertemuan 3 & 4] Script Client-Side DOM Selection, Event Handling, & Fetch API
+├── script.js                 # [Pertemuan 3 & 4] Script Client-Side DOM Selection & Fetch API
 ├── server.js                 # [Bagas] Server Express.js (REST API & Static Server)
 ├── users.json                # [Bagas] Database mock pengguna & hash password Bcrypt
 ├── dashboard-data.json       # Mock database bersama (mendukung Express API & PHP MVC)
-├── hash-password.js          # [Bagas] Utilitas pembuatan hash password
-├── tsconfig.json             # Konfigurasi compiler TypeScript
-├── package.json              # Manifest dependensi & scripts NPM
+├── composer.json             # Manifest dependensi Composer Laravel 10
 └── README.md                 # Dokumentasi komprehensif proyek kolaborasi
 ```
 
@@ -410,6 +521,32 @@ Untuk menjalankan backend Express.js dan antarmuka Client-Side Rendering yang di
    - **Landing Page Tim:** [http://localhost:3000](http://localhost:3000)
    - **Login Klien:** [http://localhost:3000/login.html](http://localhost:3000/login.html)
    - **Dashboard (CSR via TypeScript):** [http://localhost:3000/dashboard](http://localhost:3000/dashboard)
+
+---
+
+### 4. Menjalankan Aplikasi Laravel & CRUD Program Management (Week 9) ⭐
+Untuk menjalankan aplikasi Laravel yang mengimplementasikan Migration, Eloquent ORM, dan CRUD Program Management yang dikembangkan oleh **Zaidaan Diandra**:
+
+1. **Pastikan MySQL berjalan (via Laragon / XAMPP):**
+   - Database: `presidentku` (port 3306, user `root`, password kosong / default Laragon).
+2. **Jalankan Migration & Seeder (jika pertama kali setup):**
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
+3. **Jalankan Server Laravel Artisan:**
+   ```bash
+   php artisan serve
+   ```
+4. **Akses melalui browser:**
+   - 🌟 **Program Management CRUD (Week 9):** [http://localhost:8000/programs](http://localhost:8000/programs) atau [http://localhost:8000](http://localhost:8000)
+   - ➕ **Form Tambah Program:** [http://localhost:8000/programs/create](http://localhost:8000/programs/create)
+   - 📡 **Endpoint Uji Eloquent JSON (Task 02):** [http://localhost:8000/uji-eloquent](http://localhost:8000/uji-eloquent)
+   - 💎 **Landing Page VIP (Preserved):** [http://localhost:8000/landing](http://localhost:8000/landing)
+5. **Menjalankan Pengujian Otomatis (Automated Testing):**
+   ```bash
+   php artisan test tests/Feature/ProgramCrudTest.php
+   ```
 
 ---
 
