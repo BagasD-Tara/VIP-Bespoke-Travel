@@ -29,32 +29,14 @@
   ],
   "requestSaya": [
     {
-      "id": "req-1792466280",
-      "destination": "Santorini Sunset Yacht Cruise",
-      "dateRange": "05 Mei – 12 Mei 2027",
-      "guests": 2,
-      "statusBadge": "Diajukan",
-      "statusType": "warning",
-      "currentStepIndex": 0,
-      "steps": [
-        "Diajukan",
-        "Ditinjau",
-        "Proposal",
-        "Disetujui",
-        "Dikonfirmasi"
-      ],
-      "footerType": "estimate",
-      "costEstimate": "Menunggu Kurasi",
-      "costBadge": "Baru"
-    },
-    {
       "id": "req-1",
-      "destination": "Kyoto Autumn Private Retreat & Onsen",
+      "destination": "The Alpine Retreat: Zermatt & St. Moritz",
       "dateRange": "18 Nov – 25 Nov 2026",
       "guests": 2,
       "statusBadge": "Proposal Dikirim",
       "statusType": "warning",
       "currentStepIndex": 2,
+      "image": "Switzerland.jfif",
       "steps": [
         "Diajukan",
         "Ditinjau",
@@ -83,6 +65,25 @@
       ],
       "footerType": "confirmed",
       "confirmedText": "Booking 4 dari 4 Confirmed"
+    },
+    {
+      "id": "req-1792466280",
+      "destination": "Santorini Sunset Yacht Cruise",
+      "dateRange": "05 Mei – 12 Mei 2027",
+      "guests": 2,
+      "statusBadge": "Diajukan",
+      "statusType": "warning",
+      "currentStepIndex": 0,
+      "steps": [
+        "Diajukan",
+        "Ditinjau",
+        "Proposal",
+        "Disetujui",
+        "Dikonfirmasi"
+      ],
+      "footerType": "estimate",
+      "costEstimate": "Menunggu Kurasi",
+      "costBadge": "Baru"
     }
   ],
   "perjalananMendatang": {

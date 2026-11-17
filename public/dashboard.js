@@ -323,20 +323,34 @@ function renderRequests(requests) {
         else {
             footerContent = `
           <div class="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
-            <svg class="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-sky-600" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
             </svg>
             <span>${escapeHtml(req.confirmedText || "Booking Confirmed")}</span>
           </div>
         `;
         }
+        const imageHtml = req.image
+            ? `
+          <div class="mb-4 overflow-hidden rounded-xl border border-slate-200/70 bg-slate-100">
+            <img 
+              src="${escapeHtml(req.image)}" 
+              alt="${escapeHtml(req.destination)}" 
+              class="w-full h-44 sm:h-48 object-cover rounded-xl hover:scale-[1.02] transition duration-300"
+              loading="lazy"
+            />
+          </div>
+        `
+            : "";
         return `
         <div class="request-card p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm transition hover:shadow-md">
           <div class="flex items-start justify-between gap-3 mb-1">
             <h4 class="text-[15px] sm:text-base font-bold text-slate-900 leading-snug">${escapeHtml(req.destination)}</h4>
             <span class="${statusBadgeClass} shrink-0">${escapeHtml(req.statusBadge)}</span>
           </div>
-          <p class="text-xs sm:text-[13px] text-slate-500 mb-5">${escapeHtml(req.dateRange)} • ${req.guests} peserta</p>
+          <p class="text-xs sm:text-[13px] text-slate-500 mb-4">${escapeHtml(req.dateRange)} • ${req.guests} peserta</p>
+
+          ${imageHtml}
 
           <div class="steps-container flex items-center justify-between gap-1 sm:gap-2 mb-5">
             ${stepsHtml}
@@ -344,7 +358,7 @@ function renderRequests(requests) {
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
             ${footerContent}
-            <a href="#" class="text-xs sm:text-[13px] font-semibold text-emerald-800 hover:text-emerald-950 transition">Lihat detail</a>
+            <a href="#" class="text-xs sm:text-[13px] font-semibold text-sky-600 hover:text-sky-800 transition">Lihat detail</a>
           </div>
         </div>
       `;
@@ -528,9 +542,9 @@ function setupInteractions() {
             }
             // 3. STATE: BERHASIL (SUCCESS)
             if (modalFeedbackEl) {
-                modalFeedbackEl.className = "p-3.5 rounded-xl text-xs font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-center gap-2";
+                modalFeedbackEl.className = "p-3.5 rounded-xl text-xs font-medium bg-sky-50 text-sky-900 border border-sky-200 flex items-center gap-2";
                 modalFeedbackEl.innerHTML = `
-          <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="w-4 h-4 text-sky-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
           </svg>
           <span>${escapeHtml(resJson.message || "Request baru berhasil diajukan!")}</span>
