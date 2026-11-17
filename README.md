@@ -8,7 +8,8 @@ Repositori resmi kolaborasi pengembangan platform **VIP Bespoke Travel & Luxury 
 
 - **Zaidaan Diandra Eka Putra (NIM: 202410370110420)**
   - **Fokus Kontribusi:**
-    - **Week 9 (Pertemuan 9):** Implementasi Framework **Laravel 10**, Database **Migration** (`create_programs_table`), **Eloquent ORM Model** (`app/Models/Program.php`), serta pengembangan fitur antarmuka **CRUD Lengkap** (**Program Management**) terintegrasi database MySQL Laragon dan validasi PHPUnit automated test.
+    - **Week 10 (Pertemuan 10):** Refactoring arsitektur CRUD ke dalam Controller mandiri (`ProgramController`), implementasi **Request & Validation** ketat (`nama: required|max:100`, `deskripsi: required`), serta perancangan **RESTful Program API** (`/api/programs`) dengan respon JSON terstandarisasi, penggunaan HTTP status code yang tepat (200, 201, 404, 422), dan 10 skenario automated feature testing (PHPUnit).
+    - **Week 9 (Pertemuan 9):** Implementasi Framework **Laravel 10**, Database **Migration** (`create_programs_table`), **Eloquent ORM Model** (`app/Models/Program.php`), serta pengembangan fitur antarmuka **CRUD Lengkap** (**Bespoke Programs Ledger**) terintegrasi database MySQL Laragon.
     - **Week 7 (Pertemuan 7):** Perancangan & Implementasi Penuh Arsitektur **Model-View-Controller (MVC)** PHP (`models/`, `controllers/`, `views/`, `index.php`), perancangan dashboard **Sovereign Reserve** (*Obsidian & Glowing Champagne Gold*) dengan telemetri portofolio aset, grafik SVG area line, alokasi domain 3D donut chart, kesiapan armada jet, dan settlement ledger terenkripsi.
     - **Week 6 (Pertemuan 6):** Perancangan modul **Pemrograman Berorientasi Objek / OOP** (`BespokeConcierge.php`), landing page dinamis dan interaktif (**Black Gold Luxury**) (`latihan1.html`, `latihan1.php`) dengan hero banner full-width, kapsul pencarian melayang, 3 kartu showcase, dan modal VIP Portal terintegrasi.
 - **Bagas Dewantara (NIM: 202410370110441)**
@@ -413,6 +414,99 @@ flowchart LR
 
 ---
 
+### 🌐 8. Pertemuan 10: Controller Refactoring, Request Validation, & RESTful Program API (Week 10 — Zaidaan Diandra)
+
+Penyempurnaan arsitektur aplikasi backend dengan memindahkan seluruh alur logika CRUD ke dalam **Controller mandiri** (`ProgramController`), menerapkan lapisan **Request & Input Validation** ketat (`required|max:100`), serta membangun **RESTful Program API** lengkap yang mengembalikan respon JSON berstandar industri dengan kode status HTTP yang tepat (*200 OK, 201 Created, 404 Not Found, 422 Unprocessable Entity*).
+
+#### 🔹 Task 01 — Move CRUD into Controller
+*Tujuan: Memisahkan alur logika bisnis CRUD dari routing file ke dalam controller terstruktur `ProgramController`.*
+
+```mermaid
+flowchart LR
+    R["ROUTE<br/>(routes/web.php & api.php)"] -->|Menerima Request| C["CONTROLLER<br/>(ProgramController.php)"]
+    C -->|Memproses Logika CRUD| E["ELOQUENT ORM<br/>(Program::class)"]
+    E -->|Eksekusi Query| DB[("DATABASE MYSQL<br/>(vip_bespoke)")]
+```
+
+- **Metode Terstruktur pada `ProgramController`:**
+  - `index()` &rarr; **READ**: Mengambil seluruh koleksi program ekspedisi dari database.
+  - `create()` &rarr; **FORM**: Menyajikan formulir pembuatan program baru.
+  - `store(Request $request)` &rarr; **CREATE**: Menerima request, memvalidasi input, dan menyimpan ke database.
+  - `show($id)` &rarr; **READ DETAIL**: Mengambil satu program spesifik berdasarkan ID.
+  - `edit($id)` &rarr; **FORM EDIT**: Menyajikan formulir edit dengan data program eksisting.
+  - `update(Request $request, $id)` &rarr; **UPDATE**: Memvalidasi input dan memperbarui record di database.
+  - `destroy($id)` &rarr; **DELETE**: Menghapus data program secara permanen dari database.
+
+---
+
+#### 🔹 Task 02 — Add Request & Validation
+*Tujuan: Mengamankan data yang masuk ke sistem dengan memvalidasi setiap payload sebelum dieksekusi ke database.*
+
+```mermaid
+flowchart TD
+    IN["INPUT PENGGUNA<br/>(Form / JSON Payload)"] --> REQ["HTTP REQUEST<br/>($request)"]
+    REQ --> VAL["VALIDATION RULES<br/>nama: required|max:100<br/>deskripsi: required"]
+    VAL -->|Valid| DB[("DATABASE<br/>Disimpan via Eloquent")]
+    VAL -->|Tidak Valid| ERR["RESPONSE 422<br/>Unprocessable Entity / Redirect with Errors"]
+```
+
+- **Aturan Validasi yang Diterapkan:**
+  - `nama`: `required|string|max:100` (Wajib diisi dan maksimal 100 karakter).
+  - `deskripsi`: `required|string` (Wajib diisi).
+- **Penanganan Status Validasi:**
+  - **Input Valid:** Disimpan ke database via `Program::create()` atau `$program->update()`.
+  - **Input Kosong / Melebihi 100 Karakter:** Mengembalikan respon HTTP `422 Unprocessable Entity` (untuk API) atau redirect dengan pesan error spesifik per-field (untuk Web).
+
+---
+
+#### 🔹 Task 03 — Build RESTful Program API
+*Tujuan: Membangun endpoint REST API resmi yang dapat dikonsumsi oleh aplikasi eksternal, mobile app, frontend CSR, maupun alat pengujian seperti Postman dan Insomnia.*
+
+- **Daftar Endpoint API Terdaftar (`routes/api.php`):**
+
+| Method | Endpoint | Status Sukses | Status Error | Deskripsi Operasi |
+| :--- | :--- | :---: | :---: | :--- |
+| `GET` | `/api/programs` | `200 OK` | `500` | Mengambil seluruh daftar program ekspedisi (JSON) |
+| `POST` | `/api/programs` | `201 Created` | `422` | Membuat program baru dengan validasi data |
+| `GET` | `/api/programs/{id}` | `200 OK` | `404` | Mengambil rincian program ekspedisi berdasarkan ID |
+| `PUT` | `/api/programs/{id}` | `200 OK` | `404, 422` | Memperbarui program ekspedisi berdasarkan ID |
+| `DELETE` | `/api/programs/{id}` | `200 OK` | `404` | Menghapus program ekspedisi dari database |
+
+- **Contoh Format Respon JSON (`GET /api/programs`):**
+  ```json
+  {
+    "status": "success",
+    "message": "Daftar program ekspedisi berhasil diambil.",
+    "total": 5,
+    "data": [
+      {
+        "id": 1,
+        "nama": "Alpine Swiss Sanctuary & Winter Heli-Chalet",
+        "deskripsi": "Ekspedisi privat chalet mewah Zermatt & St. Moritz dengan transfer helikopter pribadi...",
+        "created_at": "2026-11-17T10:45:44.000000Z",
+        "updated_at": "2026-11-17T10:45:44.000000Z"
+      }
+    ]
+  }
+  ```
+
+- **Automated API Testing (PHPUnit):**
+  - File Pengujian: `tests/Feature/ProgramApiTest.php`
+  - 10 skenario pengujian endpoint API:
+    1. `test_api_get_all_programs_returns_200`
+    2. `test_api_create_program_valid_data_returns_201`
+    3. `test_api_create_program_validation_fails_empty_fields_returns_422`
+    4. `test_api_create_program_validation_fails_max_100_chars_returns_422`
+    5. `test_api_get_single_program_detail_returns_200`
+    6. `test_api_get_single_program_not_found_returns_404`
+    7. `test_api_update_program_valid_data_returns_200`
+    8. `test_api_update_program_validation_fails_max_100_returns_422`
+    9. `test_api_delete_program_returns_200`
+    10. `test_api_delete_program_not_found_returns_404`
+  - **Hasil Uji:** 10 Passed (56 Assertions). Total keseluruhan test suite: **18 Passed (80 Assertions)**.
+
+---
+
 ## 📂 Struktur Direktori Proyek
 
 ```plaintext
@@ -432,10 +526,13 @@ VIP-BESPOKE-TRAVEL/
 │           ├── index.blade.php        # Tampilan tabel VIP Bespoke Programs + Modal Quick Add
 │           ├── create.blade.php       # Form tambah program mandiri
 │           └── edit.blade.php         # Form edit program terisi data eksisting
-├── routes/                   # [Week 9 - Laravel] Definisi Routing Web & API
-│   └── web.php               # Resource routes CRUD programs & endpoint uji-eloquent
-├── tests/                    # [Week 9 - Laravel] Pengujian Otomatis Feature Test
-│   └── Feature/ProgramCrudTest.php    # Automated testing 6 skenario CRUD
+├── routes/                   # [Week 9 & 10] Definisi Routing Web & API
+│   ├── web.php               # Resource routes CRUD programs & endpoint uji-eloquent
+│   └── api.php               # RESTful API routes (/api/programs)
+├── tests/                    # [Week 9 & 10] Pengujian Otomatis Feature Tests
+│   └── Feature/
+│       ├── ProgramCrudTest.php        # Automated testing 6 skenario Web CRUD
+│       └── ProgramApiTest.php         # Automated testing 10 skenario RESTful API & Validasi
 ├── artisan                   # [Laravel] CLI Tool Runner
 ├── assets/                   # [Assets] Foto & Media Resolusi Tinggi Lokal
 │   └── images/               # Koleksi foto koper pesisir, Santorini, Alpen, dan referensi
@@ -538,14 +635,23 @@ Untuk menjalankan aplikasi Laravel yang mengimplementasikan Migration, Eloquent 
    ```bash
    php artisan serve
    ```
-4. **Akses melalui browser:**
-   - 🌟 **Program Management CRUD (Week 9):** [http://localhost:8000/programs](http://localhost:8000/programs) atau [http://localhost:8000](http://localhost:8000)
+4. **Akses melalui browser & API Client:**
+   - 🌟 **Bespoke Programs Ledger (CRUD Week 9 & 10):** [http://localhost:8000/programs](http://localhost:8000/programs) atau [http://localhost:8000](http://localhost:8000)
    - ➕ **Form Tambah Program:** [http://localhost:8000/programs/create](http://localhost:8000/programs/create)
-   - 📡 **Endpoint Uji Eloquent JSON (Task 02):** [http://localhost:8000/uji-eloquent](http://localhost:8000/uji-eloquent)
-   - 💎 **Landing Page VIP (Preserved):** [http://localhost:8000/landing](http://localhost:8000/landing)
-5. **Menjalankan Pengujian Otomatis (Automated Testing):**
+   - 📡 **RESTful Program API (JSON Week 10 Task 03):** [http://localhost:8000/api/programs](http://localhost:8000/api/programs)
+   - 📡 **Endpoint Uji Eloquent JSON:** [http://localhost:8000/uji-eloquent](http://localhost:8000/uji-eloquent)
+   - 🏛️ **Dashboard Sovereign Reserve (Week 7 MVC):** [http://localhost:8000/dashboard](http://localhost:8000/dashboard)
+   - 💎 **Landing Page VIP (Preserved Week 6):** [http://localhost:8000/landing](http://localhost:8000/landing)
+5. **Menjalankan Pengujian Otomatis (Automated Testing PHPUnit):**
    ```bash
+   # Pengujian RESTful API (10 tests, 56 assertions)
+   php artisan test tests/Feature/ProgramApiTest.php
+
+   # Pengujian Web CRUD (6 tests, 17 assertions)
    php artisan test tests/Feature/ProgramCrudTest.php
+
+   # Jalankan seluruh test suite (18 tests, 80 assertions)
+   php artisan test
    ```
 
 ---

@@ -10,18 +10,21 @@
     <div>
       <div class="flex items-center gap-2 mb-2">
         <span class="inline-block w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#f2ca50]"></span>
-        <span class="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Concierge Expedition Catalog</span>
+        <span class="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Concierge Expedition Catalog &bull; Week 10</span>
       </div>
       <h1 class="font-serif-luxury text-3xl sm:text-4xl text-on-surface font-normal tracking-wide">
         Curated Bespoke Programs
       </h1>
       <p class="text-sm text-on-surface-variant max-w-2xl mt-1.5 leading-relaxed">
-        Direktori program ekspedisi privat dan rencana perjalanan eksklusif yang dikelola secara dinamis melalui arsitektur <strong>Laravel 10</strong>, <strong>Migration</strong>, <strong>Eloquent ORM</strong>, dan database relasional <strong>MySQL</strong>.
+        Direktori program ekspedisi privat yang dikelola secara dinamis melalui arsitektur <strong>Laravel Controller</strong>, <strong>Request & Validation (max:100)</strong>, serta <strong>RESTful Program API</strong> terhubung ke database <strong>MySQL</strong>.
       </p>
     </div>
 
     <!-- Actions -->
     <div class="flex items-center gap-3 flex-shrink-0">
+      <a href="#api-section" class="px-4 py-3 rounded-full text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 hover:bg-primary/20 border border-primary/30 transition-all">
+        REST API Docs &darr;
+      </a>
       <a href="{{ route('programs.create') }}" 
          onclick="event.preventDefault(); openCreateModal();"
          class="inline-flex items-center gap-2 px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider text-black bg-gradient-to-r from-primary to-primary-container hover:from-amber-400 hover:to-primary shadow-[0_0_20px_rgba(242,202,80,0.25)] hover:shadow-[0_0_30px_rgba(242,202,80,0.4)] transition-all duration-300">
@@ -34,28 +37,34 @@
   </div>
 
   <!-- STATS TILES -->
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
     <div class="p-5 rounded-2xl bg-surface-container/60 border border-outline-variant/30 backdrop-blur-md">
-      <span class="text-[11px] uppercase tracking-widest text-outline font-semibold">Total Programs Terdaftar</span>
+      <span class="text-[11px] uppercase tracking-widest text-outline font-semibold">Total Programs</span>
       <div class="font-serif-luxury text-3xl text-primary font-medium mt-1">
         {{ str_pad($programs->count(), 2, '0', STR_PAD_LEFT) }} <span class="text-xs font-sans text-on-surface-variant uppercase tracking-wider">Ekspedisi</span>
       </div>
     </div>
     <div class="p-5 rounded-2xl bg-surface-container/60 border border-outline-variant/30 backdrop-blur-md">
-      <span class="text-[11px] uppercase tracking-widest text-outline font-semibold">ORM Data Layer</span>
-      <div class="font-serif-luxury text-2xl text-on-surface font-medium mt-1">
-        Laravel Eloquent <span class="text-xs font-sans text-primary">&bull; Live</span>
+      <span class="text-[11px] uppercase tracking-widest text-outline font-semibold">Controller Architecture</span>
+      <div class="font-serif-luxury text-xl text-on-surface font-medium mt-1">
+        ProgramController <span class="text-xs font-sans text-emerald-400">&bull; Task 01</span>
       </div>
     </div>
     <div class="p-5 rounded-2xl bg-surface-container/60 border border-outline-variant/30 backdrop-blur-md">
-      <span class="text-[11px] uppercase tracking-widest text-outline font-semibold">Relational Database</span>
-      <div class="font-serif-luxury text-2xl text-on-surface font-medium mt-1">
-        MySQL <span class="text-xs font-sans text-emerald-400">&bull; Port 3306</span>
+      <span class="text-[11px] uppercase tracking-widest text-outline font-semibold">Input Validation</span>
+      <div class="font-serif-luxury text-xl text-on-surface font-medium mt-1">
+        required|max:100 <span class="text-xs font-sans text-primary">&bull; Task 02</span>
+      </div>
+    </div>
+    <div class="p-5 rounded-2xl bg-surface-container/60 border border-outline-variant/30 backdrop-blur-md">
+      <span class="text-[11px] uppercase tracking-widest text-outline font-semibold">RESTful API Status</span>
+      <div class="font-serif-luxury text-xl text-on-surface font-medium mt-1">
+        /api/programs <span class="text-xs font-sans text-sky-400">&bull; Task 03</span>
       </div>
     </div>
   </div>
 
-  <!-- MAIN TABLE CARD (TASK 03 - READ) -->
+  <!-- MAIN TABLE CARD (TASK 01 - READ) -->
   <div class="bg-surface rounded-2xl border border-outline-variant/30 shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden">
     <div class="px-6 py-5 border-b border-outline-variant/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-surface-low/80">
       <div class="flex items-center gap-3">
@@ -154,36 +163,90 @@
     </div>
   </div>
 
-  <!-- CONCIERGE INFORMATION TILES -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-4">
-    <div class="p-5 rounded-2xl bg-surface-container/40 border border-outline-variant/30">
-      <div class="flex items-center gap-2.5 font-semibold text-primary text-xs uppercase tracking-wider mb-2">
-        <span class="w-5 h-5 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center font-mono">01</span>
-        <span>Migration & Schema</span>
+  <!-- RESTFUL API DOCUMENTATION & LIVE TESTER (TASK 03) -->
+  <div id="api-section" class="bg-surface rounded-2xl border border-outline-variant/30 shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden">
+    <div class="px-6 py-5 border-b border-outline-variant/20 bg-surface-low/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_10px_#38bdf8]"></span>
+        <div>
+          <h2 class="font-serif-luxury text-xl text-on-surface font-medium">RESTful Program API Explorer (Task 03)</h2>
+          <p class="text-xs text-outline">Endpoint REST API resmi terdaftar pada <code class="text-primary font-mono">routes/api.php</code></p>
+        </div>
       </div>
-      <p class="text-xs text-on-surface-variant/80 leading-relaxed">
-        Tabel database <code class="text-primary font-mono bg-surface-high px-1.5 py-0.5 rounded">programs</code> didefinisikan melalui Laravel Migration dengan kolom id, nama, deskripsi, dan timestamps.
-      </p>
+      <button 
+        type="button" 
+        onclick="testLiveApi()"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-black bg-sky-400 hover:bg-sky-300 shadow-sm transition">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>Uji Live GET /api/programs</span>
+      </button>
     </div>
 
-    <div class="p-5 rounded-2xl bg-surface-container/40 border border-outline-variant/30">
-      <div class="flex items-center gap-2.5 font-semibold text-primary text-xs uppercase tracking-wider mb-2">
-        <span class="w-5 h-5 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center font-mono">02</span>
-        <span>Eloquent ORM Model</span>
-      </div>
-      <p class="text-xs text-on-surface-variant/80 leading-relaxed">
-        Model <code class="text-primary font-mono bg-surface-high px-1.5 py-0.5 rounded">App\Models\Program</code> mengelola relasi objek dengan proteksi mass-assignment <code class="text-primary font-mono bg-surface-high px-1.5 py-0.5 rounded">$fillable</code>.
-      </p>
-    </div>
+    <!-- Endpoint Catalog -->
+    <div class="p-6 space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-mono">
+        
+        <div class="p-3.5 rounded-xl bg-surface-container/60 border border-outline-variant/30 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">GET</span>
+            <span class="text-on-surface">/api/programs</span>
+          </div>
+          <span class="text-[10px] text-outline font-sans">Semua Data (200)</span>
+        </div>
 
-    <div class="p-5 rounded-2xl bg-surface-container/40 border border-outline-variant/30">
-      <div class="flex items-center gap-2.5 font-semibold text-primary text-xs uppercase tracking-wider mb-2">
-        <span class="w-5 h-5 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center font-mono">03</span>
-        <span>Full CRUD Cycle</span>
+        <div class="p-3.5 rounded-xl bg-surface-container/60 border border-outline-variant/30 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-400 font-bold">POST</span>
+            <span class="text-on-surface">/api/programs</span>
+          </div>
+          <span class="text-[10px] text-outline font-sans">Tambah (201/422)</span>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-surface-container/60 border border-outline-variant/30 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">GET</span>
+            <span class="text-on-surface">/api/programs/{id}</span>
+          </div>
+          <span class="text-[10px] text-outline font-sans">Detail (200/404)</span>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-surface-container/60 border border-outline-variant/30 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">PUT</span>
+            <span class="text-on-surface">/api/programs/{id}</span>
+          </div>
+          <span class="text-[10px] text-outline font-sans">Update (200/422)</span>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-surface-container/60 border border-outline-variant/30 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 font-bold">DELETE</span>
+            <span class="text-on-surface">/api/programs/{id}</span>
+          </div>
+          <span class="text-[10px] text-outline font-sans">Hapus (200/404)</span>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-surface-container/60 border border-outline-variant/30 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 font-bold">TEST</span>
+            <a href="{{ url('/uji-eloquent') }}" target="_blank" class="text-primary hover:underline">/uji-eloquent</a>
+          </div>
+          <span class="text-[10px] text-outline font-sans">JSON Telemetri</span>
+        </div>
+
       </div>
-      <p class="text-xs text-on-surface-variant/80 leading-relaxed">
-        Integrasi penuh Create, Read, Update, dan Delete terhubung langsung ke controller dan tabel MySQL tanpa data statis (hardcoded).
-      </p>
+
+      <!-- Live JSON Result Viewer -->
+      <div id="live-api-box" class="hidden mt-4 p-4 rounded-xl bg-surface-low border border-outline-variant/40">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-mono text-primary font-bold">HASIL RESPON JSON DARI SERVER:</span>
+          <span id="api-status-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-900/60 text-emerald-400">200 OK</span>
+        </div>
+        <pre id="api-response-content" class="text-xs font-mono text-emerald-300 overflow-x-auto p-3 rounded-lg bg-black/60 max-h-60"></pre>
+      </div>
     </div>
   </div>
 
@@ -200,18 +263,22 @@
       <button type="button" onclick="closeCreateModal()" class="text-outline hover:text-on-surface font-bold text-xl leading-none">&times;</button>
     </div>
 
-    <form action="{{ route('programs.store') }}" method="POST" class="p-6 space-y-5">
+    <form action="{{ route('programs.store') }}" method="POST" class="p-6 space-y-5" novalidate>
       @csrf
 
       <div>
-        <label for="modal-nama" class="block text-xs font-bold text-outline uppercase tracking-widest mb-2">
-          Nama Program Ekspedisi <span class="text-primary">*</span>
-        </label>
+        <div class="flex items-center justify-between mb-2">
+          <label for="modal-nama" class="block text-xs font-bold text-outline uppercase tracking-widest">
+            Nama Program Ekspedisi <span class="text-primary">*</span>
+          </label>
+          <span class="text-[10px] font-mono text-outline/70">Maks. 100 karakter</span>
+        </div>
         <input 
           type="text" 
           id="modal-nama" 
           name="nama" 
           required 
+          maxlength="120"
           placeholder="Contoh: Swiss Alpine Winter Sanctuary & Heli-Chalet"
           class="w-full px-4 py-3 text-sm bg-surface-container border border-outline-variant/40 rounded-xl text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all"
         />
@@ -273,5 +340,33 @@
       closeCreateModal();
     }
   });
+
+  async function testLiveApi() {
+    const box = document.getElementById('live-api-box');
+    const content = document.getElementById('api-response-content');
+    const badge = document.getElementById('api-status-badge');
+    if (!box || !content) return;
+
+    box.classList.remove('hidden');
+    content.textContent = 'Memuat data dari /api/programs...';
+
+    try {
+      const res = await fetch('/api/programs', {
+        headers: { 'Accept': 'application/json' }
+      });
+      badge.textContent = `${res.status} ${res.statusText}`;
+      if (res.ok) {
+        badge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-900/60 text-emerald-400';
+      } else {
+        badge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-900/60 text-red-400';
+      }
+      const data = await res.json();
+      content.textContent = JSON.stringify(data, null, 2);
+    } catch (err) {
+      badge.textContent = 'Error';
+      badge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-900/60 text-red-400';
+      content.textContent = 'Gagal menghubungi /api/programs: ' + err.message;
+    }
+  }
 </script>
 @endpush

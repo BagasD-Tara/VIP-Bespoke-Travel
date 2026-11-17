@@ -15,41 +15,55 @@
     </a>
   </div>
 
-  <!-- FORM CARD (TASK 03 - CREATE) -->
+  <!-- FORM CARD (WEEK 10: TASK 01 & TASK 02) -->
   <div class="bg-surface rounded-2xl border border-outline-variant/30 shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden">
     <div class="p-6 sm:p-8 border-b border-outline-variant/20 bg-surface-low/80">
       <div class="flex items-center gap-2 mb-1.5">
         <span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#f2ca50]"></span>
-        <span class="text-xs uppercase tracking-[0.2em] text-primary font-semibold">New Itinerary Registration</span>
+        <span class="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Bespoke Concierge &bull; Task 02 Validation</span>
       </div>
       <h1 class="font-serif-luxury text-2xl sm:text-3xl text-on-surface font-normal">
         Inisiasi Program Ekspedisi Baru
       </h1>
       <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
-        Data program akan disimpan langsung ke database relasional MySQL via Laravel Eloquent ORM.
+        Formulir divalidasi ketat oleh Controller (aturan: <code class="text-primary font-mono bg-surface-high px-1 py-0.5 rounded text-[11px]">nama: required|max:100</code> dan <code class="text-primary font-mono bg-surface-high px-1 py-0.5 rounded text-[11px]">deskripsi: required</code>).
       </p>
     </div>
 
-    <form action="{{ route('programs.store') }}" method="POST" class="p-6 sm:p-8 space-y-6">
+    <form action="{{ route('programs.store') }}" method="POST" class="p-6 sm:p-8 space-y-6" novalidate>
       @csrf
 
+      <!-- Field Nama Program -->
       <div>
-        <label for="nama" class="block text-xs font-bold text-outline uppercase tracking-widest mb-2.5">
-          Nama Program Ekspedisi <span class="text-primary">*</span>
-        </label>
+        <div class="flex items-center justify-between mb-2">
+          <label for="nama" class="block text-xs font-bold text-outline uppercase tracking-widest">
+            Nama Program Ekspedisi <span class="text-primary">*</span>
+          </label>
+          <span class="text-[11px] font-mono text-outline/70">Maksimal 100 karakter</span>
+        </div>
         <input 
           type="text" 
           id="nama" 
           name="nama" 
           required 
+          maxlength="120"
           value="{{ old('nama') }}"
           placeholder="Contoh: Swiss Alpine Winter Sanctuary & Heli-Chalet"
-          class="w-full px-4 py-3.5 text-sm bg-surface-container border border-outline-variant/40 rounded-xl text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all"
+          class="w-full px-4 py-3.5 text-sm bg-surface-container border {{ $errors->has('nama') ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/40' : 'border-outline-variant/40 focus:border-primary focus:ring-1 focus:ring-primary/40' }} rounded-xl text-on-surface placeholder:text-outline/50 focus:outline-none transition-all"
         />
+        @error('nama')
+          <p class="text-xs text-red-400 mt-2 flex items-center gap-1.5 font-medium">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+            <span>{{ $message }}</span>
+          </p>
+        @enderror
       </div>
 
+      <!-- Field Deskripsi Program -->
       <div>
-        <label for="deskripsi" class="block text-xs font-bold text-outline uppercase tracking-widest mb-2.5">
+        <label for="deskripsi" class="block text-xs font-bold text-outline uppercase tracking-widest mb-2">
           Deskripsi Layanan Concierge <span class="text-primary">*</span>
         </label>
         <textarea 
@@ -58,8 +72,16 @@
           rows="6" 
           required 
           placeholder="Jelaskan secara mendalam kurasi perjalanan, fasilitas private jet/yacht, akomodasi, dan layanan eksklusif lainnya..."
-          class="w-full px-4 py-3.5 text-sm bg-surface-container border border-outline-variant/40 rounded-xl text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all leading-relaxed"
+          class="w-full px-4 py-3.5 text-sm bg-surface-container border {{ $errors->has('deskripsi') ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/40' : 'border-outline-variant/40 focus:border-primary focus:ring-1 focus:ring-primary/40' }} rounded-xl text-on-surface placeholder:text-outline/50 focus:outline-none transition-all leading-relaxed"
         >{{ old('deskripsi') }}</textarea>
+        @error('deskripsi')
+          <p class="text-xs text-red-400 mt-2 flex items-center gap-1.5 font-medium">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+            <span>{{ $message }}</span>
+          </p>
+        @enderror
       </div>
 
       <div class="pt-6 border-t border-outline-variant/20 flex items-center justify-end gap-4">
