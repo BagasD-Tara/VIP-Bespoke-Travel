@@ -213,6 +213,10 @@ $activeFilter = $activeFilter ?? 'all';
           <span class="material-symbols-outlined text-[20px]">description</span>
           <span class="font-body-md text-body-md tracking-wide">Dossiers / Reports</span>
         </a>
+        <a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-300" href="/programs">
+          <span class="material-symbols-outlined text-[20px] text-primary">database</span>
+          <span class="font-body-md text-body-md tracking-wide text-primary font-semibold">Programs CRUD (W9)</span>
+        </a>
         <a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-300" href="latihan1.php">
           <span class="material-symbols-outlined text-[20px]">arrow_back</span>
           <span class="font-body-md text-body-md tracking-wide text-primary">Public Advisory &rarr;</span>

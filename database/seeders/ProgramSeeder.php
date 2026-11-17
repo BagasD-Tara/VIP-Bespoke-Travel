@@ -8,27 +8,31 @@ use App\Models\Program;
 class ProgramSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeds for VIP Bespoke Travel.
      */
     public function run(): void
     {
         $programs = [
             [
-                'nama' => 'Pendidikan',
-                'deskripsi' => 'Meningkatkan akses pendidikan, mutu pengajaran, serta penyediaan beasiswa berprestasi di seluruh pelosok.'
+                'nama' => 'Alpine Swiss Sanctuary & Winter Heli-Chalet',
+                'deskripsi' => 'Ekspedisi privat chalet mewah Zermatt & St. Moritz dengan transfer helikopter pribadi, instruktur ski eksklusif, dan koki bintang Michelin.'
             ],
             [
-                'nama' => 'Kesehatan',
-                'deskripsi' => 'Meningkatkan layanan fasilitas kesehatan primer, pencegahan stunting, dan jaminan medis merata bagi masyarakat.'
+                'nama' => 'Amalfi Coast & Capri Yacht Charter',
+                'deskripsi' => 'Pelayaran superyacht privat melintasi pesisir Positano dan pulau Capri dengan reservasi VIP beach club dan sommelier anggur privat.'
             ],
             [
-                'nama' => 'Lingkungan',
-                'deskripsi' => 'Menjaga kelestarian lingkungan hidup, rehabilitasi hutan, dan percepatan transisi energi hijau berkelanjutan.'
+                'nama' => 'Kyoto Ryokan & Zen Heritage Retreat',
+                'deskripsi' => 'Akses eksklusif ke kuil suci tertutup di Kyoto, upacara minum teh bersama Master Zen, serta akomodasi sukiya-zukuri bersejarah.'
             ],
             [
-                'nama' => 'Infrastruktur',
-                'deskripsi' => 'Membangun infrastruktur konektivitas digital, jalan antar daerah, dan sistem logistik terpadu.'
+                'nama' => 'Monaco Grand Prix Superyacht Paddock',
+                'deskripsi' => 'Akses premier berth Port Hercule di Monaco, gala dinner privat bersama tim balap, dan helipad transfer langsung dari Bandara Nice.'
             ],
+            [
+                'nama' => 'Serengeti Migration & Private Sky Safari',
+                'deskripsi' => 'Eksplorasi savana Serengeti dengan perkemahan tenda mewah berpindah, penerbangan balon udara privat saat matahari terbit, dan pengawalan ranger elit.'
+            ]
         ];
 
         foreach ($programs as $item) {

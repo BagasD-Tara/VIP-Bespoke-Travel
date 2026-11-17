@@ -324,7 +324,7 @@ Implementasi framework **Laravel 10** untuk membangun arsitektur modern berorien
 ```mermaid
 flowchart LR
     M["MIGRATION FILE<br/>(create_programs_table)"] --> A["PHP ARTISAN MIGRATE<br/>(Jalankan Eksekusi CLI)"]
-    A --> DB["DATABASE MYSQL<br/>(Database: presidentku)"]
+    A --> DB["DATABASE MYSQL<br/>(Database: vip_bespoke)"]
     DB --> T["TABEL PROGRAMS<br/>(id, nama, deskripsi, timestamps)"]
 ```
 
@@ -429,7 +429,7 @@ VIP-BESPOKE-TRAVEL/
 │   └── views/
 │       ├── layouts/app.blade.php      # Layout dasar, navbar, & flash message
 │       └── programs/
-│           ├── index.blade.php        # Tampilan tabel Program PresidentKu + Modal
+│           ├── index.blade.php        # Tampilan tabel VIP Bespoke Programs + Modal Quick Add
 │           ├── create.blade.php       # Form tambah program mandiri
 │           └── edit.blade.php         # Form edit program terisi data eksisting
 ├── routes/                   # [Week 9 - Laravel] Definisi Routing Web & API
@@ -528,7 +528,7 @@ Untuk menjalankan backend Express.js dan antarmuka Client-Side Rendering yang di
 Untuk menjalankan aplikasi Laravel yang mengimplementasikan Migration, Eloquent ORM, dan CRUD Program Management yang dikembangkan oleh **Zaidaan Diandra**:
 
 1. **Pastikan MySQL berjalan (via Laragon / XAMPP):**
-   - Database: `presidentku` (port 3306, user `root`, password kosong / default Laragon).
+   - Database: `vip_bespoke` (port 3306, user `root`, password kosong / default Laragon).
 2. **Jalankan Migration & Seeder (jika pertama kali setup):**
    ```bash
    php artisan migrate

@@ -1398,6 +1398,7 @@ $quickStats   = $bespoke->getStats();
             <a class="hover:text-on-surface transition-colors" href="#protocol">Security Protocol</a>
             <a class="hover:text-on-surface transition-colors" href="#fleet">Aviation Manifest</a>
             <a class="hover:text-on-surface transition-colors" href="index.php">Encrypted Dossier Vault</a>
+            <a class="hover:text-primary transition-colors text-primary font-medium" href="/programs">Bespoke Programs (CRUD W9)</a>
             <a class="hover:text-on-surface transition-colors" href="#consultation">Private Treaty Consultation</a>
           </nav>
         </div>

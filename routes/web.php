@@ -6,34 +6,37 @@ use App\Models\Program;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Pertemuan 9 (Program Management PresidentKu / VIP Bespoke)
+| Web Routes - VIP Bespoke Travel & Private Concierge (Week 9 CRUD)
 |--------------------------------------------------------------------------
 */
 
-// Route Utama: Mengarahkan langsung ke antarmuka Program Management
+// Route Utama: Programs Ledger (CRUD Week 9)
 Route::get('/', [ProgramController::class, 'index'])->name('home');
 
-// Resource Route untuk seluruh operasi CRUD (Task 03)
+// Resource Routes CRUD Programs (Task 03)
 Route::resource('programs', ProgramController::class);
 
-// Endpoint Uji Coba Query Eloquent (Task 02)
+// Endpoint Uji Coba Query Eloquent JSON (Task 02)
 Route::get('/uji-eloquent', function () {
-    // 1. Mengambil semua data
+    // 1. Mengambil semua data dari database
     $programs = Program::all();
 
     // 2. Mengambil satu data
     $program = Program::find(1);
 
-    // 3. Menyimpan data baru (opsional fallback)
+    // 3. Menyimpan data baru (opsional fallback jika tabel kosong)
     if (!$program) {
         $program = Program::create([
-            'nama' => 'Pendidikan',
-            'deskripsi' => 'Program pendidikan PresidentKu'
+            'nama' => 'Alpine Swiss Sanctuary & Winter Heli-Chalet',
+            'deskripsi' => 'Ekspedisi privat chalet mewah Zermatt & St. Moritz dengan transfer helikopter pribadi.'
         ]);
+        $programs = Program::all();
     }
 
     return response()->json([
-        'task' => 'Task 02 - Build Program Model (Eloquent)',
+        'platform' => 'VIP Bespoke Travel & Concierge Platform',
+        'task' => 'Task 02 - Build Program Model (Eloquent ORM)',
+        'database' => config('database.connections.mysql.database'),
         'status' => 'success',
         'program_find_1' => $program,
         'total_programs' => $programs->count(),
@@ -41,11 +44,18 @@ Route::get('/uji-eloquent', function () {
     ]);
 });
 
-// Preservasi Halaman Sebelumnya (Sesuai Prinsip: "Tidak merusak halaman sebelumnya")
+// Preservasi Halaman & Fitur Sebelumnya (Prinsip: "Tidak merusak halaman sebelumnya")
 Route::get('/landing', function () {
     return response()->file(base_path('latihan1.html'));
 });
 
 Route::get('/vip-portal', function () {
     return response()->file(base_path('public/landing_page.html'));
+});
+
+Route::get('/dashboard', function () {
+    // Render tampilan Dashboard Sovereign Reserve (Week 7 MVC)
+    require_once base_path('controllers/DashboardController.php');
+    $controller = new \DashboardController();
+    $controller->index();
 });

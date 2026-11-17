@@ -8,14 +8,14 @@ use App\Models\Program;
 class ProgramCrudTest extends TestCase
 {
     /**
-     * Test: READ - Menampilkan daftar program pada route '/' dan '/programs'
+     * Test: READ - Menampilkan daftar program ekspedisi pada route '/' dan '/programs'
      */
     public function test_can_view_program_list(): void
     {
         $response = $this->get('/programs');
         $response->assertStatus(200);
-        $response->assertSee('Program PresidentKu');
-        $response->assertSee('Pendidikan');
+        $response->assertSee('Curated Bespoke Programs');
+        $response->assertSee('Alpine Swiss Sanctuary');
     }
 
     /**
@@ -25,7 +25,7 @@ class ProgramCrudTest extends TestCase
     {
         $response = $this->get('/programs/create');
         $response->assertStatus(200);
-        $response->assertSee('Tambah Program Baru');
+        $response->assertSee('Inisiasi Program Ekspedisi Baru');
     }
 
     /**
@@ -34,15 +34,15 @@ class ProgramCrudTest extends TestCase
     public function test_can_store_new_program(): void
     {
         $data = [
-            'nama' => 'Pariwisata & Budaya',
-            'deskripsi' => 'Pengembangan destinasi ekowisata dan pelestarian warisan budaya.'
+            'nama' => 'French Riviera Yacht & Heli Charter',
+            'deskripsi' => 'Pengalaman berlayar mewah di sepanjang Cote d\'Azur dengan koki privat dan transfer helikopter Monaco.'
         ];
 
         $response = $this->post('/programs', $data);
         $response->assertRedirect('/programs');
 
         $this->assertDatabaseHas('programs', [
-            'nama' => 'Pariwisata & Budaya'
+            'nama' => 'French Riviera Yacht & Heli Charter'
         ]);
     }
 
@@ -57,8 +57,8 @@ class ProgramCrudTest extends TestCase
         $response->assertStatus(200);
 
         $updateData = [
-            'nama' => 'Pendidikan Unggul Nasional',
-            'deskripsi' => 'Program pendidikan berstandar internasional dan beasiswa merata.'
+            'nama' => 'Alpine Swiss Sanctuary & Winter Heli-Chalet (Updated Edition)',
+            'deskripsi' => 'Edisi diperbarui dengan akses ski resort privat dan fasilitas wellness eksklusif.'
         ];
 
         $putResponse = $this->put("/programs/{$program->id}", $updateData);
@@ -66,7 +66,7 @@ class ProgramCrudTest extends TestCase
 
         $this->assertDatabaseHas('programs', [
             'id' => $program->id,
-            'nama' => 'Pendidikan Unggul Nasional'
+            'nama' => 'Alpine Swiss Sanctuary & Winter Heli-Chalet (Updated Edition)'
         ]);
     }
 
@@ -76,8 +76,8 @@ class ProgramCrudTest extends TestCase
     public function test_can_delete_program(): void
     {
         $program = Program::create([
-            'nama' => 'Program Sementara',
-            'deskripsi' => 'Akan dihapus pada saat testing.'
+            'nama' => 'Ekspedisi Sementara Testing',
+            'deskripsi' => 'Akan dihapus pada saat verifikasi automated test.'
         ]);
 
         $deleteResponse = $this->delete("/programs/{$program->id}");
